@@ -1,3 +1,11 @@
-<p>
-  history works!
-</p>
+<div class="container"
+  fxLayout
+  fxLayout.xs='column'
+  fxLayoutAlign='center'
+  fxLayoutGap="10px"
+  >
+  <app-detail-card  *ngFor="let h_item of history"
+                   [diagnosis]="h_item.diagnosis"
+                   [date]="h_item.date">
+  </app-detail-card>
+</div>
