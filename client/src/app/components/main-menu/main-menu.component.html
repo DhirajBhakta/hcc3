@@ -1,0 +1,11 @@
+<mat-menu #appMenu="matMenu">
+  <button mat-menu-item>
+    <mat-icon color="primary">person</mat-icon> Profile
+  </button>
+  <button mat-menu-item>
+    <span fxFlex></span> Logout</button>
+</mat-menu>
+
+<button mat-icon-button [matMenuTriggerFor]="appMenu">
+   <mat-icon>keyboard_arrow_down</mat-icon>
+</button>

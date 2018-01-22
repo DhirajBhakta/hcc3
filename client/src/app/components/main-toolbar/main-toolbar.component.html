@@ -1,0 +1,6 @@
+<mat-toolbar color="primary">
+  HCC
+  <span fxFlex></span>
+  <button mat-button *ngFor="let navLink of navLinks" [routerLink]="navLink.path">{{navLink.displayString}}</button>
+  <app-main-menu></app-main-menu>
+</mat-toolbar>

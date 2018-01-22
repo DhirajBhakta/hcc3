@@ -1,0 +1,26 @@
+import { NgModule } from '@angular/core';
+
+import { RouterModule } from '@angular/router';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+//angular-materials
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+
+
+@NgModule({
+  imports: [
+  ],
+
+  exports: [
+    RouterModule,
+    FlexLayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule
+  ],
+})
+export class SharedModule{ }

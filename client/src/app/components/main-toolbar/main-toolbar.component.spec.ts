@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PharmaRootComponent } from './pharma-root.component';
+import { MainToolbarComponent } from './main-toolbar.component';
 
-describe('PharmaRootComponent', () => {
-  let component: PharmaRootComponent;
-  let fixture: ComponentFixture<PharmaRootComponent>;
+describe('MainToolbarComponent', () => {
+  let component: MainToolbarComponent;
+  let fixture: ComponentFixture<MainToolbarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PharmaRootComponent ]
+      declarations: [ MainToolbarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PharmaRootComponent);
+    fixture = TestBed.createComponent(MainToolbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
