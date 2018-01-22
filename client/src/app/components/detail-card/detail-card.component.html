@@ -4,8 +4,8 @@
     <mat-panel-description>{{date | date:"fullDate"}}</mat-panel-description>
   </mat-expansion-panel-header>
   <hr>
-  Dr. Rammmoorthy Krishnan
-  <table>
+  <span class="name">{{name}}</span>
+  <table [class.prescription-table]="'true'">
     <tr>
       <th></th>
       <th>Drug</th>
@@ -13,12 +13,14 @@
       <th>Schedule</th>
       <th>Extras</th>
     </tr>
-    <tr>
-      <td>1.</td>
-      <td>Aspirin</td>
-      <td>10</td>
-      <td>1-0-1</td>
-      <td>Before Food</td>
-    </tr>
+    <ng-container *ngFor="let prescription of prescriptionList ; index as i" >
+      <tr>
+        <td>{{i+1}}</td>
+        <td>{{prescription.drugname}}</td>
+        <td>{{prescription.quantity}}</td>
+        <td>{{prescription.schedule}}</td>
+        <td>{{prescription.comments}}</td>
+      </tr>
+    </ng-container>
   </table>
 </mat-expansion-panel>
