@@ -9,7 +9,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatCardModule} from '@angular/material/card';
-
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   imports: [
@@ -23,6 +23,7 @@ import {MatCardModule} from '@angular/material/card';
     MatIconModule,
     MatMenuModule,
     MatCardModule,
+    MatInputModule,
   ],
 })
 export class SharedModule { }
