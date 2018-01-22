@@ -3,6 +3,8 @@
   fxLayoutAlign='space-around'
   fxLayoutGap="10px"
   fxFlexFill>
+
+  <!-- Centered header -->
   <div class="row">
     <span fxFlex 
           fxFlex.xs='3'></span>
@@ -15,6 +17,7 @@
   </div>
   <hr>
 
+  <!-- The body component with spans for centering -->
   <div *ngFor="let h_item of history"
        fxLayout>
     <span fxFlex
@@ -22,6 +25,8 @@
     <app-detail-card  
                     [diagnosis]="h_item.diagnosis"
                     [date]="h_item.date"
+                    [name]="h_item.name"
+                    [prescriptionList]="h_item.prescriptionList"
                     fxFlex='50%'
                     fxFlex.xs='94%'
                     >
