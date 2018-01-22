@@ -9,7 +9,12 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatCardModule} from '@angular/material/card';
+
 import {MatInputModule} from '@angular/material/input';
+
+import {MatExpansionModule} from '@angular/material/expansion'
+
+
 
 @NgModule({
   imports: [
@@ -24,6 +29,8 @@ import {MatInputModule} from '@angular/material/input';
     MatMenuModule,
     MatCardModule,
     MatInputModule,
+    MatExpansionModule
+
   ],
 })
 export class SharedModule { }

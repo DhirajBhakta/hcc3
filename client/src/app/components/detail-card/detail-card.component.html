@@ -1,4 +1,24 @@
-<mat-card>
-  <mat-card-title>{{diagnosis}}</mat-card-title>
-  <mat-card-subtitle>{{date | date:"fullDate"}}</mat-card-subtitle>
-</mat-card>
+<mat-expansion-panel>
+  <mat-expansion-panel-header collapsedHeight="100px">
+    <mat-panel-title>{{diagnosis}}</mat-panel-title>
+    <mat-panel-description>{{date | date:"fullDate"}}</mat-panel-description>
+  </mat-expansion-panel-header>
+  <hr>
+  Dr. Rammmoorthy Krishnan
+  <table>
+    <tr>
+      <th></th>
+      <th>Drug</th>
+      <th>Quantity</th>
+      <th>Schedule</th>
+      <th>Extras</th>
+    </tr>
+    <tr>
+      <td>1.</td>
+      <td>Aspirin</td>
+      <td>10</td>
+      <td>1-0-1</td>
+      <td>Before Food</td>
+    </tr>
+  </table>
+</mat-expansion-panel>

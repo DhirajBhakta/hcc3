@@ -1,11 +1,32 @@
 <div class="container"
-  fxLayout
-  fxLayout.xs='column'
-  fxLayoutAlign='center'
+  fxLayout='column'
+  fxLayoutAlign='space-around'
   fxLayoutGap="10px"
-  >
-  <app-detail-card  *ngFor="let h_item of history"
-                   [diagnosis]="h_item.diagnosis"
-                   [date]="h_item.date">
-  </app-detail-card>
+  fxFlexFill>
+  <div class="row">
+    <span fxFlex 
+          fxFlex.xs='3'></span>
+    <div class="header"
+         fxFlex='50%'
+         fxFlex.xs='94%'>
+      <h1> HISTORY</h1>
+    </div>
+    <span fxFlex fxFles.xs='3'></span>
+  </div>
+  <hr>
+
+  <div *ngFor="let h_item of history"
+       fxLayout>
+    <span fxFlex
+          fxFlex.xs='3'></span>
+    <app-detail-card  
+                    [diagnosis]="h_item.diagnosis"
+                    [date]="h_item.date"
+                    fxFlex='50%'
+                    fxFlex.xs='94%'
+                    >
+    </app-detail-card>
+    <span fxFlex
+          fxFlex.xs='3'></span>
+  </div>
 </div>
