@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 
 //ngModules
 import { PatientModule } from './modules/patient/patient.module';
-
+import { DoctorModule } from './modules/doctor/doctor.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +21,7 @@ import { PatientModule } from './modules/patient/patient.module';
     BrowserAnimationsModule,
     SharedModule,
     PatientModule,
+    DoctorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
