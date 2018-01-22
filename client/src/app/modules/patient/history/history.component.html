@@ -3,6 +3,18 @@
   fxLayoutAlign='space-around'
   fxLayoutGap="10px"
   fxFlexFill>
+  <div class="row">
+    <span fxFlex 
+          fxFlex.xs='3'></span>
+    <div class="header"
+         fxFlex='50%'
+         fxFlex.xs='94%'>
+      <h1> HISTORY</h1>
+    </div>
+    <span fxFlex fxFles.xs='3'></span>
+  </div>
+  <hr>
+
   <div *ngFor="let h_item of history"
        fxLayout>
     <span fxFlex
