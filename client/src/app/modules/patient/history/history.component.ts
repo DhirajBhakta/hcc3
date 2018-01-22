@@ -9,8 +9,8 @@ import { History } from './history.model';
 export class HistoryComponent implements OnInit {
 
   history: History[] = [
-    new History('StomachAceh', new Date()),
     new History('Stomach Ache', new Date()),
+    new History('Fever', new Date()),
   ];
 
   constructor() {}
