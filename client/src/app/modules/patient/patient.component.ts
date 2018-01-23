@@ -9,8 +9,8 @@ import { NavLink } from '../../models/util-types';
 export class PatientComponent implements OnInit {
 
   navLinks: NavLink[] = [
-    {displayString: 'Appointments', path: '/appointments'},
-    {displayString: 'History', path: '/history'}
+    {displayString: 'Appointments', path: 'appointments'},
+    {displayString: 'History', path: 'history'}
   ];
 
   constructor() { }

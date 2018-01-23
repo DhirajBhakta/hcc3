@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PatientComponent } from './modules/patient/patient.component';
-import { DoctorComponent } from './modules/doctor/doctor.component';
+import { PatientModule } from './modules/patient/patient.module';
+import { DoctorModule } from './modules/doctor/doctor.module';
 import { AppComponent } from './app.component';
 
 const appRoutes: Routes = [
-
-    { path: 'patient', component: PatientComponent },
-    { path: 'doctor', component: DoctorComponent},
-    { path: '', component: AppComponent},
-
+    {path: 'patient',
+     loadChildren: 'app/modules/patient/patient.module#PatientModule'},
+    {path: 'doctor',
+      loadChildren: 'app/modules/doctor/doctor.module#DoctorModule'},
+    {path: '',
+     redirectTo:'patient',
+     pathMatch:'full'
+   }
 ];
 
 @NgModule({
@@ -24,4 +27,3 @@ const appRoutes: Routes = [
     ]
   })
   export class AppRoutingModule {}
-
