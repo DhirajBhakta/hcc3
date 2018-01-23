@@ -3,14 +3,19 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { HistoryComponent } from './history/history.component';
+import { PatientComponent } from './patient.component';
 
-const routes: Routes = [
-  {path: 'appointments', component: AppointmentsComponent},
-  {path: 'history', component: HistoryComponent}
-];
+const Patientroutes: Routes = [
+  {
+    path: 'patient', component: PatientComponent,
+  children: [
+      { path: 'appointments', component: AppointmentsComponent },
+      { path: 'history', component: HistoryComponent }
+    ]
+  }];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(Patientroutes)],
   exports: [RouterModule]
 })
 export class PatientRoutingModule { }

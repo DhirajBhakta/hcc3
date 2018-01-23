@@ -3,16 +3,22 @@ import { Routes, RouterModule } from '@angular/router';
 import { HistoryComponent } from './history/history.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { WorkbenchComponent } from './workbench/workbench.component';
+import { DoctorComponent } from './doctor.component';
 
 
-const routes: Routes = [
-  {path: 'doctor/appointments', component: AppointmentsComponent},
-  {path: 'doctor/history', component: HistoryComponent},
-  {path: 'doctor/workbench', component: WorkbenchComponent}
+const Doctorroutes: Routes = [
+  {
+    path: 'doctor', component: DoctorComponent,
+    children: [
+      { path: 'appointments', component: AppointmentsComponent },
+      { path: 'history', component: HistoryComponent },
+      { path: 'workbench', component: WorkbenchComponent },
+    ]
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(Doctorroutes)],
   exports: [RouterModule]
 })
 export class DoctorRoutingModule { }
