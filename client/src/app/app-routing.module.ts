@@ -9,10 +9,7 @@ const appRoutes: Routes = [
      loadChildren: 'app/modules/patient/patient.module#PatientModule'},
     {path: 'doctor',
       loadChildren: 'app/modules/doctor/doctor.module#DoctorModule'},
-    {path: '',
-     redirectTo:'patient',
-     pathMatch:'full'
-   }
+
 ];
 
 @NgModule({

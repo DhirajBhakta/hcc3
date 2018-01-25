@@ -8,7 +8,7 @@ import { DoctorComponent } from './doctor.component';
 
 const Doctorroutes: Routes = [
   {
-    path: 'doctor', component: DoctorComponent,
+    path: '', component: DoctorComponent,
     children: [
       { path: 'appointments', component: AppointmentsComponent },
       { path: 'history', component: HistoryComponent },
