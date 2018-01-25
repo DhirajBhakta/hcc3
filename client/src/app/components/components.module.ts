@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 
 //shared module
 import { SharedModule } from '../shared/shared.module';
@@ -17,7 +16,6 @@ import { DetailCardComponent } from './detail-card/detail-card.component';
   ],
   imports: [
     CommonModule,
-    BrowserModule,
     SharedModule
   ],
   exports: [
