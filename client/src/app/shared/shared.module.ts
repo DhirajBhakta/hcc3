@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -22,6 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
 
   exports: [
     FormsModule,
+    ReactiveFormsModule,
     RouterModule,
     FlexLayoutModule,
     MatToolbarModule,

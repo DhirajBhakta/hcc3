@@ -1,0 +1,39 @@
+<form [formGroup]="diagForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <input matInput placeholder='Diagnosis' formControlName='diagnosis'/>
+  </mat-form-field>
+  <table formArrayName="prescriptions">
+    <tr>
+      <th>Drug Name</th>
+      <th>Quantity</th>
+      <th>Schedule</th>
+      <th>Comments</th>
+    </tr>
+    <tr *ngFor="let prescription of prescriptions.controls; let i=index" [formGroupName]='i'>
+      <td>
+        <mat-form-field>
+          <input matInput formControlName="drugname"/>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field>
+          <input matInput formControlName="quantity"/>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field>
+          <input matInput formControlName="schedule"/>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field>
+          <input matInput formControlName="comments"/>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+  <button mat-raised-button color='primary' type='button' (click)='addRow()'>Add Row</button>
+  <button  mat-raised-button color='primary' type='submit'>Submit</button>
+</form>
+{{diagForm.value | json}}
+{{diagForm.status | json}}
