@@ -4,20 +4,31 @@
   fxLayoutGap = "10px"
   fxFlexFill>
 
+  <mat-card class="patient-input-card" *ngIf="!patientIDSet">
+    <div class="container" fxLayout='column'>
+      <h3>Start Diagnosis</h3>
+      <mat-form-field>
+          <input matInput [(ngModel)]="patientID" placeholder="Enter Patient ID">
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="setPatient()"> Submit</button>
+    </div>
+  </mat-card>
+</div>
 
-<mat-card class="patient-input-card">
-  
-  <div class="container" fxLayout='column'>
-    
-    <h3>Start Diagnosis</h3>
- 
+<div class="entryForm" *ngIf="patientIDSet"
+  fxLayout="row">
+  <div class="container" fxLayout="column">
+    <button mat-raised-button color="primary" (click)="unsetPatient()">Back</button>
+    <app-patient-info></app-patient-info>
+  </div>
+  <mat-card class="pres-table-container">
     <mat-form-field>
-        <input matInput placeholder="Enter Patient ID">
+      <input matInput [(ngModel)]="diagnosis" placeholder="Diagnosis"/>
     </mat-form-field>
-
-  <button mat-raised-button color="primary" >Submit</button>
+    <app-p-table></app-p-table>
+    <button mat-raised-button color="primary">Submit</button>
+  </mat-card>
+ 
 </div>
-</mat-card>
 
 
-</div>

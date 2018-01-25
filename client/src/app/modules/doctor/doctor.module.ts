@@ -10,6 +10,9 @@ import { AppointmentsComponent } from './appointments/appointments.component';
 
 import { SharedModule } from '../../shared/shared.module';
 import { ComponentsModule } from '../../components/components.module';
+import { PatientInfoComponent } from './workbench/patient-info/patient-info.component';
+import { PRowComponent } from './workbench/p-table/p-row/p-row.component';
+import { PTableComponent } from './workbench/p-table/p-table.component';
 
 
 
@@ -26,7 +29,10 @@ import { ComponentsModule } from '../../components/components.module';
     HistoryComponent,
     WorkbenchComponent,
     DiagonsisComponent,
-    AppointmentsComponent
+    AppointmentsComponent,
+    PatientInfoComponent,
+    PRowComponent,
+    PTableComponent
   ],
   exports: [
     DoctorComponent
