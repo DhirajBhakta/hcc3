@@ -4,9 +4,10 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { replaceKeys } from 'app/utils';
+
 @Injectable()
 export class AppointmentsService {
-  url = 'http://localhost:3000/'
+  url = 'http://localhost:3000/';
 
   constructor(private http: HttpClient) { }
 

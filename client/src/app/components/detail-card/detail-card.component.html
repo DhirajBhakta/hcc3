@@ -1,10 +1,13 @@
 <mat-expansion-panel>
-  <mat-expansion-panel-header collapsedHeight="100px">
+  <mat-expansion-panel-header collapsedHeight="100px" fxLayout >
+    <!--
     <mat-panel-title>{{diagnosis}}</mat-panel-title>
     <mat-panel-description>{{date | date:"fullDate"}}</mat-panel-description>
+   -->
+  <app-generic-card [bundle]="historyDataItem" fxFlex></app-generic-card>
   </mat-expansion-panel-header>
   <hr>
-  <span class="name">{{name}}</span>
+  <span class="name">{{historyDataItem.subtitle}}</span>
   <table [class.prescription-table]="'true'">
     <tr>
       <th></th>
@@ -13,7 +16,7 @@
       <th>Schedule</th>
       <th>Extras</th>
     </tr>
-    <ng-container *ngFor="let prescription of prescriptionList ; index as i" >
+    <ng-container *ngFor="let prescription of historyDataItem.prescriptionList ; index as i" >
       <tr>
         <td>{{i+1}}</td>
         <td>{{prescription.drugname}}</td>

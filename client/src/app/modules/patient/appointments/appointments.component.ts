@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-//services
+// services
 import { AppointmentsService } from '../services/appointments.service';
 
 
@@ -11,21 +11,21 @@ import { AppointmentsService } from '../services/appointments.service';
   styleUrls: ['./appointments.component.css']
 })
 export class AppointmentsComponent implements OnInit {
-  bookedAppointmentsData:{};
+  bookedAppointmentsData: {};
   specialities = [
-    {value:1, viewValue:'Dental'},
-    {value:2, viewValue:'ENT'},
-    {value:3, viewValue:'Orthopaedics'},
-    {value:4, viewValue:'Gynaecology'},
-    {value:5, viewValue:'Psychiatry'},
-    {value:6, viewValue:'Cardiology'},
+    {value: 1, viewValue: 'Dental'},
+    {value: 2, viewValue: 'ENT'},
+    {value: 3, viewValue: 'Orthopaedics'},
+    {value: 4, viewValue: 'Gynaecology'},
+    {value: 5, viewValue: 'Psychiatry'},
+    {value: 6, viewValue: 'Cardiology'},
   ];
-  bundle={}
+  bundle = {};
 
-  constructor(private service:AppointmentsService) { }
+  constructor(private service: AppointmentsService) { }
 
-  appointmentCancel():void{
-    console.log('appointmentcancelled lol')
+  appointmentCancel(): void {
+    console.log('appointmentcancelled lol');
   }
   ngOnInit() {
     this.bookedAppointmentsData = this.service.getBookedAppointments();
