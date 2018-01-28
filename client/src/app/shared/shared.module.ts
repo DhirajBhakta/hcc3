@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -13,7 +15,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
-import { ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
 
 
 
@@ -34,7 +38,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatExpansionModule,
     MatInputModule,
     MatStepperModule,
-    MatSelectModule
+    MatSelectModule,
+    //point of error (maybe):MatNativeDateModule provides services, and shared module is imported in many places: bad practice :(
+    MatNativeDateModule,
+    MatDatepickerModule
   ],
 })
 export class SharedModule { }

@@ -1,0 +1,21 @@
+{
+  "bookedAppointments": [{
+      "speciality": "Orthopaedics",
+      "doctorname": "Dr.Bhaskar Bhandary",
+      "date": "10/11/2017",
+      "time": "10:30pm"
+    },
+    {
+      "speciality": "ENT",
+      "doctorname": "Dr.Hiruzen Sarutobi ",
+      "date": "1/10/2017",
+      "time": "8:00pm"
+    },
+    {
+      "speciality": "Psychiatry",
+      "doctorname": "Dr.Hatake Kakashi",
+      "date": "3/03/2017",
+      "time": "8:00am"
+    }
+  ]
+}

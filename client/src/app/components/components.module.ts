@@ -7,12 +7,14 @@ import { SharedModule } from '../shared/shared.module';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
 import { DetailCardComponent } from './detail-card/detail-card.component';
+import { GenericCardComponent } from './generic-card/generic-card.component';
 
 @NgModule({
   declarations: [
     MainToolbarComponent,
     MainMenuComponent,
-    DetailCardComponent
+    DetailCardComponent,
+    GenericCardComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { DetailCardComponent } from './detail-card/detail-card.component';
   exports: [
     MainToolbarComponent,
     MainMenuComponent,
-    DetailCardComponent
+    DetailCardComponent,
+    GenericCardComponent
   ]
 })
 export class ComponentsModule { }
