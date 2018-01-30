@@ -1,10 +1,5 @@
 <table class="pres-table">
-  <tr>
-    <th>Drug Name</th>
-    <th>Quantity</th>
-    <th>Schedule</th>
-    <th>Comments</th>
-  </tr>
+
   <tr app-p-row *ngFor="let p_item of prescriptions; let i = index" [prescription]="prescriptions[i]" (prescriptionChange)="addRow()">
   </tr>
 </table>

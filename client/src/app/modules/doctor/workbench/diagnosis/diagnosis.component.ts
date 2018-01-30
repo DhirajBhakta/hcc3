@@ -3,6 +3,8 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Diagnosis } from '../../../../models/diagnosis.model';
 import { Validators } from '@angular/forms';
 import { Prescription } from '../../../../models/prescription.model';
+import { AbstractControl } from '@angular/forms/src/model';
+import { AbstractControlDirective } from '@angular/forms/src/directives/abstract_control_directive';
 
 @Component({
   selector: 'app-diagnosis',
@@ -13,6 +15,12 @@ export class DiagnosisComponent implements OnInit {
 
   currDiagnosis: Diagnosis;
   diagForm: FormGroup;
+  presGroup = {
+        drugname : ['', Validators.required],
+        quantity : ['', Validators.compose([Validators.pattern(/^\d+$/), Validators.required])],
+        schedule : ['', Validators.required],
+        comments : ['', Validators.required],
+      };
 
   constructor(private fb: FormBuilder) {
     this.createForm();
@@ -21,7 +29,7 @@ export class DiagnosisComponent implements OnInit {
   createForm() {
     this.diagForm = this.fb.group({
       diagnosis: ['', Validators.required],
-      prescriptions: this.fb.array([this.fb.group(new Prescription())]),
+      prescriptions: this.fb.array([this.fb.group(this.presGroup)]),
     });
   }
 
@@ -29,8 +37,16 @@ export class DiagnosisComponent implements OnInit {
     return this.diagForm.get('prescriptions') as FormArray;
   }
 
+  getField(form: FormGroup, field: string): AbstractControl | AbstractControlDirective {
+
+    return form.get(field);
+  }
+
   addRow() {
-    this.prescriptions.push(this.fb.group(new Prescription()));
+    this.prescriptions.push(this.fb.group(this.presGroup));
+  }
+  deleteRow(i) {
+    this.prescriptions.removeAt(i);
   }
   ngOnInit() {
   }
@@ -49,6 +65,7 @@ export class DiagnosisComponent implements OnInit {
 
   }
   onSubmit() {
+    console.log(this.diagForm.controls.prescriptions);
     const finalDiagnosis = this.prepareDiagnosis();
     console.log( finalDiagnosis);
     return finalDiagnosis;

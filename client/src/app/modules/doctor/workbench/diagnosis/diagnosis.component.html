@@ -1,34 +1,46 @@
-<form [formGroup]="diagForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="diagForm" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()">
   <mat-form-field>
     <input matInput placeholder='Diagnosis' formControlName='diagnosis'/>
   </mat-form-field>
   <table formArrayName="prescriptions">
     <tr>
+      <th>No.</th>
       <th>Drug Name</th>
       <th>Quantity</th>
       <th>Schedule</th>
       <th>Comments</th>
+      <th>Delete?</th>
     </tr>
     <tr *ngFor="let prescription of prescriptions.controls; let i=index" [formGroupName]='i'>
+      <td>
+        {{i+1}}
+      </td>
       <td>
         <mat-form-field>
           <input matInput formControlName="drugname"/>
         </mat-form-field>
+        <app-show-errors [control]="getField(prescription, 'drugname')">Error here</app-show-errors>
       </td>
       <td>
         <mat-form-field>
           <input matInput formControlName="quantity"/>
         </mat-form-field>
+        <app-show-errors [control]="getField(prescription, 'quantity')">Error here</app-show-errors>
       </td>
       <td>
         <mat-form-field>
           <input matInput formControlName="schedule"/>
         </mat-form-field>
+        <app-show-errors [control]="getField(prescription, 'schedule')">Error here</app-show-errors>
       </td>
       <td>
         <mat-form-field>
           <input matInput formControlName="comments"/>
         </mat-form-field>
+        <app-show-errors [control]="getField(prescription, 'comments')">Error here</app-show-errors>
+      </td>
+      <td>
+        <button mat-raised-button color='danger' (click)="deleteRow(i)">Delete Row</button>
       </td>
     </tr>
   </table>

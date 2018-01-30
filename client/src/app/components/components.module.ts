@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-//shared module
+// shared module
 import { SharedModule } from '../shared/shared.module';
 
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
 import { DetailCardComponent } from './detail-card/detail-card.component';
+import { ShowErrorsComponent } from './show-errors/show-errors.component';
 
 @NgModule({
   declarations: [
     MainToolbarComponent,
     MainMenuComponent,
-    DetailCardComponent
+    DetailCardComponent,
+    ShowErrorsComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { DetailCardComponent } from './detail-card/detail-card.component';
   exports: [
     MainToolbarComponent,
     MainMenuComponent,
-    DetailCardComponent
+    DetailCardComponent,
+    ShowErrorsComponent
   ]
 })
 export class ComponentsModule { }
