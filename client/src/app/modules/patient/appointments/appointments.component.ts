@@ -35,7 +35,7 @@ export class AppointmentsComponent implements OnInit {
      this.bookedAppointmentsData = this.service.getBookedAppointments();
    }
 
-   
+
 
 
   appointmentCancel():void{

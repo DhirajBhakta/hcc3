@@ -10,16 +10,17 @@ import { Prescription } from '../../models/prescription.model';
 
 export class DetailCardComponent implements OnInit {
 
-  @Input() diagnosis: string;
-  @Input() date: Date;
-  @Input() name: string;
-  @Input() prescriptionList: Prescription[];
+ // @Input() diagnosis: string;
+ // @Input() date: Date;
+ // @Input() name: string;
+ // @Input() prescriptionList: Prescription[];
+
+ @Input() historyDataItem: {};
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.diagnosis);
-    console.log(this.prescriptionList);
+
   }
 
 }

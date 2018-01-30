@@ -7,14 +7,15 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class GenericCardComponent implements OnInit {
 
- @Input() bundle:{}
+ @Input() bundle: {};
  @Output() onCancel: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
   }
-  triggerCancel():void{
+  
+  triggerCancel(): void {
     this.onCancel.emit();
   }
 }

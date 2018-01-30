@@ -25,6 +25,60 @@
       "date": "3/03/2017",
       "time": "8:00am"
     }
+  ],
+
+  "historyData": [
+    {
+      "diagnosis": "Stomach Ache",
+      "date": "1/10/2017",
+      "name": "Dr. Krishna Mohan",
+      "prescriptionList": [
+        {
+          "drugname": "Aspirin",
+          "quantity": "10",
+          "schedule": "1-0-1",
+          "comments": "Before food"
+        },
+        {
+          "drugname": "Paracetamol",
+          "quantity": "3",
+          "schedule": "0-0-1",
+          "comments": "AF"
+        },
+        {
+          "drugname": "Eldofer",
+          "quantity": "1",
+          "schedule": "0-1-1",
+          "comments": "AF"
+        }
+      ]
+    },
+    {
+      "diagnosis": "Fever",
+      "date": "2/10/2017",
+      "name": "Dr. Rammoorthy Krisnan",
+      "prescriptionList":
+      [
+        {
+          "drugname": "Aspirin",
+          "quantity": "10",
+          "schedule": "1-0-1",
+          "comments": "Before food"
+        },
+        {
+          "drugname": "Paracetamol",
+          "quantity": "3",
+          "schedule": "0-0-1",
+          "comments": "AF"
+        },
+        {
+          "drugname": "Eldofer",
+          "quantity": "1",
+          "schedule": "0-1-1",
+          "comments": "AF"
+        }
+      ]
+    }
   ]
 
 }

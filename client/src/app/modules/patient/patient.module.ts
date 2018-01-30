@@ -17,6 +17,7 @@ import { BookedAppointmentCardComponent } from './appointments/booked-appointmen
 
 //services
 import { AppointmentsService } from './services/appointments.service';
+import { HistoryService } from './services/history.service';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { AppointmentsService } from './services/appointments.service';
   //   PatientComponent
   // ],
   providers:[
-    AppointmentsService
+    AppointmentsService,
+    HistoryService
   ]
 
 })
