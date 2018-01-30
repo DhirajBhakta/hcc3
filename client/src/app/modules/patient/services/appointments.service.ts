@@ -10,6 +10,10 @@ export class AppointmentsService {
 
   constructor(private http: HttpClient) { }
 
+  getSpecialities():Observable<any>{
+    return this.http.get(this.url + 'specialities');
+
+  }
   getBookedAppointments(): Observable<any> {
     return this.http.get<Array<any>>(this.url + 'bookedAppointments')
       .map(dataArray => dataArray.map((data) => replaceKeys(data, [

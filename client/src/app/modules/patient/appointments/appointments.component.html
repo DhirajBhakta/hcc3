@@ -11,32 +11,41 @@
 
   <div fxFlex='30%'>
     <h3>Book an Appointment</h3>
-    <mat-vertical-stepper [linear]='true' style='height:100vh'>
-      <mat-step label="Speciality">
-        <mat-form-field>
-          <mat-select placeholder="Select Speciality">
-            <mat-option *ngFor="let speciality of specialities" [value]="speciality.value">
-              {{ speciality.viewValue }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <div>
-          <button type='button' mat-raised-button matStepperNext color="primary">Next</button>
-        </div>
-      </mat-step>
-      <mat-step label="Book Date">
-        <input [matDatepicker]="myDatepicker">
-        <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
-        <mat-datepicker #myDatepicker></mat-datepicker>
-        <div>
-          <button type='button' mat-raised-button matStepperPrevious color="primary">Back</button>
-          <button type='button' mat-raised-button matStepperNext color="primary">Next</button>
-        </div>
-      </mat-step>
+    <mat-vertical-stepper [linear]='isLinear' style='height:100vh'>
+        <mat-step label="Speciality">
+          <form [formGroup]='specialitySelectionForm'>
+          <mat-form-field>
+            <mat-select placeholder="Select Speciality" formControlName='speciality'>
+              <mat-option *ngFor="let speciality of specialities" [value]="speciality">
+                {{ speciality }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div>
+            <button type='submit' mat-raised-button matStepperNext color="primary" >Next</button>
+          </div>
+        </form>
+        </mat-step>
+        <form>
+        <mat-step label="Book Date">
+
+          <input [matDatepicker]="myDatepicker" formControlName='date'>
+          <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker></mat-datepicker>
+          <div>
+            <button type='button' mat-raised-button matStepperPrevious color="primary">Back</button>
+            <button type='button' mat-raised-button matStepperNext color="primary" (click)="show()">Next</button>
+          </div>
+        </mat-step>
+
       <mat-step>
         <app-generic-card [bundle]="bundle"></app-generic-card>
       </mat-step>
+    </form>
     </mat-vertical-stepper>
+
   </div>
+
   <span fxFlex='10%'></span>
 </div>
+<p>{{specialitySelectionForm.value| json}}</p>

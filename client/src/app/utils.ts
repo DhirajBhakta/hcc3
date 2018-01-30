@@ -3,6 +3,5 @@ export function replaceKeys(object:Object, metadata:Array<any>){
      object[data.with] = object[data.replace];
      delete(object[data.replace]);
    }
-   console.log('wow',object);
    return object;
 }

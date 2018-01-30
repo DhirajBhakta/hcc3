@@ -1,4 +1,12 @@
 {
+ "specialities":[
+   "Dental",
+   "ENT",
+   "Orthopaedics",
+   "Psychology",
+   "Gynaecology"
+ ],
+
   "bookedAppointments": [{
       "speciality": "Orthopaedics",
       "doctorname": "Dr.Bhaskar Bhandary",
@@ -18,4 +26,5 @@
       "time": "8:00am"
     }
   ]
+
 }

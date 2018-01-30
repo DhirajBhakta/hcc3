@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormBuilder, FormControl, FormGroup , Validators} from '@angular/forms';
 //services
 import { AppointmentsService } from '../services/appointments.service';
+
 
 
 
@@ -11,24 +12,35 @@ import { AppointmentsService } from '../services/appointments.service';
   styleUrls: ['./appointments.component.css']
 })
 export class AppointmentsComponent implements OnInit {
+  specialities;
   bookedAppointmentsData:{};
-  specialities = [
-    {value:1, viewValue:'Dental'},
-    {value:2, viewValue:'ENT'},
-    {value:3, viewValue:'Orthopaedics'},
-    {value:4, viewValue:'Gynaecology'},
-    {value:5, viewValue:'Psychiatry'},
-    {value:6, viewValue:'Cardiology'},
-  ];
-  bundle={}
+  specialitySelectionForm: FormGroup;
+  dateSelectionForm: FormGroup;
 
-  constructor(private service:AppointmentsService) { }
+  bundle={};
+  isLinear=true;
+
+  constructor(private service:AppointmentsService, private _fb:FormBuilder) {
+   this.specialities = [];
+    this.specialitySelectionForm = this._fb.group({
+      speciality:['',Validators.required ],
+    });
+    this.dateSelectionForm = this._fb.group({
+      date:['',Validators.required ],
+    });
+   }
+
+   ngOnInit() {
+     this.service.getSpecialities().subscribe(data => this.specialities = data);
+     this.bookedAppointmentsData = this.service.getBookedAppointments();
+   }
+
+   
+
 
   appointmentCancel():void{
-    console.log('appointmentcancelled lol')
+    console.log('appointmentcancelled lol');
   }
-  ngOnInit() {
-    this.bookedAppointmentsData = this.service.getBookedAppointments();
-  }
+
 
 }
