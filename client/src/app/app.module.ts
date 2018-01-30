@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 //ngModules
 import { PatientModule } from './modules/patient/patient.module';
 import { DoctorModule } from './modules/doctor/doctor.module';
+import { PharmaModule } from './modules/pharma/pharma.module';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { AppRoutingModule } from './app-routing.module';
     SharedModule,
     PatientModule,
     DoctorModule,
+    PharmaModule,
     AppRoutingModule
   ],
   providers: [],
