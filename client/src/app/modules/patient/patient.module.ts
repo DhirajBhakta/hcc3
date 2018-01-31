@@ -13,12 +13,19 @@ import { PatientComponent } from './patient.component';
 //Components housed in this patientModule
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { HistoryComponent } from './history/history.component';
+import { BookedAppointmentCardComponent } from './appointments/booked-appointment-card/booked-appointment-card.component';
+
+//services
+import { AppointmentsService } from './services/appointments.service';
+import { HistoryService } from './services/history.service';
+
 
 @NgModule({
   declarations: [
     PatientComponent,
     AppointmentsComponent,
     HistoryComponent,
+    BookedAppointmentCardComponent,
   ],
 
   imports: [
@@ -27,8 +34,12 @@ import { HistoryComponent } from './history/history.component';
     PatientRoutingModule,
     SharedModule
   ],
-  exports : [
-    PatientComponent
+  // exports : [
+  //   PatientComponent
+  // ],
+  providers:[
+    AppointmentsService,
+    HistoryService
   ]
 
 })

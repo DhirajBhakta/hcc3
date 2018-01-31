@@ -18,15 +18,11 @@
   <hr>
 
   <!-- The body component with spans for centering -->
-  <div *ngFor="let h_item of history"
+  <div *ngFor="let h_item of historyData | async"
        fxLayout>
     <span fxFlex
           fxFlex.xs='3'></span>
-    <app-detail-card  
-                    [diagnosis]="h_item.diagnosis"
-                    [date]="h_item.date"
-                    [name]="h_item.name"
-                    [prescriptionList]="h_item.prescriptionList"
+    <app-detail-card [historyDataItem]="h_item"
                     fxFlex='50%'
                     fxFlex.xs='94%'
                     >

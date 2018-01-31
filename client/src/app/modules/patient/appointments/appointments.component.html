@@ -1,9 +1,53 @@
-<mat-vertical-stepper>
-  <mat-step>
-    <button mat-button>hi</button>
-  </mat-step>
-  <mat-step>
-    <button mat-button>bye</button>
-  </mat-step>
+<div fxLayout fxLayout.xs='column' fxLayoutGap='20px'>
+  <span fxFlex='8%'></span>
 
-</mat-vertical-stepper>
+  <div fxFlex="50%" fxLayout='column' flexLayoutAlign='center center'>
+    <h3> Booked Appointments</h3>
+    <app-generic-card *ngFor='let bookedAppointmentData of bookedAppointmentsData | async' [bundle]="bookedAppointmentData" (onCancel)='appointmentCancel()'></app-generic-card>
+
+
+  </div>
+  <span fxFlex></span>
+
+  <div fxFlex='30%'>
+    <h3>Book an Appointment</h3>
+    <mat-vertical-stepper linear style='height:100vh'>
+      <mat-step label="Speciality" [stepControl]='specialitySelectionForm'>
+        <mat-spinner *ngIf='isLoading'></mat-spinner>
+        <form *ngIf='!isLoading'[formGroup]='specialitySelectionForm'>
+          <mat-form-field>
+            <mat-select placeholder="Select Speciality" formControlName='speciality'>
+              <mat-option *ngFor="let speciality of specialities" [value]="speciality">
+                {{ speciality }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div>
+            <button type='submit' mat-raised-button matStepperNext color="primary">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step label="choose Date" [stepControl]='dateSelectionForm'>
+
+        <form [formGroup]="dateSelectionForm" (ngSubmit)="onDateSubmit()">
+          <input  [matDatepickerFilter]="dateFilter" [matDatepicker]="myDatepicker" formControlName='date' placeholder='choose a date'>
+          <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker></mat-datepicker>
+          <div>
+            <button type='button' mat-raised-button matStepperPrevious color="primary">Back</button>
+            <button type='submit' mat-raised-button matStepperNext color="primary" >Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step>
+        <mat-spinner *ngIf='isloading'></mat-spinner>
+        <app-generic-card *ngIf='!isLoading' [bundle]="bundle"></app-generic-card>
+      </mat-step>
+
+    </mat-vertical-stepper>
+
+  </div>
+
+  <span fxFlex='10%'></span>
+</div>
