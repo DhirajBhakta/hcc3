@@ -1,11 +1,118 @@
 {
- "specialities":[
-   "Dental",
-   "ENT",
-   "Orthopaedics",
-   "Psychology",
-   "Gynaecology"
- ],
+  "appointmentBooking": [{
+      "speciality": "Dental",
+      "validdates": [
+        "2018-02-02",
+        "2018-02-03",
+        "2018-02-06",
+        "2018-02-08",
+        "2018-02-09",
+        "2018-02-10",
+        "2018-02-15",
+        "2018-02-20",
+        "2018-02-21",
+        "2018-02-22"
+      ]
+    },
+    {
+      "speciality": "ENT",
+      "validdates": [
+        "2018-02-01",
+        "2018-02-11",
+        "2018-02-12",
+        "2018-02-13",
+        "2018-02-02",
+        "2018-02-14",
+        "2018-02-15",
+        "2018-02-19"
+      ]
+    },
+
+    {
+      "speciality": "Orthopaedics",
+      "validdates": [
+        "2018-02-01",
+        "2018-02-02",
+        "2018-02-03",
+        "2018-02-04",
+        "2018-02-05"
+      ]
+    },
+    {
+      "speciality": "Psychology",
+      "validdates": [
+        "2018-02-02",
+        "2018-02-03",
+        "2018-02-06",
+        "2018-02-08",
+        "2018-02-09",
+        "2018-02-10",
+        "2018-02-25",
+        "2018-02-26",
+        "2018-02-27",
+        "2018-02-28"
+      ]
+    },
+    {
+      "speciality": "Gynaecology",
+      "validdates": [
+        "2018-02-01",
+        "2018-02-05",
+        "2018-02-10",
+        "2018-02-20"
+      ]
+    }
+  ],
+
+  "doctors": [{
+      "speciality": "ENT",
+      "doctorname": "Dr. Bhaskar Bhandary",
+      "date": "2018-02-01",
+      "time":"10:30 AM"
+    },
+    {
+      "speciality": "ENT",
+      "doctorname": "Dr. Bhaskar Bhandary",
+      "date": "2018-02-11",
+      "time":"1:30 PM"
+    },
+    {
+      "speciality": "ENT",
+      "doctorname": "Dr. Bhaskar Bhandary",
+      "date": "2018-02-12",
+      "time":"11:30 AM"
+    },
+    {
+      "speciality": "ENT",
+      "doctorname": "Dr. Bhaskar Bhandary",
+      "date": "2018-02-13",
+      "time":"9:30 AM"
+    },
+    {
+      "speciality": "ENT",
+      "doctorname": "Dr. Bhaskar Bhandary",
+      "date": "2018-02-02",
+      "time":"5:30 PM"
+    },
+    {
+      "speciality": "ENT",
+      "doctorname": "Dr. Arun Ganapathy",
+      "date": "2018-02-14",
+      "time":"9:30 AM"
+    },
+    {
+      "speciality": "ENT",
+      "doctorname": "Dr. Arun Ganapathy",
+      "date": "2018-02-15",
+      "time":"9:45 AM"
+    },
+    {
+      "speciality": "ENT",
+      "doctorname": "Dr. Arun Ganapathy",
+      "date": "2018-02-19",
+      "time":"8:30 AM"
+    }
+  ],
 
   "bookedAppointments": [{
       "speciality": "Orthopaedics",
@@ -27,13 +134,11 @@
     }
   ],
 
-  "historyData": [
-    {
+  "historyData": [{
       "diagnosis": "Stomach Ache",
       "date": "1/10/2017",
       "name": "Dr. Krishna Mohan",
-      "prescriptionList": [
-        {
+      "prescriptionList": [{
           "drugname": "Aspirin",
           "quantity": "10",
           "schedule": "1-0-1",
@@ -57,9 +162,7 @@
       "diagnosis": "Fever",
       "date": "2/10/2017",
       "name": "Dr. Rammoorthy Krisnan",
-      "prescriptionList":
-      [
-        {
+      "prescriptionList": [{
           "drugname": "Aspirin",
           "quantity": "10",
           "schedule": "1-0-1",
@@ -79,6 +182,7 @@
         }
       ]
     }
-  ]
+  ],
+  "lama":{"buulllcrap":"ohh"}
 
 }

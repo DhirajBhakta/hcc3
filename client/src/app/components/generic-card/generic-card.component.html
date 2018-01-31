@@ -1,13 +1,13 @@
 <mat-card>
   <div fxLayout>
-    <div fxFlex="80%" fxLayout fxLayout.xs='column'>
+    <div fxFlex="90%" fxLayout fxLayout.xs='column' fxLayout.sm='column'>
       <div fxLayout='column' fxFlex='50%'>
         <span *ngIf='bundle.subtitle' class='subtitle'>{{bundle.subtitle}}</span>
         <span *ngIf='bundle.title' class='title'>{{bundle.title}}</span>
       </div>
-            <div fxFlex='30%' fxLayout='column'>
-        <span *ngIf='bundle.time'><mat-icon svgIcon='access_time' style='font-size:10px'></mat-icon>{{bundle.time}}</span>
-        <span *ngIf='bundle.date'><mat-icon svgIcon='date_range'></mat-icon>{{bundle.date}}</span>
+      <div fxFlex fxLayout='column'>
+        <span *ngIf='bundle.time'><mat-icon svgIcon='access_time' style='color:white; height:15px'></mat-icon>{{bundle.time}}</span>
+        <span *ngIf='bundle.date'><mat-icon svgIcon='date_range'  style='color:white; height:15px'></mat-icon>{{bundle.date}}</span>
       </div>
     </div>
     <div fxFlex fxLayout fxLayoutAlign='center center'>
