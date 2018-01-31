@@ -19,14 +19,14 @@ function log(Obs) {
 @Injectable()
 export class AppointmentsService {
   url = 'http://localhost:3000/';
-  appointmentData$: Observable<Array<any>>;
-  specialities$: Observable<Array<string>>;
-  specialityDatesMap$: object;
+  appointmentData$;
+  specialities$;
+  specialityDatesMap$;
 
   constructor(private http: HttpClient) { }
 
   requestData() {
-    this.appointmentData$ = this.http.get<Observable<Array<any>>>(this.url + 'appointmentBooking');
+    this.appointmentData$ = this.http.get(this.url + 'appointmentBooking');
     this.specialities$ = this.appointmentData$.map(dataArray => dataArray.map((data) => data.speciality));
     this.specialityDatesMap$ = this.appointmentData$.map(dataArray => dataArray.reduce(function(acc, curr) {
       return acc.set(curr['speciality'], curr['validdates']);
@@ -47,10 +47,16 @@ export class AppointmentsService {
     params = params.append('speciality', speciality)
       .append('date', date);
     return this.http.get(this.url + 'doctors', { params: params })
-      .map(dataArray => dataArray.map((data) => replaceKeys(data, [
+      .map((data) => replaceKeys(data, [
         { replace: 'doctorname', with: 'subtitle' },
         { replace: 'speciality', with: 'title' }
-      ])));
+      ]));
+  }
+
+  postBookedAppointment(){
+    //send post request with reqired data to book the appointment;
+    //if success, return true
+    return true;
   }
 
   getBookedAppointments(): Observable<any> {

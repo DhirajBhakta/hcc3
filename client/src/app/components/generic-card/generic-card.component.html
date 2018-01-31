@@ -10,8 +10,9 @@
         <span *ngIf='bundle.date'><mat-icon svgIcon='date_range'  style='color:white; height:15px'></mat-icon>{{bundle.date| date}}</span>
       </div>
     </div>
-    <div fxFlex fxLayout fxLayoutAlign='center center'>
-      <button mat-raised-button color='primary' (click)="triggerCancel()">CANCEL</button>
+    <div fxFlex fxLayout='column' fxLayoutGap='5px' fxLayoutAlign='center center'>
+      <button *ngIf='canCancel' mat-raised-button color='primary' (click)="triggerCancel()">CANCEL</button>
+      <button *ngIf='canConfirm' mat-raised-button color='warn' (click)="triggerCancel()">CONFIRM</button>
     </div>
   </div>
 </mat-card>

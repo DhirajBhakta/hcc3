@@ -15,7 +15,7 @@ import { AppointmentsService } from '../services/appointments.service';
 export class AppointmentsComponent implements OnInit {
   specialities: Set<string>;
   bookedAppointmentsData: {};
-  dateMap: {};
+  dateMap: Map<string, Array<string>>;
   isLoading: boolean;
 
   specialitySelectionForm: FormGroup;
@@ -51,6 +51,10 @@ export class AppointmentsComponent implements OnInit {
         this.bundle = data[0];
         this.isLoading = false;
       });
+  }
+
+  onAppointmentConfirm(){
+    this.service.postBookedAppointment();
   }
 
   dateFilter(d: Date): boolean {
