@@ -12,7 +12,7 @@ export class AppComponent {
   title = 'app';
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-    iconRegistry.addSvgIcon('access_time',sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/access_time.svg'))
-                .addSvgIcon('date_range',sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/date_range.svg'));
+    iconRegistry.addSvgIcon('access_time', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/access_time.svg'))
+                .addSvgIcon('date_range', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/date_range.svg'));
   }
 }
