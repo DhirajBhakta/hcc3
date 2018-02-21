@@ -63,58 +63,58 @@
       ]
     }
   ],
-
-  "doctors": [{
+  "doctors": [
+    {
       "speciality": "ENT",
       "doctorname": "Dr. Bhaskar Bhandary",
       "date": "2018-02-01",
-      "time":"10:30 AM"
+      "time": "10:30 AM"
     },
     {
       "speciality": "ENT",
       "doctorname": "Dr. Bhaskar Bhandary",
       "date": "2018-02-11",
-      "time":"1:30 PM"
+      "time": "1:30 PM"
     },
     {
       "speciality": "ENT",
       "doctorname": "Dr. Bhaskar Bhandary",
       "date": "2018-02-12",
-      "time":"11:30 AM"
+      "time": "11:30 AM"
     },
     {
       "speciality": "ENT",
       "doctorname": "Dr. Bhaskar Bhandary",
       "date": "2018-02-13",
-      "time":"9:30 AM"
+      "time": "9:30 AM"
     },
     {
       "speciality": "ENT",
       "doctorname": "Dr. Bhaskar Bhandary",
       "date": "2018-02-02",
-      "time":"5:30 PM"
+      "time": "5:30 PM"
     },
     {
       "speciality": "ENT",
       "doctorname": "Dr. Arun Ganapathy",
       "date": "2018-02-14",
-      "time":"9:30 AM"
+      "time": "9:30 AM"
     },
     {
       "speciality": "ENT",
       "doctorname": "Dr. Arun Ganapathy",
       "date": "2018-02-15",
-      "time":"9:45 AM"
+      "time": "9:45 AM"
     },
     {
       "speciality": "ENT",
       "doctorname": "Dr. Arun Ganapathy",
       "date": "2018-02-19",
-      "time":"8:30 AM"
+      "time": "8:30 AM"
     }
   ],
-
-  "bookedAppointments": [{
+  "bookedAppointments": [
+    {
       "speciality": "Orthopaedics",
       "doctorname": "Dr.Bhaskar Bhandary",
       "date": "10/11/2017",
@@ -122,15 +122,34 @@
     },
     {
       "speciality": "ENT",
-      "doctorname": "Dr.Hiruzen Sarutobi ",
+      "doctorname": "Dr. Gautam Mohan",
       "date": "1/10/2017",
       "time": "8:00pm"
     },
     {
       "speciality": "Psychiatry",
-      "doctorname": "Dr.Hatake Kakashi",
+      "doctorname": "Dr. Ram Shastry",
       "date": "3/03/2017",
       "time": "8:00am"
+    },
+    {
+      "date": "2018-02-15",
+      "time": "9:45 AM",
+      "doctorname": "Dr. Arun Ganapathy",
+      "speciality": "ENT",
+      "id": 151
+    },
+    {
+      "date": "2018-02-01",
+      "time": "10:30 AM",
+      "doctorname": "Dr. Bhaskar Bhandary",
+      "speciality": "ENT",
+      "id": 169
+    },
+    {
+      "date": "2018-02-14",
+      "time": "9:30 AM",
+      "id": 26
     }
   ],
 

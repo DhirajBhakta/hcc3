@@ -9,6 +9,7 @@ import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
 import { DetailCardComponent } from './detail-card/detail-card.component';
 import { ShowErrorsComponent } from './show-errors/show-errors.component';
 import { GenericCardComponent } from './generic-card/generic-card.component';
+import { ProfileCardComponent } from './profile-card/profile-card.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { GenericCardComponent } from './generic-card/generic-card.component';
     MainMenuComponent,
     DetailCardComponent,
     ShowErrorsComponent,
-    GenericCardComponent
+    GenericCardComponent,
+    ProfileCardComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { GenericCardComponent } from './generic-card/generic-card.component';
     MainMenuComponent,
     DetailCardComponent,
     ShowErrorsComponent,
-    GenericCardComponent
+    GenericCardComponent,
+    ProfileCardComponent
   ]
 })
 export class ComponentsModule { }

@@ -11,7 +11,8 @@ export class GenericCardComponent implements OnInit {
  @Input() canCancel: boolean;
  @Input() canConfirm: boolean;
 
- @Output() onCancel: EventEmitter<any> = new EventEmitter();
+ @Output() Cancel: EventEmitter<any> = new EventEmitter();
+ @Output() Confirm: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -19,6 +20,13 @@ export class GenericCardComponent implements OnInit {
   }
 
   triggerCancel(): void {
-    this.onCancel.emit();
+    this.Cancel.emit();
   }
+
+  triggerConfirm(): void {
+    console.log('confirm clicked! emit triggered')
+    this.Confirm.emit();
+  }
+
+
 }

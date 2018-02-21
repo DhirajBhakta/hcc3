@@ -1,0 +1,11 @@
+.mat-card{
+  padding:0px;
+}
+.mat-card-header{
+  background-color: #002f6c;
+  color:white;
+}
+
+td{
+  padding:10px;
+}

@@ -4,8 +4,13 @@ import { dateString } from 'app/utils';
 //services
 import { AppointmentsService } from '../services/appointments.service';
 
+import 'rxjs/add/operator/merge';
+import 'rxjs/add/operator/toArray';
 
 
+function log(Obs) {
+  Obs.subscribe(d => console.log('LOGG:', d));
+}
 
 @Component({
   selector: 'app-appointments',
@@ -14,7 +19,7 @@ import { AppointmentsService } from '../services/appointments.service';
 })
 export class AppointmentsComponent implements OnInit {
   specialities: Set<string>;
-  bookedAppointmentsData: {};
+  bookedAppointmentsData$;
   dateMap: Map<string, Array<string>>;
   isLoading: boolean;
 
@@ -41,7 +46,7 @@ export class AppointmentsComponent implements OnInit {
       this.isLoading = false
     });
     this.service.getSpecialityDatesMap().subscribe(data => { this.dateMap = new Map(data); });
-    this.bookedAppointmentsData = this.service.getBookedAppointments();
+    this.bookedAppointmentsData$ = this.service.getBookedAppointments();
   }
 
   onDateSubmit() {
@@ -53,8 +58,8 @@ export class AppointmentsComponent implements OnInit {
       });
   }
 
-  onAppointmentConfirm(){
-    this.service.postBookedAppointment();
+  onAppointmentConfirm() {
+    this.bookedAppointmentsData$= this.service.postBookedAppointment(this.bundle);
   }
 
   dateFilter(d: Date): boolean {

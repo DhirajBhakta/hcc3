@@ -2,5 +2,16 @@
   HCC
   <span fxFlex></span>
   <button mat-button *ngFor="let navLink of navLinks" [routerLink]="navLink.path">{{navLink.displayString}}</button>
-  <app-main-menu></app-main-menu>
+
+  <mat-menu #appMenu="matMenu">
+    <button mat-menu-item  *ngFor="let menuLink of menuLinks" [routerLink]="menuLink.path">
+      <mat-icon color="primary">{{menuLink.icon}}</mat-icon> {{menuLink.displayString}}
+    </button>
+    <button mat-menu-item>
+      <span fxFlex></span> Logout</button>
+  </mat-menu>
+
+  <button mat-icon-button [matMenuTriggerFor]="appMenu">
+     <mat-icon>keyboard_arrow_down</mat-icon>
+  </button>
 </mat-toolbar>

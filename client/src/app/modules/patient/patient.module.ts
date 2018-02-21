@@ -14,6 +14,8 @@ import { PatientComponent } from './patient.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { HistoryComponent } from './history/history.component';
 import { BookedAppointmentCardComponent } from './appointments/booked-appointment-card/booked-appointment-card.component';
+import { PatientProfileComponent } from './patient-profile/patient-profile.component';
+
 
 //services
 import { AppointmentsService } from './services/appointments.service';
@@ -26,6 +28,7 @@ import { HistoryService } from './services/history.service';
     AppointmentsComponent,
     HistoryComponent,
     BookedAppointmentCardComponent,
+    PatientProfileComponent,
   ],
 
   imports: [
