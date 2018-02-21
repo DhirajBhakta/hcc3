@@ -11,6 +11,7 @@ import { NavLink } from '../../models/util-types';
 })
 export class MainToolbarComponent implements OnInit {
   @Input() navLinks: NavLink[];
+  @Input() menuLinks;
   constructor() { }
 
   ngOnInit() {

@@ -1,25 +1,7 @@
-<div class="container"
-  fxLayout='column'
-  fxLayoutAlign='space-around'
-  fxLayoutGap="10px"
-  fxFlexFill>
-
-  <!-- Centered header -->
-  <div class="row">
-    <span fxFlex 
-          fxFlex.xs='3'></span>
-    <div class="header"
-         fxFlex='50%'
-         fxFlex.xs='94%'>
-      <h1> HISTORY</h1>
-    </div>
-    <span fxFlex fxFles.xs='3'></span>
-  </div>
-  <hr>
+<div class="container" fxLayout='column' fxLayoutAlign='center center' fxLayoutGap="10px">
 
   <!-- The body component with spans for centering -->
-  <div *ngFor="let h_item of historyData | async"
-       fxLayout>
+  <div *ngFor="let h_item of historyData | async" fxLayout>
     <span fxFlex
           fxFlex.xs='3'></span>
     <app-detail-card [historyDataItem]="h_item"
@@ -29,5 +11,5 @@
     </app-detail-card>
     <span fxFlex
           fxFlex.xs='3'></span>
-  </div>
+   </div>
 </div>

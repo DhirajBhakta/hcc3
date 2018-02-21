@@ -3,7 +3,7 @@
 
   <div fxFlex="50%" fxLayout='column' flexLayoutAlign='center center'>
     <h3> Booked Appointments</h3>
-    <app-generic-card canCancel='true' *ngFor='let bookedAppointmentData of bookedAppointmentsData | async' [bundle]="bookedAppointmentData" (onCancel)='appointmentCancel()'></app-generic-card>
+    <app-generic-card canCancel='true' *ngFor='let bookedAppointmentData of bookedAppointmentsData$ | async' [bundle]="bookedAppointmentData" (onCancel)='appointmentCancel()'></app-generic-card>
 
 
   </div>
@@ -42,7 +42,7 @@
 
       <mat-step>
         <mat-spinner *ngIf='isloading'></mat-spinner>
-        <app-generic-card canConfirm='true' *ngIf='!isLoading' [bundle]="bundle"></app-generic-card>
+        <app-generic-card canConfirm='true' *ngIf='!isLoading' [bundle]="bundle" (Confirm)="onAppointmentConfirm()"></app-generic-card>
       </mat-step>
 
     </mat-vertical-stepper>

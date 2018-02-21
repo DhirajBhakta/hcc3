@@ -12,7 +12,7 @@
     </div>
     <div fxFlex fxLayout='column' fxLayoutGap='5px' fxLayoutAlign='center center'>
       <button *ngIf='canCancel' mat-raised-button color='primary' (click)="triggerCancel()">CANCEL</button>
-      <button *ngIf='canConfirm' mat-raised-button color='warn' (click)="triggerCancel()">CONFIRM</button>
+      <button *ngIf='canConfirm' mat-raised-button color='warn' (click)="triggerConfirm()">CONFIRM</button>
     </div>
   </div>
 </mat-card>

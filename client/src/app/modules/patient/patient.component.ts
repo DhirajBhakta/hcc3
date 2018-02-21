@@ -12,6 +12,9 @@ export class PatientComponent implements OnInit {
     {displayString: 'Appointments', path: 'appointments'},
     {displayString: 'History', path: 'history'}
   ];
+  menuLinks = [
+    {displayString:'Profile', path:'profile', icon:'person'}
+  ];
 
   constructor() { }
 
