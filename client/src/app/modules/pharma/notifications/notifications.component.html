@@ -1,3 +1,46 @@
-<p>
-  notifications works!
-</p>
+<mat-tab-group>
+  <mat-tab label="Seen" fxLayout='column'
+                        fxLayoutGap='20px'>
+    <h1>Some tab content</h1>
+    <div *ngFor="let notification of (notifications$ | async)">
+      <div flexLayout='row'
+           fxLayoutAlign='center center'>
+        <mat-card fxFlex="50%" fxFlex.xs="100%">
+          <mat-card-title>{{notification.title}}</mat-card-title>
+          <mat-card-content>
+            <table 
+                  fxLayoutAlign='center center'>
+              <tr>
+                <th>Drug</th>
+                <th>Quantity</th>
+                <th>Store(Batch. No|Qty|Rack)</th>
+              </tr>
+              <tr *ngFor="let p_item of notification.prescriptions">
+                <td>{{p_item.drugname}}</td>
+                <td>{{p_item.quantity}}</td>
+                <td>
+                  <table>
+                    <tr *ngFor="let store of p_item.stores">
+                      <td>{{store.batch_no}}</td>
+                      <td>{{store.quantity}}</td>
+                      <td>{{store.expiry_date | date:'shortDate'}}</td>
+                      <td>{{store.rack}}</td>
+                    </tr>
+
+                  </table>
+                </td>
+
+              </tr>
+            </table>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    <hr/>
+  </div>
+  </mat-tab>
+  <mat-tab label="Unseen">
+
+  </mat-tab>
+  <mat-tab label="Acknowledged">
+  </mat-tab>
+</mat-tab-group>

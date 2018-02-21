@@ -183,6 +183,51 @@
       ]
     }
   ],
-  "lama":{"buulllcrap":"ohh"}
-
+  "lama":{"buulllcrap":"ohh"},
+  "pharma_notifications": [
+    {
+      "doctor_name" : "Dr. Bhaskar Bhandary",
+      "patient_name" : "Ranganath Pai M",
+      "diagnosis" : "Fever",
+      "type" : "seen",
+      "prescriptions" : [
+        {
+          "drugname" : "Aspirin",
+          "quantity" : "10",
+          "stores" : [
+            {
+              "batch_no" : "BLOX",
+              "quantity" : "5", 
+              "expiry_date" : "2016-06-21T10:47:40Z",
+              "rack" : "L1"
+            },
+            {
+              "batch_no" : "BLOX",
+              "quantity" : "11", 
+              "expiry_date" : "2016-06-21T10:47:40Z",
+              "rack" : "R1"
+            }
+          ]
+        },
+        {
+          "drugname" : "Paracetamol",
+          "quantity" : "6",
+          "stores" : [
+            {
+              "batch_no" : "BLOX",
+              "quantity" : "5", 
+              "expiry_date" : "2016-06-21T10:47:40Z",
+              "rack" : "L1"
+            },
+            {
+              "batch_no" : "BLOX",
+              "quantity" : "20", 
+              "expiry_date" : "2016-06-21T10:47:40Z",
+              "rack" : "R1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

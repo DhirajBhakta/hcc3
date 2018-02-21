@@ -10,6 +10,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
 
 import { ComponentsModule } from '../../components/components.module';
 import { SharedModule } from '../../shared/shared.module';
+import { NotificationService } from './services/notification.service';
+import { PTableComponent } from './notifications/p-table/p-table.component';
 
 
 @NgModule({
@@ -24,7 +26,11 @@ import { SharedModule } from '../../shared/shared.module';
     HistoryComponent,
     StockupdateComponent,
     InventoryComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    PTableComponent
+  ],
+  providers: [
+    NotificationService
   ],
   exports: [
     PharmaComponent,

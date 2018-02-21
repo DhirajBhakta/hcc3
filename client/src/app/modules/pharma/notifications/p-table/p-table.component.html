@@ -1,0 +1,23 @@
+<table fxLayoutAlign='center center'>
+  <tr>
+    <th>Drug</th>
+    <th>Quantity</th>
+    <th>Store(Batch. No|Qty|Rack)</th>
+  </tr>
+  <tr *ngFor="let p_item of prescriptions">
+    <td>{{p_item.drugname}}</td>
+    <td>{{p_item.quantity}}</td>
+    <td>
+      <table>
+        <tr *ngFor="let store of p_item.stores">
+          <td>{{store.batch_no}}</td>
+          <td>{{store.quantity}}</td>
+          <td>{{store.expiry_date | date:'shortDate'}}</td>
+          <td>{{store.rack}}</td>
+        </tr>
+
+      </table>
+    </td>
+
+  </tr>
+  </table>
