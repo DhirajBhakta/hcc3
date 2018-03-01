@@ -1,0 +1,13 @@
+.mat-card{
+  padding:0;
+}
+.mat-card-header{
+  background-color: #1C258F;
+  color:white;
+  border-radius: 0px 5px 5px 0px;
+}
+
+
+form{
+  padding:20px;
+}

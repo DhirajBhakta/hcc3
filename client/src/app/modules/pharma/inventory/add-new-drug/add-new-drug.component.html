@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-header>
+    <h3>Add a new Drug</h3>
+  </mat-card-header>
+  <form fxLayout='column' [formGroup]="addNewDrugForm" (ngSubmit)="onNewDrugSubmit()">
+    <mat-form-field>
+      <input matInput placeholder="Trade Name" formControlName='tradeName'>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Generic Name" formControlName='genericName'>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Select Rack" formControlName='rack'>
+        <mat-option *ngFor="let rack of racks" [value]="rack">
+          {{ rack }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button type='submit' color='primary'>Add</button>
+  </form>
+<p>Form value: {{ addNewDrugForm.value | json }}</p>
+</mat-card>

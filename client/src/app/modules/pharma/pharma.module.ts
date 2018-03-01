@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { AgGridModule }  from "ag-grid-angular/main";
+
 import { PharmaRoutingModule } from './pharma-routing.module';
 import { PharmaComponent } from './pharma.component';
 import { HistoryComponent } from './history/history.component';
@@ -10,6 +12,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 
 import { ComponentsModule } from '../../components/components.module';
 import { SharedModule } from '../../shared/shared.module';
+import { AddNewDrugComponent } from './inventory/add-new-drug/add-new-drug.component';
 
 
 @NgModule({
@@ -17,14 +20,16 @@ import { SharedModule } from '../../shared/shared.module';
     CommonModule,
     PharmaRoutingModule,
     SharedModule,
-    ComponentsModule
+    ComponentsModule,
+    AgGridModule.withComponents([ ])
   ],
   declarations: [
     PharmaComponent,
     HistoryComponent,
     StockupdateComponent,
     InventoryComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    AddNewDrugComponent
   ],
   exports: [
     PharmaComponent,

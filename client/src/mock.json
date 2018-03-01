@@ -1,6 +1,5 @@
 {
-  "appointmentBooking": [
-    {
+  "appointmentBooking": [{
       "speciality": "Dental",
       "validdates": [
         "2018-02-02",
@@ -63,8 +62,7 @@
       ]
     }
   ],
-  "doctors": [
-    {
+  "doctors": [{
       "speciality": "ENT",
       "doctorname": "Dr. Bhaskar Bhandary",
       "date": "2018-02-01",
@@ -113,8 +111,7 @@
       "time": "8:30 AM"
     }
   ],
-  "bookedAppointments": [
-    {
+  "bookedAppointments": [{
       "speciality": "Orthopaedics",
       "doctorname": "Dr.Bhaskar Bhandary",
       "date": "10/11/2017",
@@ -152,13 +149,11 @@
       "id": 26
     }
   ],
-  "historyData": [
-    {
+  "historyData": [{
       "diagnosis": "Stomach Ache",
       "date": "1/10/2017",
       "name": "Dr. Krishna Mohan",
-      "prescriptionList": [
-        {
+      "prescriptionList": [{
           "drugname": "Aspirin",
           "quantity": "10",
           "schedule": "1-0-1",
@@ -182,8 +177,7 @@
       "diagnosis": "Fever",
       "date": "2/10/2017",
       "name": "Dr. Rammoorthy Krisnan",
-      "prescriptionList": [
-        {
+      "prescriptionList": [{
           "drugname": "Aspirin",
           "quantity": "10",
           "schedule": "1-0-1",
@@ -200,6 +194,1418 @@
           "quantity": "1",
           "schedule": "0-1-1",
           "comments": "AF"
+        }
+      ]
+    }
+  ],
+  "inventory": [{
+      "tradeName": "et",
+      "genericName": "nesciunt",
+      "batches": [{
+          "batch": "consequatur",
+          "quantity": 55,
+          "rack": "8"
+        },
+        {
+          "batch": "accusamus",
+          "quantity": 82,
+          "rack": "4"
+        }
+      ]
+    },
+    {
+      "tradeName": "earum",
+      "genericName": "dolor",
+      "batches": [{
+        "batch": "non",
+        "quantity": 102,
+        "rack": "0"
+      }]
+    },
+    {
+      "tradeName": "esse",
+      "genericName": "soluta",
+      "batches": [{
+          "batch": "temporibus",
+          "quantity": 2,
+          "rack": "4"
+        },
+        {
+          "batch": "voluptatem",
+          "quantity": 134,
+          "rack": "5"
+        }
+      ]
+    },
+    {
+      "tradeName": "veritatis",
+      "genericName": "deleniti",
+      "batches": [{
+        "batch": "rem",
+        "quantity": 8,
+        "rack": "9"
+      }]
+    },
+    {
+      "tradeName": "consequuntur",
+      "genericName": "quia",
+      "batches": [{
+          "batch": "error",
+          "quantity": 136,
+          "rack": "7"
+        },
+        {
+          "batch": "sed",
+          "quantity": 150,
+          "rack": "1"
+        }
+      ]
+    },
+    {
+      "tradeName": "et",
+      "genericName": "molestiae",
+      "batches": [{
+          "batch": "cumque",
+          "quantity": 15,
+          "rack": "8"
+        },
+        {
+          "batch": "quia",
+          "quantity": 55,
+          "rack": "11"
+        },
+        {
+          "batch": "consequuntur",
+          "quantity": 136,
+          "rack": "1"
+        }
+      ]
+    },
+    {
+      "tradeName": "non",
+      "genericName": "quibusdam",
+      "batches": [{
+          "batch": "ducimus",
+          "quantity": 130,
+          "rack": "4"
+        },
+        {
+          "batch": "dolores",
+          "quantity": 36,
+          "rack": "7"
+        },
+        {
+          "batch": "nisi",
+          "quantity": 114,
+          "rack": "8"
+        }
+      ]
+    },
+    {
+      "tradeName": "aut",
+      "genericName": "suscipit",
+      "batches": [{
+          "batch": "unde",
+          "quantity": 128,
+          "rack": "11"
+        },
+        {
+          "batch": "nobis",
+          "quantity": 193,
+          "rack": "0"
+        }
+      ]
+    },
+    {
+      "tradeName": "dolorum",
+      "genericName": "nostrum",
+      "batches": [{
+        "batch": "repudiandae",
+        "quantity": 40,
+        "rack": "4"
+      }]
+    },
+    {
+      "tradeName": "rerum",
+      "genericName": "qui",
+      "batches": [{
+        "batch": "vitae",
+        "quantity": 134,
+        "rack": "1"
+      }]
+    },
+    {
+      "tradeName": "quia",
+      "genericName": "deserunt",
+      "batches": [{
+          "batch": "et",
+          "quantity": 57,
+          "rack": "8"
+        },
+        {
+          "batch": "soluta",
+          "quantity": 118,
+          "rack": "8"
+        },
+        {
+          "batch": "sed",
+          "quantity": 101,
+          "rack": "8"
+        }
+      ]
+    },
+    {
+      "tradeName": "ut",
+      "genericName": "ipsum",
+      "batches": [{
+          "batch": "quo",
+          "quantity": 142,
+          "rack": "4"
+        },
+        {
+          "batch": "maxime",
+          "quantity": 67,
+          "rack": "3"
+        },
+        {
+          "batch": "ut",
+          "quantity": 2,
+          "rack": "10"
+        }
+      ]
+    },
+    {
+      "tradeName": "dolorem",
+      "genericName": "dolor",
+      "batches": [{
+          "batch": "eveniet",
+          "quantity": 117,
+          "rack": "10"
+        },
+        {
+          "batch": "quia",
+          "quantity": 78,
+          "rack": "6"
+        }
+      ]
+    },
+    {
+      "tradeName": "error",
+      "genericName": "pariatur",
+      "batches": [{
+          "batch": "rerum",
+          "quantity": 49,
+          "rack": "6"
+        },
+        {
+          "batch": "quia",
+          "quantity": 13,
+          "rack": "10"
+        }
+      ]
+    },
+    {
+      "tradeName": "qui",
+      "genericName": "porro",
+      "batches": [{
+          "batch": "non",
+          "quantity": 126,
+          "rack": "5"
+        },
+        {
+          "batch": "voluptates",
+          "quantity": 21,
+          "rack": "5"
+        },
+        {
+          "batch": "est",
+          "quantity": 35,
+          "rack": "5"
+        }
+      ]
+    },
+    {
+      "tradeName": "nostrum",
+      "genericName": "sint",
+      "batches": [{
+        "batch": "est",
+        "quantity": 7,
+        "rack": "8"
+      }]
+    },
+    {
+      "tradeName": "maiores",
+      "genericName": "commodi",
+      "batches": [{
+          "batch": "aut",
+          "quantity": 61,
+          "rack": "6"
+        },
+        {
+          "batch": "sit",
+          "quantity": 55,
+          "rack": "3"
+        },
+        {
+          "batch": "quasi",
+          "quantity": 1,
+          "rack": "1"
+        }
+      ]
+    },
+    {
+      "tradeName": "similique",
+      "genericName": "non",
+      "batches": [{
+          "batch": "et",
+          "quantity": 21,
+          "rack": "4"
+        },
+        {
+          "batch": "vero",
+          "quantity": 103,
+          "rack": "1"
+        }
+      ]
+    },
+    {
+      "tradeName": "molestias",
+      "genericName": "est",
+      "batches": [{
+        "batch": "dignissimos",
+        "quantity": 146,
+        "rack": "6"
+      }]
+    },
+    {
+      "tradeName": "non",
+      "genericName": "natus",
+      "batches": [{
+        "batch": "ad",
+        "quantity": 81,
+        "rack": "1"
+      }]
+    },
+    {
+      "tradeName": "accusamus",
+      "genericName": "velit",
+      "batches": [{
+          "batch": "adipisci",
+          "quantity": 43,
+          "rack": "9"
+        },
+        {
+          "batch": "animi",
+          "quantity": 10,
+          "rack": "3"
+        }
+      ]
+    },
+    {
+      "tradeName": "adipisci",
+      "genericName": "ducimus",
+      "batches": [{
+          "batch": "praesentium",
+          "quantity": 108,
+          "rack": "6"
+        },
+        {
+          "batch": "similique",
+          "quantity": 162,
+          "rack": "12"
+        }
+      ]
+    },
+    {
+      "tradeName": "accusantium",
+      "genericName": "recusandae",
+      "batches": [{
+        "batch": "ab",
+        "quantity": 116,
+        "rack": "9"
+      }]
+    },
+    {
+      "tradeName": "ducimus",
+      "genericName": "dolor",
+      "batches": [{
+        "batch": "animi",
+        "quantity": 160,
+        "rack": "4"
+      }]
+    },
+    {
+      "tradeName": "aut",
+      "genericName": "est",
+      "batches": [{
+        "batch": "alias",
+        "quantity": 129,
+        "rack": "2"
+      }]
+    },
+    {
+      "tradeName": "aut",
+      "genericName": "incidunt",
+      "batches": [{
+        "batch": "magnam",
+        "quantity": 146,
+        "rack": "11"
+      }]
+    },
+    {
+      "tradeName": "iste",
+      "genericName": "voluptates",
+      "batches": [{
+        "batch": "doloremque",
+        "quantity": 6,
+        "rack": "10"
+      }]
+    },
+    {
+      "tradeName": "rerum",
+      "genericName": "quidem",
+      "batches": [{
+        "batch": "assumenda",
+        "quantity": 181,
+        "rack": "9"
+      }]
+    },
+    {
+      "tradeName": "tempora",
+      "genericName": "adipisci",
+      "batches": [{
+          "batch": "error",
+          "quantity": 155,
+          "rack": "1"
+        },
+        {
+          "batch": "ratione",
+          "quantity": 16,
+          "rack": "6"
+        },
+        {
+          "batch": "quibusdam",
+          "quantity": 171,
+          "rack": "0"
+        },
+        {
+          "batch": "saepe",
+          "quantity": 33,
+          "rack": "2"
+        }
+      ]
+    },
+    {
+      "tradeName": "non",
+      "genericName": "ipsam",
+      "batches": [{
+        "batch": "sequi",
+        "quantity": 111,
+        "rack": "4"
+      }]
+    },
+    {
+      "tradeName": "ut",
+      "genericName": "dignissimos",
+      "batches": [{
+        "batch": "qui",
+        "quantity": 73,
+        "rack": "1"
+      }]
+    },
+    {
+      "tradeName": "iste",
+      "genericName": "tenetur",
+      "batches": [{
+          "batch": "aut",
+          "quantity": 11,
+          "rack": "8"
+        },
+        {
+          "batch": "alias",
+          "quantity": 173,
+          "rack": "0"
+        }
+      ]
+    },
+    {
+      "tradeName": "odit",
+      "genericName": "in",
+      "batches": [{
+        "batch": "cum",
+        "quantity": 17,
+        "rack": "2"
+      }]
+    },
+    {
+      "tradeName": "ab",
+      "genericName": "ut",
+      "batches": [{
+          "batch": "et",
+          "quantity": 54,
+          "rack": "6"
+        },
+        {
+          "batch": "et",
+          "quantity": 135,
+          "rack": "9"
+        },
+        {
+          "batch": "amet",
+          "quantity": 198,
+          "rack": "0"
+        }
+      ]
+    },
+    {
+      "tradeName": "veniam",
+      "genericName": "porro",
+      "batches": [{
+          "batch": "voluptates",
+          "quantity": 81,
+          "rack": "12"
+        },
+        {
+          "batch": "amet",
+          "quantity": 59,
+          "rack": "0"
+        },
+        {
+          "batch": "qui",
+          "quantity": 137,
+          "rack": "11"
+        },
+        {
+          "batch": "consectetur",
+          "quantity": 26,
+          "rack": "1"
+        }
+      ]
+    },
+    {
+      "tradeName": "eius",
+      "genericName": "sapiente",
+      "batches": [{
+          "batch": "a",
+          "quantity": 37,
+          "rack": "0"
+        },
+        {
+          "batch": "omnis",
+          "quantity": 148,
+          "rack": "2"
+        },
+        {
+          "batch": "molestiae",
+          "quantity": 188,
+          "rack": "3"
+        }
+      ]
+    },
+    {
+      "tradeName": "doloribus",
+      "genericName": "magnam",
+      "batches": [{
+          "batch": "non",
+          "quantity": 152,
+          "rack": "1"
+        },
+        {
+          "batch": "doloremque",
+          "quantity": 137,
+          "rack": "8"
+        }
+      ]
+    },
+    {
+      "tradeName": "eos",
+      "genericName": "qui",
+      "batches": [{
+          "batch": "ut",
+          "quantity": 123,
+          "rack": "9"
+        },
+        {
+          "batch": "quo",
+          "quantity": 78,
+          "rack": "4"
+        }
+      ]
+    },
+    {
+      "tradeName": "dolores",
+      "genericName": "eveniet",
+      "batches": [{
+          "batch": "cupiditate",
+          "quantity": 24,
+          "rack": "9"
+        },
+        {
+          "batch": "eos",
+          "quantity": 177,
+          "rack": "2"
+        }
+      ]
+    },
+    {
+      "tradeName": "et",
+      "genericName": "omnis",
+      "batches": [{
+        "batch": "ut",
+        "quantity": 78,
+        "rack": "6"
+      }]
+    },
+    {
+      "tradeName": "accusamus",
+      "genericName": "quasi",
+      "batches": [{
+          "batch": "est",
+          "quantity": 109,
+          "rack": "7"
+        },
+        {
+          "batch": "totam",
+          "quantity": 140,
+          "rack": "4"
+        }
+      ]
+    },
+    {
+      "tradeName": "similique",
+      "genericName": "quia",
+      "batches": [{
+        "batch": "natus",
+        "quantity": 187,
+        "rack": "2"
+      }]
+    },
+    {
+      "tradeName": "tempore",
+      "genericName": "consequatur",
+      "batches": [{
+        "batch": "voluptatum",
+        "quantity": 130,
+        "rack": "8"
+      }]
+    },
+    {
+      "tradeName": "modi",
+      "genericName": "et",
+      "batches": [{
+          "batch": "doloremque",
+          "quantity": 114,
+          "rack": "4"
+        },
+        {
+          "batch": "accusantium",
+          "quantity": 192,
+          "rack": "9"
+        }
+      ]
+    },
+    {
+      "tradeName": "vitae",
+      "genericName": "sunt",
+      "batches": [{
+          "batch": "quam",
+          "quantity": 57,
+          "rack": "7"
+        },
+        {
+          "batch": "cupiditate",
+          "quantity": 153,
+          "rack": "11"
+        }
+      ]
+    },
+    {
+      "tradeName": "consequatur",
+      "genericName": "voluptate",
+      "batches": [{
+          "batch": "voluptas",
+          "quantity": 118,
+          "rack": "3"
+        },
+        {
+          "batch": "totam",
+          "quantity": 169,
+          "rack": "2"
+        },
+        {
+          "batch": "repellendus",
+          "quantity": 198,
+          "rack": "4"
+        }
+      ]
+    },
+    {
+      "tradeName": "nobis",
+      "genericName": "repellendus",
+      "batches": [{
+        "batch": "est",
+        "quantity": 175,
+        "rack": "7"
+      }]
+    },
+    {
+      "tradeName": "distinctio",
+      "genericName": "quia",
+      "batches": [{
+        "batch": "officiis",
+        "quantity": 160,
+        "rack": "3"
+      }]
+    },
+    {
+      "tradeName": "eum",
+      "genericName": "qui",
+      "batches": [{
+          "batch": "occaecati",
+          "quantity": 101,
+          "rack": "7"
+        },
+        {
+          "batch": "est",
+          "quantity": 113,
+          "rack": "9"
+        },
+        {
+          "batch": "pariatur",
+          "quantity": 152,
+          "rack": "10"
+        },
+        {
+          "batch": "praesentium",
+          "quantity": 26,
+          "rack": "5"
+        }
+      ]
+    },
+    {
+      "tradeName": "praesentium",
+      "genericName": "sint",
+      "batches": [{
+        "batch": "illum",
+        "quantity": 49,
+        "rack": "10"
+      }]
+    },
+    {
+      "tradeName": "quia",
+      "genericName": "nisi",
+      "batches": [{
+          "batch": "in",
+          "quantity": 109,
+          "rack": "11"
+        },
+        {
+          "batch": "veritatis",
+          "quantity": 9,
+          "rack": "9"
+        }
+      ]
+    },
+    {
+      "tradeName": "numquam",
+      "genericName": "molestiae",
+      "batches": [{
+          "batch": "aperiam",
+          "quantity": 97,
+          "rack": "10"
+        },
+        {
+          "batch": "magnam",
+          "quantity": 146,
+          "rack": "10"
+        },
+        {
+          "batch": "non",
+          "quantity": 63,
+          "rack": "5"
+        }
+      ]
+    },
+    {
+      "tradeName": "quos",
+      "genericName": "animi",
+      "batches": [{
+          "batch": "quis",
+          "quantity": 82,
+          "rack": "12"
+        },
+        {
+          "batch": "aut",
+          "quantity": 41,
+          "rack": "7"
+        }
+      ]
+    },
+    {
+      "tradeName": "ipsum",
+      "genericName": "facilis",
+      "batches": [{
+          "batch": "quaerat",
+          "quantity": 82,
+          "rack": "12"
+        },
+        {
+          "batch": "recusandae",
+          "quantity": 120,
+          "rack": "9"
+        },
+        {
+          "batch": "officia",
+          "quantity": 132,
+          "rack": "7"
+        },
+        {
+          "batch": "et",
+          "quantity": 16,
+          "rack": "10"
+        }
+      ]
+    },
+    {
+      "tradeName": "iste",
+      "genericName": "aut",
+      "batches": [{
+        "batch": "ipsa",
+        "quantity": 19,
+        "rack": "10"
+      }]
+    },
+    {
+      "tradeName": "eos",
+      "genericName": "doloremque",
+      "batches": [{
+          "batch": "eveniet",
+          "quantity": 144,
+          "rack": "1"
+        },
+        {
+          "batch": "aut",
+          "quantity": 72,
+          "rack": "8"
+        },
+        {
+          "batch": "sit",
+          "quantity": 22,
+          "rack": "1"
+        }
+      ]
+    },
+    {
+      "tradeName": "quibusdam",
+      "genericName": "ea",
+      "batches": [{
+        "batch": "perferendis",
+        "quantity": 137,
+        "rack": "9"
+      }]
+    },
+    {
+      "tradeName": "impedit",
+      "genericName": "odio",
+      "batches": [{
+          "batch": "voluptatibus",
+          "quantity": 166,
+          "rack": "7"
+        },
+        {
+          "batch": "distinctio",
+          "quantity": 192,
+          "rack": "12"
+        }
+      ]
+    },
+    {
+      "tradeName": "eaque",
+      "genericName": "quia",
+      "batches": [{
+          "batch": "et",
+          "quantity": 141,
+          "rack": "12"
+        },
+        {
+          "batch": "illum",
+          "quantity": 185,
+          "rack": "11"
+        },
+        {
+          "batch": "est",
+          "quantity": 58,
+          "rack": "7"
+        }
+      ]
+    },
+    {
+      "tradeName": "et",
+      "genericName": "libero",
+      "batches": [{
+          "batch": "molestiae",
+          "quantity": 79,
+          "rack": "0"
+        },
+        {
+          "batch": "ut",
+          "quantity": 154,
+          "rack": "12"
+        },
+        {
+          "batch": "fugit",
+          "quantity": 2,
+          "rack": "7"
+        }
+      ]
+    },
+    {
+      "tradeName": "excepturi",
+      "genericName": "perferendis",
+      "batches": [{
+          "batch": "aut",
+          "quantity": 70,
+          "rack": "5"
+        },
+        {
+          "batch": "incidunt",
+          "quantity": 94,
+          "rack": "7"
+        },
+        {
+          "batch": "suscipit",
+          "quantity": 195,
+          "rack": "9"
+        }
+      ]
+    },
+    {
+      "tradeName": "dignissimos",
+      "genericName": "dolor",
+      "batches": [{
+          "batch": "voluptas",
+          "quantity": 145,
+          "rack": "12"
+        },
+        {
+          "batch": "omnis",
+          "quantity": 125,
+          "rack": "3"
+        }
+      ]
+    },
+    {
+      "tradeName": "molestiae",
+      "genericName": "aut",
+      "batches": [{
+        "batch": "alias",
+        "quantity": 143,
+        "rack": "8"
+      }]
+    },
+    {
+      "tradeName": "eaque",
+      "genericName": "ut",
+      "batches": [{
+          "batch": "et",
+          "quantity": 68,
+          "rack": "9"
+        },
+        {
+          "batch": "quaerat",
+          "quantity": 187,
+          "rack": "1"
+        },
+        {
+          "batch": "et",
+          "quantity": 155,
+          "rack": "8"
+        }
+      ]
+    },
+    {
+      "tradeName": "error",
+      "genericName": "corrupti",
+      "batches": [{
+          "batch": "corrupti",
+          "quantity": 143,
+          "rack": "3"
+        },
+        {
+          "batch": "hic",
+          "quantity": 9,
+          "rack": "2"
+        },
+        {
+          "batch": "laudantium",
+          "quantity": 5,
+          "rack": "9"
+        }
+      ]
+    },
+    {
+      "tradeName": "qui",
+      "genericName": "minima",
+      "batches": [{
+          "batch": "voluptas",
+          "quantity": 37,
+          "rack": "4"
+        },
+        {
+          "batch": "qui",
+          "quantity": 109,
+          "rack": "12"
+        },
+        {
+          "batch": "at",
+          "quantity": 159,
+          "rack": "11"
+        }
+      ]
+    },
+    {
+      "tradeName": "unde",
+      "genericName": "consequuntur",
+      "batches": [{
+          "batch": "et",
+          "quantity": 127,
+          "rack": "2"
+        },
+        {
+          "batch": "voluptatem",
+          "quantity": 160,
+          "rack": "1"
+        }
+      ]
+    },
+    {
+      "tradeName": "quasi",
+      "genericName": "quae",
+      "batches": [{
+          "batch": "laboriosam",
+          "quantity": 106,
+          "rack": "7"
+        },
+        {
+          "batch": "aut",
+          "quantity": 17,
+          "rack": "6"
+        },
+        {
+          "batch": "ut",
+          "quantity": 180,
+          "rack": "6"
+        }
+      ]
+    },
+    {
+      "tradeName": "in",
+      "genericName": "ullam",
+      "batches": [{
+          "batch": "nemo",
+          "quantity": 128,
+          "rack": "11"
+        },
+        {
+          "batch": "ipsa",
+          "quantity": 37,
+          "rack": "10"
+        }
+      ]
+    },
+    {
+      "tradeName": "sed",
+      "genericName": "reprehenderit",
+      "batches": [{
+        "batch": "soluta",
+        "quantity": 161,
+        "rack": "6"
+      }]
+    },
+    {
+      "tradeName": "provident",
+      "genericName": "rerum",
+      "batches": [{
+        "batch": "iusto",
+        "quantity": 21,
+        "rack": "9"
+      }]
+    },
+    {
+      "tradeName": "asperiores",
+      "genericName": "non",
+      "batches": [{
+          "batch": "itaque",
+          "quantity": 170,
+          "rack": "4"
+        },
+        {
+          "batch": "repellendus",
+          "quantity": 71,
+          "rack": "0"
+        },
+        {
+          "batch": "ea",
+          "quantity": 87,
+          "rack": "4"
+        }
+      ]
+    },
+    {
+      "tradeName": "aut",
+      "genericName": "impedit",
+      "batches": [{
+          "batch": "delectus",
+          "quantity": 178,
+          "rack": "4"
+        },
+        {
+          "batch": "perferendis",
+          "quantity": 28,
+          "rack": "6"
+        }
+      ]
+    },
+    {
+      "tradeName": "consequatur",
+      "genericName": "occaecati",
+      "batches": [{
+          "batch": "aut",
+          "quantity": 55,
+          "rack": "7"
+        },
+        {
+          "batch": "et",
+          "quantity": 23,
+          "rack": "6"
+        }
+      ]
+    },
+    {
+      "tradeName": "voluptate",
+      "genericName": "sed",
+      "batches": [{
+        "batch": "omnis",
+        "quantity": 26,
+        "rack": "6"
+      }]
+    },
+    {
+      "tradeName": "quisquam",
+      "genericName": "ab",
+      "batches": [{
+        "batch": "omnis",
+        "quantity": 145,
+        "rack": "1"
+      }]
+    },
+    {
+      "tradeName": "sit",
+      "genericName": "neque",
+      "batches": [{
+          "batch": "sequi",
+          "quantity": 39,
+          "rack": "5"
+        },
+        {
+          "batch": "assumenda",
+          "quantity": 73,
+          "rack": "11"
+        }
+      ]
+    },
+    {
+      "tradeName": "voluptatem",
+      "genericName": "est",
+      "batches": [{
+          "batch": "quas",
+          "quantity": 55,
+          "rack": "1"
+        },
+        {
+          "batch": "illo",
+          "quantity": 90,
+          "rack": "0"
+        }
+      ]
+    },
+    {
+      "tradeName": "cum",
+      "genericName": "est",
+      "batches": [{
+          "batch": "beatae",
+          "quantity": 110,
+          "rack": "12"
+        },
+        {
+          "batch": "ut",
+          "quantity": 12,
+          "rack": "0"
+        }
+      ]
+    },
+    {
+      "tradeName": "tempora",
+      "genericName": "quae",
+      "batches": [{
+          "batch": "itaque",
+          "quantity": 109,
+          "rack": "10"
+        },
+        {
+          "batch": "assumenda",
+          "quantity": 82,
+          "rack": "2"
+        }
+      ]
+    },
+    {
+      "tradeName": "id",
+      "genericName": "doloribus",
+      "batches": [{
+        "batch": "quo",
+        "quantity": 168,
+        "rack": "3"
+      }]
+    },
+    {
+      "tradeName": "eos",
+      "genericName": "nemo",
+      "batches": [{
+        "batch": "rerum",
+        "quantity": 73,
+        "rack": "2"
+      }]
+    },
+    {
+      "tradeName": "amet",
+      "genericName": "doloremque",
+      "batches": [{
+        "batch": "aut",
+        "quantity": 131,
+        "rack": "3"
+      }]
+    },
+    {
+      "tradeName": "veritatis",
+      "genericName": "quas",
+      "batches": [{
+          "batch": "odio",
+          "quantity": 120,
+          "rack": "0"
+        },
+        {
+          "batch": "aperiam",
+          "quantity": 81,
+          "rack": "8"
+        }
+      ]
+    },
+    {
+      "tradeName": "vero",
+      "genericName": "iusto",
+      "batches": [{
+          "batch": "veniam",
+          "quantity": 153,
+          "rack": "6"
+        },
+        {
+          "batch": "iusto",
+          "quantity": 42,
+          "rack": "9"
+        }
+      ]
+    },
+    {
+      "tradeName": "ratione",
+      "genericName": "amet",
+      "batches": [{
+          "batch": "ex",
+          "quantity": 110,
+          "rack": "6"
+        },
+        {
+          "batch": "quasi",
+          "quantity": 149,
+          "rack": "1"
+        }
+      ]
+    },
+    {
+      "tradeName": "natus",
+      "genericName": "voluptatem",
+      "batches": [{
+          "batch": "autem",
+          "quantity": 30,
+          "rack": "6"
+        },
+        {
+          "batch": "ab",
+          "quantity": 56,
+          "rack": "12"
+        }
+      ]
+    },
+    {
+      "tradeName": "ad",
+      "genericName": "maxime",
+      "batches": [{
+        "batch": "id",
+        "quantity": 83,
+        "rack": "11"
+      }]
+    },
+    {
+      "tradeName": "ad",
+      "genericName": "delectus",
+      "batches": [{
+        "batch": "exercitationem",
+        "quantity": 194,
+        "rack": "11"
+      }]
+    },
+    {
+      "tradeName": "facilis",
+      "genericName": "ducimus",
+      "batches": [{
+        "batch": "qui",
+        "quantity": 56,
+        "rack": "1"
+      }]
+    },
+    {
+      "tradeName": "consequatur",
+      "genericName": "inventore",
+      "batches": [{
+        "batch": "voluptatem",
+        "quantity": 77,
+        "rack": "6"
+      }]
+    },
+    {
+      "tradeName": "amet",
+      "genericName": "aliquid",
+      "batches": [{
+          "batch": "incidunt",
+          "quantity": 174,
+          "rack": "10"
+        },
+        {
+          "batch": "aut",
+          "quantity": 11,
+          "rack": "7"
+        },
+        {
+          "batch": "vero",
+          "quantity": 172,
+          "rack": "5"
+        }
+      ]
+    },
+    {
+      "tradeName": "a",
+      "genericName": "voluptatem",
+      "batches": [{
+        "batch": "accusamus",
+        "quantity": 70,
+        "rack": "7"
+      }]
+    },
+    {
+      "tradeName": "necessitatibus",
+      "genericName": "sed",
+      "batches": [{
+          "batch": "dolor",
+          "quantity": 117,
+          "rack": "4"
+        },
+        {
+          "batch": "laudantium",
+          "quantity": 135,
+          "rack": "9"
+        },
+        {
+          "batch": "voluptatem",
+          "quantity": 138,
+          "rack": "7"
+        }
+      ]
+    },
+    {
+      "tradeName": "et",
+      "genericName": "exercitationem",
+      "batches": [{
+        "batch": "hic",
+        "quantity": 53,
+        "rack": "1"
+      }]
+    },
+    {
+      "tradeName": "laboriosam",
+      "genericName": "eum",
+      "batches": [{
+          "batch": "placeat",
+          "quantity": 50,
+          "rack": "12"
+        },
+        {
+          "batch": "omnis",
+          "quantity": 116,
+          "rack": "9"
+        }
+      ]
+    },
+    {
+      "tradeName": "iure",
+      "genericName": "qui",
+      "batches": [{
+          "batch": "fugit",
+          "quantity": 111,
+          "rack": "8"
+        },
+        {
+          "batch": "expedita",
+          "quantity": 114,
+          "rack": "7"
+        }
+      ]
+    },
+    {
+      "tradeName": "nulla",
+      "genericName": "commodi",
+      "batches": [{
+        "batch": "quia",
+        "quantity": 185,
+        "rack": "7"
+      }]
+    },
+    {
+      "tradeName": "qui",
+      "genericName": "et",
+      "batches": [{
+          "batch": "sed",
+          "quantity": 86,
+          "rack": "0"
+        },
+        {
+          "batch": "praesentium",
+          "quantity": 110,
+          "rack": "0"
+        }
+      ]
+    },
+    {
+      "tradeName": "temporibus",
+      "genericName": "odio",
+      "batches": [{
+          "batch": "aut",
+          "quantity": 37,
+          "rack": "12"
+        },
+        {
+          "batch": "dolor",
+          "quantity": 113,
+          "rack": "2"
         }
       ]
     }
