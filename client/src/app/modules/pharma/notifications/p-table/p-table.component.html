@@ -1,0 +1,41 @@
+<form>
+<table fxLayoutAlign='center center'>
+  <tr>
+    <th>Drug</th>
+    <th>Quantity</th>
+    <th>Remaining</th>
+    <th>Batch No.</th>
+    <th>Qty in Stock</th>
+    <th>Expiry Date</th>
+    <th>Rack No.</th>
+    <th>Qty to Give</th>
+  </tr>
+  <ng-container *ngFor="let p_item of prescriptions; let i = index">
+    <tr>
+    <td [attr.rowspan]="p_item.stores.length + 1">{{p_item.drugname}}</td>
+    <td [attr.rowspan]="p_item.stores.length + 1">{{p_item.quantity}}</td>
+    <td [attr.rowspan]="p_item.stores.length + 1">{{remainingMap[i]}}</td>
+    </tr>
+    <tr *ngFor="let store of p_item.stores; let j = index">
+      <td>{{store.batch_no}}</td>
+      <td>{{store.quantity}}</td>
+      <td>{{store.expiry_date | date:'shortDate'}}</td>
+      <td>{{store.rack}}</td>
+      <td><input type="number" value="0" class="drug_input"
+                 name="drug_input"
+                 [attr.min]="0" [attr.max]="store.quantity"
+                (input)="insertStoreMap(i,j,$event.target.value);colorChange(i,j,$event.target)"/></td>
+    </tr>
+  </ng-container>
+</table>
+printing storemap : {{drugMap | json}}
+{{drugList | json}}
+{{remainingMap | json}}
+<div class="errors" *ngIf="errors">
+  <h4>Errors</h4>
+  <ul>
+    <li *ngFor="let error of errors">{{error}}</li>
+  </ul>
+</div>
+<button mat-raised-button color="primary" type="submit" (click)="correctFormat();validate()" >Submit</button>
+</form>

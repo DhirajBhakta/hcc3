@@ -1,3 +1,21 @@
-<p>
-  notifications works!
-</p>
+<mat-tab-group>
+  <mat-tab label="Incoming" fxLayout='column'
+                        fxLayoutGap='20px'>
+    <h1>Some tab content</h1>
+    <div *ngFor="let notification of (notifications$ | async)">
+      <div flexLayout='row'
+           fxLayoutAlign='center center'>
+        <mat-card fxFlex="50%" fxFlex.xs="100%">
+          <mat-card-title>{{notification.title}}</mat-card-title>
+          <mat-card-content>
+            <app-p-table [pres]="notification.prescriptions"></app-p-table>
+
+          </mat-card-content>
+        </mat-card>
+      </div>
+    <hr/>
+  </div>
+  </mat-tab>
+  <mat-tab label="Rejected">
+  </mat-tab>
+</mat-tab-group>

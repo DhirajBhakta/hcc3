@@ -13,6 +13,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { ComponentsModule } from '../../components/components.module';
 import { SharedModule } from '../../shared/shared.module';
 import { AddNewDrugComponent } from './inventory/add-new-drug/add-new-drug.component';
+import { NotificationService } from './services/notification.service';
+import { PTableComponent } from './notifications/p-table/p-table.component';
 
 
 @NgModule({
@@ -30,6 +32,10 @@ import { AddNewDrugComponent } from './inventory/add-new-drug/add-new-drug.compo
     InventoryComponent,
     NotificationsComponent,
     AddNewDrugComponent
+    PTableComponent
+  ],
+  providers: [
+    NotificationService
   ],
   exports: [
     PharmaComponent,

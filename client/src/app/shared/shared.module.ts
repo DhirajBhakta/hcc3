@@ -18,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 
@@ -42,7 +43,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     //point of error (maybe):MatNativeDateModule provides services, and shared module is imported in many places: bad practice :(
     MatNativeDateModule,
     MatDatepickerModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTabsModule
   ],
 })
 export class SharedModule { }
