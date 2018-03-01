@@ -150,10 +150,7 @@
       "id": 26
     }
   ],
-<<<<<<< HEAD
-=======
 
->>>>>>> 9af11e71c765b0b9e4acbc82a3524b77cc52505c
   "historyData": [{
       "diagnosis": "Stomach Ache",
       "date": "1/10/2017",
@@ -203,7 +200,6 @@
       ]
     }
   ],
-<<<<<<< HEAD
   "inventory": [{
       "tradeName": "et",
       "genericName": "nesciunt",
@@ -1616,11 +1612,6 @@
       ]
     }
   ],
-  "lama": {
-    "buulllcrap": "ohh"
-  }
-=======
-  "lama":{"buulllcrap":"ohh"},
   "pharma_notifications": [
     {
       "id" : 1,
@@ -1674,5 +1665,4 @@
       ]
     }
   ]
->>>>>>> 9af11e71c765b0b9e4acbc82a3524b77cc52505c
 }
