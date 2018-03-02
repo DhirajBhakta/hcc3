@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HistoryService } from '../services/history.service';
 
 @Component({
   selector: 'app-history',
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryComponent implements OnInit {
 
-  constructor() { }
+  columnDefs;
+  rowData$;
+  selectedPrescription;
+
+  constructor(private historyService: HistoryService) {
+        this.columnDefs = [
+            {headerName: 'Patient-Name', field: 'patient_name'},
+            {headerName: 'Doctor-Name', field: 'doctor_name'},
+            {headerName: 'Date-Time', field: 'date'},
+            {headerName: 'Prescription', field: 'diagnosis', cellRenderer: function(params) { return '<a>' + params.value + '</a>'; }},
+
+        ];
+
+        this.selectedPrescription = null;
+
+      }
 
   ngOnInit() {
+    this.rowData$ = this.historyService.getData();
   }
-
+  onCellClicked(data) {
+    console.log(data)
+    this.selectedPrescription = data.data;
+  }
 }

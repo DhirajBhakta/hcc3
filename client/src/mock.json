@@ -1612,13 +1612,67 @@
       ]
     }
   ],
+  "pharma_history" : [
+    {
+      "id" : 1,
+      "doctor_name" : "Dr. Bhaskar Bhandary",
+      "patient_name" : "Ranganath Pai M",
+      "date" : "2016-06-21T10:47:40Z",
+      "diagnosis" : "Fever",
+      "prescriptions" : [
+        {
+          "drug_id": 1,
+          "drugname" : "Aspirin",
+          "quantity" : 10,
+          "stores" : [
+            {
+              "store_id" : 1,
+              "batch_no" : "BLOX",
+              "quantity" : 5,
+              "expiry_date" : "2016-06-21T10:47:40Z",
+              "rack" : "L1"
+            },
+            {
+              "store_id" : 2,
+              "batch_no" : "BLOX",
+              "quantity" : 11,
+              "expiry_date" : "2016-06-21T10:47:40Z",
+              "rack" : "R1"
+            }
+          ]
+        },
+        {
+          "drug_id": 2,
+          "drugname" : "Paracetamol",
+          "quantity" : 6,
+          "stores" : [
+            {
+              "store_id" : 4,
+              "batch_no" : "BLOX",
+              "quantity" : 5,
+              "expiry_date" : "2016-06-21T10:47:40Z",
+              "rack" : "L1"
+            },
+            {
+              "store_id" : 5,
+              "batch_no" : "BLOX",
+              "quantity" : 20,
+              "expiry_date" : "2016-06-21T10:47:40Z",
+              "rack" : "R1"
+            }
+          ]
+        }
+      ]
+    }
+
+  ],
   "pharma_notifications": [
     {
       "id" : 1,
       "doctor_name" : "Dr. Bhaskar Bhandary",
       "patient_name" : "Ranganath Pai M",
       "diagnosis" : "Fever",
-      "type" : "seen",
+      "date" : "2016-06-21T10:47:40Z",
       "prescriptions" : [
         {
           "drug_id": 1,

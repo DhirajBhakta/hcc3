@@ -15,6 +15,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { AddNewDrugComponent } from './inventory/add-new-drug/add-new-drug.component';
 import { NotificationService } from './services/notification.service';
 import { PTableComponent } from './notifications/p-table/p-table.component';
+import { HistoryService } from './services/history.service';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { PTableComponent } from './notifications/p-table/p-table.component';
     PTableComponent
   ],
   providers: [
-    NotificationService
+    NotificationService,
+    HistoryService
   ],
   exports: [
     PharmaComponent,
