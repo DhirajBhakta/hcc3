@@ -1,3 +1,44 @@
-<p>
-  history works!
-</p>
+<h1>Pharma History</h1>
+<div fxLayout='row' style='height:70%;width:50%'>
+  <ag-grid-angular fxFlex class='ag-theme-material' [rowData]="rowData$ | async" 
+                                                    [columnDefs]="columnDefs"
+                                                    enableColResize
+                                                    enableSorting
+                                                    enableFilter
+                                                    (cellClicked)="onCellClicked($event)"
+                                                > </ag-grid-angular>
+  <mat-card *ngIf="selectedPrescription" class="data-table">
+    <mat-card-header>
+    <mat-card-title>
+      {{selectedPrescription.diagnosis}}
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{selectedPrescription.date | date:'shortDate'}}
+    </mat-card-subtitle>
+    </mat-card-header>
+    {{selectedPrescription.patient_name}}
+    {{selectedPrescription.doctor_name}}
+    <table>
+      <tr>
+        <th>Drug </th>
+        <th>Quantity </th>
+        <th>Batch No.</th>
+        <th>Quantity</th>
+        <th>Expiry Date</th>
+        <th>Store</th>
+      </tr>
+      <ng-container *ngFor="let prescription of selectedPrescription.prescriptions">
+      <tr >
+        <td [attr.rowspan]="prescription.stores.length + 1">{{prescription.drugname}}</td>
+        <td [attr.rowspan]="prescription.stores.length + 1">{{prescription.quantity}}</td>
+      </tr>
+      <tr *ngFor="let store of prescription.stores">
+        <td>{{store.batch_no}}</td>
+        <td>{{store.quantity}}</td>
+        <td>{{store.expiry_date | date:'shortDate'}}</td>
+        <td>{{store.rack}}</td>
+      </tr>
+      </ng-container>
+    </table>
+  </mat-card>
+</div>
