@@ -150,10 +150,7 @@
       "id": 26
     }
   ],
-<<<<<<< HEAD
-=======
 
->>>>>>> 9af11e71c765b0b9e4acbc82a3524b77cc52505c
   "historyData": [{
       "diagnosis": "Stomach Ache",
       "date": "1/10/2017",
@@ -203,7 +200,6 @@
       ]
     }
   ],
-<<<<<<< HEAD
   "inventory": [{
       "tradeName": "et",
       "genericName": "nesciunt",
@@ -1616,11 +1612,6 @@
       ]
     }
   ],
-  "lama": {
-    "buulllcrap": "ohh"
-  }
-=======
-  "lama":{"buulllcrap":"ohh"},
   "pharma_notifications": [
     {
       "id" : 1,
@@ -1637,14 +1628,14 @@
             {
               "store_id" : 1,
               "batch_no" : "BLOX",
-              "quantity" : 5, 
+              "quantity" : 5,
               "expiry_date" : "2016-06-21T10:47:40Z",
               "rack" : "L1"
             },
             {
               "store_id" : 2,
               "batch_no" : "BLOX",
-              "quantity" : 11, 
+              "quantity" : 11,
               "expiry_date" : "2016-06-21T10:47:40Z",
               "rack" : "R1"
             }
@@ -1658,14 +1649,14 @@
             {
               "store_id" : 4,
               "batch_no" : "BLOX",
-              "quantity" : 5, 
+              "quantity" : 5,
               "expiry_date" : "2016-06-21T10:47:40Z",
               "rack" : "L1"
             },
             {
               "store_id" : 5,
               "batch_no" : "BLOX",
-              "quantity" : 20, 
+              "quantity" : 20,
               "expiry_date" : "2016-06-21T10:47:40Z",
               "rack" : "R1"
             }
@@ -1674,5 +1665,4 @@
       ]
     }
   ]
->>>>>>> 9af11e71c765b0b9e4acbc82a3524b77cc52505c
 }

@@ -9,13 +9,6 @@
     <mat-form-field>
       <input matInput placeholder="Generic Name" formControlName='genericName'>
     </mat-form-field>
-    <mat-form-field>
-      <mat-select placeholder="Select Rack" formControlName='rack'>
-        <mat-option *ngFor="let rack of racks" [value]="rack">
-          {{ rack }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
     <button mat-raised-button type='submit' color='primary'>Add</button>
   </form>
 <p>Form value: {{ addNewDrugForm.value | json }}</p>

@@ -15,6 +15,8 @@ import { DoctorModule } from './modules/doctor/doctor.module';
 import { PharmaModule } from './modules/pharma/pharma.module';
 import { AppRoutingModule } from './app-routing.module';
 
+import {PatientAuthGuard, DoctorAuthGuard, PharmaAuthGuard} from './AuthGuards';
+import {UserService} from './UserService';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,7 @@ import { AppRoutingModule } from './app-routing.module';
     PharmaModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [PatientAuthGuard, PharmaAuthGuard, DoctorAuthGuard, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

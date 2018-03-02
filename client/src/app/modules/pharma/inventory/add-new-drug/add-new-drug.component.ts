@@ -10,14 +10,12 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class AddNewDrugComponent implements OnInit {
 
-  racks=['1','2','3','4a','4b','quickAccess'];
   addNewDrugForm;
 
   constructor(private _fb: FormBuilder) {
     this.addNewDrugForm = this._fb.group({
       tradeName: ['', Validators.required],
       genericName: ['', Validators.required],
-      rack: ['',Validators.required]
     });
   }
   ngOnInit() {

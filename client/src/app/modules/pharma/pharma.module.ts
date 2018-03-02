@@ -31,7 +31,7 @@ import { PTableComponent } from './notifications/p-table/p-table.component';
     StockupdateComponent,
     InventoryComponent,
     NotificationsComponent,
-    AddNewDrugComponent
+    AddNewDrugComponent,
     PTableComponent
   ],
   providers: [

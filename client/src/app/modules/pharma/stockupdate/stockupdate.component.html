@@ -1,3 +1,60 @@
-<p>
-  stockupdate works!
-</p>
+<h1>Stock Update</h1>
+
+<form [formGroup]="stockUpdateForm" (ngSubmit)="onSubmit()">
+  <div formArrayName="stockDrugs" class="well well-lg">
+    <table>
+      <thead>
+        <tr>
+          <th>Drug Name</th>
+          <th>Quantity</th>
+          <th>Batch</th>
+          <th>Expiry Date</th>
+          <th>Rack</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stockDrug of stockDrugs.controls; let i=index" [formGroupName]="i">
+          <td>
+            <mat-form-field>
+              <input matInput formControlName="genericName"/>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput formControlName="quantity"/>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput formControlName="batch"/>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput  formControlName="expiryDate"/>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <input matInput  formControlName="rack"/>
+            </mat-form-field>
+          </td>
+          <td><button mat-raised-button color='ascent' (click)="deleteRow(i)">Delete</button></td>
+          <!-- <div class="form-group">
+        <label class="center-block">Rack
+         <select class="form-control" formControlName="rack">
+           <option *ngFor="let state of states" [value]="state">{{state}}</option>
+         </select>
+       </label>
+      </div> -->
+
+        </tr>
+      </tbody>
+    </table>
+
+    <button mat-raised-button color='primary' (click)="addRow()">New Row</button>
+    <button mat-raised-button type="submit">Submit</button>
+  </div>
+  {{stockUpdateForm.value | json}}
+
+</form>
