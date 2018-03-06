@@ -14,21 +14,20 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ('url', 'name')
 
-class DrugSerializer(serializers.HyperlinkedModelSerializer):
-    batches = serializers.PrimaryKeyRelatedField(many=True, queryset=Batch.objects.all())
-    class Meta:
-        model = Drug
-        fields = ('generic_name', 'trade_name', 'batches')
-
-class BatchSerializer(serializers.HyperlinkedModelSerializer):
-    stores = serializers.PrimaryKeyRelatedField(many=True, queryset=Store.objects.all())
-    class Meta:
-        model = Batch
-        fields = ('name', 'expiry_date', 'drug', 'stores')
-
-class StoreSerializer(serializers.HyperlinkedModelSerializer):
+class StoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Store
         fields = ('rack', 'quantity', 'batch')
 
+class BatchSerializer(serializers.ModelSerializer):
+    stores = StoreSerializer(many=True)
+    class Meta:
+        model = Batch
+        fields = ('name', 'expiry_date', 'drug', 'stores')
+
+class DrugSerializer(serializers.ModelSerializer):
+    batches = BatchSerializer(many=True)
+    class Meta:
+        model = Drug
+        fields = ('generic_name', 'trade_name', 'batches')
 
