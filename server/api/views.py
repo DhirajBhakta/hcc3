@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from .serializers import UserSerializer, GroupSerializer, DrugSerializer, BatchSerializer, StoreSerializer
-from .models.Drug import Drug, Batch, Store
+from .serializers import UserSerializer, GroupSerializer, DrugSerializer, BatchSerializer
+from .models.drug import Drug, Batch
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -20,16 +20,11 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
 
 class DrugViewSet(viewsets.ModelViewSet):
-    
+
     queryset = Drug.objects.all()
     serializer_class = DrugSerializer
 
 class BatchViewSet(viewsets.ModelViewSet):
-    
+
     queryset = Batch.objects.all()
     serializer_class = BatchSerializer
-
-class StoreViewSet(viewsets.ModelViewSet):
-    
-    queryset = Store.objects.all()
-    serializer_class = StoreSerializer

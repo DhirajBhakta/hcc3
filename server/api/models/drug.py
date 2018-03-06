@@ -1,15 +1,21 @@
 from django.db import models
 
+
+#generic_names are lowercase.(eg:ranitidine)
+#trade_names are ALL_CAPS. (eg:ZANTAC)
 class Drug(models.Model):
     generic_name = models.CharField(max_length=255)
     trade_name = models.CharField(max_length=255)
 
-    class Meta:
-        unique_together = ('generic_name', 'trade_name')
+    def save(self, *args, **kwargs):
+        self.generic_name = self.generic_name.lower()
+        self.trade_name = self.trade_name.upper()
+        return super(Drug, self).save(*args, **kwargs)
 
 
+
+#'batch' stands for 'batch_number' for consistency throughout the app
 class Batch(models.Model):
-    #'batch' stands for 'batch_number' for consistency throughout the app
     drug = models.ForeignKey('Drug', on_delete=models.CASCADE, related_name='batches')
     batch = models.CharField(max_length=255)
     rack = models.IntegerField()
