@@ -1,12 +1,12 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from .models.Drug import Drug, Batch, Store
+from .models.drug import Drug, Batch
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'groups')
+        fields = ('url', 'username', 'email', 'groups','password')
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
@@ -14,16 +14,16 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ('url', 'name')
 
-class StoreSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Store
-        fields = ('rack', 'quantity', 'batch')
+#
+# class PatientSerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = Patient
+#         fields = ('url','name',)
 
 class BatchSerializer(serializers.ModelSerializer):
-    stores = StoreSerializer(many=True)
     class Meta:
         model = Batch
-        fields = ('name', 'expiry_date', 'drug', 'stores')
+        fields = ('name', 'expiry_date', 'drug')
 
 class DrugSerializer(serializers.ModelSerializer):
     batches = BatchSerializer(many=True)
