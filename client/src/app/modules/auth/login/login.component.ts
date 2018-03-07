@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { User } from 'app/models/user.model';
 import { AuthService } from '../auth.service';
-import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie';
 
 
 @Component({
@@ -19,7 +18,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private cookieService: CookieService) {
     this.username = null;
-    this.pasword = null;
+    this.password = null;
   }
 
 
@@ -27,11 +26,10 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    console.log(this.user);
     if (this.username && this.password)
       this.authService.login(this.username, this.password).subscribe(
         (response) => {
-          console.log("User logged in, recieved response...", response.json());
+          console.log("User logged in, recieved response...", response);
           console.log("Cookie holds this token:",this.cookieService.get('Bearer'));
           this.router.navigateByUrl('/patient');
         }

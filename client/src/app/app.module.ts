@@ -16,7 +16,6 @@ import { PharmaModule } from './modules/pharma/pharma.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './modules/auth/auth.module';
 
-import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 @NgModule({
   declarations: [
@@ -31,9 +30,9 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
     DoctorModule,
     PharmaModule,
     AuthModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
-  providers:[CookieService],
+  providers:[],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -26,11 +26,11 @@
     "@angular/router": "^5.0.0",
     "ag-grid": "^16.0.1",
     "ag-grid-angular": "^16.0.0",
-    "angular2-cookie": "^1.2.6",
     "core-js": "^2.4.1",
     "faker": "^4.1.0",
     "json-server": "^0.12.1",
     "lodash": "^4.17.4",
+    "ngx-cookie": "^2.0.1",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
   },

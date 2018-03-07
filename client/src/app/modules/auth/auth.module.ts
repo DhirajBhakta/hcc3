@@ -6,10 +6,13 @@ import { AuthService } from './auth.service';
 import { PatientAuthGuard, DoctorAuthGuard, PharmaAuthGuard } from './auth-guards';
 import { LoginComponent } from './login/login.component';
 
+import { CookieModule } from 'ngx-cookie';
+
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
+    CookieModule.forRoot(),
   ],
   providers : [
     AuthService, PatientAuthGuard, PharmaAuthGuard, DoctorAuthGuard

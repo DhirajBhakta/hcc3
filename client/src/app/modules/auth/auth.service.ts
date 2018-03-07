@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import { User } from './user';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 
@@ -25,7 +24,7 @@ export class AuthService {
   }
 
   login(username: String, password: String) {
-    const url = this.BASE_URL + 'auth-token';
+    const url = this.BASE_URL + 'token-auth/';
     return this.http.post(url, {username, password}, {headers : this.headers});
   }
 }
