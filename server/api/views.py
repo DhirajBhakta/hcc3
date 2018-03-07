@@ -1,7 +1,18 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from .serializers import UserSerializer, GroupSerializer, DrugSerializer, BatchSerializer
+from .serializers import (
+    UserSerializer,
+    GroupSerializer,
+    CourseSerializer,
+    DepartmentSerializer,
+    PersonSerializer,
+    DrugSerializer,
+    BatchSerializer,
+    )
 from .models.drug import Drug, Batch
+from .models.person import Person
+from .models.trivial import Department, Course
+
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -18,6 +29,19 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
+
+class CourseViewSet(viewsets.ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+
+class DepartmentViewSet(viewsets.ModelViewSet):
+    queryset = Department.objects.all()
+    serializer_class = DepartmentSerializer
+
+class PersonViewSet(viewsets.ModelViewSet):
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
 
 class DrugViewSet(viewsets.ModelViewSet):
 

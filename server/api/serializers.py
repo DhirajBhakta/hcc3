@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
+
 from .models.drug import Drug, Batch
+from .models.person import Person
+from .models.trivial import Course, Department
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -14,11 +17,35 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ('url', 'name')
 
-#
-# class PatientSerializer(serializers.HyperlinkedModelSerializer):
-#     class Meta:
-#         model = Patient
-#         fields = ('url','name',)
+
+class PersonSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Person
+        fields = '__all__'
+
+
+class CourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = ('id', 'name', )
+
+class DepartmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Department
+        fields = ('id', 'name',)
+
+class PersonSerializer(serializers.HyperlinkedModelSerializer):
+    user = UserSerializer()
+    department = DepartmentSerializer()
+    course  = CourseSerializer()
+    patron = PersonSerializer()
+
+    class Meta:
+        model = Person
+        fields = '__all__'
+
+
+
 
 class DrugSerializer(serializers.HyperlinkedModelSerializer):
     batches = serializers.PrimaryKeyRelatedField(many=True, queryset=Batch.objects.all())
