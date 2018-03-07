@@ -39,7 +39,7 @@ class DepartmentSerializer(serializers.ModelSerializer):
 
 class PersonSerializer(serializers.ModelSerializer):
     user = UserSerializer()
-    department = DepartmentSerializer()
+    department = serializers.PrimaryKeyRelatedField(read_only='True')
     course  = CourseSerializer()
     patron = PersonSerializer()
 

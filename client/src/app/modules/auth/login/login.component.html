@@ -5,11 +5,11 @@
         <mat-card-title>NITK HCC Login </mat-card-title>
         <form fxLayout='column' (ngSubmit)="onLogin()" novalidate>
           <mat-form-field>
-            <input matInput type="text" id="username" placeholder="Enter Username" [(ngModel)]="user.username" name="username" required>
+            <input matInput type="text" id="username" placeholder="Enter Username" [(ngModel)]="username" name="username" required>
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput type="password" id="password" placeholder="Enter Password" [(ngModel)]="user.password" name="password" required>
+            <input matInput type="password" id="password" placeholder="Enter Password" [(ngModel)]="password" name="password" required>
           </mat-form-field>
           <button mat-raised-button color='primary' type="submit">Submit</button>
         </form>
