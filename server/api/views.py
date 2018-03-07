@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User, Group
-from rest_framework import viewsets 
-from rest_framework.views import APIView
+from rest_framework import viewsets
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+
 from .serializers import (
     UserSerializer,
     GroupSerializer,
@@ -63,5 +66,7 @@ class PharmaRecordViewSet(viewsets.ModelViewSet):
     serializer_class = PharmaRecordSerializer
 
 class PrescriptionViewSet(viewsets.ModelViewSet):
+    authentication_classes = (JSONWebTokenAuthentication ,)
+    permission_classes = (IsAuthenticated, )
     queryset = Prescription.objects.all()
     serializer_class = PrescriptionSerializer

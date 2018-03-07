@@ -20,8 +20,9 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^token-auth/', obtain_jwt_token),
     url(r'^token-refresh/', refresh_jwt_token),
     url(r'^token-verify/', verify_jwt_token),
-    url('^api/', include('api.urls'))
+    url(r'^api/', include('api.urls'))
 ]

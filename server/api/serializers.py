@@ -9,7 +9,7 @@ from .models.prescription import Prescription
 from .models.pharma import PharmaRecord, DispensedDrug
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('url', 'username', 'email', 'groups','password')
@@ -83,7 +83,7 @@ class PrescriptionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Prescription
-        fields = ('doctor', 'doctor_id', 'patient', 'patient_id', 'indication', 'date_time', 'prescribed_drugs')
+        fields = ('doctor', 'patient', 'patient_id', 'indication', 'date_time', 'prescribed_drugs')
 
 class PharmaRecordSerializer(serializers.ModelSerializer):
 
