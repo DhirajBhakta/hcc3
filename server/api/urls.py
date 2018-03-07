@@ -10,6 +10,8 @@ router.register(r'departments',views.DepartmentViewSet)
 router.register(r'persons',views.PersonViewSet)
 router.register(r'drugs', views.DrugViewSet)
 router.register(r'batches', views.BatchViewSet)
+router.register(r'pharma/records', views.PharmaRecordViewSet)
+router.register(r'prescriptions', views.PrescriptionViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

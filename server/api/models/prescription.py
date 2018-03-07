@@ -10,7 +10,7 @@ from .person import Person
 
 class Prescription(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, null=True)
-    patient = models.ForeignKey(Person, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Person, on_delete=models.SET_NULL, null=True)
     indication = models.CharField(max_length=255)
     date_time = models.DateTimeField(auto_now_add=True)
 

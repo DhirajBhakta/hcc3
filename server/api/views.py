@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
+from rest_framework import viewsets 
+from rest_framework.views import APIView
 from .serializers import (
     UserSerializer,
     GroupSerializer,
@@ -8,10 +9,14 @@ from .serializers import (
     PersonSerializer,
     DrugSerializer,
     BatchSerializer,
+    PrescriptionSerializer,
+    PharmaRecordSerializer
     )
 from .models.drug import Drug, Batch
 from .models.person import Person
 from .models.trivial import Department, Course
+from .models.prescription import Prescription
+from .models.pharma import PharmaRecord
 
 
 
@@ -52,3 +57,11 @@ class BatchViewSet(viewsets.ModelViewSet):
 
     queryset = Batch.objects.all()
     serializer_class = BatchSerializer
+
+class PharmaRecordViewSet(viewsets.ModelViewSet):
+    queryset = PharmaRecord.objects.all()
+    serializer_class = PharmaRecordSerializer
+
+class PrescriptionViewSet(viewsets.ModelViewSet):
+    queryset = Prescription.objects.all()
+    serializer_class = PrescriptionSerializer
