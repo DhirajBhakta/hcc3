@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
+from rest_framework_jwt.serializers import JSONWebTokenSerializer
+from django.contrib.auth import authenticate, get_user_model
 
 from .models.doctor import Doctor
 from .models.drug import Drug, Batch

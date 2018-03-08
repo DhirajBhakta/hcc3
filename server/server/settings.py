@@ -85,8 +85,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':'HCC_DATABASE',
-        'USER':'root',
-        'PASSWORD':'',
+        'USER':'mysql',
+        'PASSWORD':'mysql',
         'HOST':'localhost',
     }
 }
