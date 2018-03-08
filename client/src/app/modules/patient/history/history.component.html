@@ -1,15 +1,16 @@
 <div class="container" fxLayout='column' fxLayoutAlign='center center' fxLayoutGap="10px">
 
+  <button (click)="call()">Click</button>
   <!-- The body component with spans for centering -->
-  <div *ngFor="let h_item of historyData | async" fxLayout>
-    <span fxFlex
-          fxFlex.xs='3'></span>
-    <app-detail-card [historyDataItem]="h_item"
-                    fxFlex='50%'
-                    fxFlex.xs='94%'
-                    >
-    </app-detail-card>
-    <span fxFlex
-          fxFlex.xs='3'></span>
-   </div>
+  <!--<div *ngFor="let h_item of historyData | async" fxLayout>-->
+    <!--<span fxFlex-->
+          <!--fxFlex.xs='3'></span>-->
+    <!--<app-detail-card [historyDataItem]="h_item"-->
+                    <!--fxFlex='50%'-->
+                    <!--fxFlex.xs='94%'-->
+                    <!--&gt;-->
+    <!--</app-detail-card>-->
+    <!--<span fxFlex-->
+          <!--fxFlex.xs='3'></span>-->
+   <!--</div>-->
 </div>

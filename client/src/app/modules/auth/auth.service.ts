@@ -25,6 +25,7 @@ export class AuthService {
 
   login(username: String, password: String) {
     const url = this.BASE_URL + 'token-auth/';
-    return this.http.post(url, {username, password}, {headers : this.headers});
+    return this.http.post(url, {username, password}, {headers : this.headers})
+      .map(data => localStorage.setItem('token', data.token));
   }
 }

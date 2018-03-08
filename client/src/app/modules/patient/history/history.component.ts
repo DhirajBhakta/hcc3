@@ -11,11 +11,15 @@ import { HistoryService } from '../services/history.service';
 export class HistoryComponent implements OnInit {
   historyData: {};
   bundle: {};
-  
+
   constructor(private service: HistoryService) {}
 
   ngOnInit() {
     this.historyData = this.service.getHistoryData();
+  }
+  call() {
+    this.service.getRealHistoryData().subscribe(data => console.log(data));
+
   }
 
 }
