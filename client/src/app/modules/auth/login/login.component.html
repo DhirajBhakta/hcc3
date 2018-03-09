@@ -1,19 +1,22 @@
-<div id="back">
-  <div fxLayout='column' style="min-height: 100vh">
-    <div fxFlex fxLayout='row' fxLayoutAlign='center center'>
-      <mat-card fxFlex="40%" fxFlex.xs="90%" fxFlex.sm="90%">
-        <mat-card-title>NITK HCC Login </mat-card-title>
-        <form fxLayout='column' (ngSubmit)="onLogin()" novalidate>
-          <mat-form-field>
-            <input matInput type="text" id="username" placeholder="Enter Username" [(ngModel)]="username" name="username" required>
-          </mat-form-field>
+<div class='container' fxLayout fxLayout.xs='column' fxlayout.sm='column' fxLayoutAlign='center center'>
+  <span fxFlex></span>
 
-          <mat-form-field>
-            <input matInput type="password" id="password" placeholder="Enter Password" [(ngModel)]="password" name="password" required>
-          </mat-form-field>
-          <button mat-raised-button color='primary' type="submit">Submit</button>
-        </form>
-      </mat-card>
-    </div>
+  <div fxFlex='40%' class="header">
+    <div>Welcome to <span>NITK HCC</span></div>
   </div>
+
+
+  <div fxFlex='25%' class='login'>
+    <form fxLayout='column' (ngSubmit)="onLogin()" novalidate>
+      <mat-form-field>
+        <input matInput type="text" id="username" placeholder="Username" [(ngModel)]="username" name="username" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="password" id="password" placeholder="password" [(ngModel)]="password" name="password" required>
+      </mat-form-field>
+      <button mat-raised-button color='primary' type="submit">Login</button>
+    </form>
+  </div>
+  <span fxFlex></span>
 </div>

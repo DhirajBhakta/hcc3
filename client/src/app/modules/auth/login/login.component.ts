@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.username, this.password).subscribe(
         (response) => {
           this.authService.setSession(response);
-          this.router.navigateByUrl('/patient');
+          this.router.navigateByUrl(this.authService.getRootURL());
         }
       );
   }
