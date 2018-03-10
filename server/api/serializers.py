@@ -14,7 +14,8 @@ from .models.pharma import PharmaRecord, DispensedDrug
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'groups','password')
+        fields = ('username', 'email', 'groups','password')
+        lookup_field = 'username'
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
@@ -23,10 +24,11 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'name')
 
 
-class PersonSerializer(serializers.HyperlinkedModelSerializer):
+class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Person
         fields = '__all__'
+        lookup_field = 'user__username'
 
 
 class CourseSerializer(serializers.ModelSerializer):
