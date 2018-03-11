@@ -1,9 +1,9 @@
 <mat-card>
   <mat-card-header>
     <div style="padding:0px">
-      <h1 *ngIf='!brief'>{{bundle.name}}</h1>
-      <h4 *ngIf='brief'>{{bundle.name}}</h4>
-      <h5>{{bundle.patient_type}}</h5>
+      <h1 *ngIf='!brief'>{{ bundle.name }}</h1>
+      <h4 *ngIf='brief'>{{ bundle.name }}</h4>
+      <h5>{{ bundle.patient_type }}</h5>
     </div>
   </mat-card-header>
 
@@ -12,49 +12,49 @@
       <tr>
         <td>
           <mat-icon svgIcon='birthday_cake' style='height:15px'></mat-icon>Birth date:</td>
-        <td></td>
+        <td>{{ bundle.date_of_birth | date}}</td>
       </tr>
       <tr>
         <td>
           <mat-icon svgIcon='gender' style='height:15px'></mat-icon>Gender :</td>
-        <td></td>
+        <td>{{ bundle.gender }}</td>
       </tr>
       <tr>
         <td>
           <mat-icon svgIcon='drop' style='height:15px;'></mat-icon>Blood Group :</td>
-        <td></td>
+        <td>{{ bundle.blood_group }}</td>
       </tr>
       <div *ngIf='!brief'>
         <tr>
           <td>
             <mat-icon svgIcon='phone' style='height:15px'></mat-icon>Phone number :</td>
-          <td></td>
+          <td>{{ bundle.phone }}</td>
         </tr>
         <tr>
           <td>
             <mat-icon svgIcon='phone' style='height:15px'></mat-icon>Guardian Phone number :</td>
-          <td></td>
+          <td>{{ bundle.guardian_phone }}</td>
         </tr>
         <tr>
           <td>
             <mat-icon svgIcon='home' style='height:15px'></mat-icon>Local Address :</td>
-          <td></td>
+          <td>{{ bundle.local_address }}</td>
         </tr>
         <tr>
           <td>
             <mat-icon svgIcon='home' style='height:15px'></mat-icon>Permanent Address :</td>
-          <td></td>
+          <td>{{ bundle.permanent_address }}</td>
         </tr>
       </div>
       <tr>
         <td>
           <mat-icon svgIcon='school' style='height:15px'></mat-icon>Course :</td>
-        <td></td>
+        <td>{{ bundle.course.name }}</td>
       </tr>
       <tr>
         <td>
           <mat-icon svgIcon='domain' style='height:15px'></mat-icon>Department :</td>
-        <td></td>
+        <td>{{ bundle.department.name }}</td>
       </tr>
 
       <tr>

@@ -6,6 +6,10 @@ export function replaceKeys(object:Object, metadata:Array<any>){
    return object;
 }
 
+export function prepareURL(...args){
+  return args.reduce((accumulator,current)=>accumulator+current+'/',[]);
+}
+
 
 //ISO date format is univeral: YYYY-MM-DDTHH:MM:SSZ
 export function dateString(date: Date){

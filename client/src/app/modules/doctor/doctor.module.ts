@@ -12,7 +12,7 @@ import { ComponentsModule } from '../../components/components.module';
 import { PatientInfoComponent } from './workbench/patient-info/patient-info.component';
 import { DiagnosisComponent } from './workbench/diagnosis/diagnosis.component';
 
-
+import { WorkbenchService } from './services/workbench.service';
 
 
 @NgModule({
@@ -32,6 +32,9 @@ import { DiagnosisComponent } from './workbench/diagnosis/diagnosis.component';
   ],
   exports: [
     DoctorComponent
+  ],
+  providers: [
+    WorkbenchService
   ],
 })
 export class DoctorModule { }
