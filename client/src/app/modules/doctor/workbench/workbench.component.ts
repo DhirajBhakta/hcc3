@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Prescription } from '../../../models/prescription.model';
+import {UserService} from 'app/services/user.service';
 import { WorkbenchService } from '../services/workbench.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class WorkbenchComponent implements OnInit {
   patientSet: Boolean;
   family: any[];
 
-  constructor(private service: WorkbenchService) {
+  constructor(private userService: UserService) {
     this.patientSet = false;
   }
 
@@ -24,10 +25,10 @@ export class WorkbenchComponent implements OnInit {
 
   /*retrieve user and his entire dependants, if exists*/
   getFamily() {
-    this.service.getPatient(this.username).subscribe((response) => {
-      let user = response.json().person;
-      this.family = user.dependants;
-      this.family.unshift(user);
+    this.userService.getUser(this.username).subscribe((response) => {
+      let patron = response.json().person;
+      this.family = patron.dependants;
+      this.family.unshift(patron);
     });
   }
 

@@ -46,8 +46,7 @@
           <td>{{ bundle.permanent_address }}</td>
         </tr>
       </div>
-      <div *ngIf="bundle.patient_type!='Dependant'">
-      <tr>
+      <tr *ngIf="bundle.patient_type=='Student'">
         <td>
           <mat-icon svgIcon='school' style='height:15px'></mat-icon>Course :</td>
         <td>{{ bundle.course.name }}</td>
@@ -57,7 +56,6 @@
           <mat-icon svgIcon='domain' style='height:15px'></mat-icon>Department :</td>
         <td>{{ bundle.department.name }}</td>
       </tr>
-    </div>
       <tr>
         <td>Allergic To :</td>
         <td></td>
