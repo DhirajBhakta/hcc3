@@ -9,3 +9,8 @@
 .pres-table-container{
     margin:10px;
 }
+
+button.member{
+  width:300px;
+  margin:5px;
+}

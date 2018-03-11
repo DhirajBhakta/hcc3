@@ -15,8 +15,7 @@ export class WorkbenchService {
   constructor(private http: JWTHttpClient) { }
 
   public getPatient(patientUsername: string): Observable<any> {
-    return this.http.get(prepareURL(environment.server_base_url, 'persons', patientUsername));
-                    // .do((response)=> this.currentPatient = response.json());
+    return this.http.get(prepareURL(environment.server_base_url, 'users', patientUsername));
   }
 
 

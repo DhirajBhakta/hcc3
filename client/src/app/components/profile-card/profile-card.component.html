@@ -1,9 +1,9 @@
-<mat-card>
+<mat-card *ngIf='bundle'>
   <mat-card-header>
     <div style="padding:0px">
       <h1 *ngIf='!brief'>{{ bundle.name }}</h1>
       <h4 *ngIf='brief'>{{ bundle.name }}</h4>
-      <h5>{{ bundle.patient_type }}</h5>
+      <h5>{{ bundle.patient_type }} <span *ngIf="bundle.patient_type=='Dependant'"> of {{bundle.patron.name}}</span></h5>
     </div>
   </mat-card-header>
 
@@ -46,6 +46,7 @@
           <td>{{ bundle.permanent_address }}</td>
         </tr>
       </div>
+      <div *ngIf="bundle.patient_type!='Dependant'">
       <tr>
         <td>
           <mat-icon svgIcon='school' style='height:15px'></mat-icon>Course :</td>
@@ -56,7 +57,7 @@
           <mat-icon svgIcon='domain' style='height:15px'></mat-icon>Department :</td>
         <td>{{ bundle.department.name }}</td>
       </tr>
-
+    </div>
       <tr>
         <td>Allergic To :</td>
         <td></td>

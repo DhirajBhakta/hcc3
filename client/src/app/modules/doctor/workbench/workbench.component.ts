@@ -9,9 +9,10 @@ import { WorkbenchService } from '../services/workbench.service';
 })
 export class WorkbenchComponent implements OnInit {
 
-  patient_username: string = null;
-  patientSet: Boolean;
+  username: string = null;
   patient_details = null;
+  patientSet: Boolean;
+  family: any[];
 
   constructor(private service: WorkbenchService) {
     this.patientSet = false;
@@ -20,15 +21,22 @@ export class WorkbenchComponent implements OnInit {
   ngOnInit() {
   }
 
-  setPatient() {
-    this.service.getPatient(this.patient_username)
-      .subscribe((response) => this.patient_details = response);
+
+  /*retrieve user and his entire dependants, if exists*/
+  getFamily() {
+    this.service.getPatient(this.username).subscribe((response) => {
+      let user = response.json().person;
+      this.family = user.dependants;
+      this.family.unshift(user);
+    });
+  }
+
+  setPatient(patient) {
+    this.patient_details = patient;
     this.patientSet = true;
   }
 
   reset() {
-    this.patient_username = null;
-    this.patient_details = null;
     this.patientSet = false;
   }
 

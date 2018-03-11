@@ -1,10 +1,14 @@
+
+<h1 style='text-align:center'>Workbench</h1>
+
 <div *ngIf="!patientSet"
-      fxLayout='column' fxLayoutAlign='center center'
-      style='height:100%'>
+      fxLayout='column' fxLayoutAlign='center center'>
   <mat-form-field >
-    <input matInput [(ngModel)]='patient_username' placeholder="Enter Patient username">
+    <input matInput [(ngModel)]='username' placeholder="Enter Patient username">
   </mat-form-field>
-  <button mat-mini-fab color="primary" (click)="setPatient()"><mat-icon svgIcon='forward' style='height:15px;'></mat-icon></button>
+  <button mat-mini-fab color="primary" (click)="getFamily()"><mat-icon svgIcon='forward' style='height:15px;'></mat-icon></button>
+
+  <button class='member' *ngFor="let member of family" mat-raised-button (click)="setPatient(member)">{{member.name}}</button>
 </div>
 
 
@@ -15,7 +19,7 @@
 <div *ngIf="patientSet" fxLayout fxLayoutAlign = 'center stretch' fxLayoutGap = "10px">
 
 
-    <app-profile-card fxFlex='30%' [bundle]="patient_details" brief='true'></app-profile-card>
+    <app-profile-card fxFlex='30%' [bundle]="patient_details"  brief='true'></app-profile-card>
   <mat-card  fxFlex class="pres-table-container">
     <app-diagnosis></app-diagnosis>
   </mat-card>
