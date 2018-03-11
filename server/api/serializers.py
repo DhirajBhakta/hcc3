@@ -11,6 +11,27 @@ from .models.prescription import Prescription
 from .models.pharma import PharmaRecord, DispensedDrug
 
 
+def invertDict(dictionary):
+    return dict([(v,k) for k,v in dictionary.items()])
+
+
+class KeyValueField(serializers.Field):
+    def __init__(self, labels, *args, **kwargs):
+        self.labels = labels
+        self.inverted_labels = invertDict(labels)
+        return super().__init__(*args, **kwargs)
+
+    def to_representation(self, obj):
+        if type(obj) is list:
+            return [self.labels.get(key,None) for key in obj]
+        return self.labels.get(obj, None)
+
+    def to_internal_value(self, val):
+        if type(val) is list:
+            return [self.inverted_labels.get(o, None ) for key in val]
+        return self.inverted_labels.get(val,None)
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -24,32 +45,29 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'name')
 
 
-class PersonSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Person
-        fields = '__all__'
-        lookup_field = 'user__username'
-
-
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ('id', 'name', )
+        fields = ('name', )
 
 class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
-        fields = ('id', 'name',)
+        fields = ('name',)
 
-class PersonSerializer(serializers.ModelSerializer):
+class PatronSerializer(serializers.ModelSerializer):
     user = UserSerializer()
-    department = serializers.PrimaryKeyRelatedField(read_only='True')
+    department = DepartmentSerializer()
     course  = CourseSerializer()
-    patron = PersonSerializer()
+    gender = KeyValueField(labels={'M':"Male",'F':"Female",'O':"Other"})
+    patient_type = KeyValueField(labels={'S':'Student', 'E':'Employee','D':'Dependant'})
 
     class Meta:
         model = Person
         fields = '__all__'
+
+class PersonSerializer(PatronSerializer):
+    patron = PatronSerializer()
 
 class DoctorSerializer(serializers.ModelSerializer):
     person = PersonSerializer()
