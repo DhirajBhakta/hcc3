@@ -1,35 +1,22 @@
-<div class = "container patient-input"
-  fxLayout = "column"
-  fxLayoutAlign = 'space-around center'
-  fxLayoutGap = "10px"
-  fxFlexFill>
-
-  <mat-card class="patient-input-card" *ngIf="!patientIDSet">
-    <div class="container" fxLayout='column'>
-      <h3>Start Diagnosis</h3>
-      <mat-form-field>
-          <input matInput [(ngModel)]="patientID" placeholder="Enter Patient ID">
-      </mat-form-field>
-      <button mat-raised-button color="primary" (click)="setPatient()"> Submit</button>
-    </div>
-  </mat-card>
+<div *ngIf="!patientSet"
+      fxLayout='column' fxLayoutAlign='center center'
+      style='height:100%'>
+  <mat-form-field >
+    <input matInput [(ngModel)]='patient_username' placeholder="Enter Patient username">
+  </mat-form-field>
+  <button mat-mini-fab color="primary" (click)="setPatient()"><mat-icon svgIcon='forward' style='height:15px;'></mat-icon></button>
 </div>
 
-<div class="entryForm" *ngIf="patientIDSet"
-  fxLayout="row">
-  <div class="container" fxLayout="column">
-    <button mat-raised-button color="primary" (click)="unsetPatient()">Back</button>
-    <app-patient-info></app-patient-info>
-  </div>
-  <mat-card class="pres-table-container">
-    <!-- <mat-form-field>
-      <input matInput [(ngModel)]="diagnosis" placeholder="Diagnosis"/>
-    </mat-form-field>
-    <app-p-table></app-p-table>
-    <button mat-raised-button color="primary">Submit</button> -->
+
+
+
+
+
+<div *ngIf="patientSet" fxLayout fxLayoutAlign = 'center stretch' fxLayoutGap = "10px">
+
+
+    <app-profile-card fxFlex='30%' [bundle]="{'name':'Dhiraj Bhakta K','patient_type':'Student'}" brief='true'></app-profile-card>
+  <mat-card  fxFlex class="pres-table-container">
     <app-diagnosis></app-diagnosis>
   </mat-card>
- 
 </div>
-
-

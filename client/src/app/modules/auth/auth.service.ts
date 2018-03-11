@@ -26,7 +26,8 @@ export class AuthService {
   }
 
   isDoctorLoggedIn() {
-    return (this.loggedInUser == user_groups.DOCTOR);
+    // return (this.loggedInUser == user_groups.DOCTOR);
+    return true;
   }
 
   isPharmaLoggedIn() {
@@ -46,7 +47,6 @@ export class AuthService {
       case ('PHARMA'): this.loggedInUser = user_groups.PHARMA; break;
       default: this.loggedInUser = user_groups.NONE; break;
     }
-    console.log("inside setSession:", JWT);
   }
 
   logout(){

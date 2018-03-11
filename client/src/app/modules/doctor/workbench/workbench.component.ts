@@ -8,23 +8,22 @@ import { Prescription } from '../../../models/prescription.model';
 })
 export class WorkbenchComponent implements OnInit {
 
-  diagnosis: string;
-  patientID: string;
-  patientIDSet = true;
-
-  constructor() { }
+  patient_username: String = null;
+  patientSet:Boolean;
+  constructor() {
+    this.patientSet = false;
+  }
 
   ngOnInit() {
   }
 
-  setPatient() {
-    this.patientIDSet = true;
-    console.log(this.patientID);
-
+  setPatient(){
+    this.patientSet = true;
   }
-  unsetPatient() {
-    this.patientID = null;
-    this.patientIDSet = false;
+
+  reset(){
+    this.patient_username = null;
+    this.patientSet = false;
   }
 
 

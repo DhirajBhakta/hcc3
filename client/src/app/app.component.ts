@@ -20,7 +20,8 @@ export class AppComponent {
                 .addSvgIcon('phone', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/phone.svg'))
                 .addSvgIcon('school', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/school.svg'))
                 .addSvgIcon('domain', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/domain.svg'))
-                .addSvgIcon('gender', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/gender.svg'));
+                .addSvgIcon('gender', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/gender.svg'))
+                .addSvgIcon('forward', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/forward.svg'));
 
   }
 }
