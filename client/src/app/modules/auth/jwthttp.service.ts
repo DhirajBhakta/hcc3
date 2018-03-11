@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Http, XHRBackend, RequestOptions, Request, RequestOptionsArgs, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -7,11 +8,11 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class JWTHttpClient extends Http {
-
-  constructor(backend: XHRBackend, options: RequestOptions) {
+ 
+  constructor(backend: XHRBackend, options: RequestOptions,private router: Router) {
+    super(backend, options);
     let token = localStorage.getItem('JWT');
     options.headers.set('Authorization', `JWT ${token}`);
-    super(backend, options);
   }
 
   request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
@@ -28,11 +29,8 @@ export class JWTHttpClient extends Http {
 
   private catchAuthError(self: JWTHttpClient) {
     return (res: Response) => {
-      console.log(res);
-      if (res.status === 401 || res.status === 403) {
-        // if not authenticated
-        console.log(res);
-      }
+      if ([400,401,403,500,504,404].includes(res.status))
+        this.router.navigate(['/http-error', res.status]);
       return Observable.throw(res);
     };
   }

@@ -10,6 +10,7 @@ import { DetailCardComponent } from './detail-card/detail-card.component';
 import { ShowErrorsComponent } from './show-errors/show-errors.component';
 import { GenericCardComponent } from './generic-card/generic-card.component';
 import { ProfileCardComponent } from './profile-card/profile-card.component';
+import { HttpErrorComponent } from './http-error/http-error.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ProfileCardComponent } from './profile-card/profile-card.component';
     DetailCardComponent,
     ShowErrorsComponent,
     GenericCardComponent,
-    ProfileCardComponent
+    ProfileCardComponent,
+    HttpErrorComponent
   ],
   imports: [
     CommonModule,

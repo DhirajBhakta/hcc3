@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
 
@@ -23,10 +24,10 @@ import { LoginComponent } from './login/login.component';
     DoctorAuthGuard,
     {
       provide: JWTHttpClient,
-      useFactory: (backend: XHRBackend, options: RequestOptions) => {
-        return new JWTHttpClient(backend, options);
+      useFactory: (backend: XHRBackend, options: RequestOptions, router: Router) => {
+        return new JWTHttpClient(backend, options, router);
       },
-      deps: [XHRBackend, RequestOptions]
+      deps: [XHRBackend, RequestOptions, Router]
     }
   ],
   declarations: [LoginComponent],
