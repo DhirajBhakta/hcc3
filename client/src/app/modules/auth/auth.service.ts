@@ -18,6 +18,7 @@ export class AuthService {
   private BASE_URL = 'http://localhost:8000/';
   private headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   private loggedInUser: user_groups = user_groups.NONE;
+  public is_multi_profile:boolean = false;
 
   constructor(private http: HttpClient) { }
 
@@ -36,11 +37,13 @@ export class AuthService {
 
   login(username: String, password: String) {
     const url = this.BASE_URL + 'token-auth/';
-    return this.http.post(url, {username, password}, {headers : this.headers});
+    return this.http.post(url, {username, password}, {headers : this.headers})
+                    .do((response)=> this.setSession(response);
   }
 
   setSession(JWT) {
     localStorage.setItem('JWT', JWT.token);
+    this.is_multi_profile = JWT.multi_profile;
     switch (JWT.usergroup.toUpperCase()) {
       case ('PATIENT'): this.loggedInUser = user_groups.PATIENT; break;
       case ('DOCTOR'): this.loggedInUser = user_groups.DOCTOR; break;

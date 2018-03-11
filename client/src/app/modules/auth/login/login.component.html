@@ -5,8 +5,8 @@
     <div>Welcome to <span>NITK HCC</span></div>
   </div>
 
-
-  <div fxFlex='25%' class='login'>
+ <!-- Main Login div-->
+  <div *ngIf='!user_verified' fxFlex='25%' class='login'>
     <form fxLayout='column' (ngSubmit)="onLogin()" novalidate>
       <mat-form-field>
         <input matInput type="text" id="username" placeholder="Username" [(ngModel)]="username" name="username" required>
@@ -17,6 +17,11 @@
       </mat-form-field>
       <button mat-raised-button color='primary' type="submit">Login</button>
     </form>
+  </div>
+
+ <!-- After user is verified, choose the profile (if EMPLOYEE or DEPENDANT only) -->
+  <div *ngIf='user_verified' fxLayout='column'>
+    <button mat-raised-button class='member' *ngFor='let member of family' (click)='setProfile(member)'>{{member.name}}</button>
   </div>
   <span fxFlex></span>
 </div>

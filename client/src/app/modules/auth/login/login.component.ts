@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
+import { UserService } from 'app/services/user.service';
 
 
 @Component({
@@ -11,25 +12,37 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  public username: String = null;
-  public password: String = null;
-  constructor(private authService: AuthService,
-    private router: Router) {
-    this.username = null;
-    this.password = null;
-  }
+  public user_verified:boolean=false;
+  public username: String=null;
+  public password: String=null;
+  public family: any[];
+
+  constructor(private authService: AuthService, private userService: UserService, private router: Router) { }
 
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   onLogin() {
     if (this.username && this.password)
-      this.authService.login(this.username, this.password).subscribe(
-        (response) => {
-          this.authService.setSession(response);
-          this.router.navigateByUrl(this.authService.getRootURL());
-        }
-      );
+         this.authService.login(this.username, this.password).subscribe(() => {
+              this.userService.getUser(this.username).subscribe((response)=>{
+                      let patron = response.json().person;
+                      this.family = patron.dependants;
+                      this.family.unshift(patron);
+                    });
+              if(!this.authService.is_multi_profile)
+                    this.navigateToHomePage();
+        this.user_verified = true;
+        });
   }
+
+
+  navigateToHomePage(){
+    this.router.navigateByUrl(this.authService.getRootURL());
+  }
+  setProfile(person){
+    this.userService.setCurrentPerson(person);
+    this.navigateToHomePage();
+  }
+
 }
