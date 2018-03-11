@@ -43,7 +43,7 @@ BLOOD_GROUP_CHOICES = (
 
 class Person(models.Model):
     #common fields
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True, related_name='person')
     name = models.CharField(max_length=255)
     date_of_birth = models.DateField()
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
@@ -54,11 +54,11 @@ class Person(models.Model):
     blood_group = models.CharField(max_length=3, choices=BLOOD_GROUP_CHOICES)
     patient_type = models.CharField(max_length=1, choices=PATIENT_TYPE_CHOICES)
     #optional fields
-    department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
+    department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True)
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
     retired = models.NullBooleanField(default=False, null=True)
     designation = models.CharField(max_length=255, null=True, blank=True)
-    patron = models.ForeignKey("self",on_delete=models.CASCADE, null=True, blank=True)
+    patron = models.ForeignKey("self",on_delete=models.CASCADE, null=True, blank=True, related_name='dependants')
 
     def __str__(self):
         return self.name +": "+self.patient_type

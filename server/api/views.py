@@ -48,7 +48,6 @@ class DepartmentViewSet(viewsets.ModelViewSet):
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
-    lookup_field = 'user__username'
 
 class DrugViewSet(viewsets.ModelViewSet):
 

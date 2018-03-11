@@ -32,19 +32,6 @@ class KeyValueField(serializers.Field):
         return self.inverted_labels.get(val,None)
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'groups','password')
-        lookup_field = 'username'
-
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ('url', 'name')
-
-
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
@@ -56,7 +43,6 @@ class DepartmentSerializer(serializers.ModelSerializer):
         fields = ('name',)
 
 class PatronSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
     department = DepartmentSerializer()
     course  = CourseSerializer()
     gender = KeyValueField(labels={'M':"Male",'F':"Female",'O':"Other"})
@@ -66,8 +52,27 @@ class PatronSerializer(serializers.ModelSerializer):
         model = Person
         fields = '__all__'
 
-class PersonSerializer(PatronSerializer):
+class DependantSerializer(PatronSerializer):
     patron = PatronSerializer()
+
+class PersonSerializer(DependantSerializer):
+    dependants = DependantSerializer(many=True)
+
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ('name',)
+
+class UserSerializer(serializers.ModelSerializer):
+    person = PersonSerializer()
+    groups = GroupSerializer(many=True)
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'groups','password', 'person')
+
+
+
+
 
 class DoctorSerializer(serializers.ModelSerializer):
     person = PersonSerializer()
