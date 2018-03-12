@@ -86,11 +86,18 @@ class BatchSerializer(serializers.ModelSerializer):
         model = Batch
         fields = ('batch', 'expiry_date', 'drug')
 
+#Assuming doctor uses only trade_names
 class DrugSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Drug
+        fields = ('id', 'trade_name')
+
+
+class DrugAndBatchesSerializer(serializers.ModelSerializer):
     batches = BatchSerializer(many=True, read_only=True)
     class Meta:
         model = Drug
-        fields = ('id','generic_name', 'trade_name', 'batches')
+        fields = ('id','trade_name', 'batches')
 
 class PrescriptionSerializer(serializers.ModelSerializer):
     doctor = DoctorSerializer(read_only=True)

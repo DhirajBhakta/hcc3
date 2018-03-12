@@ -53,6 +53,7 @@ class DrugViewSet(viewsets.ModelViewSet):
     queryset = Drug.objects.all()
     serializer_class = DrugSerializer
 
+
 class BatchViewSet(viewsets.ModelViewSet):
     queryset = Batch.objects.all()
     serializer_class = BatchSerializer
