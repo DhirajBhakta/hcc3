@@ -1,51 +1,56 @@
 <form [formGroup]="diagForm" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()">
-  <mat-form-field>
-    <input matInput placeholder='Diagnosis' formControlName='diagnosis'/>
-  </mat-form-field>
-  <table formArrayName="prescriptions">
-    <tr>
-      <th>No.</th>
-      <th>Drug Name</th>
-      <th>Quantity</th>
-      <th>Schedule</th>
-      <th>Comments</th>
-      <th>Delete?</th>
-    </tr>
+  <div class='diagnosis-container' fxLayout fxLayoutAlign="center center">
+    <mat-form-field class='diagnosis'>
+      <input matInput style='text-align:center' placeholder='Diagnosis' formControlName='diagnosis' />
+    </mat-form-field>
+  </div>
+
+
+  <table formArrayName="prescriptions" style='width:100%'>
+    <thead>
+      <tr>
+        <th>Drug Name</th>
+        <th>Quantity</th>
+        <th>Schedule</th>
+        <th>Comments</th>
+        <th>Cancel</th>
+      </tr>
+    </thead>
+    <tbody>
     <tr *ngFor="let prescription of prescriptions.controls; let i=index" [formGroupName]='i'>
       <td>
-        {{i+1}}
-      </td>
-      <td>
         <mat-form-field>
-          <input matInput formControlName="drugname"/>
+          <input matInput formControlName="drugname" />
         </mat-form-field>
         <app-show-errors [control]="getField(prescription, 'drugname')">Error here</app-show-errors>
       </td>
       <td>
         <mat-form-field>
-          <input matInput formControlName="quantity"/>
+          <input matInput formControlName="quantity" />
         </mat-form-field>
         <app-show-errors [control]="getField(prescription, 'quantity')">Error here</app-show-errors>
       </td>
       <td>
         <mat-form-field>
-          <input matInput formControlName="schedule"/>
+          <input matInput formControlName="schedule" />
         </mat-form-field>
         <app-show-errors [control]="getField(prescription, 'schedule')">Error here</app-show-errors>
       </td>
       <td>
         <mat-form-field>
-          <input matInput formControlName="comments"/>
+          <input matInput formControlName="comments" />
         </mat-form-field>
         <app-show-errors [control]="getField(prescription, 'comments')">Error here</app-show-errors>
       </td>
       <td>
-        <button mat-raised-button color='danger' (click)="deleteRow(i)">Delete Row</button>
+        <button matButton mat-mini-fab color='warn' (click)="deleteRow(i)">x</button>
       </td>
     </tr>
+  </tbody>
   </table>
-  <button mat-raised-button color='primary' type='button' (click)='addRow()'>Add Row</button>
-  <button  mat-raised-button color='primary' type='submit'>Submit</button>
+  <div fxLayout fxLayoutAlign='center' fxLayoutGap='10px'>
+    <button mat-raised-button color='primary' type='button' (click)='addRow()'>Add Drug </button>
+    <button mat-raised-button color='warn' type='submit'>Submit</button>
+  </div>
 </form>
-{{diagForm.value | json}}
-{{diagForm.status | json}}
+{{diagForm.value | json}} {{diagForm.status | json}}

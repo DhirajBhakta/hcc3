@@ -25,23 +25,3 @@ input{
   color:white;
   font-weight: bolder;
 }
-
-
-button.member{
-  background-color: Transparent;
-  outline:none;
-  color:white;
-  width:350px;
-  margin:20px;
-  font-weight:lighter;
-  border: 1px solid white;
-  border-radius: 10px;
-}
-
-button.member:hover{
-  opacity:0.5;
-  cursor:pointer;
-  background-color: black;
-  border:1px solid black;
-  font-weight:bold;
-}

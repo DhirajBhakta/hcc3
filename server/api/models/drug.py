@@ -12,6 +12,9 @@ class Drug(models.Model):
         self.trade_name = self.trade_name.upper()
         return super(Drug, self).save(*args, **kwargs)
 
+    def __str__(self):
+        return self.trade_name+' ('+self.generic_name+')'
+
 
 
 #'batch' stands for 'batch_number' for consistency throughout the app
@@ -21,6 +24,9 @@ class Batch(models.Model):
     rack = models.IntegerField()
     quantity = models.IntegerField()
     expiry_date = models.DateField()
+
+    def __str__(self):
+        return self.batch+'('+self.drug.__str__()+')'+str(self.quantity)
 
 
 

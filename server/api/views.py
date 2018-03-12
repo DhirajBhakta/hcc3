@@ -50,12 +50,10 @@ class PersonViewSet(viewsets.ModelViewSet):
     serializer_class = PersonSerializer
 
 class DrugViewSet(viewsets.ModelViewSet):
-
     queryset = Drug.objects.all()
     serializer_class = DrugSerializer
 
 class BatchViewSet(viewsets.ModelViewSet):
-
     queryset = Batch.objects.all()
     serializer_class = BatchSerializer
 
@@ -64,7 +62,5 @@ class PharmaRecordViewSet(viewsets.ModelViewSet):
     serializer_class = PharmaRecordSerializer
 
 class PrescriptionViewSet(viewsets.ModelViewSet):
-    authentication_classes = (JSONWebTokenAuthentication ,)
-    permission_classes = (IsAuthenticated, )
     queryset = Prescription.objects.all()
     serializer_class = PrescriptionSerializer

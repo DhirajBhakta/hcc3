@@ -10,7 +10,6 @@
     margin:10px;
 }
 
-button.member{
-  width:300px;
-  margin:5px;
+.mat-card{
+  padding:0;
 }

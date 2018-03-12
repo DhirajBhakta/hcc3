@@ -1,8 +1,21 @@
-th{
-    text-transform: uppercase;
-    text-align: left;
-
+thead{
+  color:white;
+  background-color: gray;
+  text-align: center;
+  text-transform:uppercase;
 }
-td{
-    padding: 5px;
+
+tbody{
+    text-align: center;
+}
+
+div.diagnosis-container{
+  background-color: #75b4fc;
+  color:white;
+}
+.diagnosis{
+  background-color: white;
+  color:black;
+  border:2px solid black;
+  border-radius: 5px;
 }

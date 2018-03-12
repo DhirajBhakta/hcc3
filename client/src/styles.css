@@ -9,3 +9,26 @@ body{
   height:100vh;
   font-family: 'Roboto',sans-serif;
 }
+
+
+
+
+button.member{
+  background-color: Transparent;
+  outline:none;
+  color:black;
+  width:350px;
+  margin:20px;
+  font-weight:lighter;
+  border: 1px solid white;
+  border-radius: 10px;
+}
+
+button.member:hover{
+  opacity:0.5;
+  cursor:pointer;
+  background-color: black;
+  color:white;
+  border:1px solid black;
+  font-weight:bold;
+}

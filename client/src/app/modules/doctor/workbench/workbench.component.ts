@@ -16,7 +16,8 @@ export class WorkbenchComponent implements OnInit {
   family: any[];
 
   constructor(private userService: UserService) {
-    this.patientSet = false;
+    // this.patientSet = false;
+    this.patientSet = true;
   }
 
   ngOnInit() {
