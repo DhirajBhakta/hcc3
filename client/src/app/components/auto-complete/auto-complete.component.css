@@ -1,0 +1,25 @@
+input.auto-complete{
+  width:200px;
+  height:20px;
+  float:left;
+  border-bottom:1px solid gray;
+}
+ul{
+  list-style: none;
+  text-align: left;
+}
+li{
+  padding:10px;
+  text-align:left;
+  font-weight: lighter;
+  background-color: #d6d6e1;
+  color:black;
+  margin:1px;
+  width:100%;
+}
+
+li:hover{
+  background-color: black;
+  color:white;
+  cursor:pointer;
+}
