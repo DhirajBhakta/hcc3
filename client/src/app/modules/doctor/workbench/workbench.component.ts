@@ -15,9 +15,8 @@ export class WorkbenchComponent implements OnInit {
   patientSet: Boolean;
   family: any[];
 
-  constructor(private userService: UserService) {
-    // this.patientSet = false;
-    this.patientSet = true;
+  constructor(private userService: UserService, private wbService: WorkbenchService) {
+     this.patientSet = false;
   }
 
   ngOnInit() {
@@ -33,10 +32,13 @@ export class WorkbenchComponent implements OnInit {
     });
   }
 
-  setPatient(patient) {
-    this.patient_details = patient;
+  setPatient(person) {
+    this.patient_details = person;
+    this.wbService.setPatientID(person.id);
     this.patientSet = true;
   }
+
+
 
   reset() {
     this.patientSet = false;

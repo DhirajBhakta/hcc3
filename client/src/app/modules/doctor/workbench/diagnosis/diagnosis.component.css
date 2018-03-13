@@ -1,21 +1,18 @@
-thead{
-  color:white;
-  background-color: gray;
-  text-align: center;
-  text-transform:uppercase;
-}
 
-tbody{
+table{
     text-align: center;
 }
 
-div.diagnosis-container{
+div.indication-container{
   background-color: #75b4fc;
   color:white;
 }
-.diagnosis{
+.indication{
   background-color: white;
   color:black;
-  border:2px solid black;
-  border-radius: 5px;
+  border:1px solid black;
+  border-radius: 2px;
+}
+.input{
+  width:100%;
 }

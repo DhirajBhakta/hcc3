@@ -21,6 +21,7 @@ import { HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 import { JWTHttpClient } from './services/jwthttp.service';
 import {UserService} from './services/user.service';
 
+import {JasperoAlertsModule} from '@jaspero/ng-alerts';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {UserService} from './services/user.service';
     DoctorModule,
     PharmaModule,
     AuthModule,
-    AppRoutingModule
+    AppRoutingModule,
+    JasperoAlertsModule.forRoot()
   ],
   providers:[
     UserService,

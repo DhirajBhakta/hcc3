@@ -13,8 +13,8 @@ import { UserService } from 'app/services/user.service';
 export class LoginComponent implements OnInit {
 
   public user_verified:boolean=false;
-  public username: String=null;
-  public password: String=null;
+  public username: string=null;
+  public password: string=null;
   public family: any[];
 
   constructor(private authService: AuthService, private userService: UserService, private router: Router) { }

@@ -19,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 
@@ -44,7 +45,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatNativeDateModule,
     MatDatepickerModule,
     MatProgressSpinnerModule,
-    MatTabsModule
+    MatTabsModule,
+    MatAutocompleteModule
   ],
 })
 export class SharedModule { }

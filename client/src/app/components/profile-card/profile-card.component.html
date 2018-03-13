@@ -51,7 +51,7 @@
           <mat-icon svgIcon='school' style='height:15px'></mat-icon>Course :</td>
         <td>{{ bundle.course.name }}</td>
       </tr>
-      <tr>
+      <tr *ngIf="bundle.patient_type!='Dependant'">
         <td>
           <mat-icon svgIcon='domain' style='height:15px'></mat-icon>Department :</td>
         <td>{{ bundle.department.name }}</td>

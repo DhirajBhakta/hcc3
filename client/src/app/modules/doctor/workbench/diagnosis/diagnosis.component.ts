@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { Diagnosis } from '../../../../models/diagnosis.model';
 import { Validators } from '@angular/forms';
 import { Prescription } from '../../../../models/prescription.model';
 import { AbstractControl } from '@angular/forms/src/model';
 import { AbstractControlDirective } from '@angular/forms/src/directives/abstract_control_directive';
+import { WorkbenchService } from '../../services/workbench.service';
+import {AlertsService} from '@jaspero/ng-alerts';
+
 
 @Component({
   selector: 'app-diagnosis',
@@ -13,62 +15,56 @@ import { AbstractControlDirective } from '@angular/forms/src/directives/abstract
 })
 export class DiagnosisComponent implements OnInit {
 
-  currDiagnosis: Diagnosis;
+  drugs: any[];
+  currDiagnosis;
   diagForm: FormGroup;
   presGroup = {
-        drugname : ['', Validators.required],
-        quantity : ['', Validators.compose([Validators.pattern(/^\d+$/), Validators.required])],
-        schedule : ['', Validators.required],
-        comments : ['', Validators.required],
-      };
+    drug: ['', Validators.required],
+    quantity: ['', Validators.compose([Validators.pattern(/^\d+$/), Validators.required])],
+    comments: ['', Validators.required],
+  };
 
-  constructor(private fb: FormBuilder) {
-    this.createForm();
-   }
-
-  createForm() {
+  constructor(private fb: FormBuilder, private wbService: WorkbenchService, private _alerts:AlertsService) {
     this.diagForm = this.fb.group({
-      diagnosis: ['', Validators.required],
-      prescriptions: this.fb.array([this.fb.group(this.presGroup)]),
+      indication: ['', Validators.required],
+      prescribed_drugs: this.fb.array([this.fb.group(this.presGroup)]),
     });
   }
 
-  get prescriptions(): FormArray {
-    return this.diagForm.get('prescriptions') as FormArray;
+  ngOnInit() {
+    this.wbService.getDrugNames().subscribe((res) => this.drugs = res.json());
   }
 
-  getField(form: FormGroup, field: string): AbstractControl | AbstractControlDirective {
+  get prescribed_drugs(): FormArray {
+    return this.diagForm.get('prescribed_drugs') as FormArray;
+  }
 
-    return form.get(field);
+  onDrugSelect(item, row_id) {
+    this.prescribed_drugs.at(row_id).patchValue({ drug: item });
   }
 
   addRow() {
-    this.prescriptions.push(this.fb.group(this.presGroup));
+    this.prescribed_drugs.push(this.fb.group(this.presGroup));
   }
+
   deleteRow(i) {
-    this.prescriptions.removeAt(i);
+    this.prescribed_drugs.removeAt(i);
   }
-  ngOnInit() {
-  }
-  prepareDiagnosis() {
-    const formModel = this.diagForm.value;
-    const prescriptionsCopy: Prescription[] = formModel.prescriptions.map(
-       prescription => Object.assign({}, prescription));
 
-    const finalDiagnosis: Diagnosis = {
-      patientID: '0',
-      doctorID: '0',
-      diagnosis: formModel.diagnosis,
-      prescriptions: prescriptionsCopy
-    };
-    return finalDiagnosis;
-
-  }
   onSubmit() {
-    console.log(this.diagForm.controls.prescriptions);
-    const finalDiagnosis = this.prepareDiagnosis();
-    console.log( finalDiagnosis);
-    return finalDiagnosis;
+    const indication = this.diagForm.value.indication;
+    const prescribed_drugs = this.diagForm.value.prescribed_drugs;
+    const prescription = {
+      patient_id: this.wbService.getPatientID(),
+      indication: indication,
+      prescribed_drugs: prescribed_drugs
+    };
+    this.wbService.submitPrescription(prescription).subscribe(res => {
+      if(Math.floor(res.status/100) == 2){
+        this._alerts.create( 'success', 'Prescription successfully submitted');
+        setInterval(()=>window.location.reload(),2000);
+      }
+    })
   }
 
 }

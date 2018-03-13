@@ -11,6 +11,7 @@ import { ShowErrorsComponent } from './show-errors/show-errors.component';
 import { GenericCardComponent } from './generic-card/generic-card.component';
 import { ProfileCardComponent } from './profile-card/profile-card.component';
 import { HttpErrorComponent } from './http-error/http-error.component';
+import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpErrorComponent } from './http-error/http-error.component';
     ShowErrorsComponent,
     GenericCardComponent,
     ProfileCardComponent,
-    HttpErrorComponent
+    HttpErrorComponent,
+    AutoCompleteComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { HttpErrorComponent } from './http-error/http-error.component';
     DetailCardComponent,
     ShowErrorsComponent,
     GenericCardComponent,
-    ProfileCardComponent
+    ProfileCardComponent,
+    AutoCompleteComponent
   ]
 })
 export class ComponentsModule { }
