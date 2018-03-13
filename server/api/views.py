@@ -1,3 +1,4 @@
+import json
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -52,6 +53,13 @@ class PersonViewSet(viewsets.ModelViewSet):
 class DrugViewSet(viewsets.ModelViewSet):
     queryset = Drug.objects.all()
     serializer_class = DrugSerializer
+
+    def get_serializer(self, *args, **kwargs):
+        serializer_class = self.get_serializer_class()
+        kwargs['context'] = self.get_serializer_context()
+        if('fields' in self.request.query_params):
+            kwargs['fields'] = json.loads(self.request.query_params['fields'])
+        return serializer_class(*args, **kwargs)
 
 
 class BatchViewSet(viewsets.ModelViewSet):

@@ -6,5 +6,8 @@ from .person import Person
 #   So create the Patient before creating the doctor
 
 class Doctor(models.Model):
-    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    person = models.OneToOneField(Person, on_delete=models.CASCADE)
     specialization = models.CharField(max_length=64)
+
+    def __str__(self):
+        return self.person.name+' ['+self.specialization+']'

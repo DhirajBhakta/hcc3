@@ -7,7 +7,7 @@ from .models.doctor import Doctor
 from .models.drug import Drug, Batch
 from .models.person import Person
 from .models.trivial import Course, Department
-from .models.prescription import Prescription
+from .models.prescription import Prescription, PrescribedDrug
 from .models.pharma import PharmaRecord, DispensedDrug
 
 
@@ -32,6 +32,25 @@ class KeyValueField(serializers.Field):
         return self.inverted_labels.get(val,None)
 
 
+class DynamicFieldsModelSerializer(serializers.ModelSerializer):
+    """
+    A ModelSerializer that takes an additional `fields` argument that
+    controls which fields should be displayed.
+    """
+    def __init__(self, *args, **kwargs):
+        # Don't pass the 'fields' arg up to the superclass
+        fields = kwargs.pop('fields', None)
+
+        # Instantiate the superclass normally
+        super().__init__(*args, **kwargs)
+
+        if fields is not None:
+            # Drop any fields that are not specified in the `fields` argument.
+            allowed = set(fields)
+            existing = set(self.fields)
+            for field_name in existing - allowed:
+                self.fields.pop(field_name)
+
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
@@ -41,6 +60,11 @@ class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
         fields = ('name',)
+
+class DoctorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Doctor
+        fields = ('id','specialization')
 
 class PatronSerializer(serializers.ModelSerializer):
     department = DepartmentSerializer()
@@ -56,6 +80,7 @@ class DependantSerializer(PatronSerializer):
     patron = PatronSerializer()
 
 class PersonSerializer(DependantSerializer):
+    doctor = DoctorSerializer()
     dependants = DependantSerializer(many=True)
 
 class GroupSerializer(serializers.ModelSerializer):
@@ -71,53 +96,51 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('username', 'email', 'groups','password', 'person')
 
 
-
-
-
-class DoctorSerializer(serializers.ModelSerializer):
-    person = PersonSerializer()
-
-    class Meta:
-        model = Doctor
-        fields = '__all__'
-
 class BatchSerializer(serializers.ModelSerializer):
+    drug = serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model = Batch
-        fields = ('batch', 'expiry_date', 'drug')
+        fields = ('batch', 'quantity','expiry_date','drug')
 
 #Assuming doctor uses only trade_names
-class DrugSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Drug
-        fields = ('id', 'trade_name')
-
-
-class DrugAndBatchesSerializer(serializers.ModelSerializer):
+class DrugSerializer(DynamicFieldsModelSerializer):
     batches = BatchSerializer(many=True, read_only=True)
     class Meta:
         model = Drug
-        fields = ('id','trade_name', 'batches')
+        fields = ('id', 'trade_name','batches')
+
+class PrescribedDrugSerializer(serializers.ModelSerializer):
+    drug = serializers.PrimaryKeyRelatedField(queryset=Drug.objects.all())
+    class Meta:
+        model = PrescribedDrug
+        fields = ('id','drug','quantity','comments')
 
 class PrescriptionSerializer(serializers.ModelSerializer):
     doctor = DoctorSerializer(read_only=True)
-    # doctor_id = serializers.PrimaryKeyRelatedField(source='doctor', queryset=Doctor.objects.all(), write_only=True)
-    patient = PersonSerializer(read_only=True)
     patient_id = serializers.PrimaryKeyRelatedField(source='patient', queryset=Person.objects.all(), write_only=True)
-    prescribed_drugs = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    patient = PersonSerializer(read_only=True)
+    prescribed_drugs = PrescribedDrugSerializer(many=True)
 
-    def save(self):
-        user = serializers.CurrentUserDefault().user
-        this_doctor = Doctor.objects.filter(person__user__username=user.username)
-        if this_doctor is None:
-            raise serializers.ValidationError('You are not a doctor!')
-        doctor_id = this_doctor.get().id
-        patient_id = self.validated_data['patient_id']
-        prescribed_drugs = self.validated_data['prescribed_drugs']
+    def create(self, validated_data):
+        user = None
+        request = self.context.get("request")
+        if request and hasattr(request, "user"):
+            user = request.user
+            person_id = user.person.id
+            doctor = Doctor.objects.get(person=person_id)
+            validated_data['doctor_id'] = doctor.id
+            prescribed_drugs = validated_data.pop('prescribed_drugs')
+            prescription = Prescription.objects.create(**validated_data)
+            for drug in prescribed_drugs:
+                drug['prescription'] = prescription
+            prescribedDrugs = PrescribedDrug.objects.bulk_create([PrescribedDrug(**drug) for drug in prescribed_drugs])
+            return prescription
+        return None
+
 
     class Meta:
         model = Prescription
-        fields = ('doctor', 'patient', 'patient_id', 'indication', 'date_time', 'prescribed_drugs')
+        fields = ('id','doctor', 'patient', 'patient_id', 'indication', 'date_time', 'prescribed_drugs',)
 
 class PharmaRecordSerializer(serializers.ModelSerializer):
 

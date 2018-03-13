@@ -59,6 +59,8 @@ class Person(models.Model):
     retired = models.NullBooleanField(default=False, null=True)
     designation = models.CharField(max_length=255, null=True, blank=True)
     patron = models.ForeignKey("self",on_delete=models.CASCADE, null=True, blank=True, related_name='dependants')
+    # doctor = models.ForeignKey(Doctor,on_delete=models.CASCADE, null=True, blank=True, related_name='person')
+
 
     def __str__(self):
         return self.name +": "+self.patient_type
