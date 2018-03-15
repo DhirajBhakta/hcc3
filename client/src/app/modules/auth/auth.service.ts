@@ -27,13 +27,11 @@ export class AuthService {
   }
 
   isDoctorLoggedIn() {
-    // return (this.loggedInUser == user_groups.DOCTOR);
-    return true;
+    return (this.loggedInUser == user_groups.DOCTOR);
   }
 
   isPharmaLoggedIn() {
-  //  return (this.loggedInUser == user_groups.PHARMA);
-  return true;
+    return (this.loggedInUser == user_groups.PHARMA);
   }
 
   login(username: String, password: String) {
