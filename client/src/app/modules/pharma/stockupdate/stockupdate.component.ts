@@ -54,7 +54,7 @@ export class StockupdateComponent implements OnInit {
                             }));
     this.phService.submitStockUpdate(stock_drugs).subscribe((resp) => {
                               if (Math.floor(resp.status / 100) == 2) {
-                                this._alerts.create('success', 'Prescription successfully submitted');
+                                this._alerts.create('success', 'New Stocks successfully submitted');
                                 setInterval(() => window.location.reload(), 2000);
                               };
                             });

@@ -10,7 +10,6 @@ export class InventoryComponent implements OnInit {
 
   columnDefs;
   rowData;
-  
   constructor(private phService: PharmaService) {
     this.columnDefs = [
       { headerName: "Trade-name", field: "drug.trade_name" },
@@ -19,7 +18,6 @@ export class InventoryComponent implements OnInit {
       { headerName: "Quantity Left", field: "quantity" },
       { headerName: "Rack", field: "rack" },
     ];
-
   }
 
   ngOnInit() {
