@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PharmaService } from '../services/pharma.service';
 
 @Component({
   selector: 'app-inventory',
@@ -6,26 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
+
   columnDefs;
   rowData;
+  
+  constructor(private phService: PharmaService) {
+    this.columnDefs = [
+      { headerName: "Trade-name", field: "drug.trade_name" },
+      { headerName: "Generic-name", field: "drug.generic_name" },
+      { headerName: "Batch", field: "batch" },
+      { headerName: "Quantity Left", field: "quantity" },
+      { headerName: "Rack", field: "rack" },
+    ];
 
-  constructor() {
-        this.columnDefs = [
-            {headerName: "Trade-name", field: "tradeName"},
-            {headerName: "Generic-name", field: "genericName"},
-            {headerName: "Batch", field: "batch"},
-            {headerName: "Quantity Left", field: "quantity"},
-            {headerName: "Rack", field: "rack"},
-
-        ];
-
-        this.rowData = [
-            {make: "Toyota", model: "Celica", price: 35000},
-            {make: "Ford", model: "Mondeo", price: 32000},
-            {make: "Porsche", model: "Boxter", price: 72000}
-        ]; }
+  }
 
   ngOnInit() {
+    this.phService.getInventory().subscribe((resp) => this.rowData = resp.json());
   }
 
 }

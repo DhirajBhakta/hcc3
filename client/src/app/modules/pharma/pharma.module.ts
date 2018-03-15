@@ -16,6 +16,7 @@ import { AddNewDrugComponent } from './inventory/add-new-drug/add-new-drug.compo
 import { NotificationService } from './services/notification.service';
 import { PTableComponent } from './notifications/p-table/p-table.component';
 import { HistoryService } from './services/history.service';
+import { PharmaService } from './services/pharma.service';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { HistoryService } from './services/history.service';
   ],
   providers: [
     NotificationService,
-    HistoryService
+    HistoryService,
+    PharmaService
   ],
   exports: [
     PharmaComponent,

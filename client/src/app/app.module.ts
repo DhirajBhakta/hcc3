@@ -19,9 +19,9 @@ import { AuthModule } from './modules/auth/auth.module';
 
 import { HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 import { JWTHttpClient } from './services/jwthttp.service';
-import {UserService} from './services/user.service';
+import { UserService } from './services/user.service';
 
-import {JasperoAlertsModule} from '@jaspero/ng-alerts';
+import { JasperoAlertsModule } from '@jaspero/ng-alerts';
 
 @NgModule({
   declarations: [
