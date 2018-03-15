@@ -1,60 +1,50 @@
 <h1>Stock Update</h1>
 
-<form [formGroup]="stockUpdateForm" (ngSubmit)="onSubmit()">
-  <div formArrayName="stockDrugs" class="well well-lg">
-    <table>
-      <thead>
-        <tr>
-          <th>Drug Name</th>
-          <th>Quantity</th>
-          <th>Batch</th>
-          <th>Expiry Date</th>
-          <th>Rack</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let stockDrug of stockDrugs.controls; let i=index" [formGroupName]="i">
+<form [formGroup]="stock_update_form" (ngSubmit)="onSubmit()">
+  <div formArrayName="stock_drugs">
+    <table style='width:100%'>
+        <tr *ngFor="let stock_drug of stock_drugs.controls; let i=index" [formGroupName]="i" fxLayout fxLayoutAlign='space-around'>
+          <td>
+            <app-auto-complete [source]=drugs
+                                placeholder='Drug'
+                                display-attr='trade_name'
+                                value-attr='id'
+                                (onSelected)="onDrugSelect($event,i)"></app-auto-complete>
+          </td>
           <td>
             <mat-form-field>
-              <input matInput formControlName="genericName"/>
+              <input matInput formControlName="batch" placeholder="batch"/>
             </mat-form-field>
           </td>
           <td>
             <mat-form-field>
-              <input matInput formControlName="quantity"/>
+              <input matInput formControlName="quantity" placeholder='Quantity'/>
             </mat-form-field>
           </td>
           <td>
             <mat-form-field>
-              <input matInput formControlName="batch"/>
+              <input matInput formControlName="expiry_date" placeholder='Expiry-Date'/>
             </mat-form-field>
           </td>
           <td>
             <mat-form-field>
-              <input matInput  formControlName="expiryDate"/>
+              <input matInput formControlName="rack" placeholder='Rack'/>
             </mat-form-field>
           </td>
-          <td>
-            <mat-form-field>
-              <input matInput  formControlName="rack"/>
-            </mat-form-field>
-          </td>
-          <td><button mat-raised-button color='ascent' (click)="deleteRow(i)">Delete</button></td>
-          <!-- <div class="form-group">
-        <label class="center-block">Rack
-         <select class="form-control" formControlName="rack">
-           <option *ngFor="let state of states" [value]="state">{{state}}</option>
-         </select>
-       </label>
-      </div> -->
 
+          <td>
+            <button matButton mat-mini-fab color='warn' (click)="deleteRow(i)">x</button>
+          </td>
         </tr>
-      </tbody>
     </table>
 
-    <button mat-raised-button color='primary' (click)="addRow()">New Row</button>
-    <button mat-raised-button type="submit">Submit</button>
+    <div fxLayout fxLayoutAlign='center end' fxLayoutGap='10px' >
+      <button mat-raised-button color='primary' type='button' (click)='addRow()'>Add Drug </button>
+      <button *ngIf="stock_update_form.status=='VALID'" mat-raised-button color='warn' type='submit'>Submit</button>
+    </div>
+
   </div>
-  {{stockUpdateForm.value | json}}
+
+
 
 </form>
