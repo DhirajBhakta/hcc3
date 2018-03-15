@@ -21,12 +21,12 @@ class Drug(models.Model):
 class Batch(models.Model):
     drug = models.ForeignKey('Drug', on_delete=models.CASCADE, related_name='batches')
     batch = models.CharField(max_length=255)
-    rack = models.IntegerField()
     quantity = models.IntegerField()
     expiry_date = models.DateField()
+    rack = models.IntegerField()
 
     def __str__(self):
-        return self.batch+'('+self.drug.__str__()+')'+str(self.quantity)
+        return self.batch+'('+self.drug.__str__()+')'+str(self.quantity)+'  [RACK:'+str(self.rack)+']'
 
 
 
