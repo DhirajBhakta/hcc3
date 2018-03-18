@@ -4,7 +4,7 @@ from rest_framework.response import Response
 class ObtainJWTView(ObtainJSONWebToken):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
-        if(response.data and response.data['token']):
+        if(response.data and 'token' in response.data):
             serializer = self.get_serializer(data=request.data)
             if(serializer.is_valid()):
                 user = serializer.object.get('user')

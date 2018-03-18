@@ -94,6 +94,7 @@ class DispensedDrugViewSet(viewsets.ModelViewSet):
 
 
 
+# TODO: Convert this back to ViewSet instead
 
 class PharmaRecordListView(APIView):
     """
