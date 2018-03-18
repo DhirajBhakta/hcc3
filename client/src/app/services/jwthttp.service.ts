@@ -18,13 +18,29 @@ export class JWTHttpClient extends Http {
   request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
     let token = localStorage.getItem('JWT');
     if (typeof url === 'string') {
-      if (!options)
+      if(!options)
         options = { headers: new Headers() };
+      if (!options.headers)
+        options.headers = new Headers();
       options.headers.set('Authorization', `JWT ${token}`);
     }
     else
       url.headers.set('Authorization', `JWT ${token}`);
     return super.request(url, options).catch(this.catchAuthError(this));
+  }
+
+  post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+    let token = localStorage.getItem('JWT');
+    if (typeof url === 'string') {
+      if(!options)
+        options = { headers: new Headers() };
+      if (!options.headers)
+        options.headers = new Headers();
+      options.headers.set('Authorization', `JWT ${token}`);
+    }
+    else
+      url.headers.set('Authorization', `JWT ${token}`);
+   return super.post(url, body).catch(this.catchAuthError(this));
   }
 
   private catchAuthError(self: JWTHttpClient) {

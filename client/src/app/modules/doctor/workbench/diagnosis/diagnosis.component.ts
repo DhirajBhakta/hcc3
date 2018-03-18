@@ -19,7 +19,7 @@ export class DiagnosisComponent implements OnInit {
   currDiagnosis;
   diagForm: FormGroup;
   presGroup = {
-    drug: ['', Validators.required],
+    drug_id: ['', Validators.required],
     quantity: ['', Validators.compose([Validators.pattern(/^\d+$/), Validators.required])],
     comments: ['', Validators.required],
   };
@@ -40,7 +40,7 @@ export class DiagnosisComponent implements OnInit {
   }
 
   onDrugSelect(item, row_id) {
-    this.prescribed_drugs.at(row_id).patchValue({ drug: item });
+    this.prescribed_drugs.at(row_id).patchValue({ drug_id: item });
   }
 
   addRow() {
@@ -59,6 +59,7 @@ export class DiagnosisComponent implements OnInit {
       indication: indication,
       prescribed_drugs: prescribed_drugs
     };
+    console.log(prescription)
     this.wbService.submitPrescription(prescription).subscribe(res => {
       if(Math.floor(res.status/100) == 2){
         this._alerts.create( 'success', 'Prescription successfully submitted');

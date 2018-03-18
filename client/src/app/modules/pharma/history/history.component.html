@@ -10,14 +10,14 @@
   <mat-card *ngIf="selectedPrescription" class="data-table">
     <mat-card-header>
     <mat-card-title>
-      {{selectedPrescription.diagnosis}}
+      {{selectedPrescription.indication}}
     </mat-card-title>
     <mat-card-subtitle>
-      {{selectedPrescription.date | date:'shortDate'}}
+      {{selectedPrescription.date_time | date:'shortDate'}}
     </mat-card-subtitle>
     </mat-card-header>
-    {{selectedPrescription.patient_name}}
-    {{selectedPrescription.doctor_name}}
+    {{selectedPrescription.patient.name}}
+    {{selectedPrescription.doctor.id}}
     <table>
       <tr>
         <th>Drug </th>
@@ -25,18 +25,18 @@
         <th>Batch No.</th>
         <th>Quantity</th>
         <th>Expiry Date</th>
-        <th>Store</th>
+        <th>Rack</th>
       </tr>
-      <ng-container *ngFor="let prescription of selectedPrescription.prescriptions">
+      <ng-container *ngFor="let drugInfo of selectedDrugs">
       <tr >
-        <td [attr.rowspan]="prescription.stores.length + 1">{{prescription.drugname}}</td>
-        <td [attr.rowspan]="prescription.stores.length + 1">{{prescription.quantity}}</td>
+        <td [attr.rowspan]="drugInfo.batchList.length + 1">{{drugInfo.drug.trade_name}}</td>
+        <td [attr.rowspan]="drugInfo.batchList.length + 1">{{drugInfo.quantity}}</td>
       </tr>
-      <tr *ngFor="let store of prescription.stores">
-        <td>{{store.batch_no}}</td>
-        <td>{{store.quantity}}</td>
-        <td>{{store.expiry_date | date:'shortDate'}}</td>
-        <td>{{store.rack}}</td>
+      <tr *ngFor="let batch_info of drugInfo.batchList">
+        <td>{{batch_info.batch.batch}}</td> <!-- *sigh* -->
+        <td>{{batch_info.batch.quantity}}</td>
+        <td>{{batch_info.batch.expiry_date | date:'shortDate'}}</td>
+        <td>{{batch_info.batch.rack}}</td>
       </tr>
       </ng-container>
     </table>

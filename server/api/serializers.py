@@ -66,7 +66,7 @@ class DoctorSerializer(serializers.ModelSerializer):
         model = Doctor
         fields = ('id','specialization')
 
-class PatronSerializer(serializers.ModelSerializer):
+class PatronSerializer(DynamicFieldsModelSerializer):
     department = DepartmentSerializer()
     course  = CourseSerializer()
     gender = KeyValueField(labels={'M':"Male",'F':"Female",'O':"Other"})
@@ -97,28 +97,36 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class BatchSerializer(serializers.ModelSerializer):
-    drug = serializers.PrimaryKeyRelatedField(read_only=True)
-    class Meta:
-        model = Batch
-        fields = ('batch', 'quantity','expiry_date','drug')
-
-#Assuming doctor uses only trade_names
-class DrugSerializer(DynamicFieldsModelSerializer):
-    batches = BatchSerializer(many=True, read_only=True)
-    class Meta:
-        model = Drug
-        fields = ('id', 'trade_name','batches')
-
-class PrescribedDrugSerializer(serializers.ModelSerializer):
     drug = serializers.PrimaryKeyRelatedField(queryset=Drug.objects.all())
     class Meta:
+        model = Batch
+        fields = ('id', 'batch', 'quantity', 'expiry_date', 'rack', 'drug')
+
+
+class DrugSerializer(DynamicFieldsModelSerializer):
+    """
+        Assuming doctor uses only trade_names
+    """
+    batches = BatchSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Drug
+        fields = ('id', 'trade_name', 'generic_name', 'batches')
+
+
+class PrescribedDrugSerializer(serializers.ModelSerializer):
+    drug = DrugSerializer(read_only=True)
+    drug_id = serializers.PrimaryKeyRelatedField(source='drug', queryset=Drug.objects.all(), write_only=True)
+
+    class Meta:
         model = PrescribedDrug
-        fields = ('id','drug','quantity','comments')
+        fields = ('id', 'drug_id', 'drug', 'quantity', 'comments')
+
 
 class PrescriptionSerializer(serializers.ModelSerializer):
     doctor = DoctorSerializer(read_only=True)
     patient_id = serializers.PrimaryKeyRelatedField(source='patient', queryset=Person.objects.all(), write_only=True)
-    patient = PersonSerializer(read_only=True)
+    patient = PersonSerializer(read_only=True, fields=('id', 'name'))
     prescribed_drugs = PrescribedDrugSerializer(many=True)
 
     def create(self, validated_data):
@@ -126,8 +134,7 @@ class PrescriptionSerializer(serializers.ModelSerializer):
         request = self.context.get("request")
         if request and hasattr(request, "user"):
             user = request.user
-            person_id = user.person.id
-            doctor = Doctor.objects.get(person=person_id)
+            doctor = Doctor.objects.get(person__user=user)
             validated_data['doctor_id'] = doctor.id
             prescribed_drugs = validated_data.pop('prescribed_drugs')
             prescription = Prescription.objects.create(**validated_data)
@@ -137,14 +144,24 @@ class PrescriptionSerializer(serializers.ModelSerializer):
             return prescription
         return None
 
-
     class Meta:
         model = Prescription
-        fields = ('id','doctor', 'patient', 'patient_id', 'indication', 'date_time', 'prescribed_drugs',)
+        fields = ('id','doctor', 'patient', 'patient_id', 'indication', 'date_time', 'prescribed_drugs')
+
+class DispensedDrugSerializer(serializers.ModelSerializer):
+    batch_id = serializers.PrimaryKeyRelatedField(source='batch', queryset=Batch.objects.all(), write_only=True)
+    batch = BatchSerializer(read_only=True)
+    pharmarecord = serializers.PrimaryKeyRelatedField(queryset=PharmaRecord.objects.all())
+
+    class Meta:
+        model = DispensedDrug
+        fields = ('batch', 'batch_id', 'quantity', 'pharmarecord')
+
 
 class PharmaRecordSerializer(serializers.ModelSerializer):
 
-    dispensed_drugs = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    prescription = PrescriptionSerializer(read_only=True)
+    dispensed_drugs = DispensedDrugSerializer(many=True)
 
     class Meta:
         model = PharmaRecord

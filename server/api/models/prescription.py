@@ -20,3 +20,5 @@ class PrescribedDrug(models.Model):
     drug = models.ForeignKey(Drug, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     comments = models.TextField()
+
+
