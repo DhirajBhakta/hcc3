@@ -96,14 +96,18 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('username', 'email', 'groups','password', 'person')
 
 
+<<<<<<< HEAD
 class BatchSerializer(serializers.ModelSerializer):
     drug = serializers.PrimaryKeyRelatedField(queryset=Drug.objects.all())
     class Meta:
         model = Batch
         fields = ('id', 'batch', 'quantity', 'expiry_date', 'rack', 'drug')
 
+=======
+>>>>>>> 5a53a8aef22c27d2b3e6193e51ba428d6f8cc1ad
 
 class DrugSerializer(DynamicFieldsModelSerializer):
+<<<<<<< HEAD
     """
         Assuming doctor uses only trade_names
     """
@@ -112,6 +116,18 @@ class DrugSerializer(DynamicFieldsModelSerializer):
     class Meta:
         model = Drug
         fields = ('id', 'trade_name', 'generic_name', 'batches')
+=======
+    batches = serializers.StringRelatedField(many=True, read_only=True)
+    class Meta:
+        model = Drug
+        fields = ('id', 'trade_name','generic_name','batches')
+
+class BatchSerializer(serializers.ModelSerializer):
+    drug = DrugSerializer(fields=['trade_name','generic_name'])
+    class Meta:
+        model = Batch
+        fields = ('drug','batch','quantity','expiry_date','rack')
+>>>>>>> 5a53a8aef22c27d2b3e6193e51ba428d6f8cc1ad
 
 
 class PrescribedDrugSerializer(serializers.ModelSerializer):

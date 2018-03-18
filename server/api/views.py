@@ -64,6 +64,10 @@ class BatchViewSet(viewsets.ModelViewSet):
     queryset = Batch.objects.all()
     serializer_class = BatchSerializer
 
+    def get_serializer(self, *args, **kwargs):
+        if "data" in kwargs:
+             kwargs["many"] = isinstance(kwargs["data"], list)
+        return super().get_serializer(*args, **kwargs)
 
 class PharmaRecordViewSet(viewsets.ModelViewSet):
     queryset = PharmaRecord.objects.all()
