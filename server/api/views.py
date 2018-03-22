@@ -141,3 +141,14 @@ class PharmaRecordDetailView(generics.RetrieveUpdateDestroyAPIView):
 class PrescriptionViewSet(viewsets.ModelViewSet):
     queryset = Prescription.objects.all()
     serializer_class = PrescriptionSerializer
+
+    def get_queryset(self):
+        queryset = Prescription.objects.all()
+        user = self.request.user;
+        if user is not None:
+            user_group = user.groups.all()[0].name
+            if user_group == "PATIENT":
+                queryset = queryset.filter(patient=user.person)
+            elif user_group == 'DOCTOR':
+                queryset = queryset.filter(doctor_person=user.person)
+        return queryset
