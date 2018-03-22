@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { History } from './history.model';
 import { Prescription } from '../../../models/prescription.model';
-import { HistoryService } from '../services/history.service';
+import { PatientService } from '../services/patient.service';
 
 @Component({
   selector: 'app-history',
@@ -9,17 +9,18 @@ import { HistoryService } from '../services/history.service';
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit {
-  historyData: {};
+  prescriptions: [];
   bundle: {};
 
-  constructor(private service: HistoryService) {}
+  constructor(private service: PatientService) {}
 
   ngOnInit() {
-    this.historyData = this.service.getHistoryData();
+    this.service.getPrescriptions().subscribe((response)=>{
+      this.prescriptions = response;
+      console.log(response)
+    });
   }
-  call() {
-    this.service.getRealHistoryData().subscribe(data => console.log(data));
 
-  }
+
 
 }

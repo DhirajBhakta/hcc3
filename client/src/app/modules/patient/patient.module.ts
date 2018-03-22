@@ -19,7 +19,7 @@ import { PatientProfileComponent } from './patient-profile/patient-profile.compo
 
 //services
 import { AppointmentsService } from './services/appointments.service';
-import { HistoryService } from './services/history.service';
+import { PatientService } from './services/patient.service';
 
 
 @NgModule({
@@ -42,7 +42,7 @@ import { HistoryService } from './services/history.service';
   // ],
   providers:[
     AppointmentsService,
-    HistoryService
+    PatientService
   ]
 
 })

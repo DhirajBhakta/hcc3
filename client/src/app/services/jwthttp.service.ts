@@ -8,7 +8,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class JWTHttpClient extends Http {
- 
+
   constructor(backend: XHRBackend, options: RequestOptions,private router: Router) {
     super(backend, options);
     let token = localStorage.getItem('JWT');
@@ -39,7 +39,7 @@ export class JWTHttpClient extends Http {
       options.headers.set('Authorization', `JWT ${token}`);
     }
     else
-      url.headers.set('Authorization', `JWT ${token}`);
+      options.headers.set('Authorization', `JWT ${token}`);
    return super.post(url, body).catch(this.catchAuthError(this));
   }
 

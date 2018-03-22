@@ -1,16 +1,29 @@
-<div class="container" fxLayout='column' fxLayoutAlign='center center' fxLayoutGap="10px">
+<div class="container" fxLayout='column' fxLayoutAlign='space-evenly center'>
 
-  <button (click)="call()">Click</button>
-  <!-- The body component with spans for centering -->
-  <!--<div *ngFor="let h_item of historyData | async" fxLayout>-->
-    <!--<span fxFlex-->
-          <!--fxFlex.xs='3'></span>-->
-    <!--<app-detail-card [historyDataItem]="h_item"-->
-                    <!--fxFlex='50%'-->
-                    <!--fxFlex.xs='94%'-->
-                    <!--&gt;-->
-    <!--</app-detail-card>-->
-    <!--<span fxFlex-->
-          <!--fxFlex.xs='3'></span>-->
-   <!--</div>-->
+  <div *ngFor="let prescription of prescriptions" style="width:50%">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <div class='prescription-header' fxLayout fxLayout.xs='column' fxLayout.sm='column' fxLayoutAlign='space-evenly'>
+          <div >
+            <span>Dr.{{prescription.doctor.person.name}}</span>
+            <br/>
+            <span class='indication'>{{prescription.indication}}</span>
+          </div>
+          <span>{{prescription.date_time|date:'medium'}}</span>
+        </div>
+      </mat-expansion-panel-header>
+      <table>
+        <tr>
+          <th>Drug</th>
+          <th>Quantity</th>
+          <th>Comments</th>
+        </tr>
+        <tr *ngFor="let prescribed_drug of prescription.prescribed_drugs ; index as i">
+          <td>{{prescribed_drug.drug.trade_name}}</td>
+          <td>{{prescribed_drug.quantity}}</td>
+          <td>{{prescribed_drug.comments}}</td>
+        </tr>
+      </table>
+    </mat-expansion-panel>
+  </div>
 </div>

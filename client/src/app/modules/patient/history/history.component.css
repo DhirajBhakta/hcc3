@@ -1,0 +1,34 @@
+
+.mat-expansion-panel:hover{
+  background-color: #3e65b4;
+  color:white;
+}
+
+.mat-expansion-panel-header{
+  padding:20px;
+}
+
+.prescription-header{
+  width:100%;
+}
+
+span.indication{
+  font-weight: bolder;
+  font-size: 25px;
+  font-family: monospace;
+}
+
+
+table{
+  width:100%;
+}
+
+th{
+  color:white;
+  background-color:gray;
+}
+
+td{
+  border:1px solid black;
+  text-align: center;
+}

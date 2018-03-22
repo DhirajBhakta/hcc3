@@ -17,7 +17,7 @@ export class NotificationService {
   params: URLSearchParams;
   requestOptions: RequestOptions;
 
-  constructor(private http: JWTHttpClient) { 
+  constructor(private http: JWTHttpClient) {
     this.params = new URLSearchParams();
     this.requestOptions = new RequestOptions();
   }
@@ -27,7 +27,7 @@ export class NotificationService {
     this.requestOptions.search = this.params;
     return this.http
       .request(this.url + 'pharmarecords', {params : this.params})
-      .map(response => JSON.parse(response._body));
+      .map(response => JSON.parse(response['_body']));
   }
   loopForData(): Observable<any> {
     return Observable.interval(5000)
