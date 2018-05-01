@@ -1,22 +1,26 @@
 <div class='container' fxLayout fxLayout.xs='column' fxlayout.sm='column' fxLayoutAlign='center center'>
   <span fxFlex></span>
 
-  <div fxFlex='40%' class="header">
-    <div>Welcome to <span>NITK HCC</span></div>
+ <div class="login-back"fxLayout fxLayout.xs='column' fxlayout.sm='column' fxLayoutAlign='center center'>
+  <div fxFlex='50%' class="header">
+
+    <div><img src="assets/img/nitk.png" class="logo"/> </div> <div> <span>NITK HCC</span></div>
   </div>
 
  <!-- Main Login div-->
-  <div *ngIf='!user_verified' fxFlex='25%' class='login'>
-    <form fxLayout='column' (ngSubmit)="onLogin()" novalidate>
-      <mat-form-field>
-        <input matInput type="text" id="username" placeholder="Username" [(ngModel)]="username" name="username" required>
-      </mat-form-field>
+    <div *ngIf='!user_verified' fxFlex='50%' class='login'>
+      <form fxLayout='column' (ngSubmit)="onLogin()" novalidate>
+        <mat-form-field>
+          <input matInput type="text" class="input" id="username" placeholder="Username" [(ngModel)]="username" name="username" required>
+        </mat-form-field>
 
-      <mat-form-field>
-        <input matInput type="password" id="password" placeholder="password" [(ngModel)]="password" name="password" required>
-      </mat-form-field>
-      <button mat-raised-button color='primary' type="submit">Login</button>
-    </form>
+        <mat-form-field>
+          <input matInput type="password" class="input" id="password" placeholder="Password" [(ngModel)]="password" name="password" required>
+        </mat-form-field>
+        <button mat-raised-button class="login-button" type="submit">Login</button>
+        <p class="alert" *ngIf="incorrectLogin">Please check your username and/or password and try again</p>
+      </form>
+    </div>
   </div>
 
  <!-- After user is verified, choose the profile (if EMPLOYEE or DEPENDANT only) -->

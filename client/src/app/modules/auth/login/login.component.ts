@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   public username: string=null;
   public password: string=null;
   public family: any[];
+  public incorrectLogin = true;
 
   constructor(private authService: AuthService, private userService: UserService, private router: Router) { }
 
