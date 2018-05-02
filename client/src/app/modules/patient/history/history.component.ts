@@ -9,7 +9,7 @@ import { PatientService } from '../services/patient.service';
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit {
-  prescriptions: [];
+  prescriptions: any[];
   bundle: {};
 
   constructor(private service: PatientService) {}
