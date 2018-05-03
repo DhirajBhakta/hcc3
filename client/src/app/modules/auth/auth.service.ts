@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import 'rxjs/add/operator/do';
 
@@ -20,7 +21,7 @@ export class AuthService {
   private loggedInUser: user_groups = user_groups.NONE;
   public is_multi_profile:boolean = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   isLoggedIn() {
     return (this.loggedInUser !== user_groups.NONE);
@@ -58,6 +59,7 @@ export class AuthService {
   logout(){
     localStorage.removeItem('JWT');
     this.loggedInUser = user_groups.NONE;
+    this.router.navigate(['/login']);
   }
 
   getRootURL(){

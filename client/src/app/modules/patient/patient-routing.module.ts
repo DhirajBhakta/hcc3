@@ -10,10 +10,10 @@ const Patientroutes: Routes = [
   {
     path: '', component: PatientComponent,
     children: [
+      { path: '', redirectTo:'history'},
       { path: 'appointments', component: AppointmentsComponent },
       { path: 'history', component: HistoryComponent },
       { path: 'profile', component:  PatientProfileComponent},
-
     ]
   }];
 
