@@ -60,6 +60,7 @@ export class AuthService {
     localStorage.removeItem('JWT');
     this.loggedInUser = user_groups.NONE;
     this.router.navigate(['/login']);
+    console.log('logged out',localStorage.getItem('JWT'));
   }
 
   getRootURL(){
