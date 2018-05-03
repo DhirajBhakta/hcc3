@@ -13,6 +13,8 @@ import { PatientInfoComponent } from './workbench/patient-info/patient-info.comp
 import { DiagnosisComponent } from './workbench/diagnosis/diagnosis.component';
 
 import { WorkbenchService } from './services/workbench.service';
+import { HistoryService } from './services/history.service';
+import { AgGridModule } from 'ag-grid-angular';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { WorkbenchService } from './services/workbench.service';
     CommonModule,
     DoctorRoutingModule,
     SharedModule,
-    ComponentsModule
+    ComponentsModule,
+    AgGridModule.withComponents([ ])
   ],
   declarations: [
     DoctorComponent,
@@ -34,7 +37,8 @@ import { WorkbenchService } from './services/workbench.service';
     DoctorComponent
   ],
   providers: [
-    WorkbenchService
+    WorkbenchService,
+    HistoryService
   ],
 })
 export class DoctorModule { }

@@ -22,8 +22,13 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+  isLoggedIn() {
+    return (this.loggedInUser !== user_groups.NONE);
+  }
+
   isPatientLoggedIn() {
-    return (this.loggedInUser == user_groups.PATIENT);
+    return true;
+    // return (this.loggedInUser == user_groups.PATIENT);
   }
 
   isDoctorLoggedIn() {

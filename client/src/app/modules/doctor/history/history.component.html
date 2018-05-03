@@ -1,3 +1,58 @@
-<p>
-  history works!
-</p>
+<h1>History</h1>
+<div fxLayout='column' fxLayoutAlign='space-around center' style="height:100%">
+  <div fxLayout='row' fxLayoutAlign='start' fxLayoutGap="20px">
+    <mat-form-field>
+      <input matInput [matDatepicker]="startPicker" placeholder="Choose a start date">
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="endPicker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+    <div>
+      <button mat-raised-button>Today</button>
+      <button mat-raised-button>This Week</button>
+      <button mat-raised-button>This Month</button>
+      <button mat-raised-button>This Year</button>
+      <button mat-raised-button>All Time</button>
+    </div>
+  </div>
+  <div fxFlex fxLayout='row'  style='height:100%'>
+    <ag-grid-angular fxFlex class='ag-theme-material' [rowData]="rowData$ | async" [columnDefs]="columnDefs" enableColResize
+      enableSorting enableFilter (cellClicked)="onCellClicked($event)"> </ag-grid-angular>
+    <div fxFlex>
+      <mat-card *ngIf="selectedPrescription" class="data-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{selectedPrescription.indication}}
+          </mat-card-title>
+          <mat-card-subtitle>
+            {{selectedPrescription.date_time | date:'shortDate'}}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <hr/> {{selectedPrescription.patient.name}}
+        <table class="centered-element" *ngIf="selectedDrugs.length!=0">
+          <tr>
+            <th>Drug </th>
+            <th>Quantity </th>
+            <th>Comments</th>
+          </tr>
+          <ng-container *ngFor="let drugInfo of selectedDrugs">
+            <tr>
+              <td>{{drugInfo.drug.trade_name}}</td>
+              <td>{{drugInfo.quantity}}</td>
+              <td>{{drugInfo.comments}}</td>
+            </tr>
+          </ng-container>
+        </table>
+        <ng-container *ngIf="selectedDrugs.length==0">
+          <p>No drugs prescribed</p>
+        </ng-container>
+      </mat-card>
+    </div>
+  </div>
+
+</div>
+

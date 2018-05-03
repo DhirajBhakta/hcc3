@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { URLSearchParams, RequestOptions } from '@angular/http';
-import { replaceKeys } from 'app/utils';
+import { prepareURL } from 'app/utils';
 import 'rxjs/add/operator/map';
 import "rxjs/add/observable/interval";
 import "rxjs/add/operator/switchMap"
 import "rxjs/add/operator/startWith"
 import "rxjs/add/observable/empty";
 import { JWTHttpClient } from '../../../services/jwthttp.service';
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class NotificationService {
 
-  url = 'http://localhost:8000/api/';
   params: URLSearchParams;
   requestOptions: RequestOptions;
 
@@ -26,7 +26,7 @@ export class NotificationService {
     this.params.set('status', status);
     this.requestOptions.search = this.params;
     return this.http
-      .request(this.url + 'pharmarecords', {params : this.params})
+      .request(prepareURL(environment.server_base_url, 'pharmarecords'), {params : this.params})
       .map(response => JSON.parse(response['_body']));
   }
   loopForData(): Observable<any> {
@@ -36,7 +36,7 @@ export class NotificationService {
   }
   createDispensed(object): Observable<any> {
     return this.http
-      .post(this.url + 'dispensed/', object);
+      .post(prepareURL(environment.server_base_url, 'dispensed/'), object);
 
   }
 

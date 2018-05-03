@@ -150,5 +150,5 @@ class PrescriptionViewSet(viewsets.ModelViewSet):
             if user_group == "PATIENT":
                 queryset = queryset.filter(patient=user.person)
             elif user_group == 'DOCTOR':
-                queryset = queryset.filter(doctor_person=user.person)
+                queryset = queryset.filter(doctor__person=user.person)
         return queryset

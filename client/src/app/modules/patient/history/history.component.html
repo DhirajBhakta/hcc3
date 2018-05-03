@@ -36,7 +36,7 @@
       </mat-expansion-panel>
 
     </div>
-    <div *ngIf="prescriptions.length == 0" style="text-align:center">
+    <div *ngIf="prescriptions && prescriptions.length == 0" style="text-align:center">
       <img class="empty-image" src="assets/img/filing.jpg" />
       <div class="empty-error">
         No medical records found!

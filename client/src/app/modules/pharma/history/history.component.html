@@ -25,8 +25,8 @@
         <th>Batch No.</th>
         <th>Quantity</th>
         <th>Expiry Date</th>
+        <th>Rack</th>
       </tr>
-      <th>Rack</th>
       <ng-container *ngFor="let drugInfo of selectedDrugs">
       <tr >
         <td [attr.rowspan]="drugInfo.batchList.length + 1">{{drugInfo.name}}</td>
