@@ -11,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 
 //ngModules
+import { ComponentsModule } from './components/components.module';
 import { PatientModule } from './modules/patient/patient.module';
 import { DoctorModule } from './modules/doctor/doctor.module';
 import { PharmaModule } from './modules/pharma/pharma.module';
@@ -33,9 +34,7 @@ import { JasperoAlertsModule } from '@jaspero/ng-alerts';
     HttpClientModule,
     HttpModule,
     SharedModule,
-    PatientModule,
-    DoctorModule,
-    PharmaModule,
+    ComponentsModule,
     AuthModule,
     AppRoutingModule,
     JasperoAlertsModule.forRoot()

@@ -3,7 +3,7 @@ import { RouterModule, Routes, } from '@angular/router';
 import { PatientModule } from './modules/patient/patient.module';
 import { DoctorModule } from './modules/doctor/doctor.module';
 import { PharmaModule } from './modules/pharma/pharma.module';
-import { PatientAuthGuard, DoctorAuthGuard, PharmaAuthGuard, LoggedInAuthGuard } from './modules/auth/auth-guards';
+import { PatientAuthGuard, DoctorAuthGuard, PharmaAuthGuard } from './modules/auth/auth-guards';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './modules/auth/login/login.component';
 import { HttpErrorComponent } from './components/http-error/http-error.component';
@@ -30,6 +30,11 @@ const appRoutes: Routes = [
     component: LoginComponent
   },
   {
+    path: '',
+    redirectTo:'login',
+    pathMatch:'full'
+  },
+  {
     path: 'http-error/:error_code',
     component: HttpErrorComponent
   },
@@ -37,10 +42,7 @@ const appRoutes: Routes = [
     path: '**',
     component: HttpErrorComponent
   },
-  // {
-  //   path: '',
-  //   canActivate: [LoggedInAuthGuard]
-  // }
+
 
 ];
 

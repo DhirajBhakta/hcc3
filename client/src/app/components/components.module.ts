@@ -32,7 +32,8 @@ import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
     ShowErrorsComponent,
     GenericCardComponent,
     ProfileCardComponent,
-    AutoCompleteComponent
+    AutoCompleteComponent,
+    HttpErrorComponent,
   ]
 })
 export class ComponentsModule { }

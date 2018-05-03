@@ -27,8 +27,7 @@ export class AuthService {
   }
 
   isPatientLoggedIn() {
-    return true;
-    // return (this.loggedInUser == user_groups.PATIENT);
+    return (this.loggedInUser == user_groups.PATIENT);
   }
 
   isDoctorLoggedIn() {
