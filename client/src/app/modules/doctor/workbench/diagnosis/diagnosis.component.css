@@ -4,14 +4,9 @@ table{
 }
 
 div.indication-container{
-  background-color: #75b4fc;
+  padding-top:5px;
+  background-color: #3e65b4;
   color:white;
-}
-.indication{
-  background-color: white;
-  color:black;
-  border:1px solid black;
-  border-radius: 2px;
 }
 .input{
   width:100%;

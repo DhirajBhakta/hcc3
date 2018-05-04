@@ -12,17 +12,22 @@
       <mat-datepicker #endPicker></mat-datepicker>
     </mat-form-field>
     <div>
-      <button mat-raised-button>Today</button>
-      <button mat-raised-button>This Week</button>
-      <button mat-raised-button>This Month</button>
-      <button mat-raised-button>This Year</button>
-      <button mat-raised-button>All Time</button>
+      <button mat-raised-button color="primary">Filter</button>
+      <button mat-raised-button id="today-button">Today</button>
+      <button mat-raised-button id="week-button">This Week</button>
+      <button mat-raised-button id="month-button">This Month</button>
+      <button mat-raised-button id="year-button">This Year</button>
+      <button mat-raised-button id="all-button">All Time</button>
     </div>
   </div>
-  <div fxFlex fxLayout='row'  style='height:100%'>
+  <div fxFlex fxLayout='row'  fxLayoutAlign='space-around' style='height:100%'>
     <ag-grid-angular fxFlex class='ag-theme-material' [rowData]="rowData$ | async" [columnDefs]="columnDefs" enableColResize
       enableSorting enableFilter (cellClicked)="onCellClicked($event)"> </ag-grid-angular>
     <div fxFlex>
+      <mat-card *ngIf="!selectedPrescription" class="data-card">
+        <img class="empty-logo" src="assets/img/filing.jpg"/>
+        <p class="no-drugs">Please select a history item to view details.</p> 
+      </mat-card>
       <mat-card *ngIf="selectedPrescription" class="data-card">
         <mat-card-header>
           <mat-card-title>
@@ -48,7 +53,7 @@
           </ng-container>
         </table>
         <ng-container *ngIf="selectedDrugs.length==0">
-          <p>No drugs prescribed</p>
+          <p class="no-drugs">No drugs prescribed</p>
         </ng-container>
       </mat-card>
     </div>

@@ -35,7 +35,7 @@ export class WorkbenchService {
     const headers = new Headers();
     headers.append('content-type', 'application/json');
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(prepareURL(environment.server_base_url, 'prescriptions'), JSON.stringify(prescription),options);
+    return this.http.post(prepareURL(environment.server_base_url, 'prescriptions'), prescription, options);
   }
 
 }

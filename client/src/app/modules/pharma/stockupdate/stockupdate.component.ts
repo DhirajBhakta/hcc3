@@ -50,8 +50,11 @@ export class StockupdateComponent implements OnInit {
   onSubmit() {
     let stock_drugs = this.stock_drugs.value.map((drug=>{
                               drug.expiry_date = moment(drug.expiry_date,["DD-MM-YYYY","DD-MM-YY"]).format("YYYY-MM-DD");
+                              drug.drug_id = drug.drug;
+                              delete drug.drug;
                               return drug;
                             }));
+    console.log(stock_drugs)
     this.phService.submitStockUpdate(stock_drugs).subscribe((resp) => {
                               if (Math.floor(resp.status / 100) == 2) {
                                 this._alerts.create('success', 'New Stocks successfully submitted');

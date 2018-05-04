@@ -15,17 +15,17 @@
                               value-attr='id'
                               (onSelected)="onDrugSelect($event,i)"></app-auto-complete>
         </td>
-        <td>
+        <td fxFlex>
           <mat-form-field>
             <input matInput formControlName="quantity" placeholder="Quantity"/>
           </mat-form-field>
         </td>
-        <td>
+        <td fxFlex>
           <mat-form-field>
             <input matInput formControlName="comments" placeholder='Comments'/>
           </mat-form-field>
         </td>
-        <td>
+        <td fxFlex>
           <button matButton mat-mini-fab color='warn' (click)="deleteRow(i)">x</button>
         </td>
       </tr>

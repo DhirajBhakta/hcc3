@@ -2,3 +2,6 @@
   color:black;
   font-size:25px;
 }
+.ag-theme-material {
+    min-height: 500px;
+}

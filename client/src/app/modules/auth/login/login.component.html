@@ -8,7 +8,7 @@
   </div>
 
  <!-- Main Login div-->
-    <div *ngIf='!user_verified' fxFlex='50%' class='login'>
+    <div *ngIf='!user_verified' fxFlex='70%' class='login'>
       <form fxLayout='column' (ngSubmit)="onLogin()" novalidate>
         <mat-form-field>
           <input matInput type="text" class="input" id="username" placeholder="Username" [(ngModel)]="username" name="username" required>

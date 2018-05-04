@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
 import { UserService } from 'app/services/user.service';
+import { element } from 'protractor';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   public username: string=null;
   public password: string=null;
   public family: any[];
-  public incorrectLogin = true;
+  public incorrectLogin = false;
 
   constructor(private authService: AuthService, private userService: UserService, private router: Router) { }
 
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
               if(!this.authService.is_multi_profile)
                     this.navigateToHomePage();
         this.user_verified = true;
-        });
+        },(error :any ) =>  if( error.status === 400) this.incorrectLogin=true; );
   }
 
 

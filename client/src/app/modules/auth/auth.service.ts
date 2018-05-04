@@ -4,6 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import 'rxjs/add/operator/do';
+import { Observable } from 'rxjs/Observable';
 
 enum user_groups {
   NONE,
@@ -23,26 +24,47 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  isLocallyStored(user_group) {
+    const stored_user_group = localStorage.getItem('user-group');
+    return stored_user_group !== null &&
+           stored_user_group === user_group.toString();
+  }
+
   isLoggedIn() {
-    return (this.loggedInUser !== user_groups.NONE);
+
+    if (this.loggedInUser === user_groups.NONE) {
+      return true;
+    }
+    return [user_groups.DOCTOR, user_groups.PATIENT, user_groups.PHARMA]
+              .map(this.isLocallyStored)
+              .reduce((x, y) => x || y);
   }
 
   isPatientLoggedIn() {
-    return (this.loggedInUser == user_groups.PATIENT);
+    if (this.loggedInUser === user_groups.PATIENT) {
+      return true;
+    }
+    return this.isLocallyStored(user_groups.PATIENT);
   }
 
   isDoctorLoggedIn() {
-    return (this.loggedInUser == user_groups.DOCTOR);
+    if (this.loggedInUser === user_groups.DOCTOR) {
+      return true;
+    }
+    return this.isLocallyStored(user_groups.DOCTOR);
   }
 
   isPharmaLoggedIn() {
-    return (this.loggedInUser == user_groups.PHARMA);
+    if (this.loggedInUser === user_groups.PHARMA) {
+      return true;
+    }
+    return this.isLocallyStored(user_groups.PHARMA)
   }
 
   login(username: String, password: String) {
     const url = this.BASE_URL + 'token-auth/';
     return this.http.post(url, {username, password}, {headers : this.headers})
-                    .do((response)=> this.setSession(response));
+                    .do((response)=> this.setSession(response))
   }
 
   setSession(JWT) {
@@ -54,17 +76,19 @@ export class AuthService {
       case ('PHARMA'): this.loggedInUser = user_groups.PHARMA; break;
       default: this.loggedInUser = user_groups.NONE; break;
     }
+    localStorage.setItem('user-group', this.loggedInUser.toString());
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('JWT');
+    localStorage.removeItem('user-group');
     this.loggedInUser = user_groups.NONE;
     this.router.navigate(['/login']);
-    console.log('logged out',localStorage.getItem('JWT'));
+    console.log('logged out', localStorage.getItem('JWT'));
   }
 
-  getRootURL(){
-    switch(this.loggedInUser){
+  getRootURL() {
+    switch (this.loggedInUser) {
       case(user_groups.PATIENT): return '/patient';
       case(user_groups.DOCTOR): return '/doctor';
       case(user_groups.PHARMA): return '/pharma';

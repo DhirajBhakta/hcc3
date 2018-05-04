@@ -29,14 +29,14 @@ export class PharmaService {
     const headers = new Headers();
     headers.append('content-type', 'application/json');
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(prepareURL(environment.server_base_url, 'batches'), JSON.stringify(stock_drugs), options);
+    return this.http.post(prepareURL(environment.server_base_url, 'batches'), stock_drugs, options);
   }
 
   submitNewDrug(new_drug) {
     const headers = new Headers();
     headers.append('content-type', 'application/json');
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(prepareURL(environment.server_base_url, 'drugs'), JSON.stringify(new_drug), options);
+    return this.http.post(prepareURL(environment.server_base_url, 'drugs'), new_drug, options);
   }
 
 }

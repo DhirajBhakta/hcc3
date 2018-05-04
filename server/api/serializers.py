@@ -98,9 +98,10 @@ class UserSerializer(serializers.ModelSerializer):
 
 class BatchSerializer(serializers.ModelSerializer):
     drug = serializers.StringRelatedField()
+    drug_id = serializers.PrimaryKeyRelatedField(source='drug', queryset=Drug.objects.all(), write_only=True)
     class Meta:
         model = Batch
-        fields = ('id', 'batch', 'quantity', 'expiry_date', 'rack', 'drug')
+        fields = ('id', 'batch', 'quantity', 'expiry_date', 'rack', 'drug', 'drug_id')
 
 
 class DrugSerializer(DynamicFieldsModelSerializer):
