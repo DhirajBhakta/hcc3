@@ -8,6 +8,9 @@ div.indication-container{
   background-color: #3e65b4;
   color:white;
 }
+.indication{
+  color:white;
+}
 .input{
   width:100%;
 }

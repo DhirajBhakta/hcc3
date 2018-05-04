@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
 import { UserService } from 'app/services/user.service';
-import { element } from 'protractor';
 
 
 @Component({

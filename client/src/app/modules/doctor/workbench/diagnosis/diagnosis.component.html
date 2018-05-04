@@ -1,5 +1,6 @@
 <form [formGroup]="diagForm" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()">
-  <div class='indication-container' fxLayout fxLayoutAlign="center center">
+  <div class='indication-container' fxLayout fxLayoutAlign="stretch center">
+    <mat-icon svgIcon='medical' style='height:15px'></mat-icon>
     <mat-form-field class='indication'>
       <input matInput style='text-align:center' placeholder='Indication' formControlName='indication' />
     </mat-form-field>
@@ -7,8 +8,8 @@
 
 
   <table formArrayName="prescribed_drugs" style='width:100%'>
-      <tr *ngFor="let prescribed_drug of prescribed_drugs.controls; let i=index" [formGroupName]='i' fxLayout fxLayoutGap='5px' fxLayoutAlign='stretch stretch'>
-        <td fxFlex>
+      <tr *ngFor="let prescribed_drug of prescribed_drugs.controls; let i=index" [formGroupName]='i' fxLayout fxLayoutGap='5px' fxLayoutAlign=''>
+        <td>
           <app-auto-complete [source]=drugs
                               placeholder='Drug'
                               display-attr='trade_name'
