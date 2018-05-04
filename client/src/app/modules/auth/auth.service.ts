@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import {Observable} from 'rxjs/Rx';
 import * as moment from 'moment';
 import 'rxjs/add/operator/do';
 
@@ -42,7 +43,11 @@ export class AuthService {
   login(username: String, password: String) {
     const url = this.BASE_URL + 'token-auth/';
     return this.http.post(url, {username, password}, {headers : this.headers})
-                    .do((response)=> this.setSession(response));
+                    .do((response)=> this.setSession(response))
+                    .catch((error:any)=>{
+                      if(error.status ===400)
+                       return "LOGINFAIL";
+                    })
   }
 
   setSession(JWT) {

@@ -21,7 +21,8 @@ export class AppComponent {
                 .addSvgIcon('school', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/school.svg'))
                 .addSvgIcon('domain', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/domain.svg'))
                 .addSvgIcon('gender', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/gender.svg'))
-                .addSvgIcon('forward', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/forward.svg'));
+                .addSvgIcon('forward', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/forward.svg'))
+                .addSvgIcon('medical', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/medical.svg'))
 
   }
 }

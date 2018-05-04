@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   public username: string=null;
   public password: string=null;
   public family: any[];
-  public incorrectLogin = true;
+  public incorrectLogin = false;
 
   constructor(private authService: AuthService, private userService: UserService, private router: Router) { }
 
@@ -25,16 +25,18 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     if (this.username && this.password)
-         this.authService.login(this.username, this.password).subscribe(() => {
+         this.authService.login(this.username, this.password).subscribe((response) => {
+              
+              if(this.authService.is_multi_profile)
               this.userService.getUser(this.username).subscribe((response)=>{
                       let patron = response.json().person;
                       this.family = patron.dependants;
                       this.family.unshift(patron);
                     });
-              if(!this.authService.is_multi_profile)
+              else
                     this.navigateToHomePage();
         this.user_verified = true;
-        });
+      })
   }
 
 
