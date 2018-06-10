@@ -16,7 +16,7 @@ export class PharmaService {
 
   getDrugNames() {
     /*For autocomplete: get only id and trade_name. dont retrieve batches*/
-    let params = new URLSearchParams();
+    const params = new URLSearchParams();
     params.set('fields', JSON.stringify(['id', 'trade_name']));
     return this.http.get(prepareURL(environment.server_base_url, 'drugs'), { params });
   }
@@ -28,14 +28,14 @@ export class PharmaService {
   submitStockUpdate(stock_drugs) {
     const headers = new Headers();
     headers.append('content-type', 'application/json');
-    let options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({ headers: headers });
     return this.http.post(prepareURL(environment.server_base_url, 'batches'), stock_drugs, options);
   }
 
   submitNewDrug(new_drug) {
     const headers = new Headers();
     headers.append('content-type', 'application/json');
-    let options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({ headers: headers });
     return this.http.post(prepareURL(environment.server_base_url, 'drugs'), new_drug, options);
   }
 

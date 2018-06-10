@@ -13,7 +13,7 @@ export class PatientComponent implements OnInit {
     {displayString: 'History', path: 'history'}
   ];
   menuLinks = [
-    {displayString:'Profile', path:'profile', icon:'person'}
+    {displayString: 'Profile', path: 'profile', icon: 'person'}
   ];
 
   constructor() { }

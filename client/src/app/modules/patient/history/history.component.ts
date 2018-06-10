@@ -15,9 +15,9 @@ export class HistoryComponent implements OnInit {
   constructor(private service: PatientService) {}
 
   ngOnInit() {
-    this.service.getPrescriptions().subscribe((response)=>{
+    this.service.getPrescriptions().subscribe((response) => {
       this.prescriptions = response;
-      console.log(response)
+      console.log(response);
     });
   }
 

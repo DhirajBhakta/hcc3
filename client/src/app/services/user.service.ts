@@ -15,8 +15,8 @@ export class UserService {
 
   getUser(username: string): Observable<any> {
     return this.http.get(prepareURL(environment.server_base_url, 'users', username))
-                    .do((response)=> {
-                      this.loggedInUser = response.json()
+                    .do((response) => {
+                      this.loggedInUser = response.json();
                       this.currentPerson = this.loggedInUser.person;
                     });
   }

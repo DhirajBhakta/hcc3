@@ -15,9 +15,9 @@ export class HistoryComponent implements OnInit {
 
   constructor(private historyService: HistoryService) {
         this.columnDefs = [
-            {headerName: 'Patient-Name', valueGetter: function(params) { console.log(params.data); return params.data.patient.name;}},
-            {headerName: 'Date-Time', valueGetter: function(params) {return params.data.date_time;}},
-            {headerName: 'Prescription', valueGetter: function(params) {return params.data.indication;},
+            {headerName: 'Patient-Name', valueGetter: function(params) { console.log(params.data); return params.data.patient.name; }},
+            {headerName: 'Date-Time', valueGetter: function(params) {return params.data.date_time; }},
+            {headerName: 'Prescription', valueGetter: function(params) {return params.data.indication; },
               cellRenderer: function(params) {
                   return '<a>' + params.value + '</a>'; }},
 
@@ -48,7 +48,7 @@ export class HistoryComponent implements OnInit {
   //   }
   //   console.log(drugMap)
   //   this.selectedDrugs = Object.keys(drugMap)
-  //     .map(function(key) { 
+  //     .map(function(key) {
   //       return { 'name': key,
   //                'quantity': drugMap[key].reduce((acc, cur) => acc + cur.quantity, 0),
   //                'batchList': drugMap[key]

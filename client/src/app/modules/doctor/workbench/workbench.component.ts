@@ -10,39 +10,29 @@ import { WorkbenchService } from '../services/workbench.service';
 })
 export class WorkbenchComponent implements OnInit {
 
-  username: string = null;
+  selectedDPM;
+  waitingPatients$: any;
   patient_details = null;
   patientSet: Boolean;
-  family: any[];
 
   constructor(private userService: UserService, private wbService: WorkbenchService) {
      this.patientSet = false;
+     this.waitingPatients$ = wbService.getWaitingPatients();
   }
 
   ngOnInit() {
   }
 
-
-  /*retrieve user and his entire dependants, if exists*/
-  getFamily() {
-    this.userService.getUser(this.username).subscribe((response) => {
-      let patron = response.json().person;
-      this.family = patron.dependants;
-      this.family.unshift(patron);
-    });
-  }
-
-  setPatient(person) {
+  setPatient() {
+    const person = this.selectedDPM.patient.person;
+    console.log(person);
     this.patient_details = person;
     this.wbService.setPatientID(person.id);
+    this.wbService.setDpmID(this.selectedDPM.id);
     this.patientSet = true;
   }
-
-
 
   reset() {
     this.patientSet = false;
   }
-
-
 }

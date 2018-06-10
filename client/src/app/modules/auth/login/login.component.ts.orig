@@ -1,0 +1,56 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../auth.service';
+import { UserService } from 'app/services/user.service';
+import { element } from 'protractor';
+
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent implements OnInit {
+
+  public user_verified:boolean=false;
+  public username: string=null;
+  public password: string=null;
+  public family: any[];
+  public incorrectLogin = false;
+
+  constructor(private authService: AuthService, private userService: UserService, private router: Router) { }
+
+
+  ngOnInit() { }
+
+  onLogin() {
+    if (this.username && this.password)
+         this.authService.login(this.username, this.password).subscribe((response) => {
+              
+              if(this.authService.is_multi_profile)
+              this.userService.getUser(this.username).subscribe((response)=>{
+                      let patron = response.json().person;
+                      this.family = patron.dependants;
+                      this.family.unshift(patron);
+                    });
+              else
+                    this.navigateToHomePage();
+        this.user_verified = true;
+<<<<<<< HEAD
+        },(error :any ) =>  if( error.status === 400) this.incorrectLogin=true; );
+=======
+      })
+>>>>>>> 0c41b78074ec30cc63e260bf867889d0aef673b7
+  }
+
+
+  navigateToHomePage(){
+    this.router.navigateByUrl(this.authService.getRootURL());
+  }
+  setProfile(person){
+    this.userService.setCurrentPerson(person);
+    this.navigateToHomePage();
+  }
+
+}

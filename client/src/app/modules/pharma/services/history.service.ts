@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { replaceKeys } from 'app/utils';
-import {JWTHttpClient} from "../../../services/jwthttp.service";
+import {JWTHttpClient} from '../../../services/jwthttp.service';
 
 import { environment } from 'environments/environment';
 import { prepareURL } from 'app/utils';

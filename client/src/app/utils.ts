@@ -1,5 +1,5 @@
-export function replaceKeys(object:Object, metadata:Array<any>){
-   for(let data of metadata){
+export function replaceKeys(object: Object, metadata: Array<any>){
+   for (const data of metadata){
      object[data.with] = object[data.replace];
      delete(object[data.replace]);
    }
@@ -7,7 +7,7 @@ export function replaceKeys(object:Object, metadata:Array<any>){
 }
 
 export function prepareURL(...args){
-  return args.reduce((accumulator,current)=>accumulator+current+'/',[]);
+  return args.reduce((accumulator, current) => accumulator + current + '/', []);
 }
 
 

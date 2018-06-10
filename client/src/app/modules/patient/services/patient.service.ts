@@ -17,7 +17,7 @@ export class PatientService {
 
   getPrescriptions() {
     return this.http.get(prepareURL(environment.server_base_url, 'prescriptions'))
-                    .map((response)=> response.json());
+                    .map((response) => response.json());
   }
 
 

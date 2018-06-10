@@ -18,13 +18,17 @@ from .serializers import (
     BatchSerializer,
     PrescriptionSerializer,
     PharmaRecordSerializer,
-    DispensedDrugSerializer
+    DispensedDrugSerializer,
+    LoggedUserSerializer,
+    DPMSerializer
     )
+from .models.doctor import DoctorPatientMap
 from .models.drug import Drug, Batch
 from .models.person import Person
 from .models.trivial import Department, Course
 from .models.prescription import Prescription
 from .models.pharma import PharmaRecord, DispensedDrug
+from .models.loggeduser import LoggedUser
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -152,3 +156,21 @@ class PrescriptionViewSet(viewsets.ModelViewSet):
             elif user_group == 'DOCTOR':
                 queryset = queryset.filter(doctor__person=user.person)
         return queryset
+
+class LoggedUserViewSet(viewsets.ModelViewSet): 
+    queryset = LoggedUser.objects.all()
+    serializer_class = LoggedUserSerializer
+
+class DPMViewSet(viewsets.ModelViewSet): 
+    queryset = DoctorPatientMap.objects.all()
+    serializer_class = DPMSerializer
+    
+    def get_queryset(self):
+        queryset = DoctorPatientMap.objects.all()
+        user = self.request.user;
+        if user is not None:
+            user_groups = [user_group.name for user_group in user.groups.all()]
+            if  'DOCTOR' in user_groups:
+                queryset = queryset.filter(doctor__person=user.person)
+        return queryset
+

@@ -28,14 +28,14 @@
     </tr>
   </ng-container>
 </table>
-printing storemap : {{drugMap | json}}
-{{batchList | json}}
-{{remainingMap | json}}
+<!-- printing storemap : {{drugMap | json}} -->
+<!-- {{batchList | json}}
+{{remainingMap | json}} -->
 <div class="errors" *ngIf="errors">
   <h4>Errors</h4>
   <ul>
     <li *ngFor="let error of errors">{{error}}</li>
   </ul>
 </div>
-<button mat-raised-button color="primary" type="submit" (click)="validate()" >Submit</button>
+<button mat-raised-button color="primary" type="submit" (click)="validate()" style="margin:auto; display:block;" >Submit</button>
 </form>

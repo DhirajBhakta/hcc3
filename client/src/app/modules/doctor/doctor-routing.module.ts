@@ -11,7 +11,7 @@ const Doctorroutes: Routes = [
   {
     path: '', component: DoctorComponent,
     children: [
-      {path : '', redirectTo:'workbench',},
+      {path : '', redirectTo: 'workbench', },
       { path: 'appointments', component: AppointmentsComponent },
       { path: 'history', component: HistoryComponent },
       { path: 'workbench', component: WorkbenchComponent },

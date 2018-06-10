@@ -2,13 +2,19 @@
 <h1 style='text-align:center'>Workbench</h1>
 
 <div *ngIf="!patientSet"
-      fxLayout='column' fxLayoutAlign='center center'>
-  <mat-form-field >
-    <input matInput [(ngModel)]='username' placeholder="Enter Patient username">
-  </mat-form-field>
-  <button mat-mini-fab color="primary" (click)="getFamily()"><mat-icon svgIcon='forward' style='height:15px;'></mat-icon></button>
-
-  <button class='member' *ngFor="let member of family" mat-raised-button (click)="setPatient(member)">{{member.name}}</button>
+      fxLayout='column' fxLayoutAlign='center center' fxLayoutGap="20px">
+    Patients in Queue
+    <div class="waiting-empty" *ngIf="!waitingPatients$">
+      No one's waiting.
+    </div>
+    <div class="waiting-room" fxLayout="column"fxLayoutGap="20px">
+      <mat-radio-group fxLayout="column" [(ngModel)]="selectedDPM" name="selectPatient" fxLayoutGap="20px">
+      <mat-radio-button *ngFor="let user of waitingPatients$ | async" [value]="user">
+        {{user.patient.person.name}}
+      </mat-radio-button>
+      </mat-radio-group>
+      <button mat-raised-button color='primary' (click)="setPatient()"> Select</button>
+    </div>
 </div>
 
 

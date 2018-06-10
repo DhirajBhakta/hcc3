@@ -5,10 +5,10 @@ import { CanActivate } from '@angular/router/src/interfaces';
 
 @Injectable()
 export class PatientAuthGuard implements CanLoad {
-  constructor(private authService: AuthService , private router: Router) { };
+  constructor(private authService: AuthService , private router: Router) { }
 
   canLoad() {
-    console.log("Trying to authorize Patient");
+    console.log('Trying to authorize Patient');
     if (this.authService.isPatientLoggedIn()) {
       return true;
     } else {
@@ -23,10 +23,10 @@ export class PatientAuthGuard implements CanLoad {
 
 @Injectable()
 export class DoctorAuthGuard implements CanLoad {
-  constructor(private authService: AuthService, private router: Router) { };
+  constructor(private authService: AuthService, private router: Router) { }
 
   canLoad() {
-    console.log("Trying to authorize Doctor");
+    console.log('Trying to authorize Doctor');
     if (this.authService.isDoctorLoggedIn()) {
       return true;
     } else {
@@ -42,11 +42,26 @@ export class DoctorAuthGuard implements CanLoad {
 
 @Injectable()
 export class PharmaAuthGuard implements CanLoad {
-  constructor(private authService: AuthService, private router: Router) { };
+  constructor(private authService: AuthService, private router: Router) { }
 
   canLoad() {
-    console.log("Trying to authorize Pharma");
+    console.log('Trying to authorize Pharma');
     if (this.authService.isPharmaLoggedIn()) {
+      return true;
+    } else {
+      this.router.navigate(['/login']);
+      return false;
+    }
+  }
+}
+
+@Injectable()
+export class ReceptionAuthGuard implements CanLoad {
+  constructor(private authService: AuthService, private router: Router) { }
+
+  canLoad() {
+    console.log('Trying to authorize Pharma');
+    if (this.authService.isReceptionLoggedIn()) {
       return true;
     } else {
       this.router.navigate(['/login']);
@@ -61,17 +76,21 @@ export class LoggedInAuthGuard implements CanActivate {
               private router: Router) {}
 
   canActivate() {
-    console.log("Trying to authorize logged in");
+    console.log('Trying to authorize logged in');
     if (this.authService.isDoctorLoggedIn()) {
       this.router.navigate(['/doctor']);
       return true;
-    } 
+    }
     else if (this.authService.isPatientLoggedIn()) {
       this.router.navigate(['/patient']);
       return true;
     }
     else if (this.authService.isPharmaLoggedIn()) {
       this.router.navigate(['/pharma']);
+      return true;
+    }
+    else if (this.authService.isReceptionLoggedIn()) {
+      this.router.navigate(['/reception']);
       return true;
     }
     else {

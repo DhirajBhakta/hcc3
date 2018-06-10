@@ -24,7 +24,7 @@ export class DiagnosisComponent implements OnInit {
     comments: ['', Validators.required],
   };
 
-  constructor(private fb: FormBuilder, private wbService: WorkbenchService, private _alerts:AlertsService) {
+  constructor(private fb: FormBuilder, private wbService: WorkbenchService, private _alerts: AlertsService) {
     this.diagForm = this.fb.group({
       indication: ['', Validators.required],
       prescribed_drugs: this.fb.array([this.fb.group(this.presGroup)]),
@@ -59,13 +59,14 @@ export class DiagnosisComponent implements OnInit {
       indication: indication,
       prescribed_drugs: prescribed_drugs
     };
-    console.log(prescription)
+    console.log(prescription);
     this.wbService.submitPrescription(prescription).subscribe(res => {
-      if(Math.floor(res.status/100) == 2){
+      this.wbService.updateDPM().subscribe( () => {
+      if (Math.floor(res.status / 100) == 2){
         this._alerts.create( 'success', 'Prescription successfully submitted');
-        setInterval(()=>window.location.reload(),2000);
+        setInterval(() => window.location.reload(), 2000);
       }
-    })
+    }); });
   }
 
 }

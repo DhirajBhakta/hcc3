@@ -21,18 +21,18 @@ export class NotificationsComponent implements OnInit {
 
     this.notificationService.getData(status = 'S')
       .subscribe(x => {
-        console.log(x)
+        console.log(x);
         x.map(y => {
-          console.log(y)
-          this.notifications$.push(y['prescription'])
-          console.log(this.notifications$)
-      })});
+          console.log(y);
+          this.notifications$.push(y['prescription']);
+          console.log(this.notifications$);
+      }); });
 
     this.notificationService.loopForData()
       .subscribe(x => {
         x.map(y => {
           this.notifications$.unshift(y['prescription']);
-           })});
+           }); });
   }
   sendData(batchList) {
     for (const batch of batchList) {

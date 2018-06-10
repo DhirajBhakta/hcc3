@@ -17,10 +17,10 @@ export class HistoryComponent implements OnInit {
 
   constructor(private notificationService: NotificationService) {
         this.columnDefs = [
-            {headerName: 'Patient-Name', valueGetter: function(params) {return params.data.prescription.patient.name;}},
-            {headerName: 'Doctor-Name', valueGetter: function(params) {return params.data.prescription.doctor.id;}},
-            {headerName: 'Date-Time', valueGetter: function(params) {return params.data.prescription.date_time;}},
-            {headerName: 'Prescription', valueGetter: function(params) {return params.data.prescription.indication;},
+            {headerName: 'Patient-Name', valueGetter: function(params) {return params.data.prescription.patient.name; }},
+            {headerName: 'Doctor-Name', valueGetter: function(params) {return params.data.prescription.doctor.id; }},
+            {headerName: 'Date-Time', valueGetter: function(params) {return params.data.prescription.date_time; }},
+            {headerName: 'Prescription', valueGetter: function(params) {return params.data.prescription.indication; },
               cellRenderer: function(params) {
                   return '<a>' + params.value + '</a>'; }},
 
@@ -47,13 +47,13 @@ export class HistoryComponent implements OnInit {
       }
       drugMap[batch_info.batch.drug].push(batch_info);
     }
-    console.log(drugMap)
+    console.log(drugMap);
     this.selectedDrugs = Object.keys(drugMap)
-      .map(function(key) { 
+      .map(function(key) {
         return { 'name': key,
                  'quantity': drugMap[key].reduce((acc, cur) => acc + cur.quantity, 0),
                  'batchList': drugMap[key]
-               }
+               };
               });
     console.log(this.selectedDrugs);
 

@@ -12,9 +12,9 @@ import { UserService } from 'app/services/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  public user_verified:boolean=false;
-  public username: string=null;
-  public password: string=null;
+  public user_verified= false;
+  public username: string= null;
+  public password: string= null;
   public family: any[];
   public incorrectLogin = false;
 
@@ -24,19 +24,20 @@ export class LoginComponent implements OnInit {
   ngOnInit() { }
 
   onLogin() {
-    if (this.username && this.password)
-         this.authService.login(this.username, this.password).subscribe(() => {
-              this.userService.getUser(this.username).subscribe((response)=>{
-                      let patron = response.json().person;
-                      this.family = patron.dependants;
-                      this.family.unshift(patron);
-                    });
-              if(!this.authService.is_multi_profile)
-                    this.navigateToHomePage();
+    if (this.username && this.password) {
+      this.authService.login(this.username, this.password).subscribe(() => {
+        this.userService.getUser(this.username).subscribe((response) => {
+          const patron = response.json().person;
+          this.family = patron.dependants;
+          this.family.unshift(patron);
+        });
+        if (!this.authService.is_multi_profile) {
+          this.navigateToHomePage();
+        }
         this.user_verified = true;
-        },(error :any ) =>  if( error.status === 400) this.incorrectLogin=true; );
+      }, (error: any) =>  { if (error.status === 400) { this.incorrectLogin = true; } } );
+    }
   }
-
 
   navigateToHomePage(){
     this.router.navigateByUrl(this.authService.getRootURL());

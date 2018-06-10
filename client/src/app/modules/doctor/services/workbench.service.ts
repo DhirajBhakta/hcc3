@@ -13,9 +13,9 @@ import { environment } from 'environments/environment';
 @Injectable()
 export class WorkbenchService {
   private patientID;
+  private dpmID; // This is to remove the entry from DPM table after diagnosis step is done
 
   constructor(private http: JWTHttpClient) { }
-
   getPatientID(){
     return this.patientID;
   }
@@ -24,9 +24,17 @@ export class WorkbenchService {
     this.patientID = id;
   }
 
+  getDpmID() {
+    return this.dpmID;
+  }
+
+  setDpmID(dpmID) {
+    this.dpmID = dpmID;
+  }
+
   getDrugNames() {
     /*For autocomplete*/
-    let params = new URLSearchParams();
+    const params = new URLSearchParams();
     params.set('fields', JSON.stringify(['id', 'trade_name']));
     return this.http.get(prepareURL(environment.server_base_url, 'drugs'), { params });
   }
@@ -34,8 +42,17 @@ export class WorkbenchService {
   submitPrescription(prescription){
     const headers = new Headers();
     headers.append('content-type', 'application/json');
-    let options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({ headers: headers });
     return this.http.post(prepareURL(environment.server_base_url, 'prescriptions'), prescription, options);
+  }
+
+  getWaitingPatients() {
+    return this.http.get(prepareURL(environment.server_base_url, 'doctorpatientmap'))
+                    .map(response => response.json());
+  }
+
+  updateDPM() {
+    return this.http.delete(prepareURL(environment.server_base_url, 'doctorpatientmap', '' + this.dpmID));
   }
 
 }

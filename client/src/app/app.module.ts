@@ -39,7 +39,7 @@ import { JasperoAlertsModule } from '@jaspero/ng-alerts';
     AppRoutingModule,
     JasperoAlertsModule.forRoot()
   ],
-  providers:[
+  providers: [
     UserService,
     {
       provide: JWTHttpClient,

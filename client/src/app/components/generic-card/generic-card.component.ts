@@ -24,7 +24,7 @@ export class GenericCardComponent implements OnInit {
   }
 
   triggerConfirm(): void {
-    console.log('confirm clicked! emit triggered')
+    console.log('confirm clicked! emit triggered');
     this.Confirm.emit();
   }
 

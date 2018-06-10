@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: '', component: PharmaComponent,
     children: [
-      {path: '', redirectTo:'notifications'},
+      {path: '', redirectTo: 'notifications'},
       { path: 'inventory', component: InventoryComponent },
       { path: 'history', component: HistoryComponent },
       { path: 'stockupdate', component: StockupdateComponent },

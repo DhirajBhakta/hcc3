@@ -14,11 +14,11 @@ export class PTableComponent implements OnInit {
 
   /*
     drugMap : Keep track of the drugs and batches and quantities in terms of local index.
-        Example : {0 : [{0: 1, 1 : 2}]} 
+        Example : {0 : [{0: 1, 1 : 2}]}
         is in format { drug1_id : [{batch_1 : batch1_qty,
                                     batch_2 : batch2_qty}]}
         This is later converted to drugList which is the right format for sending data serverside.
-    
+
     drugList : Finalized data to be POSTed to server.
     remainingMap : Keeps track of the remaining qty to be fulfilled for each drug. Is updated along with
                    drugMap
@@ -47,7 +47,7 @@ export class PTableComponent implements OnInit {
   }
 
   isEmpty(obj) {
-    for (var x in obj) { if (obj.hasOwnProperty(x))  return false; }
+    for (const x in obj) { if (obj.hasOwnProperty(x))  return false; }
     return true;
   }
 
@@ -79,7 +79,7 @@ export class PTableComponent implements OnInit {
     this.calcRemaining();
   }
   /*
-  Correct format is 
+  Correct format is
   [
     {
       batch_id : 0,
@@ -100,7 +100,7 @@ export class PTableComponent implements OnInit {
     this.completionEvent.emit(this.batchList);
   }
   calcRemaining() {
-    console.log(Object.keys(this.prescriptions))
+    console.log(Object.keys(this.prescriptions));
     for (const drug_id of Object.keys(this.prescriptions)) {
       let rem = this.prescriptions[drug_id].quantity;
       if (this.drugMap[drug_id] !== undefined) {
@@ -116,7 +116,7 @@ export class PTableComponent implements OnInit {
     this.errors = [];
     for (const key of Object.keys(this.remainingMap)) {
       if (this.remainingMap[key] !== 0) {
-        this.errors.push('The sum of the quantities from store does not add up to the remaining'); 
+        this.errors.push('The sum of the quantities from store does not add up to the remaining');
         break;
       }
     }
@@ -129,7 +129,7 @@ export class PTableComponent implements OnInit {
           this.errors.push('More drugs have been allocated than available in the batch');
         }
         if (this.drugMap[key][batch] < 0) {
-          this.errors.push('Negative drugs are not allowed')
+          this.errors.push('Negative drugs are not allowed');
         }
       }
     }

@@ -40,7 +40,7 @@ import { PatientService } from './services/patient.service';
   // exports : [
   //   PatientComponent
   // ],
-  providers:[
+  providers: [
     AppointmentsService,
     PatientService
   ]

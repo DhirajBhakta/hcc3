@@ -13,8 +13,8 @@ export class AddNewDrugComponent implements OnInit {
 
   add_new_drug_form;
 
-  constructor(private _fb: FormBuilder, private phService: PharmaService, private _alerts:AlertsService) {
-    this.add_new_drug_form= this._fb.group({
+  constructor(private _fb: FormBuilder, private phService: PharmaService, private _alerts: AlertsService) {
+    this.add_new_drug_form = this._fb.group({
       trade_name: ['', Validators.required],
       generic_name: ['', Validators.required],
     });
@@ -23,12 +23,12 @@ export class AddNewDrugComponent implements OnInit {
   }
 
   onSubmit() {
-    let new_drug = this.add_new_drug_form.value;
+    const new_drug = this.add_new_drug_form.value;
     this.phService.submitNewDrug(new_drug).subscribe((resp) => {
                               if (Math.floor(resp.status / 100) == 2) {
                                 this._alerts.create('success', 'New Drug successfully submitted');
                                 this.add_new_drug_form.reset();
-                              };
+                              }
                             });
   }
 

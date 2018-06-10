@@ -43,7 +43,7 @@ export class AppointmentsComponent implements OnInit {
     this.service.requestData();
     this.service.specialities().subscribe((specialities) => {
       this.specialities = specialities;
-      this.isLoading = false
+      this.isLoading = false;
     });
     this.service.getSpecialityDatesMap().subscribe(data => { this.dateMap = new Map(data); });
     this.bookedAppointmentsData$ = this.service.getBookedAppointments();
@@ -59,7 +59,7 @@ export class AppointmentsComponent implements OnInit {
   }
 
   onAppointmentConfirm() {
-    this.bookedAppointmentsData$= this.service.postBookedAppointment(this.bundle);
+    this.bookedAppointmentsData$ = this.service.postBookedAppointment(this.bundle);
   }
 
   dateFilter(d: Date): boolean {

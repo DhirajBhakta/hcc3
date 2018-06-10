@@ -4,10 +4,10 @@ import { HttpClient } from '@angular/common/http';
 import { URLSearchParams, RequestOptions } from '@angular/http';
 import { prepareURL } from 'app/utils';
 import 'rxjs/add/operator/map';
-import "rxjs/add/observable/interval";
-import "rxjs/add/operator/switchMap"
-import "rxjs/add/operator/startWith"
-import "rxjs/add/observable/empty";
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/observable/empty';
 import { JWTHttpClient } from '../../../services/jwthttp.service';
 import { environment } from 'environments/environment';
 
