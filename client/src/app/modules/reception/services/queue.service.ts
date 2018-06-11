@@ -11,21 +11,15 @@ import { environment } from 'environments/environment';
 
 
 @Injectable()
-export class GreeterService {
+export class QueueService {
 
   constructor(private http: JWTHttpClient) { }
 
-  /**
-   * This function returns a list of logged in users.
-   * @returns Response from the GET request on /loggedusers
-   * @memberof GreeterService
-   */
-  getLoggedUsers() {
-    return this.http.get(prepareURL(environment.server_base_url, 'loggedusers'))
-                    .map(response => response.json())
-                    .do(response => console.log(response));
-  }
+  getQueue(doctor_id){
+    this.http.get(prepareURL(environment.server_base_url,'doctors',doctor_id))
+             .subscribe((data)=>console.log('WWWWW',data.json()));
 
+  }
   /**
    * This function adds an entry to the DoctorPatientMap in the backend. Creates a relation b/w doctor and patient.
    *

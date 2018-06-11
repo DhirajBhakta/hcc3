@@ -25,4 +25,9 @@ export class UserService {
     this.currentPerson = person;
   }
 
+  getAllLoggedInUsers(){
+      return this.http.get(prepareURL(environment.server_base_url,'loggedusers'))
+                      .map(response => response.json());
+  }
+
 }

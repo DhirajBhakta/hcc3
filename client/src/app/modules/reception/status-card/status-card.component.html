@@ -1,0 +1,26 @@
+<mat-card *ngIf="!flipped" [ngClass]="{'animated':!flipped, 'flipInX':!flipped}">
+  <div fxLayout>
+    <div fxFlex="90%" fxLayout fxLayout.xs='column' fxLayout.sm='column'>
+      <div fxLayout='column' fxFlex='70%'>
+        <span class='subtitle'>Dentistry</span>
+        <span class='title'>{{doctor.user.person.name}}</span>
+      </div>
+      <button mat-button fxLayout='column' fxFlex='10%' class='counter'>
+        {{count}}
+      </button >
+    </div>
+    <div fxFlex fxLayout='column' fxLayoutGap='5px' fxLayoutAlign='center center'>
+      <button mat-raised-button color='primary' (click)="flip();">+</button>
+    </div>
+  </div>
+</mat-card>
+
+<mat-card class='incrementor-card' *ngIf="flipped" [ngClass]="{'animated':flipped, 'flipInX':flipped}">
+  <mat-form-field>
+    <input matInput placeholder="Enter ID">
+  </mat-form-field>
+  <div fxFlex fxLayout fxLayoutGap='5px' fxLayoutAlign='center center'>
+    <button mat-raised-button color='primary' (click)="incrementCount();flip();">Add to Queue</button>
+    <button mat-raised-button color='warn' (click)="flip();">Cancel</button>
+  </div>
+</mat-card>

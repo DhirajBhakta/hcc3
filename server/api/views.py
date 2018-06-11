@@ -14,15 +14,15 @@ from .serializers import (
     CourseSerializer,
     DepartmentSerializer,
     PersonSerializer,
+    DoctorSerializer,
     DrugSerializer,
     BatchSerializer,
     PrescriptionSerializer,
     PharmaRecordSerializer,
     DispensedDrugSerializer,
     LoggedUserSerializer,
-    DPMSerializer
     )
-from .models.doctor import DoctorPatientMap
+from .models.doctor import Doctor
 from .models.drug import Drug, Batch
 from .models.person import Person
 from .models.trivial import Department, Course
@@ -51,6 +51,10 @@ class DepartmentViewSet(viewsets.ModelViewSet):
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
+
+class DoctorViewSet(viewsets.ModelViewSet):
+    queryset = Doctor.objects.all()
+    serializer_class = DoctorSerializer
 
 class DrugViewSet(viewsets.ModelViewSet):
     queryset = Drug.objects.all()
@@ -157,20 +161,19 @@ class PrescriptionViewSet(viewsets.ModelViewSet):
                 queryset = queryset.filter(doctor__person=user.person)
         return queryset
 
-class LoggedUserViewSet(viewsets.ModelViewSet): 
+class LoggedUserViewSet(viewsets.ModelViewSet):
     queryset = LoggedUser.objects.all()
     serializer_class = LoggedUserSerializer
-
-class DPMViewSet(viewsets.ModelViewSet): 
-    queryset = DoctorPatientMap.objects.all()
-    serializer_class = DPMSerializer
-    
-    def get_queryset(self):
-        queryset = DoctorPatientMap.objects.all()
-        user = self.request.user;
-        if user is not None:
-            user_groups = [user_group.name for user_group in user.groups.all()]
-            if  'DOCTOR' in user_groups:
-                queryset = queryset.filter(doctor__person=user.person)
-        return queryset
-
+# 
+# class DPMViewSet(viewsets.ModelViewSet):
+#     queryset = DoctorPatientMap.objects.all()
+#     serializer_class = DPMSerializer
+#
+#     def get_queryset(self):
+#         queryset = DoctorPatientMap.objects.all()
+#         user = self.request.user;
+#         if user is not None:
+#             user_groups = [user_group.name for user_group in user.groups.all()]
+#             if  'DOCTOR' in user_groups:
+#                 queryset = queryset.filter(doctor__person=user.person)
+#         return queryset

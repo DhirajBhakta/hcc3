@@ -7,7 +7,8 @@ import { GreeterComponent } from './greeter/greeter.component';
 
 import { ComponentsModule } from '../../components/components.module';
 import { SharedModule } from '../../shared/shared.module';
-import { GreeterService } from './services/greeter.service';
+import { QueueService } from './services/queue.service';
+import { StatusCardComponent } from './status-card/status-card.component';
 
 @NgModule({
   imports: [
@@ -16,12 +17,12 @@ import { GreeterService } from './services/greeter.service';
     SharedModule,
     ComponentsModule
   ],
-  declarations: [ReceptionComponent, GreeterComponent],
+  declarations: [ReceptionComponent, GreeterComponent, StatusCardComponent],
   exports: [
     ReceptionComponent
   ],
   providers : [
-    GreeterService
+    QueueService
   ]
 })
 export class ReceptionModule { }

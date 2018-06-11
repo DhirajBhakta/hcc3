@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavLink } from '../../models/util-types';
+import { JWTHttpClient } from 'app/services/jwthttp.service';
+import {UserService} from 'app/services/user.service';
+
 
 @Component({
   selector: 'app-reception',
@@ -13,9 +16,10 @@ export class ReceptionComponent implements OnInit {
   ];
 
 
-  constructor() { }
+  constructor(private http: JWTHttpClient, private userService: UserService) { }
 
   ngOnInit() {
+    
   }
 
 }

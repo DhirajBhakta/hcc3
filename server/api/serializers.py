@@ -3,7 +3,7 @@ from rest_framework import serializers
 from rest_framework_jwt.serializers import JSONWebTokenSerializer
 from django.contrib.auth import authenticate, get_user_model
 
-from .models.doctor import Doctor, DoctorPatientMap
+from .models.doctor import Doctor
 from .models.drug import Drug, Batch
 from .models.person import Person
 from .models.trivial import Course, Department
@@ -77,11 +77,13 @@ class DependantSerializer(PatronSerializer):
 class PersonSerializer(DependantSerializer):
     dependants = DependantSerializer(many=True)
 
+
 class DoctorSerializer(serializers.ModelSerializer):
     person = PersonSerializer()
+    patients_queue = PersonSerializer(many=True)
     class Meta:
         model = Doctor
-        fields = ('id','specialization', 'person')
+        fields = ('id','specialization', 'person','patients_queue')
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
@@ -168,21 +170,21 @@ class PharmaRecordSerializer(serializers.ModelSerializer):
         model = PharmaRecord
         fields = ('prescription', 'dispensed_drugs')
 
-class LoggedUserSerializer(serializers.ModelSerializer): 
+class LoggedUserSerializer(serializers.ModelSerializer):
 
     user = UserSerializer(read_only=True)
 
     class Meta:
         model = LoggedUser
         fields = '__all__'
-
-class DPMSerializer(serializers.ModelSerializer):
-
-    patient_id = serializers.PrimaryKeyRelatedField(source='patient', queryset=User.objects.all(), write_only=True)
-    patient = UserSerializer(read_only=True)
-    doctor_id = serializers.PrimaryKeyRelatedField(source='doctor', queryset=User.objects.all(), write_only=True)
-    doctor = UserSerializer(read_only=True)
-
-    class Meta:
-        model = DoctorPatientMap
-        fields = ('id', 'doctor', 'patient', 'doctor_id', 'patient_id')
+# 
+# class DPMSerializer(serializers.ModelSerializer):
+#
+#     patient_id = serializers.PrimaryKeyRelatedField(source='patient', queryset=Person.objects.all(), write_only=True)
+#     patient = PersonSerializer(read_only=True)
+#     doctor_id = serializers.PrimaryKeyRelatedField(source='doctor', queryset=User.objects.all(), write_only=True)
+#     doctor = UserSerializer(read_only=True)
+#
+#     class Meta:
+#         model = DoctorPatientMap
+#         fields = ('id', 'doctor', 'patient', 'doctor_id', 'patient_id')
