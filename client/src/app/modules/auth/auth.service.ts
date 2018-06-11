@@ -13,7 +13,8 @@ enum user_groups {
   PATIENT,
   DOCTOR,
   PHARMA,
-  RECEPTIONIST
+  RECEPTIONIST,
+  LABTECH
 }
 
 
@@ -55,7 +56,7 @@ export class AuthService {
     }
 
     // a beauty :')
-    return [user_groups.DOCTOR, user_groups.PATIENT, user_groups.PHARMA, user_groups.RECEPTIONIST]
+    return [user_groups.DOCTOR, user_groups.PATIENT, user_groups.PHARMA, user_groups.RECEPTIONIST, user_groups.LABTECH]
               .map(this.isLocallyStored)
               .reduce((x, y) => x || y);
   }
@@ -109,6 +110,19 @@ export class AuthService {
   }
 
   /**
+  * Helper function that checks if the logged in user is a labtech
+  * @returns Returns true if user is Labtech
+  * @memberof AuthService
+  */
+  isLabtechLoggedIn() {
+    if (this.loggedInUser === user_groups.LABTECH) {
+      return true;
+    }
+    return this.isLocallyStored(user_groups.LABTECH);
+  }
+
+
+  /**
    * This function logs in the given username and password parameters by using a post request to the auth server.
    * @param {String} username
    * @param {String} password
@@ -137,6 +151,7 @@ export class AuthService {
       case ('DOCTOR'): this.loggedInUser = user_groups.DOCTOR; break;
       case ('PHARMA'): this.loggedInUser = user_groups.PHARMA; break;
       case ('RECEPTIONIST'): this.loggedInUser = user_groups.RECEPTIONIST; break;
+      case ('LABTECH'): this.loggedInUser = user_groups.LABTECH; break;
       default: this.loggedInUser = user_groups.NONE; break;
     }
     localStorage.setItem('user-group', this.loggedInUser.toString());
@@ -170,6 +185,7 @@ export class AuthService {
       case(user_groups.DOCTOR): return '/doctor';
       case(user_groups.PHARMA): return '/pharma';
       case(user_groups.RECEPTIONIST): return '/reception';
+      case(user_groups.LABTECH): return '/labtech';
       default: return '/login';
     }
   }
