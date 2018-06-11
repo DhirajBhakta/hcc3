@@ -20,7 +20,7 @@ import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
     GenericCardComponent,
     ProfileCardComponent,
     HttpErrorComponent,
-    AutoCompleteComponent
+    AutoCompleteComponent,
   ],
   imports: [
     CommonModule,

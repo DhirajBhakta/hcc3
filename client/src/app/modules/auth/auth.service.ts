@@ -7,6 +7,7 @@ import 'rxjs/add/operator/do';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
 import { JWTHttpClient } from '../../services/jwthttp.service';
+import { prepareURL } from 'app/utils';
 
 enum user_groups {
   NONE,
@@ -21,7 +22,7 @@ enum user_groups {
 @Injectable()
 export class AuthService {
 
-  private BASE_URL = 'http://localhost:8000/'; // TODO : Replace with environment url
+  private BASE_URL = environment.server_auth_url;
   private headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   private loggedInUser: user_groups = user_groups.NONE;
   public is_multi_profile = false;
@@ -130,7 +131,7 @@ export class AuthService {
    * @memberof AuthService
    */
   login(username: String, password: String) {
-    const url = this.BASE_URL + 'token-auth/';
+    const url = this.BASE_URL + '/token-auth/';
     return this.http.post(url, {username, password}, {headers : this.headers})
                     .do((response) => this.setSession(response));
   }
@@ -173,6 +174,8 @@ export class AuthService {
                   console.log('logged out', localStorage.getItem('JWT'));
                               });
   }
+
+
 
   /**
    * Returns the root URL for the current logged in user.

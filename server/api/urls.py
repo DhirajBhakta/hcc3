@@ -9,12 +9,13 @@ router.register(r'groups', views.GroupViewSet)
 router.register(r'courses', views.CourseViewSet)
 router.register(r'departments',views.DepartmentViewSet)
 router.register(r'persons',views.PersonViewSet)
+router.register(r'doctors',views.DoctorViewSet)
 router.register(r'drugs', views.DrugViewSet)
 router.register(r'batches', views.BatchViewSet)
 router.register(r'prescriptions', views.PrescriptionViewSet)
 router.register(r'dispensed', views.DispensedDrugViewSet)
 router.register(r'loggedusers', views.LoggedUserViewSet)
-router.register(r'doctorpatientmap', views.DPMViewSet)
+# router.register(r'doctorpatientmap', views.DPMViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

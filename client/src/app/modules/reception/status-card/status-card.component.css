@@ -1,0 +1,26 @@
+.mat-card{
+  padding:15px;
+  margin:5px;
+  background-color:#002f6c;
+  color:white;
+  font-size:12px;
+}
+
+.title{
+  font-size: 15px;
+  font-weight:bolder;
+}
+
+.counter{
+  background-color: white;
+  color:#002f6c;
+  padding:5px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+.incrementor-card{
+  background-color: white;
+  color:black;
+  border: 2px solid #002f6c;
+  border-radius: 5px;
+}
