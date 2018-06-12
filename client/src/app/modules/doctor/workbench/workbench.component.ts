@@ -10,29 +10,29 @@ import { WorkbenchService } from '../services/workbench.service';
 })
 export class WorkbenchComponent implements OnInit {
 
-  selectedDPM;
-  waitingPatients$: any;
-  patient_details = null;
-  patientSet: Boolean;
+  patient_queue: any[] = [];
+  patientSet:boolean = false;
+  patient;
+  doctorID:number;
+  labRequestFormDisplayed:boolean = false;
 
-  constructor(private userService: UserService, private wbService: WorkbenchService) {
-     this.patientSet = false;
-     this.waitingPatients$ = wbService.getWaitingPatients();
+  constructor(private userService: UserService, private workbenchService:WorkbenchService) {
+    this.doctorID = this.userService.getCurrentPerson().doctor;
+    console.log('DOCC:',this.doctorID);
   }
 
   ngOnInit() {
+    this.workbenchService.getQueue(this.doctorID).subscribe((queue)=> this.patient_queue = queue);
   }
 
-  setPatient() {
-    const person = this.selectedDPM.patient.person;
-    console.log(person);
-    this.patient_details = person;
-    this.wbService.setPatientID(person.id);
-    this.wbService.setDpmID(this.selectedDPM.id);
+  setPatient(person) {
+    this.patient = person;
     this.patientSet = true;
   }
 
-  reset() {
-    this.patientSet = false;
+  displayLabRequestForm(){
+    this.labRequestFormDisplayed = !this.labRequestFormDisplayed;
   }
+
+
 }

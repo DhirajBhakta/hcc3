@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { URLSearchParams, RequestOptions, Headers } from '@angular/http';
 import { JWTHttpClient } from 'app/services/jwthttp.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/switchMap';
 
 
 import { replaceKeys, prepareURL } from 'app/utils';
@@ -16,10 +17,15 @@ export class QueueService {
   constructor(private http: JWTHttpClient) { }
 
   getQueue(doctor_id){
-    this.http.get(prepareURL(environment.server_base_url,'doctors',doctor_id))
-             .subscribe((data)=>console.log('WWWWW',data.json()));
-
+    return Observable.interval(1000)
+    .switchMap(()=> this.http.get(prepareURL(environment.server_base_url,'doctors',doctor_id)))
+    .map((data)=>data.json());
   }
+
+  setAssignedDoctor(personID, doctorID){
+    return this.http.patch(prepareURL(environment.server_base_url,'persons',personID),{"assigned_doctor":doctorID});
+  }
+
   /**
    * This function adds an entry to the DoctorPatientMap in the backend. Creates a relation b/w doctor and patient.
    *

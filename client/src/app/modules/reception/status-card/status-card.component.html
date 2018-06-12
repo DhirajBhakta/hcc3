@@ -5,8 +5,9 @@
         <span class='subtitle'>Dentistry</span>
         <span class='title'>{{doctor.user.person.name}}</span>
       </div>
-      <button mat-button fxLayout='column' fxFlex='10%' class='counter'>
-        {{count}}
+
+      <button mat-button fxLayout='column' fxFlex='10%' class='counter' (click)="toggleShowQueue();">
+        {{patients_queue.length}}
       </button >
     </div>
     <div fxFlex fxLayout='column' fxLayoutGap='5px' fxLayoutAlign='center center'>
@@ -15,12 +16,29 @@
   </div>
 </mat-card>
 
+
 <mat-card class='incrementor-card' *ngIf="flipped" [ngClass]="{'animated':flipped, 'flipInX':flipped}">
-  <mat-form-field>
-    <input matInput placeholder="Enter ID">
-  </mat-form-field>
+  <div *ngIf="family?.length == 0">
+    <mat-form-field>
+      <input matInput placeholder="Enter ID" [(ngModel)]='username'>
+    </mat-form-field>
+    <button mat-raised-button color='primary' (click)="getFamily();">Ok</button>
+  </div>
+  <div fxLayout='column'>
+    <button mat-raised-button class='member' *ngFor='let member of family' (click)="assignDoctorToMember(member);">{{member.name}}</button>
+  </div>
   <div fxFlex fxLayout fxLayoutGap='5px' fxLayoutAlign='center center'>
-    <button mat-raised-button color='primary' (click)="incrementCount();flip();">Add to Queue</button>
+
+    <!-- <button mat-raised-button color='primary' (click)="incrementCount();flip();">Add to Queue</button> -->
     <button mat-raised-button color='warn' (click)="flip();">Cancel</button>
   </div>
 </mat-card>
+
+<div class='animated queue' [ngClass]="{'zoomIn':showqueue,'zoomOut':!showqueue}" fxLayout='column' fxLayoutAlign='center '>
+  <table fxFlex style='width:100%'>
+    <tr *ngFor='let patient of patients_queue'>
+      <td>{{patient.name}}</td>
+      <td><button mat-raised-button color='warn' (click)="resetAssignedDoctor(patient);">Remove</button></td>
+    </tr>
+  </table>
+  <div>

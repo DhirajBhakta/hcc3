@@ -34,7 +34,7 @@
   color:white;
 }
 
-::ng-deep .mat-form-field-ripple { 
+::ng-deep .mat-form-field-ripple {
   background-color:#fff;
 }
 ::ng-deep .mat-form-field-placeholder{

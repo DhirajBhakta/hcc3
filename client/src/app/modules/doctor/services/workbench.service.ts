@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { URLSearchParams, RequestOptions, Headers } from '@angular/http';
 import { JWTHttpClient } from 'app/services/jwthttp.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
@@ -46,10 +46,12 @@ export class WorkbenchService {
     return this.http.post(prepareURL(environment.server_base_url, 'prescriptions'), prescription, options);
   }
 
-  getWaitingPatients() {
-    return this.http.get(prepareURL(environment.server_base_url, 'doctorpatientmap'))
-                    .map(response => response.json());
+  getQueue(doctor_id){
+    return Observable.interval(1000)
+    .switchMap(()=> this.http.get(prepareURL(environment.server_base_url,'doctors',doctor_id)))
+    .map((data)=>data.json().patients_queue);
   }
+
 
   updateDPM() {
     return this.http.delete(prepareURL(environment.server_base_url, 'doctorpatientmap', '' + this.dpmID));

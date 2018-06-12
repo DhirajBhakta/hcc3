@@ -15,6 +15,7 @@ import { DiagnosisComponent } from './workbench/diagnosis/diagnosis.component';
 import { WorkbenchService } from './services/workbench.service';
 import { HistoryService } from './services/history.service';
 import { AgGridModule } from 'ag-grid-angular';
+import { LabRequestComponent } from './workbench/lab-request/lab-request.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { AgGridModule } from 'ag-grid-angular';
     WorkbenchComponent,
     AppointmentsComponent,
     PatientInfoComponent,
-    DiagnosisComponent
+    DiagnosisComponent,
+    LabRequestComponent
   ],
   exports: [
     DoctorComponent

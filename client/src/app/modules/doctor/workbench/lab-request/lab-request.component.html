@@ -1,0 +1,54 @@
+<form (ngSubmit)="onSubmit()" #labRequestForm="ngForm">
+  <mat-tab-group>
+    <mat-tab label="Lab Report 1">
+      <div fxLayout='column'>
+      <mat-checkbox [(ngModel)]="labRequestForm.bloodSugarFasting">Blood Sugar -Fasting</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.bloodSugarRandom">Blood Sugar -Random</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.bloodSugarPostPrandial">Blood Sugar -Post-Prandial</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.serumUrea">Serum Urea</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.serumCreatinine">Serum Creatinine</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.serumCholestrol">Serum Cholestrol</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.HDL">HDL</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.LDL">LDL</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.TC_HDL">TC/HDL</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.triglycerides">Triglycerides</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.LFTSerumProtein">LFT Serum Protein</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.LFTSerumAlbumin">LFT Serum Albumin</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.LFTSerumGlobulin">LFT Serum Globulin</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.LFTA_GRatio">LFT A/G Ratio</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.LFTTotalBilirubin">LFT Total Bilirubin</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.LFTDirectBilirubin">LFT Direct Bilirubin</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.LFTIndirectBilirubin">LFT Indirect Bilirubin</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.LFTSGOT">LFT SGOT</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.LFTSGPT">LFT SGPT</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.alkalinePhosphatase">Alkaline Phosphatase</mat-checkbox>
+    </div>
+    </mat-tab>
+
+    <mat-tab label="Lab Report 2">
+      <div fxLayout='column'>
+      <mat-checkbox [(ngModel)]="labRequestForm.bloodGroup">Blood Group</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.RH">R.H.</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.completeHemogram">Complete Hemogram</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.ESR">E.S.R.</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.HB">H.B.</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.bleedingTime">Bleeding Time</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.clottingTime">Clotting Time</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.bloodSugarFasting2">Blood Sugar -Fasting</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.bloodSugarPostPrandial2">Blood Sugar -P.P</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.bloodSugarRandom2">Blood Sugar -Random</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.uricAcid">Uric Acid</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.MP">M.P.</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.widal">Widal</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.sugar">Sugar</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.albumin">Albumin</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.bileSalts">Bile Salts</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.bilePigments">Bile Pigments</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.microscopy">Microscopy</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.ova">Ova</mat-checkbox>
+      <mat-checkbox [(ngModel)]="labRequestForm.cyst">Cyst</mat-checkbox>
+    </div>
+    </mat-tab>
+  </mat-tab-group>
+  <button mat-raised-button color='warn'>Submit</button>
+</form>

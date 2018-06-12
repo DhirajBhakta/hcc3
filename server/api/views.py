@@ -52,6 +52,9 @@ class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
 
+    def perform_update(self, serializer):
+        serializer.save()
+
 class DoctorViewSet(viewsets.ModelViewSet):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
@@ -164,7 +167,7 @@ class PrescriptionViewSet(viewsets.ModelViewSet):
 class LoggedUserViewSet(viewsets.ModelViewSet):
     queryset = LoggedUser.objects.all()
     serializer_class = LoggedUserSerializer
-# 
+#
 # class DPMViewSet(viewsets.ModelViewSet):
 #     queryset = DoctorPatientMap.objects.all()
 #     serializer_class = DPMSerializer

@@ -20,7 +20,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule} from '@angular/material/radio';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 
@@ -49,7 +50,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatProgressSpinnerModule,
     MatTabsModule,
     MatAutocompleteModule,
-    MatRadioModule
+    MatRadioModule,
+    MatCheckboxModule
   ],
 })
 export class SharedModule { }
