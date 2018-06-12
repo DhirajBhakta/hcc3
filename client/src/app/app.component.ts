@@ -22,7 +22,8 @@ export class AppComponent {
                 .addSvgIcon('domain', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/domain.svg'))
                 .addSvgIcon('gender', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/gender.svg'))
                 .addSvgIcon('forward', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/forward.svg'))
-                .addSvgIcon('medical', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/medical.svg'));
+                .addSvgIcon('medical', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/medical.svg'))
+                .addSvgIcon('add_circle', sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/add_circle_outline.svg'));
 
   }
 }

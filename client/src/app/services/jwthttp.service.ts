@@ -15,6 +15,16 @@ export class JWTHttpClient extends Http {
     options.headers.set('Authorization', `JWT ${token}`);
   }
 
+
+  delete(url: string , options?: RequestOptionsArgs): Observable<Response> {
+    const token = localStorage.getItem('JWT');
+    if (!options)
+      options = { headers: new Headers() };
+    if (!options.headers)
+      options.headers = new Headers();
+    options.headers.set('Authorization', `JWT ${token}`);
+    return super.delete(url, options).catch(this.catchAuthError(this));
+  }
   request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
     const token = localStorage.getItem('JWT');
     if (typeof url === 'string') {
@@ -29,6 +39,8 @@ export class JWTHttpClient extends Http {
     return super.request(url, options).catch(this.catchAuthError(this));
   }
 
+
+
   post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
     const token = localStorage.getItem('JWT');
     if (typeof url === 'string') {
@@ -42,6 +54,21 @@ export class JWTHttpClient extends Http {
       options.headers.set('Authorization', `JWT ${token}`);
    return super.post(url, body).catch(this.catchAuthError(this));
   }
+
+  put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+    const token = localStorage.getItem('JWT');
+    if (typeof url === 'string') {
+      if (!options)
+        options = { headers: new Headers() };
+      if (!options.headers)
+        options.headers = new Headers();
+      options.headers.set('Authorization', `JWT ${token}`);
+    }
+    else
+      options.headers.set('Authorization', `JWT ${token}`);
+   return super.put(url, body).catch(this.catchAuthError(this));
+  }
+
 
   private catchAuthError(self: JWTHttpClient) {
     return (res: Response) => {

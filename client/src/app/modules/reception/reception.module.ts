@@ -9,6 +9,9 @@ import { ComponentsModule } from '../../components/components.module';
 import { SharedModule } from '../../shared/shared.module';
 import { QueueService } from './services/queue.service';
 import { StatusCardComponent } from './status-card/status-card.component';
+import { TimeTableComponent } from './time-table/time-table.component';
+import { AppointmentsService } from './services/appointments.service';
+import { SpecFormComponent } from './time-table/spec-form/spec-form.component';
 
 @NgModule({
   imports: [
@@ -17,12 +20,13 @@ import { StatusCardComponent } from './status-card/status-card.component';
     SharedModule,
     ComponentsModule
   ],
-  declarations: [ReceptionComponent, GreeterComponent, StatusCardComponent],
+  declarations: [ReceptionComponent, GreeterComponent, StatusCardComponent, TimeTableComponent, SpecFormComponent],
   exports: [
     ReceptionComponent
   ],
   providers : [
-    QueueService
+    QueueService,
+    AppointmentsService
   ]
 })
 export class ReceptionModule { }

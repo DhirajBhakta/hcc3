@@ -13,13 +13,14 @@ export class ReceptionComponent implements OnInit {
 
   navLinks: NavLink[] = [
     {displayString: 'Greeter', path: 'greeter'},
+    {displayString: 'Timetable', path: 'timetable'},
   ];
 
 
   constructor(private http: JWTHttpClient, private userService: UserService) { }
 
   ngOnInit() {
-    
+
   }
 
 }

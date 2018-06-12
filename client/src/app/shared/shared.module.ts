@@ -20,7 +20,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule} from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatListModule } from '@angular/material/list';
+import { MatChipsModule } from '@angular/material/chips';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+
 
 
 
@@ -49,7 +54,14 @@ import {MatRadioModule} from '@angular/material/radio';
     MatProgressSpinnerModule,
     MatTabsModule,
     MatAutocompleteModule,
-    MatRadioModule
+    MatRadioModule,
+    MatCheckboxModule,
+    MatListModule,
+    MatChipsModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule
+
+
   ],
 })
 export class SharedModule { }
