@@ -4,11 +4,8 @@ from rest_framework_jwt.serializers import JSONWebTokenSerializer
 from django.contrib.auth import authenticate, get_user_model
 
 from .models.doctor import Doctor
-from .models.drug import Drug, Batch
 from .models.person import Person, Guest
 from .models.trivial import Course, Department
-from .models.prescription import Prescription, PrescribedDrug
-from .models.pharma import PharmaRecord, DispensedDrug
 from .models.loggeduser import LoggedUser
 
 def invertDict(dictionary):
@@ -104,78 +101,6 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('username', 'email', 'groups','password', 'person')
 
 
-class BatchSerializer(serializers.ModelSerializer):
-    drug = serializers.StringRelatedField()
-    drug_id = serializers.PrimaryKeyRelatedField(source='drug', queryset=Drug.objects.all(), write_only=True)
-    class Meta:
-        model = Batch
-        fields = ('id', 'batch', 'quantity', 'expiry_date', 'rack', 'drug', 'drug_id')
-
-
-class DrugSerializer(DynamicFieldsModelSerializer):
-    """
-        Assuming doctor uses only trade_names
-    """
-    batches = BatchSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Drug
-        fields = ('id', 'trade_name', 'generic_name', 'batches')
-
-
-class PrescribedDrugSerializer(serializers.ModelSerializer):
-    drug = DrugSerializer(read_only=True)
-    drug_id = serializers.PrimaryKeyRelatedField(source='drug', queryset=Drug.objects.all(), write_only=True)
-
-    class Meta:
-        model = PrescribedDrug
-        fields = ('id', 'drug_id', 'drug', 'quantity', 'comments')
-
-
-class PrescriptionSerializer(serializers.ModelSerializer):
-    doctor = DoctorSerializer(read_only=True)
-    patient_id = serializers.PrimaryKeyRelatedField(source='patient', queryset=Person.objects.all(), write_only=True)
-    patient = PersonSerializer(read_only=True, fields=('id', 'name'))
-    prescribed_drugs = PrescribedDrugSerializer(many=True)
-
-    def create(self, validated_data):
-        user = None
-        request = self.context.get("request")
-        if request and hasattr(request, "user"):
-            user = request.user
-            doctor = Doctor.objects.get(person__user=user)
-            validated_data['doctor_id'] = doctor.id
-            prescribed_drugs = validated_data.pop('prescribed_drugs')
-            prescription = Prescription.objects.create(**validated_data)
-            for drug in prescribed_drugs:
-                drug['prescription'] = prescription
-            prescribedDrugs = PrescribedDrug.objects.bulk_create([PrescribedDrug(**drug) for drug in prescribed_drugs])
-            return prescription
-        return None
-
-    class Meta:
-        model = Prescription
-        fields = ('id','doctor', 'patient', 'patient_id', 'indication', 'date_time', 'prescribed_drugs')
-
-class DispensedDrugSerializer(serializers.ModelSerializer):
-    batch_id = serializers.PrimaryKeyRelatedField(source='batch', queryset=Batch.objects.all(), write_only=True)
-    batch = BatchSerializer(read_only=True)
-    pharmarecord = serializers.PrimaryKeyRelatedField(queryset=PharmaRecord.objects.all())
-
-    class Meta:
-        model = DispensedDrug
-        fields = ('batch', 'batch_id', 'quantity', 'pharmarecord')
-
-
-class PharmaRecordSerializer(serializers.ModelSerializer):
-
-    prescription = PrescriptionSerializer(read_only=True)
-    dispensed_drugs = DispensedDrugSerializer(many=True)
-
-    class Meta:
-        model = PharmaRecord
-        fields = ('prescription', 'dispensed_drugs')
-
 class LoggedUserSerializer(serializers.ModelSerializer):
 
     user = UserSerializer(read_only=True)
@@ -183,14 +108,3 @@ class LoggedUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = LoggedUser
         fields = '__all__'
-#
-# class DPMSerializer(serializers.ModelSerializer):
-#
-#     patient_id = serializers.PrimaryKeyRelatedField(source='patient', queryset=Person.objects.all(), write_only=True)
-#     patient = PersonSerializer(read_only=True)
-#     doctor_id = serializers.PrimaryKeyRelatedField(source='doctor', queryset=User.objects.all(), write_only=True)
-#     doctor = UserSerializer(read_only=True)
-#
-#     class Meta:
-#         model = DoctorPatientMap
-#         fields = ('id', 'doctor', 'patient', 'doctor_id', 'patient_id')
