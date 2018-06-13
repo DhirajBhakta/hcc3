@@ -34,12 +34,12 @@
       <p class="small-grey-text">Select the start and end time for the appointment.</p>
       <mat-form-field>
         <input matInput placeholder="Start Time" [owlDateTimeTrigger]="starttime" [owlDateTime]="starttime" [(ngModel)]="spec.start_time">
-        <owl-date-time [pickerType]="'timer'" #starttime></owl-date-time>
+        <owl-date-time [pickerType]="'timer'" hour12Timer="'true'" #starttime></owl-date-time>
       </mat-form-field>
 
       <mat-form-field>
         <input matInput placeholder="End Time" [owlDateTimeTrigger]="endtime" [owlDateTime]="endtime" [(ngModel)]="spec.end_time">
-        <owl-date-time [pickerType]="'timer'" #endtime></owl-date-time>
+        <owl-date-time [pickerType]="'timer'" hour12Timer="'true'" #endtime></owl-date-time>
       </mat-form-field>
       <button mat-raised-button
               color="primary"

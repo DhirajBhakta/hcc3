@@ -191,7 +191,7 @@ class AppointmentSpecSerializer(serializers.ModelSerializer):
 class AppointmentSerializer(serializers.ModelSerializer):
 
     doctor_id = serializers.PrimaryKeyRelatedField(source='doctor', queryset=Doctor.objects.all())
-    spec_id = serializers.PrimaryKeyRelatedField(source='spec', queryset=AppointmentSpec.objects.all())
+    spec_id = serializers.PrimaryKeyRelatedField(source='spec', queryset=AppointmentSpec.objects.all(), required=False)
 
     class Meta:
         model = Appointment 

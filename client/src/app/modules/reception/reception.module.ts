@@ -14,6 +14,7 @@ import { AppointmentsService } from './services/appointments.service';
 import { SpecFormComponent } from './time-table/spec-form/spec-form.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { GenerateComponent } from './appointments/generate/generate.component';
+import { CreateAppointmentComponent } from './appointments/create-appointment/create-appointment.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,14 @@ import { GenerateComponent } from './appointments/generate/generate.component';
     SharedModule,
     ComponentsModule
   ],
-  declarations: [ReceptionComponent, GreeterComponent, StatusCardComponent, TimeTableComponent, SpecFormComponent, AppointmentsComponent, GenerateComponent],
+  declarations: [ReceptionComponent,
+                 GreeterComponent,
+                 StatusCardComponent,
+                 TimeTableComponent,
+                 SpecFormComponent,
+                 AppointmentsComponent,
+                 GenerateComponent,
+                 CreateAppointmentComponent],
   exports: [
     ReceptionComponent
   ],
