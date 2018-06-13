@@ -12,6 +12,8 @@ import { StatusCardComponent } from './status-card/status-card.component';
 import { TimeTableComponent } from './time-table/time-table.component';
 import { AppointmentsService } from './services/appointments.service';
 import { SpecFormComponent } from './time-table/spec-form/spec-form.component';
+import { AppointmentsComponent } from './appointments/appointments.component';
+import { GenerateComponent } from './appointments/generate/generate.component';
 
 @NgModule({
   imports: [
@@ -20,7 +22,7 @@ import { SpecFormComponent } from './time-table/spec-form/spec-form.component';
     SharedModule,
     ComponentsModule
   ],
-  declarations: [ReceptionComponent, GreeterComponent, StatusCardComponent, TimeTableComponent, SpecFormComponent],
+  declarations: [ReceptionComponent, GreeterComponent, StatusCardComponent, TimeTableComponent, SpecFormComponent, AppointmentsComponent, GenerateComponent],
   exports: [
     ReceptionComponent
   ],

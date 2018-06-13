@@ -6,9 +6,10 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/filter';
 
-import { replaceKeys, prepareURL } from 'app/utils';
+import { replaceKeys, prepareURL, addParams } from 'app/utils';
 import { environment } from 'environments/environment';
-import { AppointmentSpec } from '../time-table/spec-form/spec.model';
+import { AppointmentSpec } from '../models/spec.model';
+import { Appointment } from '../models/appointment.model';
 
 
 import { RequestOptions, Headers } from '@angular/http';
@@ -30,6 +31,10 @@ export class AppointmentsService {
                .do(data => console.log(data))
                .map(data => data.json());
   }
+
+
+  // CRUD Endpoints for Appointment Spec
+  //
   getSpecForDoctor(doctor_id) {
     return this.http.get(prepareURL(environment.server_base_url, 'appointment_specs') + '?doctor=' + doctor_id)
             .do(data => console.log(data))
@@ -48,4 +53,31 @@ export class AppointmentsService {
            .map(data => data.json());
   }
 
+  // CRUD Endpoints for Appointments
+  //
+  createAppointments(apps: Appointment[]) {
+    return this.http.post(prepareURL(environment.server_base_url, 'appointments'), apps, this.options)
+                    .map(data => data.json());
+  }
+  // createAppointment(app: Appointment) {
+  //   return this.http.post(prepareURL(environment.server_base_url, 'appointments'), app, this.options)
+  //                   .map(data => data.json());
+  // }
+  updateAppointment(app: Appointment) {
+    return this.http.put(prepareURL(environment.server_base_url, 'appointments', app.id), app)
+                    .map(data => data.json());
+  }
+  deleteAppointment(app_id) {
+    return this.http.delete(prepareURL(environment.server_base_url, 'appointments', app_id))
+                    .map(data => data.json());
+  }
+  getAppointments() {
+    return this.http.get(prepareURL(environment.server_base_url, 'appointments'))
+                    .map(data => data.json());
+  }
+  getAppointmentWithParams(params: Object) {
+    return this.http.get(prepareURL(environment.server_base_url, 'appointments') + addParams(params))
+                    .map(data => data.json());
+
+  }
 }

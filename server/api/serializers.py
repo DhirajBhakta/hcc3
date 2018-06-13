@@ -10,7 +10,7 @@ from .models.trivial import Course, Department
 from .models.prescription import Prescription, PrescribedDrug
 from .models.pharma import PharmaRecord, DispensedDrug
 from .models.loggeduser import LoggedUser
-from .models.appointments import AppointmentSpec
+from .models.appointments import AppointmentSpec, Appointment, Slot
 
 def invertDict(dictionary):
     return dict([(v,k) for k,v in dictionary.items()])
@@ -187,6 +187,23 @@ class AppointmentSpecSerializer(serializers.ModelSerializer):
         fields = ('doctor_id', 'id', 'monday', 'tuesday', 'wednesday',
                   'thursday', 'friday', 'saturday', 'sunday', 'all_weeks', 'week1',
                   'week2', 'week3', 'week4', 'start_time', 'end_time')
+
+class AppointmentSerializer(serializers.ModelSerializer):
+
+    doctor_id = serializers.PrimaryKeyRelatedField(source='doctor', queryset=Doctor.objects.all())
+    spec_id = serializers.PrimaryKeyRelatedField(source='spec', queryset=AppointmentSpec.objects.all())
+
+    class Meta:
+        model = Appointment 
+        fields = ('doctor_id', 'spec_id', 'id', 'date', 'start_time', 'end_time')
+
+class SlotSerializer(serializers.ModelSerializer): 
+
+    class Meta:
+        model = Slot
+        fields = '__all__'
+
+    
 # 
 # class DPMSerializer(serializers.ModelSerializer):
 #

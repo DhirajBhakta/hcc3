@@ -4,6 +4,10 @@ from .person import Person
 
 
 
+BOOKING_STATUS = (('BO', 'BOOKED'),
+                  ('WL', 'WAITING_LIST'),
+                  ('BC', 'BOOKED_CONFIRMED'), )
+                  
 class AppointmentSpec(models.Model):
     '''
     This class is the specifiction of the appointment. This is used to generate the
@@ -45,6 +49,7 @@ class Appointment(models.Model):
     These are generated from the appointment spec. 
     '''
     spec = models.ForeignKey(AppointmentSpec, on_delete=models.SET_NULL, null=True)
+    doctor = models.ForeignKey(Doctor, null=False, on_delete=models.CASCADE)
 
     date = models.DateField(null=False)
     start_time = models.TimeField(null=False)
@@ -58,6 +63,7 @@ class Slot(models.Model):
     patient = models.ForeignKey(Person, on_delete=models.CASCADE)
 
     appointment = models.ForeignKey(Appointment, null=False, on_delete=models.CASCADE, related_name='slots')
+    status = models.CharField(max_length=2, choices=BOOKING_STATUS)
 
     
     

@@ -51,10 +51,10 @@ export class SpecFormComponent implements OnInit {
     });
   }
   createSpec(spec) {
-    spec = this.correctTime(spec)
+    spec = this.correctTime(spec);
     spec = this.addDoctor(spec);
     delete spec.id;
-    console.log("Seding ");
+    console.log('Seding ');
     console.log(spec);
     this.aptService.createSpec(spec).subscribe(response => {
       console.log(response);

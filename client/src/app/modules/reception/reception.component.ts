@@ -14,6 +14,7 @@ export class ReceptionComponent implements OnInit {
   navLinks: NavLink[] = [
     {displayString: 'Greeter', path: 'greeter'},
     {displayString: 'Timetable', path: 'timetable'},
+    {displayString: 'Appointments', path: 'appointments'},
   ];
 
 

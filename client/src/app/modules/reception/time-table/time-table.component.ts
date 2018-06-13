@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentsService } from '../services/appointments.service';
-import { AppointmentSpec } from './spec-form/spec.model';
+import { AppointmentSpec } from '../models/spec.model';
 
 @Component({
   selector: 'app-time-table',

@@ -1,0 +1,6 @@
+<div class="errors" *ngIf="errors !== undefined && errors.length!==0">
+  <h4>Some errors have occurred!</h4>
+  <ul>
+    <li *ngFor="let error of errors">{{error}}</li>
+  </ul>
+</div>

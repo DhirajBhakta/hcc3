@@ -1,5 +1,6 @@
 export class AppointmentSpec {
   id = 0;
+  doctor_id = 0;
   monday = false;
   tuesday = false;
   wednesday = false;
