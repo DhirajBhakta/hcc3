@@ -2,8 +2,8 @@
   <div fxLayout>
     <div fxFlex="90%" fxLayout fxLayout.xs='column' fxLayout.sm='column'>
       <div fxLayout='column' fxFlex='70%'>
-        <span class='subtitle'>Dentistry</span>
-        <span class='title'>{{doctor.user.person.name}}</span>
+        <span class='subtitle'>{{specialization}}</span>
+        <span class='title'>Dr.{{doctor.user.person.name}}</span>
       </div>
 
       <button mat-button fxLayout='column' fxFlex='10%' class='counter' (click)="toggleShowQueue();">
@@ -18,27 +18,27 @@
 
 
 <mat-card class='incrementor-card' *ngIf="flipped" [ngClass]="{'animated':flipped, 'flipInX':flipped}">
-  <div *ngIf="family?.length == 0">
-    <mat-form-field>
-      <input matInput placeholder="Enter ID" [(ngModel)]='username'>
-    </mat-form-field>
-    <button mat-raised-button color='primary' (click)="getFamily();">Ok</button>
-  </div>
-  <div fxLayout='column'>
-    <button mat-raised-button class='member' *ngFor='let member of family' (click)="assignDoctorToMember(member);">{{member.name}}</button>
-  </div>
-  <div fxFlex fxLayout fxLayoutGap='5px' fxLayoutAlign='center center'>
-
-    <!-- <button mat-raised-button color='primary' (click)="incrementCount();flip();">Add to Queue</button> -->
+  <div fxLayout fxLayoutAlign='start end'>
+    <div *ngIf="family?.length == 0">
+      <mat-form-field>
+        <input matInput placeholder="Enter ID/Guest Name" [(ngModel)]='username'>
+      </mat-form-field>
+      <button mat-raised-button color='primary' (click)="submitGuestNameOrID();">Ok</button>
+    </div>
+    <div fxFlex fxLayout='column'>
+      <button mat-raised-button class='member' *ngFor='let member of family' (click)="assignDoctor(member);">{{member.name}}</button>
+    </div>
     <button mat-raised-button color='warn' (click)="flip();">Cancel</button>
+    <mat-slide-toggle [hidden]="family?.length != 0" [checked]="isGuest" (change)="isGuest=!isGuest">Guest</mat-slide-toggle>
   </div>
+  {{isGuest|json}}
 </mat-card>
 
-<div class='animated queue' [ngClass]="{'zoomIn':showqueue,'zoomOut':!showqueue}" fxLayout='column' fxLayoutAlign='center '>
+<div *ngIf='showqueue' class='animated queue zoomIn' fxLayout='column' fxLayoutAlign='center '>
   <table fxFlex style='width:100%'>
     <tr *ngFor='let patient of patients_queue'>
       <td>{{patient.name}}</td>
       <td><button mat-raised-button color='warn' (click)="resetAssignedDoctor(patient);">Remove</button></td>
     </tr>
   </table>
-  <div>
+<div>

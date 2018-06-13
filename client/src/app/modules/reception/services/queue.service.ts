@@ -16,29 +16,45 @@ export class QueueService {
 
   constructor(private http: JWTHttpClient) { }
 
-  getQueue(doctor_id){
+  getSpecialization(doctor_id){
+    return this.http.get(prepareURL(environment.server_base_url,'doctors',doctor_id))
+              .map((data) => data.json())
+              .map(data => data.specialization);
+  }
+  getQueue(doctor_id) {
     return Observable.interval(1000)
-    .switchMap(()=> this.http.get(prepareURL(environment.server_base_url,'doctors',doctor_id)))
-    .map((data)=>data.json());
+      .switchMap(() => this.http.get(prepareURL(environment.server_base_url, 'doctors', doctor_id)))
+      .map((data) => data.json())
+      .map((data) => {
+        data.patients_queue.map(patient => patient['isGuest'] = false);
+        data.guest_patients_queue.map(patient => patient['isGuest'] = true);
+        return data.patients_queue.concat(data.guest_patients_queue).sort(patient => patient.assigned_token);
+      });
   }
 
-  setAssignedDoctor(personID, doctorID){
-    return this.http.patch(prepareURL(environment.server_base_url,'persons',personID),{"assigned_doctor":doctorID});
+  setAssignedDoctor(patient, tokenNumber, doctorID) {
+    if (typeof patient === 'string')
+      return this.http.post(prepareURL(environment.server_base_url, 'guests'),
+        {
+          "name": patient,
+          "assigned_doctor": doctorID,
+          "assigned_token": tokenNumber
+        });
+    return this.http.patch(prepareURL(environment.server_base_url, 'persons', patient.id),
+      {
+        "assigned_doctor": doctorID,
+        "assigned_token": tokenNumber
+      });
   }
 
-  /**
-   * This function adds an entry to the DoctorPatientMap in the backend. Creates a relation b/w doctor and patient.
-   *
-   * @param {*} p_id Patient ID
-   * @param {*} d_id Doctor ID
-   * @returns Response from the POST request to /doctorpatientmap endpoint
-   * @memberof GreeterService
-   */
-  addToDPM(p_id, d_id) {
-    const payload = {patient_id : p_id, doctor_id : d_id};
-    const headers = new Headers();
-    headers.append('content-type', 'application/json');
-    const options = new RequestOptions({ headers: headers });
-    return this.http.post(prepareURL(environment.server_base_url, 'doctorpatientmap'), payload, options);
+  resetAssignedDoctor(patient) {
+    if (patient.isGuest)
+      return this.http.delete(prepareURL(environment.server_base_url, 'guests', patient.id));
+    return this.http.patch(prepareURL(environment.server_base_url, 'persons', patient.id),
+      {
+        "assigned_doctor": null,
+        "assigned_token": null
+      });
   }
+
 }

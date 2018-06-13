@@ -1,5 +1,5 @@
 venv/
-
+server/api/migrations/
 **/node_modules/
 
 **/__pycache__/

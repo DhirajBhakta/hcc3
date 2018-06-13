@@ -43,6 +43,20 @@ export class JWTHttpClient extends Http {
    return super.post(url, body).catch(this.catchAuthError(this));
   }
 
+  delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
+    const token = localStorage.getItem('JWT');
+    if (typeof url === 'string') {
+      if (!options)
+        options = { headers: new Headers() };
+      if (!options.headers)
+        options.headers = new Headers();
+      options.headers.set('Authorization', `JWT ${token}`);
+    }
+    else
+      options.headers.set('Authorization', `JWT ${token}`);
+   return super.delete(url).catch(this.catchAuthError(this));
+  }
+
   private catchAuthError(self: JWTHttpClient) {
     return (res: Response) => {
       if ([400, 401, 403, 500, 504, 404].includes(res.status))

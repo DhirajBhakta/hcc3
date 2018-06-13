@@ -41,6 +41,7 @@ BLOOD_GROUP_CHOICES = (
 #   email will also be stored in User table
 
 
+
 class Person(models.Model):
     #common fields
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True, related_name='person')
@@ -54,6 +55,7 @@ class Person(models.Model):
     blood_group = models.CharField(max_length=3, choices=BLOOD_GROUP_CHOICES)
     patient_type = models.CharField(max_length=1, choices=PATIENT_TYPE_CHOICES)
     #optional fields
+    #(SPARSE columns are nicely handled by InnoDB. don't freak out)
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True)
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
     retired = models.NullBooleanField(default=False, null=True)
@@ -62,6 +64,12 @@ class Person(models.Model):
     #if the person is a DOctor, then the following attribute will be not null`
     doctor = models.OneToOneField('Doctor',on_delete=models.CASCADE, null=True, blank=True, related_name='person')
     assigned_doctor = models.ForeignKey('Doctor',on_delete=models.SET_NULL, null=True, blank=True, related_name='patients_queue')
+    assigned_token = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.name +": "+self.patient_type
+
+class Guest( models.Model):
+    name = models.CharField(max_length=255)
+    assigned_doctor = models.ForeignKey('Doctor',on_delete=models.SET_NULL, null=True, blank=True, related_name='guest_patients_queue')
+    assigned_token = models.IntegerField(null=True, blank=True )

@@ -9,45 +9,75 @@ import { UserService } from 'app/services/user.service';
 })
 export class StatusCardComponent implements OnInit {
   @Input() doctor;
+  doctorID: number;
+  specialization:string;
   patients_queue: any[] = [];
+  token:number = 0;
   flipped:boolean = false;
   showqueue:boolean = false;
-  doctorID: number;
-  username:string;
+  username:string="";
   family:any[] = [];
+  isGuest:boolean=false;
   constructor(private queueService: QueueService, private userService:UserService) {
 
   }
 
   ngOnInit() {
     this.doctorID = this.doctor.user.person.doctor;
+    this.queueService.getSpecialization(this.doctorID)
+      .subscribe((specialization) => this.specialization = specialization);
     this.queueService.getQueue(this.doctorID)
-      .subscribe((data)=> this.patients_queue = data.patients_queue);
+      .subscribe((queue)=> this.patients_queue = queue);
   }
 
   flip(){
     this.flipped = !this.flipped;
-    this.showqueue=false;
-    this.family = [];
-    this.username = "";
   }
 
   toggleShowQueue(){
     this.showqueue=!this.showqueue;
   }
-  getFamily(){
+
+  resetDefaults(){
+    this.showqueue=false;
+    this.family = [];
+    this.username = "";
+    this.isGuest=false;
+  }
+
+  incrementToken(){
+    this.token = this.token + 1;
+    this.flip();
+    this.resetDefaults();
+  }
+
+
+  submitGuestNameOrID(){
+      if(this.isGuest)
+        this.assignDoctor(this.username);
+      else
+        this._getFamily();
+  }
+  _getFamily(){
     this.userService.getUser(this.username).subscribe((response) => {
       const patron = response.json().person;
       this.family = patron.dependants;
       this.family.unshift(patron);
     });
   }
-  assignDoctorToMember(member){
-    this.queueService.setAssignedDoctor(member.id, this.doctorID)
-                     .subscribe(()=> this.flip());
+
+
+  /**works for both normal and Guest patients
+  * for normal patient ==> input: whole person object (PATCH REQUEST)
+  * for guest patient  ==> input: just name of the guest (bcos, new guest will be created everytime) (POST REQUEST)
+  */
+  assignDoctor(patient){
+    this.queueService.setAssignedDoctor(patient,this.token, this.doctorID)
+                     .subscribe(()=> this.incrementToken());
   }
-  resetAssignedDoctor(member){
-    this.queueService.setAssignedDoctor(member.id,null)
+
+  resetAssignedDoctor(patient){
+    this.queueService.resetAssignedDoctor(patient)
                     .subscribe(()=> this.toggleShowQueue());
   }
 

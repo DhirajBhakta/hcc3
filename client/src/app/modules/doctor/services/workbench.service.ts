@@ -47,7 +47,7 @@ export class WorkbenchService {
   }
 
   getQueue(doctor_id){
-    return Observable.interval(1000)
+    return Observable.interval(5000)
     .switchMap(()=> this.http.get(prepareURL(environment.server_base_url,'doctors',doctor_id)))
     .map((data)=>data.json().patients_queue);
   }

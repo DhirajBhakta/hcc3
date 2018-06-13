@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, get_user_model
 
 from .models.doctor import Doctor
 from .models.drug import Drug, Batch
-from .models.person import Person
+from .models.person import Person, Guest
 from .models.trivial import Course, Department
 from .models.prescription import Prescription, PrescribedDrug
 from .models.pharma import PharmaRecord, DispensedDrug
@@ -77,13 +77,19 @@ class DependantSerializer(PatronSerializer):
 class PersonSerializer(DependantSerializer):
     dependants = DependantSerializer(many=True)
 
+class GuestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Guest
+        fields = '__all__'
+
 
 class DoctorSerializer(serializers.ModelSerializer):
     person = PersonSerializer()
     patients_queue = PersonSerializer(many=True)
+    guest_patients_queue = GuestSerializer(many=True)
     class Meta:
         model = Doctor
-        fields = ('id','specialization', 'person','patients_queue')
+        fields = '__all__'
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
@@ -177,7 +183,7 @@ class LoggedUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = LoggedUser
         fields = '__all__'
-# 
+#
 # class DPMSerializer(serializers.ModelSerializer):
 #
 #     patient_id = serializers.PrimaryKeyRelatedField(source='patient', queryset=Person.objects.all(), write_only=True)

@@ -21,7 +21,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatRadioModule} from '@angular/material/radio';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 
@@ -51,7 +53,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatTabsModule,
     MatAutocompleteModule,
     MatRadioModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatChipsModule,
+    MatSlideToggleModule
   ],
 })
 export class SharedModule { }

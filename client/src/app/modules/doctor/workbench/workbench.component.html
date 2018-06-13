@@ -1,23 +1,24 @@
+<p class='title'>Dr. {{person.name}}'s Workbench</p>
 <div fxLayout fxLayoutAlign="space-between">
-  <div fxLayout='column'>
+  <div fxFlex='30%' fxLayout='column'>
     <h1 style='text-align:center'>Workbench</h1>
-    <div *ngIf="patientSet">
+    <div *ngIf="isCurrentPatientSet()">
       <button mat-raised-button color='primary' (click)="displayLabRequestForm();">Request Lab Test</button>
       <lab-request [hidden]="!labRequestFormDisplayed"></lab-request>
     </div>
   </div>
 
 
-  <div *ngIf="patientSet" fxLayout fxLayoutAlign='column' fxLayoutGap="10px">
-    <app-profile-card fxFlex='50%' [bundle]="patient_details" brief='true'></app-profile-card>
-    <mat-card fxFlex class="pres-table-container">
-      <app-diagnosis></app-diagnosis>
-    </mat-card>
+  <div *ngIf="isCurrentPatientSet()" fxLayout fxLayoutAlign='column' fxLayoutGap="10px">
+
   </div>
 
-  <div fxFlex="20%" fxLayout='column'>
+  <div fxFlex="30%" fxLayout='column'>
     <h2 class='queue-heading'>Waiting Room : <span style='color:white'>{{patient_queue.length}}</span></h2>
-    <button mat-raised-button class='queue-card' *ngFor='let patient of patient_queue' (click)="setPatient(patient)">
+    <button mat-raised-button class='queue-card'
+           *ngFor='let patient of patient_queue'
+            [ngClass]="{'selected-queue-card':patient.id==currentPatient?.id}"
+           (click)="setPatient(patient)">
       <b>{{patient.name}}</b><br/>
       ({{patient.patient_type}})
     </button>

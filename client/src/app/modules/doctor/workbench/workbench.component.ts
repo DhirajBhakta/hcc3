@@ -9,25 +9,36 @@ import { WorkbenchService } from '../services/workbench.service';
   styleUrls: ['./workbench.component.css']
 })
 export class WorkbenchComponent implements OnInit {
-
+  /**
+  *"person" here ,is doctor himself (currently loggedIN person)
+  */
+  person:any;
   patient_queue: any[] = [];
-  patientSet:boolean = false;
-  patient;
-  doctorID:number;
+  currentPatient:any = null;
+
   labRequestFormDisplayed:boolean = false;
 
   constructor(private userService: UserService, private workbenchService:WorkbenchService) {
-    this.doctorID = this.userService.getCurrentPerson().doctor;
-    console.log('DOCC:',this.doctorID);
+    this.person = this.userService.getCurrentPerson();
+
   }
 
+  /**
+  *the doctor attribute of the person is doctorID (oneToOneField mapping from person to doctor)
+  */
   ngOnInit() {
-    this.workbenchService.getQueue(this.doctorID).subscribe((queue)=> this.patient_queue = queue);
+    let doctorID = this.person.doctor;
+    this.workbenchService.getQueue(doctorID).subscribe((queue)=> {
+      if(this.patient_queue.length != queue.length)
+      this.patient_queue = queue;
+    });
   }
 
   setPatient(person) {
-    this.patient = person;
-    this.patientSet = true;
+    this.currentPatient = person;
+  }
+  isCurrentPatientSet():boolean{
+    return !(this.currentPatient==null);
   }
 
   displayLabRequestForm(){

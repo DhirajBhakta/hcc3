@@ -14,6 +14,7 @@ from .serializers import (
     CourseSerializer,
     DepartmentSerializer,
     PersonSerializer,
+    GuestSerializer,
     DoctorSerializer,
     DrugSerializer,
     BatchSerializer,
@@ -24,7 +25,7 @@ from .serializers import (
     )
 from .models.doctor import Doctor
 from .models.drug import Drug, Batch
-from .models.person import Person
+from .models.person import Person, Guest
 from .models.trivial import Department, Course
 from .models.prescription import Prescription
 from .models.pharma import PharmaRecord, DispensedDrug
@@ -54,6 +55,10 @@ class PersonViewSet(viewsets.ModelViewSet):
 
     def perform_update(self, serializer):
         serializer.save()
+
+class GuestViewSet(viewsets.ModelViewSet):
+    queryset = Guest.objects.all()
+    serializer_class = GuestSerializer
 
 class DoctorViewSet(viewsets.ModelViewSet):
     queryset = Doctor.objects.all()
