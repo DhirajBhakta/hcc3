@@ -51,9 +51,9 @@ class Appointment(models.Model):
     spec = models.ForeignKey(AppointmentSpec, on_delete=models.SET_NULL, null=True)
     doctor = models.ForeignKey(Doctor, null=False, on_delete=models.CASCADE)
 
-    date = models.DateField(null=False)
-    start_time = models.TimeField(null=False)
-    end_time = models.TimeField(null=False)
+    date = models.DateTimeField(null=False)
+    start_time = models.DateTimeField(null=False)
+    end_time = models.DateTimeField(null=False)
 
 class Slot(models.Model):
     '''

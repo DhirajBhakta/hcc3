@@ -1,4 +1,17 @@
-.errors {
-  background-color: #ff000044;
+.message {
   padding: 10px 20px;
+}
+.errors h4{
+  color: #e51d23;
+  vertical-align: bottom;
+}
+.errors mat-icon {
+  color: #e51d23;
+  vertical-align: bottom;
+}
+.success {
+  vertical-align: bottom;
+}
+.success mat-icon {
+  color: #1dcb48;
 }

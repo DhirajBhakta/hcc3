@@ -10,6 +10,7 @@ import { AppointmentGenerator } from './appointment-generator';
 export class GenerateComponent implements OnInit {
 
   errors;
+  success;
   doctors$;
   doctorSpecMap;
   start_date;
@@ -47,8 +48,11 @@ export class GenerateComponent implements OnInit {
     }
     const appointments = AppointmentGenerator.generate_appointments(specList, this.start_date, this.end_date);
     this.aptService.createAppointments(appointments)
-                   .subscribe(response => console.log(response),
-                              err => this.errors.push(err));
+                   .subscribe(response => {
+                     this.success = response.length + 'Appointments have been successfully created';
+                     console.log(response);
+                   } ,
+                   err => this.errors.push(err));
 
     console.log(appointments);
   }
