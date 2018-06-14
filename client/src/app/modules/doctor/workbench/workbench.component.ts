@@ -37,6 +37,7 @@ export class WorkbenchComponent implements OnInit {
   setPatient(person) {
     this.currentPatient = person;
   }
+
   isCurrentPatientSet():boolean{
     return !(this.currentPatient==null);
   }

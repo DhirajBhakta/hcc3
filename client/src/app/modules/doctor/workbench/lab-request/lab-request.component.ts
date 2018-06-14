@@ -46,5 +46,8 @@ export class LabRequestComponent implements OnInit {
 
   ngOnInit() {
   }
+  onSubmit(){
+    
+  }
 
 }

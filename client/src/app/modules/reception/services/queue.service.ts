@@ -26,8 +26,7 @@ export class QueueService {
       .switchMap(() => this.http.get(prepareURL(environment.server_base_url, 'doctors', doctor_id)))
       .map((data) => data.json())
       .map((data) => {
-        data.patients_queue.map(patient => patient['isGuest'] = false);
-        data.guest_patients_queue.map(patient => patient['isGuest'] = true);
+        data.guest_patients_queue.map(patient => patient['patient_type'] = 'guest');
         return data.patients_queue.concat(data.guest_patients_queue).sort(patient => patient.assigned_token);
       });
   }
@@ -48,7 +47,7 @@ export class QueueService {
   }
 
   resetAssignedDoctor(patient) {
-    if (patient.isGuest)
+    if (patient.patient_type == 'guest')
       return this.http.delete(prepareURL(environment.server_base_url, 'guests', patient.id));
     return this.http.patch(prepareURL(environment.server_base_url, 'persons', patient.id),
       {

@@ -23,38 +23,16 @@ export class WorkbenchService {
   setPatientID(id){
     this.patientID = id;
   }
-
-  getDpmID() {
-    return this.dpmID;
+  
+  getQueue(doctor_id) {
+    return Observable.interval(1000)
+      .switchMap(() => this.http.get(prepareURL(environment.server_base_url, 'doctors', doctor_id)))
+      .map((data) => data.json())
+      .map((data) => {
+        data.guest_patients_queue.map(patient => patient['patient_type'] = 'guest');
+        return data.patients_queue.concat(data.guest_patients_queue).sort(patient => patient.assigned_token);
+      });
   }
 
-  setDpmID(dpmID) {
-    this.dpmID = dpmID;
-  }
-
-  getDrugNames() {
-    /*For autocomplete*/
-    const params = new URLSearchParams();
-    params.set('fields', JSON.stringify(['id', 'trade_name']));
-    return this.http.get(prepareURL(environment.server_base_url, 'drugs'), { params });
-  }
-
-  submitPrescription(prescription){
-    const headers = new Headers();
-    headers.append('content-type', 'application/json');
-    const options = new RequestOptions({ headers: headers });
-    return this.http.post(prepareURL(environment.server_base_url, 'prescriptions'), prescription, options);
-  }
-
-  getQueue(doctor_id){
-    return Observable.interval(5000)
-    .switchMap(()=> this.http.get(prepareURL(environment.server_base_url,'doctors',doctor_id)))
-    .map((data)=>data.json().patients_queue);
-  }
-
-
-  updateDPM() {
-    return this.http.delete(prepareURL(environment.server_base_url, 'doctorpatientmap', '' + this.dpmID));
-  }
 
 }

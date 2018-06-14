@@ -1,7 +1,6 @@
 <p class='title'>Dr. {{person.name}}'s Workbench</p>
 <div fxLayout fxLayoutAlign="space-between">
   <div fxFlex='30%' fxLayout='column'>
-    <h1 style='text-align:center'>Workbench</h1>
     <div *ngIf="isCurrentPatientSet()">
       <button mat-raised-button color='primary' (click)="displayLabRequestForm();">Request Lab Test</button>
       <lab-request [hidden]="!labRequestFormDisplayed"></lab-request>
@@ -13,7 +12,7 @@
 
   </div>
 
-  <div fxFlex="30%" fxLayout='column'>
+  <div fxFlex="20%" fxLayout='column'>
     <h2 class='queue-heading'>Waiting Room : <span style='color:white'>{{patient_queue.length}}</span></h2>
     <button mat-raised-button class='queue-card'
            *ngFor='let patient of patient_queue'
