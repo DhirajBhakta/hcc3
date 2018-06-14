@@ -61,15 +61,10 @@ class Person(models.Model):
     retired = models.NullBooleanField(default=False, null=True)
     designation = models.CharField(max_length=255, null=True, blank=True)
     patron = models.ForeignKey("self",on_delete=models.CASCADE, null=True, blank=True, related_name='dependants')
-    #if the person is a DOctor, then the following attribute will be not null`
-    doctor = models.OneToOneField('Doctor',on_delete=models.CASCADE, null=True, blank=True, related_name='person')
-    assigned_doctor = models.ForeignKey('Doctor',on_delete=models.SET_NULL, null=True, blank=True, related_name='patients_queue')
-    assigned_token = models.IntegerField(null=True, blank=True)
+
 
     def __str__(self):
         return self.name +": "+self.patient_type
 
 class Guest( models.Model):
     name = models.CharField(max_length=255)
-    assigned_doctor = models.ForeignKey('Doctor',on_delete=models.SET_NULL, null=True, blank=True, related_name='guest_patients_queue')
-    assigned_token = models.IntegerField(null=True, blank=True )

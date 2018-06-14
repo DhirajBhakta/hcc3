@@ -3,6 +3,7 @@ import { Prescription } from '../../../models/prescription.model';
 import {UserService} from 'app/services/user.service';
 import { WorkbenchService } from '../services/workbench.service';
 
+
 @Component({
   selector: 'app-workbench',
   templateUrl: './workbench.component.html',
@@ -15,11 +16,17 @@ export class WorkbenchComponent implements OnInit {
   person:any;
   patient_queue: any[] = [];
   currentPatient:any = null;
+  indication:string = "";
+  displayState:string = "HISTORY";
+  bundle={
+    'specialization':'General',
+    'doctorName':'Dr.Bhandary',
+    'date':'11/15/1995',
+    'indication':'fever'  
+  }
 
-  labRequestFormDisplayed:boolean = false;
 
   constructor(private userService: UserService, private workbenchService:WorkbenchService) {
-    this.person = this.userService.getCurrentPerson();
 
   }
 
@@ -27,6 +34,7 @@ export class WorkbenchComponent implements OnInit {
   *the doctor attribute of the person is doctorID (oneToOneField mapping from person to doctor)
   */
   ngOnInit() {
+    this.person = this.userService.getCurrentPerson();
     let doctorID = this.person.doctor;
     this.workbenchService.getQueue(doctorID).subscribe((queue)=> {
       if(this.patient_queue.length != queue.length)
@@ -36,14 +44,15 @@ export class WorkbenchComponent implements OnInit {
 
   setPatient(person) {
     this.currentPatient = person;
+    this.displayState = "HISTORY";
   }
 
   isCurrentPatientSet():boolean{
     return !(this.currentPatient==null);
   }
 
-  displayLabRequestForm(){
-    this.labRequestFormDisplayed = !this.labRequestFormDisplayed;
+  setDisplayState(event){
+    this.displayState = event.value;
   }
 
 

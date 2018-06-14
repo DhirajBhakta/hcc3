@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, get_user_model
 
 from .models.doctor import Doctor
 from .models.person import Person, Guest
+from .models.waiting_room import WaitingRoom
 from .models.trivial import Course, Department
 from .models.loggeduser import LoggedUser
 from .models.patient_history import PatientHistory
@@ -77,16 +78,27 @@ class DependantSerializer(PatronSerializer):
 class PersonSerializer(DependantSerializer):
     dependants = DependantSerializer(many=True)
 
+#for optimization
+class MinimalPersonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Person
+        fields = ('name','patient_type',)
+
 class GuestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Guest
         fields = '__all__'
 
+class WaitingRoomSerializer(serializers.ModelSerializer):
+    person = MinimalPersonSerializer()
+    guest = GuestSerializer()
+    class Meta:
+        model = WaitingRoom
+        fields = '__all__'
+
 
 class DoctorSerializer(serializers.ModelSerializer):
-    person = PersonSerializer()
-    patients_queue = PersonSerializer(many=True)
-    guest_patients_queue = GuestSerializer(many=True)
+    person = MinimalPersonSerializer()
     class Meta:
         model = Doctor
         fields = '__all__'
@@ -111,11 +123,14 @@ class LoggedUserSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class LabReportSerializer(serializers.ModelSerializer):
+    patient = MinimalPersonSerializer()
+    doctor = DoctorSerializer()    
     class Meta:
         model = LabReport
         fields = '__all__'
 
 class PatientHistorySerializer(serializers.ModelSerializer):
+    doctor = DoctorSerializer()
     class Meta:
         model = PatientHistory
         fields = '__all__'

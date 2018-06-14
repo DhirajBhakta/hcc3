@@ -15,6 +15,7 @@ from .serializers import (
     DepartmentSerializer,
     PersonSerializer,
     GuestSerializer,
+    WaitingRoomSerializer,
     DoctorSerializer,
     LoggedUserSerializer,
     LabReportSerializer,
@@ -22,6 +23,7 @@ from .serializers import (
     )
 from .models.doctor import Doctor
 from .models.person import Person, Guest
+from .models.waiting_room import WaitingRoom
 from .models.trivial import Department, Course
 from .models.loggeduser import LoggedUser
 from .models.patient_history import PatientHistory
@@ -56,9 +58,15 @@ class GuestViewSet(viewsets.ModelViewSet):
     queryset = Guest.objects.all()
     serializer_class = GuestSerializer
 
+class WaitingRoomViewSet(viewsets.ModelViewSet):
+    queryset = WaitingRoom.objects.all()
+    serializer_class = WaitingRoomSerializer
+    filter_fields = ('doctor',)
+
 class DoctorViewSet(viewsets.ModelViewSet):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
+    filter_fields = ('person__id',)
 
 class LoggedUserViewSet(viewsets.ModelViewSet):
     queryset = LoggedUser.objects.all()

@@ -5,6 +5,7 @@ from django.db import models
 #   So create the Patient before creating the doctor
 
 class Doctor(models.Model):
+    person = models.OneToOneField('Person',on_delete=models.CASCADE)
     specialization = models.CharField(max_length=64)
 
     def __str__(self):

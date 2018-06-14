@@ -12,10 +12,10 @@ p.title{
   border:1px solid #E9E9E9;
 }
 .selected-queue-card{
-  background-color: #039BE5;
+  background-color: #039BE580;
   color:white;
-  font-size: 17px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: lighter;
 }
 .queue-heading{
   background-color: #039BE5;
@@ -25,4 +25,12 @@ p.title{
   padding-bottom:10px;
   padding-right:5px;
   margin-bottom: 0;
+}
+
+.display-box{
+  height:400px;
+}
+
+.display-box > *{
+  height: 100%;
 }

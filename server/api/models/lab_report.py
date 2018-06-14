@@ -4,6 +4,7 @@ from django.db import models
 class LabReport(models.Model):
     patient = models.ForeignKey('Person', on_delete=models.CASCADE)
     doctor = models.ForeignKey('Doctor', on_delete=models.SET_NULL)
+    done = models.BooleanField(default=False)
     bloodGroup = models.CharField(max_length=255, null=True, blank=True)
     RH = models.CharField(max_length=255, null=True, blank=True)
     completeHemogram = models.CharField(max_length=255, null=True, blank=True)

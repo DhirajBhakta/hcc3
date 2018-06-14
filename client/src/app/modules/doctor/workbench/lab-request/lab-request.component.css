@@ -1,0 +1,19 @@
+.mat-checkbox{
+  font-size: 12px;
+}
+
+form{
+  height: 100%;
+}
+
+.container{
+  height:100%;
+  padding:15px;
+  background-color: #33a8f233;
+}
+
+
+.mat-tab-group{
+  height: 100%;
+  background-color: #c9e5f633;
+}

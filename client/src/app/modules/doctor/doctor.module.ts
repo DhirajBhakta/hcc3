@@ -13,6 +13,7 @@ import { WorkbenchService } from './services/workbench.service';
 import { HistoryService } from './services/history.service';
 import { AgGridModule } from 'ag-grid-angular';
 import { LabRequestComponent } from './workbench/lab-request/lab-request.component';
+import { HistoryCardComponent } from './history-card/history-card.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { LabRequestComponent } from './workbench/lab-request/lab-request.compone
     DoctorComponent,
     WorkbenchComponent,
     PatientInfoComponent,
-    LabRequestComponent
+    LabRequestComponent,
+    HistoryCardComponent
   ],
   exports: [
     DoctorComponent
