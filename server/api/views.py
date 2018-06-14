@@ -17,11 +17,15 @@ from .serializers import (
     GuestSerializer,
     DoctorSerializer,
     LoggedUserSerializer,
+    LabReportSerializer,
+    PatientHistorySerializer
     )
 from .models.doctor import Doctor
 from .models.person import Person, Guest
 from .models.trivial import Department, Course
 from .models.loggeduser import LoggedUser
+from .models.patient_history import PatientHistory
+from .models.lab_report import LabReport
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -59,3 +63,11 @@ class DoctorViewSet(viewsets.ModelViewSet):
 class LoggedUserViewSet(viewsets.ModelViewSet):
     queryset = LoggedUser.objects.all()
     serializer_class = LoggedUserSerializer
+
+class LabReportViewSet(viewsets.ModelViewSet):
+    queryset = LabReport.objects.all()
+    serializer_class = LabReportSerializer
+
+class PatientHistoryViewSet(viewsets.ModelViewSet):
+    queryset = PatientHistory.objects.all()
+    serializer_class = PatientHistorySerializer

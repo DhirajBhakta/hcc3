@@ -12,6 +12,8 @@ router.register(r'persons',views.PersonViewSet)
 router.register(r'guests',views.GuestViewSet)
 router.register(r'doctors',views.DoctorViewSet)
 router.register(r'loggedusers', views.LoggedUserViewSet)
+router.register(r'patienthistory',views.PatientHistoryViewSet)
+router.register(r'labreports',views.LabReportViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

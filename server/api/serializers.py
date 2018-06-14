@@ -7,6 +7,8 @@ from .models.doctor import Doctor
 from .models.person import Person, Guest
 from .models.trivial import Course, Department
 from .models.loggeduser import LoggedUser
+from .models.patient_history import PatientHistory
+from .models.lab_report import LabReport
 
 def invertDict(dictionary):
     return dict([(v,k) for k,v in dictionary.items()])
@@ -58,6 +60,7 @@ class DepartmentSerializer(serializers.ModelSerializer):
         model = Department
         fields = ('name',)
 
+
 class PatronSerializer(DynamicFieldsModelSerializer):
     department = DepartmentSerializer()
     course  = CourseSerializer()
@@ -102,9 +105,17 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class LoggedUserSerializer(serializers.ModelSerializer):
-
     user = UserSerializer(read_only=True)
-
     class Meta:
         model = LoggedUser
+        fields = '__all__'
+
+class LabReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LabReport
+        fields = '__all__'
+
+class PatientHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PatientHistory
         fields = '__all__'

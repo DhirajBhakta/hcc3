@@ -1,6 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
-from .person import *
 
 #
 #1. Every Doctor is also a patient and so are his kin
