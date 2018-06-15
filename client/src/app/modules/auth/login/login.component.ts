@@ -26,14 +26,13 @@ export class LoginComponent implements OnInit {
   onLogin() {
     if (this.username && this.password) {
       this.authService.login(this.username, this.password).subscribe(() => {
-        this.userService.getUser(this.username).subscribe((response) => {
-          const patron = response.json().person;
-          this.family = patron.dependants;
-          this.family.unshift(patron);
-        });
         if (!this.authService.is_multi_profile) {
-          this.navigateToHomePage();
+          this.userService.getUser(this.username).subscribe((user)=>this.setProfile(user.person));
         }
+        else{
+        this.userService.getFamily(this.username).subscribe((family) =>this.family = family);
+      }
+
         this.user_verified = true;
       }, (error: any) =>  { if (error.status === 400) { this.incorrectLogin = true; } } );
     }

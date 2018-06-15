@@ -168,6 +168,7 @@ export class AuthService {
    * @memberof AuthService
    */
   getRootURL() {
+    console.log('here',this.loggedInUser);
     switch (this.loggedInUser) {
       case(user_groups.PATIENT): return '/patient';
       case(user_groups.DOCTOR): return '/doctor';

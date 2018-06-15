@@ -60,7 +60,7 @@ export class ReceptionAuthGuard implements CanLoad {
   constructor(private authService: AuthService, private router: Router) { }
 
   canLoad() {
-    console.log('Trying to authorize Pharma');
+    console.log('Trying to authorize RECEPTIONIST');
     if (this.authService.isReceptionLoggedIn()) {
       return true;
     } else {

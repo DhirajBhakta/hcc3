@@ -1,4 +1,4 @@
-<p class='title'>Dr. {{person.name}}'s Workbench</p>
+<p class='title'>Dr.{{doctor.person.name}}'s Workbench</p>
 <div fxLayout fxLayoutAlign="space-between">
   <div fxFlex='30%' fxLayout='column' fxLayoutAlign="start stretch"  class='display-box'>
     <lab-request *ngIf="displayState=='LABREQUEST'"></lab-request>
@@ -10,7 +10,7 @@
 
 
   <div  fxFLex="40%" *ngIf="isCurrentPatientSet()" fxLayout='column' fxLayoutAlign='start' fxLayoutGap="10px">
-    <h2>Patient:  {{currentPatient.name}}</h2>
+    <h2>Patient:  {{_getPatientName(currentPatient)}}</h2>
     <mat-button-toggle-group (change)="setDisplayState($event);">
       <mat-button-toggle value="INFO" [checked]="displayState=='INFO'">Info</mat-button-toggle>
       <mat-button-toggle value="HISTORY" [checked]="displayState=='HISTORY'">History</mat-button-toggle>
@@ -25,10 +25,10 @@
   </div>
 
   <div fxFlex="20%" fxLayout='column'>
-    <h2 class='queue-heading'>Waiting Room : <span style='color:white'>{{patient_queue.length}}</span></h2>
-    <button mat-raised-button class='queue-card' *ngFor='let patient of patient_queue' [ngClass]="{'selected-queue-card':patient.id==currentPatient?.id}" (click)="setPatient(patient)">
-      <b>{{patient.name}}</b><br/>
-      ({{patient.patient_type}})
+    <h2 class='queue-heading'>Waiting Room : <span style='color:white'>{{patients_queue.length}}</span></h2>
+    <button mat-raised-button class='queue-card' *ngFor='let waiting_item of patients_queue' [ngClass]="{'selected-queue-card':waiting_item.id==currentPatient?.id}" (click)="setPatient(waiting_item)">
+      <span *ngIf='waiting_item.patient'><b>{{waiting_item.patient.name}}</b><br/>{{waiting_item.patient.patient_type}}</span>
+      <span *ngIf='waiting_item.guest' style='color:red'><b>{{waiting_item.guest.name}}</b><br/>(GUEST)</span>
     </button>
   </div>
 </div>

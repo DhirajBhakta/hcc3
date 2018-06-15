@@ -50,6 +50,7 @@ class DepartmentViewSet(viewsets.ModelViewSet):
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
+    filter_fields = ('patron',)
 
     def perform_update(self, serializer):
         serializer.save()

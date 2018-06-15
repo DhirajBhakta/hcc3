@@ -16,44 +16,52 @@ export class QueueService {
 
   constructor(private http: JWTHttpClient) { }
 
-  getSpecialization(doctor_id){
-    return this.http.get(prepareURL(environment.server_base_url,'doctors',doctor_id))
-              .map((data) => data.json())
-              .map(data => data.specialization);
+
+  getDoctor(person_id) {
+    //you get an ARRAY as response , bcos you applied a filter (person__id=person_id)
+    //hence get the first element[0].
+    return this.http.get(prepareURL(environment.server_base_url, 'doctors') + '?person__id=' + person_id)
+      .map((data) => data.json()[0]);
   }
+
   getQueue(doctor_id) {
-    return Observable.interval(1000)
-      .switchMap(() => this.http.get(prepareURL(environment.server_base_url, 'doctors', doctor_id)))
+    return Observable.interval(2000)
+      .switchMap(() => this.http.get(prepareURL(environment.server_base_url, 'waitingroom') + '?doctor=' + doctor_id))
       .map((data) => data.json())
-      .map((data) => {
-        data.guest_patients_queue.map(patient => patient['patient_type'] = 'guest');
-        return data.patients_queue.concat(data.guest_patients_queue).sort(patient => patient.assigned_token);
+      .map((data) => data.sort((item)=> item.token));
+  }
+
+  createGuest(name: string) {
+    return this.http.post(prepareURL(environment.server_base_url, 'guests'), { "name": name })
+      .map((response) => response.json())
+  }
+
+  enqueue(patient, token, doctorID) {
+    console.log('WHWHW', patient);
+    console.log('ARGS',doctorID);
+    if (typeof patient === 'string'){
+      console.log('im here');
+      return this.createGuest(patient)
+            .flatMap((newguest) =>
+                this.http.post(prepareURL(environment.server_base_url,'waitingroom'),
+                {
+                  "guest_id":newguest.id,
+                  "patient_id":null,
+                  "doctor":doctorID,
+                  "token":token,
+                }));
+              }
+    return this.http.post(prepareURL(environment.server_base_url, 'waitingroom'),
+      {
+        "guest_id":null,
+        "patient_id": patient.id,
+        "doctor":doctorID,
+        "token": token,
       });
   }
 
-  setAssignedDoctor(patient, tokenNumber, doctorID) {
-    if (typeof patient === 'string')
-      return this.http.post(prepareURL(environment.server_base_url, 'guests'),
-        {
-          "name": patient,
-          "assigned_doctor": doctorID,
-          "assigned_token": tokenNumber
-        });
-    return this.http.patch(prepareURL(environment.server_base_url, 'persons', patient.id),
-      {
-        "assigned_doctor": doctorID,
-        "assigned_token": tokenNumber
-      });
-  }
-
-  resetAssignedDoctor(patient) {
-    if (patient.patient_type == 'guest')
-      return this.http.delete(prepareURL(environment.server_base_url, 'guests', patient.id));
-    return this.http.patch(prepareURL(environment.server_base_url, 'persons', patient.id),
-      {
-        "assigned_doctor": null,
-        "assigned_token": null
-      });
+  dequeue(waiting_item) {
+    return this.http.delete(prepareURL(environment.server_base_url, 'waitingroom', waiting_item.id));
   }
 
 }

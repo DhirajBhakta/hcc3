@@ -20,7 +20,6 @@ export class AutoCompleteComponent implements OnInit {
   ngOnInit(){ }
 
   generateSuggestions() {
-    console.log('source', this.source);
     if (this.user_input != '')
       this.suggestions = this.source.filter(item => item[this.display_attr].toUpperCase().includes(this.user_input.toUpperCase()));
   }

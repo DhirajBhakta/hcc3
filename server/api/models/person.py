@@ -60,7 +60,7 @@ class Person(models.Model):
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
     retired = models.NullBooleanField(default=False, null=True)
     designation = models.CharField(max_length=255, null=True, blank=True)
-    patron = models.ForeignKey("self",on_delete=models.CASCADE, null=True, blank=True, related_name='dependants')
+    patron = models.ForeignKey("self",on_delete=models.CASCADE, null=True, blank=True)
 
 
     def __str__(self):

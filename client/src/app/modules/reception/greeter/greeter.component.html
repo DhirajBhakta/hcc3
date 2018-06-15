@@ -29,7 +29,7 @@
 
 <div fxFlex=50% class='left-list'>
 <h1>Available Doctors in Cabin</h1>
-  <status-card *ngFor='let loggedIndoctor of loggedInDoctors' [doctor]='loggedIndoctor'></status-card>
+  <status-card *ngFor='let personID of loggedInDoctorsPersonIDs' [doctor__Person_id]='personID'></status-card>
 </div>
 
 <div class='right-list'>

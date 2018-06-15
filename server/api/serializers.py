@@ -62,27 +62,22 @@ class DepartmentSerializer(serializers.ModelSerializer):
         fields = ('name',)
 
 
-class PatronSerializer(DynamicFieldsModelSerializer):
+class PersonSerializer(DynamicFieldsModelSerializer):
     department = DepartmentSerializer()
     course  = CourseSerializer()
     gender = KeyValueField(labels={'M':"Male",'F':"Female",'O':"Other"})
-    patient_type = KeyValueField(labels={'S':'Student', 'E':'Employee','D':'Dependant'})
+    patient_type = KeyValueField(labels={'S':'STUDENT', 'E':'EMPLOYEE','D':'DEPENDANT'})
 
     class Meta:
         model = Person
         fields = '__all__'
 
-class DependantSerializer(PatronSerializer):
-    patron = PatronSerializer()
-
-class PersonSerializer(DependantSerializer):
-    dependants = DependantSerializer(many=True)
-
 #for optimization
 class MinimalPersonSerializer(serializers.ModelSerializer):
+    patient_type = KeyValueField(labels={'S':'STUDENT', 'E':'EMPLOYEE','D':'DEPENDANT'})
     class Meta:
         model = Person
-        fields = ('name','patient_type',)
+        fields = ('id','name','patient_type',)
 
 class GuestSerializer(serializers.ModelSerializer):
     class Meta:
@@ -90,8 +85,10 @@ class GuestSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class WaitingRoomSerializer(serializers.ModelSerializer):
-    person = MinimalPersonSerializer()
-    guest = GuestSerializer()
+    patient = MinimalPersonSerializer(read_only=True)
+    patient_id = serializers.PrimaryKeyRelatedField(write_only=True,allow_null=True, source='patient', queryset=Person.objects.all(),)
+    guest = GuestSerializer(read_only=True)
+    guest_id = serializers.PrimaryKeyRelatedField(write_only=True,allow_null=True, source='guest', queryset=Guest.objects.all(),)
     class Meta:
         model = WaitingRoom
         fields = '__all__'
@@ -109,11 +106,11 @@ class GroupSerializer(serializers.ModelSerializer):
         fields = ('name',)
 
 class UserSerializer(serializers.ModelSerializer):
-    person = PersonSerializer()
+    person = MinimalPersonSerializer()
     groups = GroupSerializer(many=True)
     class Meta:
         model = User
-        fields = ('username', 'email', 'groups','password', 'person')
+        fields = ('username', 'groups', 'person')
 
 
 class LoggedUserSerializer(serializers.ModelSerializer):
@@ -124,7 +121,7 @@ class LoggedUserSerializer(serializers.ModelSerializer):
 
 class LabReportSerializer(serializers.ModelSerializer):
     patient = MinimalPersonSerializer()
-    doctor = DoctorSerializer()    
+    doctor = DoctorSerializer()
     class Meta:
         model = LabReport
         fields = '__all__'

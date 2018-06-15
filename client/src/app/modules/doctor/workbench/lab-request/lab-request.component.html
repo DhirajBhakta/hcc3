@@ -47,10 +47,11 @@
           <mat-checkbox ngModel name="bilePigments">Bile Pigments</mat-checkbox>
           <mat-checkbox ngModel name="microscopy">Microscopy</mat-checkbox>
           <mat-checkbox ngModel name="ova">Ova</mat-checkbox>
-          <mat-checkbox ngModel name="cyst">Cyst</mat-checkbox>
+          <mat-checkbox ngModel name="cyst" [checked]="true">Cyst</mat-checkbox>
         </div>
+        {{form.value|json}}
       </mat-tab>
     </mat-tab-group>
-    <button mat-raised-button color='warn'>Submit</button>
+    <button mat-raised-button color='warn' [disabled]="form.pristine">Submit</button>
   </div>
 </form>

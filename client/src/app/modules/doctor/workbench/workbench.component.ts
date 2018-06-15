@@ -10,11 +10,9 @@ import { WorkbenchService } from '../services/workbench.service';
   styleUrls: ['./workbench.component.css']
 })
 export class WorkbenchComponent implements OnInit {
-  /**
-  *"person" here ,is doctor himself (currently loggedIN person)
-  */
-  person:any;
-  patient_queue: any[] = [];
+
+  doctor: any;
+  patients_queue: any[] = [];
   currentPatient:any = null;
   indication:string = "";
   displayState:string = "HISTORY";
@@ -22,7 +20,7 @@ export class WorkbenchComponent implements OnInit {
     'specialization':'General',
     'doctorName':'Dr.Bhandary',
     'date':'11/15/1995',
-    'indication':'fever'  
+    'indication':'fever'
   }
 
 
@@ -30,20 +28,22 @@ export class WorkbenchComponent implements OnInit {
 
   }
 
-  /**
-  *the doctor attribute of the person is doctorID (oneToOneField mapping from person to doctor)
-  */
   ngOnInit() {
-    this.person = this.userService.getCurrentPerson();
-    let doctorID = this.person.doctor;
-    this.workbenchService.getQueue(doctorID).subscribe((queue)=> {
-      if(this.patient_queue.length != queue.length)
-      this.patient_queue = queue;
+    let person = this.userService.getCurrentPerson();
+    console.log('DOC',person);
+    this.workbenchService.getDoctor(person.id)
+      .flatMap((doctor) => {
+        this.doctor = doctor;
+        return this.workbenchService.getQueue(doctor.id);
+      })
+      .subscribe((queue) =>
+      if(this.patients_queue.length != queue.length){
+        this.patients_queue= queue.sort((item=>item.token))
     });
   }
 
-  setPatient(person) {
-    this.currentPatient = person;
+  setPatient(waiting_item) {
+    this.currentPatient = waiting_item;
     this.displayState = "HISTORY";
   }
 
@@ -53,6 +53,12 @@ export class WorkbenchComponent implements OnInit {
 
   setDisplayState(event){
     this.displayState = event.value;
+  }
+
+  _getPatientName(item){
+    if(item.patient)
+      return item.patient.name;
+    return item.guest.name;
   }
 
 
