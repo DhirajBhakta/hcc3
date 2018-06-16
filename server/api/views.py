@@ -195,7 +195,7 @@ class SlotViewSet(CreateListMixin, viewsets.ModelViewSet):
     queryset = Slot.objects.all()
     serializer_class = SlotSerializer
     filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('appointment')
+    filter_fields = ('appointment',)
  
 # class DPMViewSet(viewsets.ModelViewSet):
 #     queryset = DoctorPatientMap.objects.all()

@@ -1,0 +1,26 @@
+<div fxLayout="column" fxFill>
+<app-show-errors [success]="success"></app-show-errors>
+<ng-container *ngFor="let doctor of doctors$ | async">
+  <mat-expansion-panel *ngIf="doctor.person && doctor.specialization" fxFill>
+    <mat-expansion-panel-header>
+      <div fxLayout="row" fxLayoutAlign="space-between" fxFlex style="margin-right:10px">
+        <p>{{doctor.person.name}}</p>
+        <p class="small-grey-text">{{doctor.specialization}}</p>
+      </div>
+    </mat-expansion-panel-header>
+    <div *ngIf="doctorApptMap[doctor.id] != null && doctorApptMap[doctor.id].length !== 0">
+      <div *ngFor="let month of objectKeys(doctorApptMap[doctor.id]);let i=index">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+          <p class="small-grey-text">{{month}}</p>
+          </mat-expansion-panel-header>
+            <app-appointment-item *ngFor="let appt of doctorApptMap[doctor.id][month]"
+                                  [appt]="appt"
+                                  (deletedAppointment)="handleDeletedAppointment()"></app-appointment-item>
+        </mat-expansion-panel>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</ng-container>
+
+</div>

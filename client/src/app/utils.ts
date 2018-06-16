@@ -11,8 +11,8 @@ export function prepareURL(...args){
 }
 
 export function addParams(params) {
-  return Object.keys(params).map(function(key){
-    return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
+  return '?' + Object.keys(params).map(function(key){
+    return key + '=' + params[key];
   }).join('&');
 }
 

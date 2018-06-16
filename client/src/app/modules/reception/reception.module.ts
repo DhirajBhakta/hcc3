@@ -15,6 +15,10 @@ import { SpecFormComponent } from './time-table/spec-form/spec-form.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { GenerateComponent } from './appointments/generate/generate.component';
 import { CreateAppointmentComponent } from './appointments/create-appointment/create-appointment.component';
+import { ViewAppointmentsComponent } from './appointments/view-appointments/view-appointments.component';
+import { AppointmentItemComponent } from './appointments/appointment-item/appointment-item.component';
+import { CreateSlotComponent } from './appointments/appointment-item/create-slot/create-slot.component';
+import { SlotItemComponent } from './appointments/appointment-item/slot-item/slot-item.component';
 
 @NgModule({
   imports: [
@@ -30,7 +34,11 @@ import { CreateAppointmentComponent } from './appointments/create-appointment/cr
                  SpecFormComponent,
                  AppointmentsComponent,
                  GenerateComponent,
-                 CreateAppointmentComponent],
+                 CreateAppointmentComponent,
+                 ViewAppointmentsComponent,
+                 AppointmentItemComponent,
+                 CreateSlotComponent,
+                 SlotItemComponent],
   exports: [
     ReceptionComponent
   ],

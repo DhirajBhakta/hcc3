@@ -26,6 +26,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 
@@ -62,6 +63,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     MatSidenavModule,
+    MatSlideToggleModule,
 
 
   ],

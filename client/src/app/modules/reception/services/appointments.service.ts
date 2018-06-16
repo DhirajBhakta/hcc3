@@ -59,10 +59,6 @@ export class AppointmentsService {
     return this.http.post(prepareURL(environment.server_base_url, 'appointments'), apps, this.options)
                     .map(data => data.json());
   }
-  // createAppointment(app: Appointment) {
-  //   return this.http.post(prepareURL(environment.server_base_url, 'appointments'), app, this.options)
-  //                   .map(data => data.json());
-  // }
   updateAppointment(app: Appointment) {
     return this.http.put(prepareURL(environment.server_base_url, 'appointments', app.id), app)
                     .map(data => data.json());
@@ -79,5 +75,24 @@ export class AppointmentsService {
     return this.http.get(prepareURL(environment.server_base_url, 'appointments') + addParams(params))
                     .map(data => data.json());
 
+  }
+
+  // CRUD Endpoints for Slots
+  //
+  getSlotsWithParams(params: Object) {
+    return this.http.get(prepareURL(environment.server_base_url, 'slots') + addParams(params))
+                    .map(data => data.json());
+  }
+  updateSlot(slot) {
+    return this.http.put(prepareURL(environment.server_base_url, 'slots', slot.id), slot)
+                    .map(data => data.json());
+  }
+  createSlot(slot) {
+    return this.http.post(prepareURL(environment.server_base_url, 'slots'), slot)
+                    .map(data => data.json());
+  }
+  deleteSlot(slot_id) {
+    return this.http.delete(prepareURL(environment.server_base_url, 'slots', slot_id))
+                    .map(data => data.json());
   }
 }
