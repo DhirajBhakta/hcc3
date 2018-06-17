@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppointmentsComponent implements OnInit {
 
+  view = 1;
+
   constructor() { }
 
   ngOnInit() {

@@ -3,13 +3,25 @@
   <div fxLayout="column" fxFlex="20%" class="def-shadow main-container sidenav">
     <mat-nav-list>
       <h3 matSubheader>Appointments</h3>
-      <mat-list-item>Create an Appointment Date</mat-list-item>
-      <mat-list-item>View and Edit Appointment Dates</mat-list-item>
-      <mat-list-item>Appointment Dates Generator</mat-list-item>
+      <mat-list-item (click)="view=0">Book an appointment</mat-list-item>
+      <mat-list-item (click)="view=1">Create an Appointment Date</mat-list-item>
+      <mat-list-item (click)="view=2">View and Edit Appointment Dates</mat-list-item>
+      <mat-list-item (click)="view=3">Appointment Dates Generator</mat-list-item>
     </mat-nav-list>
   </div>
 
   <div fxLayout="row" class="def-shadow main-container" fxLayoutAlign="center center" fxFlex>
+    <ng-container *ngIf="view===0">
+      <app-book-appointment></app-book-appointment>
+    </ng-container>
+    <ng-container *ngIf="view===1">
+    <app-create-appointment></app-create-appointment>
+    </ng-container>
+    <ng-container *ngIf="view===2">
     <app-view-appointments></app-view-appointments>
+    </ng-container>
+    <ng-container *ngIf="view===3">
+    <app-generate></app-generate>
+    </ng-container>
   </div>
 </div>

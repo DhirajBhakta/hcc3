@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentsService } from '../../services/appointments.service';
 import { Appointment } from '../../models/appointment.model';
+import { copy_time } from '../../../../utils';
+
+declare var require: any;
+
+const moment = require('moment');
 
 @Component({
   selector: 'app-create-appointment',
@@ -24,6 +29,13 @@ export class CreateAppointmentComponent implements OnInit {
 
   createAppointment() {
     if (!this.validateInput()) { return; }
+    console.log(this.date, this.start_time, this.end_time);
+    this.start_time =  new Date(copy_time(moment, this.start_time, moment(this.date)));
+    this.end_time =  new Date(copy_time(moment, this.end_time, moment(this.date)));
+
+    this.date = this.date;
+
+    console.log(this.date, this.start_time, this.end_time);
     const appt = new Appointment(this.selectedDoctor,
                                  this.date, this.start_time,
                                  this.end_time);

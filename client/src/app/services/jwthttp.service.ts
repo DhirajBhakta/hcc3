@@ -53,7 +53,7 @@ export class JWTHttpClient extends Http {
     }
     else
       options.headers.set('Authorization', `JWT ${token}`);
-   return super.post(url, body));
+   return super.post(url, body);
   }
 
   put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
