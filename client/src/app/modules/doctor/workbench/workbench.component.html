@@ -1,7 +1,7 @@
 <p class='title'>Dr.{{doctor.person.name}}'s Workbench</p>
 <div fxLayout fxLayoutAlign="space-between">
   <div fxFlex='30%' fxLayout='column' fxLayoutAlign="start stretch"  class='display-box'>
-    <lab-request *ngIf="displayState=='LABREQUEST'"></lab-request>
+    <lab-request *ngIf="displayState=='LABREQUEST'" [onSubmit]="submitLabRequest"></lab-request>
     <patient-history-card fxFLex [bundle]="bundle"></patient-history-card>
     <patient-history-card fxFlex [bundle]="bundle"></patient-history-card>
     <patient-history-card fxFlex [bundle]="bundle"></patient-history-card>
@@ -11,7 +11,7 @@
 
   <div  fxFLex="40%" *ngIf="isCurrentPatientSet()" fxLayout='column' fxLayoutAlign='start' fxLayoutGap="10px">
     <h2>Patient:  {{_getPatientName(currentPatient)}}</h2>
-    <mat-button-toggle-group (change)="setDisplayState($event);">
+    <mat-button-toggle-group *ngIf="!currentPatient.guest" (change)="setDisplayState($event);">
       <mat-button-toggle value="INFO" [checked]="displayState=='INFO'">Info</mat-button-toggle>
       <mat-button-toggle value="HISTORY" [checked]="displayState=='HISTORY'">History</mat-button-toggle>
       <mat-button-toggle value="LABREQUEST" [checked]="displayState=='LABREQUEST'">Request Lab Test</mat-button-toggle>
@@ -19,7 +19,6 @@
     <mat-form-field fxFlex>
       <input matInput placeholder="Enter Indication"  [(ngModel)]="indication">
     </mat-form-field>
-    {{displayState|json}}
     <span fxFLex="30%"></span>
     <button fxFLex mat-raised-button color='warn'>Submit</button>
   </div>

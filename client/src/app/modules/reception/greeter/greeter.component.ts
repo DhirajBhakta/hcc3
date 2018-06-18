@@ -13,8 +13,7 @@ export class GreeterComponent implements OnInit {
   constructor(private userService: UserService, private _alerts: AlertsService) {
     this.userService.getAllLoggedInUsers().subscribe((data) =>
         this.loggedInDoctorsPersonIDs = data.filter((item)=>item.user.groups[0].name=="DOCTOR")
-                                   .map((item)=> item.user.person.id);
-      );
+                                   .map((item)=> item.user.person.id));
   }
   ngOnInit() {
   }

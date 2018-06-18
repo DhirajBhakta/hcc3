@@ -28,11 +28,11 @@ export class StatusCardComponent implements OnInit {
         this.doctor = doctor;
         return this.queueService.getQueue(doctor.id);
       })
-      .subscribe((queue) =>
+      .subscribe((queue) =>{
       if(this.patients_queue.length != queue.length){
         this.patients_queue = queue.sort((item=>item.token));
         this.token = (queue.length!=0 ? queue[queue.length-1].token: 0) + 1;
-    });
+    }});
   }
 
   flip() {
