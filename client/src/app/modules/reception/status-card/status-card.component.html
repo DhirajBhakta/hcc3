@@ -2,11 +2,12 @@
   <div fxLayout>
     <div fxFlex="90%" fxLayout fxLayout.xs='column' fxLayout.sm='column'>
       <div fxLayout='column' fxFlex='70%'>
-        <span class='subtitle'>Dentistry</span>
-        <span class='title'>{{doctor.user.person.name}}</span>
+        <span class='subtitle'>{{doctor.specialization}}</span>
+        <span class='title'>Dr.{{doctor.person.name}}</span>
       </div>
-      <button mat-button fxLayout='column' fxFlex='10%' class='counter'>
-        {{count}}
+
+      <button mat-button fxLayout='column' fxFlex='10%' class='counter' (click)="toggleShowQueue();">
+        {{patients_queue.length}}
       </button >
     </div>
     <div fxFlex fxLayout='column' fxLayoutGap='5px' fxLayoutAlign='center center'>
@@ -15,12 +16,29 @@
   </div>
 </mat-card>
 
+
 <mat-card class='incrementor-card' *ngIf="flipped" [ngClass]="{'animated':flipped, 'flipInX':flipped}">
-  <mat-form-field>
-    <input matInput placeholder="Enter ID">
-  </mat-form-field>
-  <div fxFlex fxLayout fxLayoutGap='5px' fxLayoutAlign='center center'>
-    <button mat-raised-button color='primary' (click)="incrementCount();flip();">Add to Queue</button>
-    <button mat-raised-button color='warn' (click)="flip();">Cancel</button>
+  <div fxLayout fxLayoutAlign='start end'>
+    <div *ngIf="family?.length == 0">
+      <mat-form-field>
+        <input matInput placeholder="Enter ID/Guest Name" [(ngModel)]='username'>
+      </mat-form-field>
+      <button mat-raised-button color='primary' (click)="submitGuestNameOrID();">Ok</button>
+    </div>
+    <div fxFlex fxLayout='column'>
+      <button mat-raised-button class='member' *ngFor='let member of family' (click)="addToWaitingQueue(member);">{{member.name}}</button>
+    </div>
+    <button mat-raised-button color='warn' (click)="resetDefaults();flip();">Cancel</button>
+    <mat-slide-toggle [disabled]="family?.length != 0" [checked]="GUEST_MODE" (change)="GUEST_MODE=!GUEST_MODE">Guest</mat-slide-toggle>
   </div>
 </mat-card>
+
+<div *ngIf='showqueue' class='animated queue zoomIn' fxLayout='column' fxLayoutAlign='center '>
+  <table fxFlex style='width:100%'>
+    <tr *ngFor='let waiting_item of patients_queue'>
+      <td *ngIf='waiting_item.patient'>{{waiting_item.patient.name}}</td>
+      <td *ngIf='waiting_item.guest' style='color:red'>{{waiting_item.guest.name}}</td>
+      <td><button mat-raised-button color='warn' (click)="removeFromWaitingQueue(waiting_item);">Remove</button></td>
+    </tr>
+  </table>
+<div>

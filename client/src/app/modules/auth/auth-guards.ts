@@ -60,7 +60,7 @@ export class ReceptionAuthGuard implements CanLoad {
   constructor(private authService: AuthService, private router: Router) { }
 
   canLoad() {
-    console.log('Trying to authorize Pharma');
+    console.log('Trying to authorize RECEPTIONIST');
     if (this.authService.isReceptionLoggedIn()) {
       return true;
     } else {
@@ -71,12 +71,12 @@ export class ReceptionAuthGuard implements CanLoad {
 }
 
 @Injectable()
-export class LabtechAuthGuard implements CanLoad {
+export class LabTechAuthGuard implements CanLoad {
   constructor(private authService: AuthService, private router: Router) { }
 
   canLoad() {
-    console.log('Trying to authorize Pharma');
-    if (this.authService.isLabtechLoggedIn()) {
+    console.log('Trying to authorize LABTECH');
+    if (this.authService.isLabTechLoggedIn()) {
       return true;
     } else {
       this.router.navigate(['/login']);
@@ -84,7 +84,6 @@ export class LabtechAuthGuard implements CanLoad {
     }
   }
 }
-
 
 @Injectable()
 export class LoggedInAuthGuard implements CanActivate {
@@ -109,7 +108,7 @@ export class LoggedInAuthGuard implements CanActivate {
       this.router.navigate(['/reception']);
       return true;
     }
-    else if (this.authService.isLabtechLoggedIn()) {
+    else if (this.authService.isLabTechLoggedIn()) {
       this.router.navigate(['/labtech']);
       return true;
     }

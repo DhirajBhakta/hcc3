@@ -111,17 +111,17 @@ export class AuthService {
   }
 
   /**
-  * Helper function that checks if the logged in user is a labtech
-  * @returns Returns true if user is Labtech
+  * Helper function that checks if the logged in user is a labtechnician
+  * @returns Returns true if user is labtech
   * @memberof AuthService
   */
-  isLabtechLoggedIn() {
+  isLabTechLoggedIn() {
     if (this.loggedInUser === user_groups.LABTECH) {
+      console.log('yeah, labtech');
       return true;
     }
     return this.isLocallyStored(user_groups.LABTECH);
   }
-
 
   /**
    * This function logs in the given username and password parameters by using a post request to the auth server.
@@ -152,7 +152,7 @@ export class AuthService {
       case ('DOCTOR'): this.loggedInUser = user_groups.DOCTOR; break;
       case ('PHARMA'): this.loggedInUser = user_groups.PHARMA; break;
       case ('RECEPTIONIST'): this.loggedInUser = user_groups.RECEPTIONIST; break;
-      case ('LABTECH'): this.loggedInUser = user_groups.LABTECH; break;
+      case ('LABTECH'):this.loggedInUser = user_groups.LABTECH;break;
       default: this.loggedInUser = user_groups.NONE; break;
     }
     localStorage.setItem('user-group', this.loggedInUser.toString());
@@ -183,6 +183,7 @@ export class AuthService {
    * @memberof AuthService
    */
   getRootURL() {
+    console.log('here',this.loggedInUser);
     switch (this.loggedInUser) {
       case(user_groups.PATIENT): return '/patient';
       case(user_groups.DOCTOR): return '/doctor';

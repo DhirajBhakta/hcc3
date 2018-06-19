@@ -16,24 +16,23 @@ from .serializers import (
     CourseSerializer,
     DepartmentSerializer,
     PersonSerializer,
+    GuestSerializer,
+    WaitingRoomSerializer,
     DoctorSerializer,
-    DrugSerializer,
-    BatchSerializer,
-    PrescriptionSerializer,
-    PharmaRecordSerializer,
-    DispensedDrugSerializer,
     LoggedUserSerializer,
     AppointmentSpecSerializer,
     AppointmentSerializer,
     SlotSerializer
+    LabReportSerializer,
+    PatientHistorySerializer
     )
 from .models.doctor import Doctor
-from .models.drug import Drug, Batch
-from .models.person import Person
+from .models.person import Person, Guest
+from .models.waiting_room import WaitingRoom
 from .models.trivial import Department, Course
-from .models.prescription import Prescription
-from .models.pharma import PharmaRecord, DispensedDrug
 from .models.loggeduser import LoggedUser
+from .models.patient_history import PatientHistory
+from .models.lab_report import LabReport
 from .models.appointments import AppointmentSpec, Appointment, Slot
 
 
@@ -42,7 +41,6 @@ class CreateListMixin:
     def get_serializer(self, *args, **kwargs):
         if isinstance(kwargs.get('data', {}), list):
             kwargs['many'] = True
-
         return super().get_serializer(*args, **kwargs)
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -65,119 +63,36 @@ class DepartmentViewSet(viewsets.ModelViewSet):
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
+    filter_fields = ('patron',)
+
+    def perform_update(self, serializer):
+        serializer.save()
+
+class GuestViewSet(viewsets.ModelViewSet):
+    queryset = Guest.objects.all()
+    serializer_class = GuestSerializer
+
+class WaitingRoomViewSet(viewsets.ModelViewSet):
+    queryset = WaitingRoom.objects.all()
+    serializer_class = WaitingRoomSerializer
+    filter_fields = ('doctor',)
 
 class DoctorViewSet(viewsets.ModelViewSet):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
-
-class DrugViewSet(viewsets.ModelViewSet):
-    queryset = Drug.objects.all()
-    serializer_class = DrugSerializer
-
-    def get_serializer(self, *args, **kwargs):
-        serializer_class = self.get_serializer_class()
-        kwargs['context'] = self.get_serializer_context()
-        if('fields' in self.request.query_params):
-            kwargs['fields'] = json.loads(self.request.query_params['fields'])
-        return serializer_class(*args, **kwargs)
-
-
-class BatchViewSet(viewsets.ModelViewSet):
-    queryset = Batch.objects.all()
-    serializer_class = BatchSerializer
-
-    def get_serializer(self, *args, **kwargs):
-        if "data" in kwargs:
-             kwargs["many"] = isinstance(kwargs["data"], list)
-        return super().get_serializer(*args, **kwargs)
-
-class PharmaRecordViewSet(viewsets.ModelViewSet):
-    queryset = PharmaRecord.objects.all()
-    serializer_class = PharmaRecordSerializer
-
-class DispensedDrugViewSet(viewsets.ModelViewSet):
-    queryset = DispensedDrug.objects.all()
-    serializer_class = DispensedDrugSerializer
-
-    def perform_create(self, serializer):
-        data = serializer.validated_data
-        batch = data['batch']
-        batch_search = Batch.objects.filter(batch=batch.batch)
-        try:
-            current_batch = batch_search.get()
-            current_batch.quantity -= data['quantity']
-            pr = PharmaRecord.objects.get(id=data['pharmarecord'].id)
-            pr.status = 'A'
-            pr.save()
-            current_batch.save()
-        except:
-            raise ValidationError()
-        serializer.save()
-
-
-
-# TODO: Convert this back to ViewSet instead
-
-class PharmaRecordListView(APIView):
-    """
-    PharmaRecords need their status to change as they are sent to
-    the pharmacy, thus the get function is overwritten.
-
-    GET, PUT, DELETE Requests are allowed on PharmaRecord object, POST
-    is disallowed as creation of a Prescription object will auto-create
-    a PharmaRecord object.
-    """
-
-    def get(self, request, format=None):
-        status = request.GET.get('status', '')
-        print("requested status is ", status)
-        if status == '':
-            records = PharmaRecord.objects.all()
-        elif status in ('N', 'A', 'S'):
-            records = PharmaRecord.objects.filter(status=status)
-            for record in records:
-                if record.status == 'N':
-                    record.status = 'S'
-                    record.save()
-        serializer = PharmaRecordSerializer(records, many=True)
-        return Response(serializer.data)
-
-
-class PharmaRecordDetailView(generics.RetrieveUpdateDestroyAPIView):
-    """
-    PharmaRecordDetail takes care of GET, PUT, DELETE for instances
-    of PharmaRecord
-    """
-    queryset = PharmaRecord.objects.all()
-    serializer_class = PharmaRecordSerializer
-
-    # def put(self, request, *args, **kwargs):
-    #     if "dispensed_drugs" in request.data:
-    #         serializer = DispensedDrugSerializer(data=request.data["dispensed_drugs"], many=True)
-    #         serializer.is_valid(raise_exception=True)
-    #         serializer.save()
-    #         return Response(serializer.data)
-    #     return self.update(request, *args, **kwargs)
-
-
-class PrescriptionViewSet(viewsets.ModelViewSet):
-    queryset = Prescription.objects.all()
-    serializer_class = PrescriptionSerializer
-
-    def get_queryset(self):
-        queryset = Prescription.objects.all()
-        user = self.request.user;
-        if user is not None:
-            user_group = user.groups.all()[0].name
-            if user_group == "PATIENT":
-                queryset = queryset.filter(patient=user.person)
-            elif user_group == 'DOCTOR':
-                queryset = queryset.filter(doctor__person=user.person)
-        return queryset
+    filter_fields = ('person__id',)
 
 class LoggedUserViewSet(viewsets.ModelViewSet):
     queryset = LoggedUser.objects.all()
     serializer_class = LoggedUserSerializer
+
+class LabReportViewSet(viewsets.ModelViewSet):
+    queryset = LabReport.objects.all()
+    serializer_class = LabReportSerializer
+
+class PatientHistoryViewSet(viewsets.ModelViewSet):
+    queryset = PatientHistory.objects.all()
+    serializer_class = PatientHistorySerializer
 
 class AppointmentSpecViewSet(viewsets.ModelViewSet):
     queryset = AppointmentSpec.objects.all()
@@ -188,7 +103,7 @@ class AppointmentSpecViewSet(viewsets.ModelViewSet):
 class AppointmentViewSet(CreateListMixin, viewsets.ModelViewSet):
     queryset = Appointment.objects.all()
     serializer_class = AppointmentSerializer
-    filter_backends= (DjangoFilterBackend,) 
+    filter_backends= (DjangoFilterBackend,)
     filter_fields = ('doctor', 'spec')
 
 class SlotViewSet(CreateListMixin, viewsets.ModelViewSet):
@@ -196,16 +111,3 @@ class SlotViewSet(CreateListMixin, viewsets.ModelViewSet):
     serializer_class = SlotSerializer
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('appointment',)
- 
-# class DPMViewSet(viewsets.ModelViewSet):
-#     queryset = DoctorPatientMap.objects.all()
-#     serializer_class = DPMSerializer
-#
-#     def get_queryset(self):
-#         queryset = DoctorPatientMap.objects.all()
-#         user = self.request.user;
-#         if user is not None:
-#             user_groups = [user_group.name for user_group in user.groups.all()]
-#             if  'DOCTOR' in user_groups:
-#                 queryset = queryset.filter(doctor__person=user.person)
-#         return queryset

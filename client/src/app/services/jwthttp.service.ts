@@ -26,6 +26,7 @@ export class JWTHttpClient extends Http {
     options.headers.set('Authorization', `JWT ${token}`);
     return super.delete(url, options);
   }
+
   request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
     const token = localStorage.getItem('JWT');
     if (typeof url === 'string') {
@@ -68,6 +69,14 @@ export class JWTHttpClient extends Http {
     else
       options.headers.set('Authorization', `JWT ${token}`);
    return super.put(url, body);
+  }
+
+  private catchAuthError(self: JWTHttpClient) {
+    return (res: Response) => {
+      if ([400, 401, 403, 500, 504, 404].includes(res.status))
+        this.router.navigate(['/http-error', res.status]);
+      return Observable.throw(res);
+    };
   }
 
 

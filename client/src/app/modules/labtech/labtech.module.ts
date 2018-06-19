@@ -1,21 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LabtechRoutingModule } from './labtech-routing.module';
-import { LabtechComponent } from './labtech.component';
-
-import { ComponentsModule } from '../../components/components.module';
 import { SharedModule } from '../../shared/shared.module';
-import { ExaminationComponent } from './examination/examination.component';
+import { ComponentsModule } from '../../components/components.module';
+
+import { LabtechComponent } from './labtech.component';
+import { LabtechService } from './services/labtech.service';
+import { LabTechRoutingModule } from './labtech-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    LabtechRoutingModule,
+    LabTechRoutingModule,
     SharedModule,
     ComponentsModule
-
   ],
-  declarations: [LabtechComponent, ExaminationComponent]
+  providers: [
+  LabtechService
+  ],
+  exports:[
+    LabtechComponent
+  ],
+
+  declarations: [LabtechComponent]
 })
 export class LabtechModule { }

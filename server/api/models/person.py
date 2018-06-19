@@ -41,27 +41,29 @@ BLOOD_GROUP_CHOICES = (
 #   email will also be stored in User table
 
 
+
 class Person(models.Model):
     #common fields
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True, related_name='person')
     name = models.CharField(max_length=255)
-    date_of_birth = models.DateField()
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    phone = models.CharField(max_length=15)
+    date_of_birth = models.DateField(null=True, blank=True)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES,null=True, blank=True)
+    phone = models.CharField(max_length=15,null=True, blank=True)
     guardian_phone = models.CharField(max_length=15, blank=True, null=True)
-    local_address = models.TextField()
-    permanent_address = models.TextField()
-    blood_group = models.CharField(max_length=3, choices=BLOOD_GROUP_CHOICES)
-    patient_type = models.CharField(max_length=1, choices=PATIENT_TYPE_CHOICES)
+    local_address = models.TextField(null=True, blank=True)
+    permanent_address = models.TextField(null=True, blank=True)
+    blood_group = models.CharField(max_length=3, choices=BLOOD_GROUP_CHOICES,null=True, blank=True)
+    patient_type = models.CharField(max_length=1, choices=PATIENT_TYPE_CHOICES,null=True, blank=True)
     #optional fields
+    #(SPARSE columns are nicely handled by InnoDB. don't freak out)
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True)
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
     retired = models.NullBooleanField(default=False, null=True)
     designation = models.CharField(max_length=255, null=True, blank=True)
-    patron = models.ForeignKey("self",on_delete=models.CASCADE, null=True, blank=True, related_name='dependants')
-    #if the person is a DOctor, then the following attribute will be not null`
-    doctor = models.OneToOneField('Doctor',on_delete=models.CASCADE, null=True, blank=True, related_name='person')
-    assigned_doctor = models.ForeignKey('Doctor',on_delete=models.SET_NULL, null=True, blank=True, related_name='patients_queue')
+    patron = models.ForeignKey("self",on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return self.name +": "+self.patient_type
+        return self.name + ' ('+self.patient_type+')'
+
+class Guest( models.Model):
+    name = models.CharField(max_length=255)

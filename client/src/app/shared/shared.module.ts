@@ -22,11 +22,13 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatRadioModule} from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 
@@ -64,7 +66,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     OwlNativeDateTimeModule,
     MatSidenavModule,
     MatSlideToggleModule,
-
+    MatButtonToggleModule
 
   ],
 })

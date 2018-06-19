@@ -1,19 +1,20 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
 from rest_framework_jwt.serializers import JSONWebTokenSerializer
 from django.contrib.auth import authenticate, get_user_model
 
 from .models.doctor import Doctor
-from .models.drug import Drug, Batch
-from .models.person import Person
+from .models.person import Person, Guest
+from .models.waiting_room import WaitingRoom
 from .models.trivial import Course, Department
-from .models.prescription import Prescription, PrescribedDrug
-from .models.pharma import PharmaRecord, DispensedDrug
 from .models.loggeduser import LoggedUser
+from .models.patient_history import PatientHistory
+from .models.lab_report import LabReport
 from .models.appointments import AppointmentSpec, Appointment, Slot
 
 def invertDict(dictionary):
-    return dict([(v,k) for k,v in dictionary.items()])
+    return dict([(v, k) for k, v in dictionary.items()])
 
 
 class KeyValueField(serializers.Field):
@@ -24,13 +25,13 @@ class KeyValueField(serializers.Field):
 
     def to_representation(self, obj):
         if type(obj) is list:
-            return [self.labels.get(key,None) for key in obj]
+            return [self.labels.get(key, None) for key in obj]
         return self.labels.get(obj, None)
 
     def to_internal_value(self, val):
         if type(val) is list:
-            return [self.inverted_labels.get(o, None ) for key in val]
-        return self.inverted_labels.get(val,None)
+            return [self.inverted_labels.get(o, None) for key in val]
+        return self.inverted_labels.get(val, None)
 
 
 class DynamicFieldsModelSerializer(serializers.ModelSerializer):
@@ -38,6 +39,7 @@ class DynamicFieldsModelSerializer(serializers.ModelSerializer):
     A ModelSerializer that takes an additional `fields` argument that
     controls which fields should be displayed.
     """
+
     def __init__(self, *args, **kwargs):
         # Don't pass the 'fields' arg up to the superclass
         fields = kwargs.pop('fields', None)
@@ -52,138 +54,137 @@ class DynamicFieldsModelSerializer(serializers.ModelSerializer):
             for field_name in existing - allowed:
                 self.fields.pop(field_name)
 
+
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = ('name', )
+
 
 class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
         fields = ('name',)
 
-class PatronSerializer(DynamicFieldsModelSerializer):
-    department = DepartmentSerializer()
-    course  = CourseSerializer()
-    gender = KeyValueField(labels={'M':"Male",'F':"Female",'O':"Other"})
-    patient_type = KeyValueField(labels={'S':'Student', 'E':'Employee','D':'Dependant'})
+
+class PersonSerializer(DynamicFieldsModelSerializer):
+    department = DepartmentSerializer(read_only=True)
+    course = CourseSerializer(read_only=True)
+    gender = KeyValueField(labels={'M': "MALE", 'F': "FEMALE", 'O': "Other"}, default=None)
+    patient_type = KeyValueField(labels={'S': 'STUDENT', 'E': 'EMPLOYEE', 'D': 'DEPENDANT'})
+
+    def create(self, validated_data):
+        data = self.context["request"].data;
+        dept = None
+        if("department" in data):
+            dept = Department.objects.get(name=data['department'])
+        person = Person.objects.create(**validated_data,department=dept)
+        return person
 
     class Meta:
         model = Person
         fields = '__all__'
 
-class DependantSerializer(PatronSerializer):
-    patron = PatronSerializer()
+# for optimization
 
-class PersonSerializer(DependantSerializer):
-    dependants = DependantSerializer(many=True)
+
+class MinimalPersonSerializer(serializers.ModelSerializer):
+    patient_type = KeyValueField(
+        labels={'S': 'STUDENT', 'E': 'EMPLOYEE', 'D': 'DEPENDANT'})
+
+    class Meta:
+        model = Person
+        fields = ('id', 'name', 'patient_type',)
+
+
+class GuestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Guest
+        fields = '__all__'
+
+
+class WaitingRoomSerializer(serializers.ModelSerializer):
+    patient = MinimalPersonSerializer(read_only=True)
+    patient_id = serializers.PrimaryKeyRelatedField(
+        write_only=True, allow_null=True, source='patient', queryset=Person.objects.all(),)
+    guest = GuestSerializer(read_only=True)
+    guest_id = serializers.PrimaryKeyRelatedField(
+        write_only=True, allow_null=True, source='guest', queryset=Guest.objects.all(),)
+
+    class Meta:
+        model = WaitingRoom
+        fields = '__all__'
 
 
 class DoctorSerializer(serializers.ModelSerializer):
-    person = PersonSerializer()
-    patients_queue = PersonSerializer(many=True)
+    person = MinimalPersonSerializer()
+
     class Meta:
         model = Doctor
-        fields = ('id','specialization', 'person','patients_queue')
+        fields = '__all__'
+
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
         fields = ('name',)
 
+
 class UserSerializer(serializers.ModelSerializer):
-    person = PersonSerializer()
-    groups = GroupSerializer(many=True)
+    username = serializers.CharField(
+        validators=[UniqueValidator(queryset=User.objects.all())])
+    groups = GroupSerializer(read_only=True, many=True)
+    person = MinimalPersonSerializer(read_only=True)
+    password = serializers.CharField(write_only=True)
+
+    # used during data collection: refer employee_loader.py
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data['username'], password=validated_data['password'])
+        if("group" in self.context["request"].data):
+            groupname = self.context["request"].data["group"]
+            group = Group.objects.get(name=groupname)
+            group.user_set.add(user)
+        return user
+
     class Meta:
         model = User
-        fields = ('username', 'email', 'groups','password', 'person')
+        fields = ('id','username', 'password', 'groups', 'email','person')
 
-
-class BatchSerializer(serializers.ModelSerializer):
-    drug = serializers.StringRelatedField()
-    drug_id = serializers.PrimaryKeyRelatedField(source='drug', queryset=Drug.objects.all(), write_only=True)
-    class Meta:
-        model = Batch
-        fields = ('id', 'batch', 'quantity', 'expiry_date', 'rack', 'drug', 'drug_id')
-
-
-class DrugSerializer(DynamicFieldsModelSerializer):
-    """
-        Assuming doctor uses only trade_names
-    """
-    batches = BatchSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Drug
-        fields = ('id', 'trade_name', 'generic_name', 'batches')
-
-
-class PrescribedDrugSerializer(serializers.ModelSerializer):
-    drug = DrugSerializer(read_only=True)
-    drug_id = serializers.PrimaryKeyRelatedField(source='drug', queryset=Drug.objects.all(), write_only=True)
-
-    class Meta:
-        model = PrescribedDrug
-        fields = ('id', 'drug_id', 'drug', 'quantity', 'comments')
-
-
-class PrescriptionSerializer(serializers.ModelSerializer):
-    doctor = DoctorSerializer(read_only=True)
-    patient_id = serializers.PrimaryKeyRelatedField(source='patient', queryset=Person.objects.all(), write_only=True)
-    patient = PersonSerializer(read_only=True, fields=('id', 'name'))
-    prescribed_drugs = PrescribedDrugSerializer(many=True)
-
-    def create(self, validated_data):
-        user = None
-        request = self.context.get("request")
-        if request and hasattr(request, "user"):
-            user = request.user
-            doctor = Doctor.objects.get(person__user=user)
-            validated_data['doctor_id'] = doctor.id
-            prescribed_drugs = validated_data.pop('prescribed_drugs')
-            prescription = Prescription.objects.create(**validated_data)
-            for drug in prescribed_drugs:
-                drug['prescription'] = prescription
-            prescribedDrugs = PrescribedDrug.objects.bulk_create([PrescribedDrug(**drug) for drug in prescribed_drugs])
-            return prescription
-        return None
-
-    class Meta:
-        model = Prescription
-        fields = ('id','doctor', 'patient', 'patient_id', 'indication', 'date_time', 'prescribed_drugs')
-
-class DispensedDrugSerializer(serializers.ModelSerializer):
-    batch_id = serializers.PrimaryKeyRelatedField(source='batch', queryset=Batch.objects.all(), write_only=True)
-    batch = BatchSerializer(read_only=True)
-    pharmarecord = serializers.PrimaryKeyRelatedField(queryset=PharmaRecord.objects.all())
-
-    class Meta:
-        model = DispensedDrug
-        fields = ('batch', 'batch_id', 'quantity', 'pharmarecord')
-
-
-class PharmaRecordSerializer(serializers.ModelSerializer):
-
-    prescription = PrescriptionSerializer(read_only=True)
-    dispensed_drugs = DispensedDrugSerializer(many=True)
-
-    class Meta:
-        model = PharmaRecord
-        fields = ('prescription', 'dispensed_drugs')
 
 class LoggedUserSerializer(serializers.ModelSerializer):
-
     user = UserSerializer(read_only=True)
 
     class Meta:
         model = LoggedUser
         fields = '__all__'
 
+
+class LabReportSerializer(serializers.ModelSerializer):
+    patient = MinimalPersonSerializer(read_only=True)
+    patient_id = serializers.PrimaryKeyRelatedField(
+        write_only=True, allow_null=True, source='patient', queryset=Person.objects.all(),)
+    doctor = DoctorSerializer(read_only=True)
+    doctor_id = serializers.PrimaryKeyRelatedField(
+        write_only=True, allow_null=True, source='doctor', queryset=Doctor.objects.all(),)
+
+    class Meta:
+        model = LabReport
+        fields = '__all__'
+
+
+class PatientHistorySerializer(serializers.ModelSerializer):
+    doctor = DoctorSerializer()
+
+    class Meta:
+        model = PatientHistory
+        fields = '__all__'
+
 class AppointmentSpecSerializer(serializers.ModelSerializer):
 
     doctor_id = serializers.PrimaryKeyRelatedField(source='doctor', queryset=Doctor.objects.all())
     class Meta:
-        model = AppointmentSpec 
+        model = AppointmentSpec
         fields = ('doctor_id', 'id', 'monday', 'tuesday', 'wednesday',
                   'thursday', 'friday', 'saturday', 'sunday', 'all_weeks', 'week1',
                   'week2', 'week3', 'week4', 'start_time', 'end_time')
@@ -194,24 +195,11 @@ class AppointmentSerializer(serializers.ModelSerializer):
     spec_id = serializers.PrimaryKeyRelatedField(source='spec', queryset=AppointmentSpec.objects.all(), required=False)
 
     class Meta:
-        model = Appointment 
+        model = Appointment
         fields = ('doctor_id', 'spec_id', 'id', 'date', 'start_time', 'end_time')
 
-class SlotSerializer(serializers.ModelSerializer): 
+class SlotSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Slot
         fields = '__all__'
-
-    
-# 
-# class DPMSerializer(serializers.ModelSerializer):
-#
-#     patient_id = serializers.PrimaryKeyRelatedField(source='patient', queryset=Person.objects.all(), write_only=True)
-#     patient = PersonSerializer(read_only=True)
-#     doctor_id = serializers.PrimaryKeyRelatedField(source='doctor', queryset=User.objects.all(), write_only=True)
-#     doctor = UserSerializer(read_only=True)
-#
-#     class Meta:
-#         model = DoctorPatientMap
-#         fields = ('id', 'doctor', 'patient', 'doctor_id', 'patient_id')

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavLink } from '../../models/util-types';
+
+import { LabtechService } from './services/labtech.service';
 
 @Component({
   selector: 'app-labtech',
@@ -7,15 +8,19 @@ import { NavLink } from '../../models/util-types';
   styleUrls: ['./labtech.component.css']
 })
 export class LabtechComponent implements OnInit {
+  navLinks:any[]=[];
+  notifications:any[]=[];
+  currentRequest:any = null;
+  v=3;
 
-  navLinks: NavLink[] = [
-    {displayString: 'Examination', path: 'examination'},
-  ];
-
-
-  constructor() { }
+  constructor(private labtechService:LabtechService) { }
 
   ngOnInit() {
+    this.labtechService.getNotifications().subscribe((labrequests)=>this.notifications=labrequests);
   }
+  setCurrentRequest(request){
+    this.currentRequest = request;
+  }
+
 
 }

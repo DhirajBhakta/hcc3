@@ -1,1 +1,1 @@
-from . import (doctor, drug, person, prescription, trivial, appointments)
+from . import (doctor,  person,  trivial, appointments)

@@ -1,15 +1,36 @@
-.patient-input {
-    padding-top: 30px;
+p.title{
+  background-color: #039BE5;
+  color:#ffffff80;
+  font-size: 30px;
+  font-weight:lighter;
+  text-align: center;
+  margin:0;
+  padding:10px;
+}
+ .queue-card{
+  background-color:white;
+  border:1px solid #E9E9E9;
+}
+.selected-queue-card{
+  background-color: #039BE580;
+  color:white;
+  font-size: 20px;
+  font-weight: lighter;
+}
+.queue-heading{
+  background-color: #039BE5;
+  color:#ffffff80;
+  border-radius:1px;
+  padding-top: 10px;
+  padding-bottom:10px;
+  padding-right:5px;
+  margin-bottom: 0;
 }
 
-.patient-input-card {
-    width: 300px;
+.display-box{
+  height:400px;
 }
 
-.pres-table-container{
-    margin:0px 10px;
-}
-
-.mat-card{
-  padding:0;
+.display-box > *{
+  height: 100%;
 }

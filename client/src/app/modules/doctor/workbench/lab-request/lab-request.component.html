@@ -1,0 +1,102 @@
+<form (ngSubmit)="onSubmit(form.value); form.reset();" #form="ngForm">
+  <div class="container" fxLayout='column' fxLayoutAlign='center center'>
+    <mat-tab-group>
+      <mat-tab label="Lab Report 1">
+        <table>
+          <tr>
+            <td>Blood Sugar</td>
+            <td>
+              <div fxLayout='column'>
+                <mat-checkbox ngModel name="blood_sugar_fasting">Fasting</mat-checkbox>
+                <mat-checkbox ngModel name="blood_sugar_random">Random</mat-checkbox>
+                <mat-checkbox ngModel name="blood_sugar_post_prandial">Post-Prandial</mat-checkbox>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td> - </td>
+            <td>
+              <div fxLayout='column'>
+                <mat-checkbox ngModel name="serum_urea">Serum Urea</mat-checkbox>
+                <mat-checkbox ngModel name="serum_creatinine">Serum Creatinine</mat-checkbox>
+                <mat-checkbox ngModel name="serum_cholestrol">Serum Cholestrol</mat-checkbox>
+                <mat-checkbox ngModel name="HDL">HDL</mat-checkbox>
+                <mat-checkbox ngModel name="LDL">LDL</mat-checkbox>
+                <mat-checkbox ngModel name="TC_HDL">TC/HDL</mat-checkbox>
+                <mat-checkbox ngModel name="triglycerides">Triglycerides</mat-checkbox>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td> LFT </td>
+            <td>
+              <div fxLayout='column'>
+                <mat-checkbox ngModel name="LFT_serum_protein">LFT Serum Protein</mat-checkbox>
+                <mat-checkbox ngModel name="LFT_serum_albumin">LFT Serum Albumin</mat-checkbox>
+                <mat-checkbox ngModel name="LFT_serum_globulin">LFT Serum Globulin</mat-checkbox>
+                <mat-checkbox ngModel name="LFT_A_G_ratio">LFT A/G Ratio</mat-checkbox>
+                <mat-checkbox ngModel name="LFT_total_bilirubin">LFT Total Bilirubin</mat-checkbox>
+                <mat-checkbox ngModel name="LFT_direct_bilirubin">LFT Direct Bilirubin</mat-checkbox>
+                <mat-checkbox ngModel name="LFT_indirect_bilirubin">LFT Indirect Bilirubin</mat-checkbox>
+                <mat-checkbox ngModel name="LFT_SGOT">LFT SGOT</mat-checkbox>
+                <mat-checkbox ngModel name="LFT_SGPT">LFT SGPT</mat-checkbox>
+                <mat-checkbox ngModel name="alkaline_phosphatase">Alkaline Phosphatase</mat-checkbox>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </mat-tab>
+
+      <mat-tab label="Lab Report 2">
+        <table>
+          <tr>
+            <td>Blood</td>
+            <td>
+              <div fxLayout='column'>
+                <mat-checkbox ngModel name="blood_group">Blood Group</mat-checkbox>
+                <mat-checkbox ngModel name="RH">R.H.</mat-checkbox>
+                <mat-checkbox ngModel name="complete_hemogram">Complete Hemogram</mat-checkbox>
+                <mat-checkbox ngModel name="ESR">E.S.R.</mat-checkbox>
+                <mat-checkbox ngModel name="HB">H.B.</mat-checkbox>
+                <mat-checkbox ngModel name="bleeding_time">Bleeding Time</mat-checkbox>
+                <mat-checkbox ngModel name="clotting_time">Clotting Time</mat-checkbox>
+                <mat-checkbox ngModel name="blood_sugar_fasting_2">Blood Sugar -Fasting</mat-checkbox>
+                <mat-checkbox ngModel name="blood_sugar_post_prandial_2">Blood Sugar -P.P</mat-checkbox>
+                <mat-checkbox ngModel name="blood_sugar_random_2">Blood Sugar -Random</mat-checkbox>
+                <mat-checkbox ngModel name="uric_acid">Uric Acid</mat-checkbox>
+                <mat-checkbox ngModel name="MP">M.P.</mat-checkbox>
+                <mat-checkbox ngModel name="widal">Widal</mat-checkbox>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Urine</td>
+            <td>
+              <div fxLayout='column'>
+                <mat-checkbox ngModel name="sugar">Sugar</mat-checkbox>
+                <mat-checkbox ngModel name="albumin">Albumin</mat-checkbox>
+                <mat-checkbox ngModel name="bile_salts">Bile Salts</mat-checkbox>
+                <mat-checkbox ngModel name="bile_pigments">Bile Pigments</mat-checkbox>
+                <mat-checkbox ngModel name="microscopy">Microscopy</mat-checkbox>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Stool</td>
+            <td>
+              <div fxLayout='column'>
+                <mat-checkbox ngModel name="ova">Ova</mat-checkbox>
+                <mat-checkbox ngModel name="cyst">Cyst</mat-checkbox>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </mat-tab>
+    </mat-tab-group>
+    <button mat-raised-button color='warn' [disabled]="isFormPristine(form)">Submit</button>
+  </div>
+</form>

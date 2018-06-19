@@ -11,9 +11,6 @@ import { PatientRoutingModule } from './patient-routing.module';
 //Root-Component of this patientModule
 import { PatientComponent } from './patient.component';
 //Components housed in this patientModule
-import { AppointmentsComponent } from './appointments/appointments.component';
-import { HistoryComponent } from './history/history.component';
-import { BookedAppointmentCardComponent } from './appointments/booked-appointment-card/booked-appointment-card.component';
 import { PatientProfileComponent } from './patient-profile/patient-profile.component';
 
 
@@ -25,9 +22,6 @@ import { PatientService } from './services/patient.service';
 @NgModule({
   declarations: [
     PatientComponent,
-    AppointmentsComponent,
-    HistoryComponent,
-    BookedAppointmentCardComponent,
     PatientProfileComponent,
   ],
 
