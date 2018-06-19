@@ -1,0 +1,41 @@
+<div class="slot-item def-shadow" fxLayout="row"
+      dir="rtl" *ngIf="!flipped"
+      [ngClass]="{'animated': !flipped, 'flipInX':!flipped}">
+    <button mat-button color="primary" (click)="flip()">+CREATE SLOT</button>
+</div>
+<div class="slot-item def-shadow" *ngIf="flipped"
+      [ngClass]="{'animated': flipped, 'flipInX': flipped}">
+
+      <div fxLayout="column">
+
+        <div fxLayout="row" *ngIf=" family === undefined || (family | async)?.length === 0">
+        <mat-form-field>
+          <input matInput placeholder="Enter ID" [(ngModel)]="enteredId"/>
+        </mat-form-field>
+        <button mat-button color="primary" (click)="getFamily()">Verify</button>
+        </div>
+
+        <mat-form-field *ngIf="(family | async)?.length >= 1">
+          <mat-select placeholder="Select member" [(ngModel)]="patient" name="patient">
+            <mat-option *ngFor="let member of family | async"
+                        [value]="member">
+                        {{member.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Booking Status" [(ngModel)]="booking_status">
+              <mat-option value="BO">Booked</mat-option>
+              <mat-option value="WL">Waiting List</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div fxLayout="row">
+          <button mat-button color="primary" (click)="createSlot()">Submit</button>
+          <button mat-button (click)="flip()" color="warn">Cancel</button>
+        </div>
+
+      </div>
+  </div>
+  <app-show-errors [errors]="errors" [success]="success"></app-show-errors>

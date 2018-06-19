@@ -1,0 +1,10 @@
+.add-chip {
+  background-color: #67af67;
+  color:rgba(198, 255, 171, 0.9);
+  text-shadow:1px ;
+  padding-right:5px !important;
+}
+.small-grey-text {
+  font-size: 12px;
+  color: rgba(0,0,0,.54)
+}

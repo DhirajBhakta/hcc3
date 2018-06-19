@@ -9,6 +9,17 @@ import { ComponentsModule } from '../../components/components.module';
 import { SharedModule } from '../../shared/shared.module';
 import { QueueService } from './services/queue.service';
 import { StatusCardComponent } from './status-card/status-card.component';
+import { TimeTableComponent } from './time-table/time-table.component';
+import { AppointmentsService } from './services/appointments.service';
+import { SpecFormComponent } from './time-table/spec-form/spec-form.component';
+import { AppointmentsComponent } from './appointments/appointments.component';
+import { GenerateComponent } from './appointments/generate/generate.component';
+import { CreateAppointmentComponent } from './appointments/create-appointment/create-appointment.component';
+import { ViewAppointmentsComponent } from './appointments/view-appointments/view-appointments.component';
+import { AppointmentItemComponent } from './appointments/appointment-item/appointment-item.component';
+import { CreateSlotComponent } from './appointments/appointment-item/create-slot/create-slot.component';
+import { SlotItemComponent } from './appointments/appointment-item/slot-item/slot-item.component';
+import { BookAppointmentComponent } from './appointments/book-appointment/book-appointment.component';
 
 @NgModule({
   imports: [
@@ -17,12 +28,25 @@ import { StatusCardComponent } from './status-card/status-card.component';
     SharedModule,
     ComponentsModule
   ],
-  declarations: [ReceptionComponent, GreeterComponent, StatusCardComponent],
+  declarations: [ReceptionComponent,
+                 GreeterComponent,
+                 StatusCardComponent,
+                 TimeTableComponent,
+                 SpecFormComponent,
+                 AppointmentsComponent,
+                 GenerateComponent,
+                 CreateAppointmentComponent,
+                 ViewAppointmentsComponent,
+                 AppointmentItemComponent,
+                 CreateSlotComponent,
+                 SlotItemComponent,
+                 BookAppointmentComponent],
   exports: [
     ReceptionComponent
   ],
   providers : [
-    QueueService
+    QueueService,
+    AppointmentsService
   ]
 })
 export class ReceptionModule { }

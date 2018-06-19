@@ -1,0 +1,10 @@
+<div class="message errors def-shadow" *ngIf="errors !== undefined && errors.length!==0">
+  <h4> <mat-icon svgIcon='error' style='height:25px'></mat-icon>Some errors have occurred!</h4>
+  <mat-list>
+    <mat-list-item *ngFor="let error of errors">{{error}}</mat-list-item>
+  </mat-list>
+</div>
+
+<div class="message success def-shadow" *ngIf="success">
+  <mat-icon svgIcon='check_circle' style='height:25px'></mat-icon>{{success}}
+</div>

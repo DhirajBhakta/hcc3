@@ -1,0 +1,37 @@
+<div fxLayout="row" class="doctors-list" fxLayoutGap="10px">
+<div fxLayout="column" fxFlex="60%">
+<h1>TIME TABLE</h1>
+<div  *ngFor="let doctor of doctors$ | async">
+  <mat-card *ngIf="doctor.person != null">
+    <mat-card-header>
+      <mat-card-title>
+        {{doctor.person.name}}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{doctor.specialization}}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-chip-list >
+      <span *ngIf="doctorSpecMap[doctor.id] != null && doctorSpecMap[doctor.id].length !== 0">
+        <mat-chip *ngFor="let spec of doctorSpecMap[doctor.id];let i=index"
+                  (click)="selectedSpec=spec;selectedDoctor=doctor;printDoc(doctor)"
+                  [selectable]="true">Spec {{i+1}}
+        </mat-chip>
+      </span>
+      <mat-chip class="add-chip" (click)="addSpec(doctor)">
+        Create
+        <mat-icon svgIcon='add_circle' style='height: 15px'>
+        </mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+
+    </mat-card>
+</div>
+</div>
+<div fxFlex>
+  <app-spec-form  *ngIf="selectedSpec" [doctor]="selectedDoctor"
+                  (specUpdated)="handleSpecUpdated($event)"
+                  (specDeleted)="handleSpecDeleted($event)"
+                  [spec]="selectedSpec"></app-spec-form>
+</div>
+</div>

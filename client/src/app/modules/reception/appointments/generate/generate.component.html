@@ -1,0 +1,42 @@
+<h4>Appointments Generator</h4>
+<div  *ngFor="let doctor of doctors$ | async">
+  <mat-card fxFill="50%" *ngIf="doctor.person != null">
+    <mat-card-header>
+      <mat-card-title>
+        {{doctor.person.name}}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{doctor.specialization}}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="doctorSpecMap[doctor.id] !== undefined && doctorSpecMap[doctor.id].length !== 0">
+        <mat-checkbox *ngFor="let spec of doctorSpecMap[doctor.id];let i=index"
+                      value="{{doctor.id+'|'+i}}"
+                      (change)="handleChange($event)">
+          Spec {{i+1}}
+        </mat-checkbox>
+      </div>
+      <div *ngIf="doctorSpecMap[doctor.id]?.length === 0"
+           class="small-grey-text">
+        No specs defined
+      </div>
+      </mat-card-content>
+    </mat-card>
+</div>
+<mat-form-field>
+<input matInput [matDatepicker]="startpicker" placeholder="Choose start date" [(ngModel)]="start_date">
+<mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
+<mat-datepicker #startpicker></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field>
+<input matInput [matDatepicker]="endpicker" [(ngModel)]="end_date" placeholder="Choose end date">
+<mat-datepicker-toggle matSuffix [for]="endpicker"></mat-datepicker-toggle>
+<mat-datepicker #endpicker></mat-datepicker>
+</mat-form-field>
+
+
+<button mat-raised-button color="primary" (click)="generateAppointments()">Generate</button>
+<app-show-errors [errors]="errors" [success]="success"></app-show-errors>
+

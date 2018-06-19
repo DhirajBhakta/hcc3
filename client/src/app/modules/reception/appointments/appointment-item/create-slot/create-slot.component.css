@@ -1,0 +1,11 @@
+.slot-item {
+  padding: 5px 10px;
+}
+.mat-button {
+  text-transform: uppercase !important;
+  font-weight: bold !important;
+}
+.mat-card {
+  margin-bottom: 5px;
+}
+

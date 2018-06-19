@@ -15,6 +15,9 @@ router.register(r'batches', views.BatchViewSet)
 router.register(r'prescriptions', views.PrescriptionViewSet)
 router.register(r'dispensed', views.DispensedDrugViewSet)
 router.register(r'loggedusers', views.LoggedUserViewSet)
+router.register(r'appointment_specs', views.AppointmentSpecViewSet)
+router.register(r'appointments', views.AppointmentViewSet)
+router.register(r'slots', views.SlotViewSet)
 # router.register(r'doctorpatientmap', views.DPMViewSet)
 
 # Wire up our API using automatic URL routing.

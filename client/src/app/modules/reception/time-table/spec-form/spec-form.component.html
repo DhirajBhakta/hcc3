@@ -1,0 +1,54 @@
+<mat-card fxLayout="column" class="example-container">
+  <mat-card-header>
+    <mat-card-title>
+  <h3>SPECIFICATION FOR {{doctor.person.name}}</h3>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <p *ngIf="spec.id === 0" style="font-style:italic">Unsaved</p>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+
+  <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="15px">
+    <div fxLayout="column">
+      <mat-selection-list fxLayout="column">
+        <h3 mat-subheader>Repeating Days of the Week</h3>
+        <mat-checkbox [(ngModel)]="spec.monday">Monday</mat-checkbox>
+        <mat-checkbox [(ngModel)]="spec.tuesday">Tuesday</mat-checkbox>
+        <mat-checkbox [(ngModel)]="spec.wednesday">Wednesday</mat-checkbox>
+        <mat-checkbox [(ngModel)]="spec.thursday">Thursday</mat-checkbox>
+        <mat-checkbox [(ngModel)]="spec.friday">Friday</mat-checkbox>
+        <mat-checkbox [(ngModel)]="spec.saturday">Saturday</mat-checkbox>
+        <mat-checkbox [(ngModel)]="spec.sunday">Sunday</mat-checkbox>
+      </mat-selection-list>
+      <mat-selection-list fxLayout="column">
+        <h3 mat-subheader>Repeating Weeks</h3>
+        <mat-checkbox [(ngModel)]="spec.all_weeks">All Weeks</mat-checkbox>
+        <mat-checkbox [(ngModel)]="spec.week1">Week 1</mat-checkbox>
+        <mat-checkbox [(ngModel)]="spec.week2">Week 2</mat-checkbox>
+        <mat-checkbox [(ngModel)]="spec.week3">Week 3</mat-checkbox>
+        <mat-checkbox [(ngModel)]="spec.week4">Week 4</mat-checkbox>
+      </mat-selection-list>
+    </div>
+    <div fxLayout="column">
+      <p class="small-grey-text">Select the start and end time for the appointment.</p>
+      <mat-form-field>
+        <input matInput placeholder="Start Time" [owlDateTimeTrigger]="starttime" [owlDateTime]="starttime" [(ngModel)]="spec.start_time">
+        <owl-date-time [pickerType]="'timer'" hour12Timer="'true'" #starttime></owl-date-time>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="End Time" [owlDateTimeTrigger]="endtime" [owlDateTime]="endtime" [(ngModel)]="spec.end_time">
+        <owl-date-time [pickerType]="'timer'" hour12Timer="'true'" #endtime></owl-date-time>
+      </mat-form-field>
+      <button mat-raised-button
+              color="primary"
+              (click)="createSpec(spec)"
+              *ngIf="spec.id==0">Save</button>
+      <div *ngIf="spec.id!=0">
+        <button mat-raised-button color="warn" (click)="deleteSpec(spec)">Delete</button>
+        <button mat-raised-button color="accent" (click)="updateSpec(spec);">Update</button>
+      </div>
+    </div>
+  </div>
+</mat-card>

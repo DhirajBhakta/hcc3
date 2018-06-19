@@ -1,11 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
 
 
-body{
+
+html, body {
+  box-sizing: border-box;
   padding:0px;
   margin:0px;
   height:100vh;
+  height: 100%;
   font-family: 'Roboto',sans-serif;
 }
 
@@ -38,3 +42,8 @@ button.member:hover{
     margin:20px;
     padding: 20px;
 }
+.small-grey-text {
+  font-size: 14px;
+  color: rgba(0,0,0,.54)
+}
+

@@ -18,16 +18,35 @@ export class UserService {
                     .do((response) => {
                       this.loggedInUser = response.json();
                       this.currentPerson = this.loggedInUser.person;
-                    });
+                    })
+                    .catch(err => Observable.throw(new Error(err.status)));
   }
 
-  setCurrentPerson(person){
+  getUser2(username: string): Observable<any> {
+    return this.http.get(prepareURL(environment.server_base_url, 'users', username))
+                    .catch(err => Observable.throw(new Error(err.status)));
+  }
+
+  setCurrentPerson(person) {
     this.currentPerson = person;
   }
 
-  getAllLoggedInUsers(){
+  getAllLoggedInUsers() {
       return this.http.get(prepareURL(environment.server_base_url,'loggedusers'))
                       .map(response => response.json());
+  }
+
+  getPerson(person_id) {
+    return this.http.get(prepareURL(environment.server_base_url, 'persons', person_id))
+                    .map(response => response.json());
+  }
+  _getFamily(username) {
+    return this.getUser2(username).map((response) => {
+      const patron = response.json().person;
+      const family = patron.dependants;
+      family.unshift(patron);
+      return family;
+    });
   }
 
 }

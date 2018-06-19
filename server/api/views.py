@@ -8,6 +8,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
+from django_filters.rest_framework import DjangoFilterBackend
+
 from .serializers import (
     UserSerializer,
     GroupSerializer,
@@ -21,6 +23,9 @@ from .serializers import (
     PharmaRecordSerializer,
     DispensedDrugSerializer,
     LoggedUserSerializer,
+    AppointmentSpecSerializer,
+    AppointmentSerializer,
+    SlotSerializer
     )
 from .models.doctor import Doctor
 from .models.drug import Drug, Batch
@@ -29,7 +34,16 @@ from .models.trivial import Department, Course
 from .models.prescription import Prescription
 from .models.pharma import PharmaRecord, DispensedDrug
 from .models.loggeduser import LoggedUser
+from .models.appointments import AppointmentSpec, Appointment, Slot
 
+
+class CreateListMixin:
+    """Allows bulk creation of a resource."""
+    def get_serializer(self, *args, **kwargs):
+        if isinstance(kwargs.get('data', {}), list):
+            kwargs['many'] = True
+
+        return super().get_serializer(*args, **kwargs)
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -164,7 +178,25 @@ class PrescriptionViewSet(viewsets.ModelViewSet):
 class LoggedUserViewSet(viewsets.ModelViewSet):
     queryset = LoggedUser.objects.all()
     serializer_class = LoggedUserSerializer
-# 
+
+class AppointmentSpecViewSet(viewsets.ModelViewSet):
+    queryset = AppointmentSpec.objects.all()
+    serializer_class = AppointmentSpecSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('doctor',)
+
+class AppointmentViewSet(CreateListMixin, viewsets.ModelViewSet):
+    queryset = Appointment.objects.all()
+    serializer_class = AppointmentSerializer
+    filter_backends= (DjangoFilterBackend,) 
+    filter_fields = ('doctor', 'spec')
+
+class SlotViewSet(CreateListMixin, viewsets.ModelViewSet):
+    queryset = Slot.objects.all()
+    serializer_class = SlotSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('appointment',)
+ 
 # class DPMViewSet(viewsets.ModelViewSet):
 #     queryset = DoctorPatientMap.objects.all()
 #     serializer_class = DPMSerializer

@@ -1,0 +1,30 @@
+<div fxLayout="column">
+  <h4>Create an Appointment Date</h4>
+<mat-form-field>
+  <mat-select [(value)]="selectedDoctor" placeholder="Select Doctor">
+    <ng-container  *ngFor="let doctor of doctors$ | async">
+        <mat-option *ngIf="doctor.person" value="{{doctor.id}}">{{doctor.person.name}}({{doctor.specialization}})</mat-option>
+    </ng-container>
+  </mat-select>
+</mat-form-field>
+<div fxLayout="row">
+<mat-form-field>
+  <input matInput placeholder="Start Time" [owlDateTimeTrigger]="starttime" [owlDateTime]="starttime" [(ngModel)]="start_time">
+  <owl-date-time [pickerType]="'timer'" hour12Timer="'true'" #starttime></owl-date-time>
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="End Time" [owlDateTimeTrigger]="endtime" [owlDateTime]="endtime" [(ngModel)]="end_time">
+  <owl-date-time [pickerType]="'timer'" hour12Timer="'true'" #endtime></owl-date-time>
+</mat-form-field>
+</div>
+<mat-form-field>
+<input matInput [matDatepicker]="picker" placeholder="Select date" [(ngModel)]="date">
+<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+<mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<button mat-raised-button (click)="createAppointment()">Create</button>
+<app-show-errors [errors]="errors" [success]="success"></app-show-errors>
+
+</div>
