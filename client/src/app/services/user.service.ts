@@ -19,7 +19,7 @@ export class UserService {
 
   getUser(username: string): Observable<any> {
     return this.http.get(prepareURL(environment.server_base_url, 'users', username))
-                    .map((data) => data.json());
+                    .map((data) => data.json())
                     .catch(err => Observable.throw(new Error(err.status)));
   }
 

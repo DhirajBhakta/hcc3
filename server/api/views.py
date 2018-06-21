@@ -22,7 +22,7 @@ from .serializers import (
     LoggedUserSerializer,
     AppointmentSpecSerializer,
     AppointmentSerializer,
-    SlotSerializer
+    SlotSerializer,
     LabReportSerializer,
     PatientHistorySerializer
     )

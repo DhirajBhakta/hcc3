@@ -134,7 +134,7 @@ export class BookAppointmentComponent implements OnInit {
     console.log(this.specDateMap);
   }
   getFamily() {
-    this.family = this.userService._getFamily(this.enteredId)
+    this.family = this.userService.getFamily(this.enteredId)
                                   .catch(err => {
                                       console.log(err);
                                       this.errors = ['Entered id is not valid'];

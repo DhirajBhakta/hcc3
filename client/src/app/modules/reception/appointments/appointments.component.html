@@ -1,6 +1,6 @@
 
 <div fxLayout="row" fxFlex fxFlexFill>
-  <div fxLayout="column" fxFlex="20%" class="def-shadow main-container sidenav">
+  <div fxLayout="column" fxFlex="20%" class="def-shadow padded-container sidenav">
     <mat-nav-list>
       <h3 matSubheader>Appointments</h3>
       <mat-list-item (click)="view=0">Book an appointment</mat-list-item>
@@ -10,7 +10,7 @@
     </mat-nav-list>
   </div>
 
-  <div fxLayout="row" class="def-shadow main-container" fxLayoutAlign="center center" fxFlex>
+  <div fxLayout="row" class="def-shadow padded-container" fxLayoutAlign="center center" fxFlex>
     <ng-container *ngIf="view===0">
       <app-book-appointment></app-book-appointment>
     </ng-container>

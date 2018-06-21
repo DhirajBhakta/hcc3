@@ -4,7 +4,7 @@ from datetime import datetime
 
 class LabReport(models.Model):
     patient = models.ForeignKey('Person', on_delete=models.CASCADE)
-    doctor = models.ForeignKey('Doctor', on_delete=models.SET_NULL)
+    doctor = models.ForeignKey('Doctor', on_delete=models.SET_NULL, null=True)
     date = models.DateTimeField(default=datetime.now, blank=True)
     done = models.BooleanField(default=False)
     blood_sugar_fasting = models.CharField(max_length=255, null=True, blank=True)
