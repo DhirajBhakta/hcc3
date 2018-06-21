@@ -1,9 +1,14 @@
 import json
 from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .serializers import (
     UserSerializer,
@@ -11,32 +16,41 @@ from .serializers import (
     CourseSerializer,
     DepartmentSerializer,
     PersonSerializer,
-    DrugSerializer,
-    BatchSerializer,
-    PrescriptionSerializer,
-    PharmaRecordSerializer
+    GuestSerializer,
+    WaitingRoomSerializer,
+    DoctorSerializer,
+    LoggedUserSerializer,
+    AppointmentSpecSerializer,
+    AppointmentSerializer,
+    SlotSerializer
+    LabReportSerializer,
+    PatientHistorySerializer
     )
-from .models.drug import Drug, Batch
-from .models.person import Person
+from .models.doctor import Doctor
+from .models.person import Person, Guest
+from .models.waiting_room import WaitingRoom
 from .models.trivial import Department, Course
-from .models.prescription import Prescription
-from .models.pharma import PharmaRecord
+from .models.loggeduser import LoggedUser
+from .models.patient_history import PatientHistory
+from .models.lab_report import LabReport
+from .models.appointments import AppointmentSpec, Appointment, Slot
 
 
+class CreateListMixin:
+    """Allows bulk creation of a resource."""
+    def get_serializer(self, *args, **kwargs):
+        if isinstance(kwargs.get('data', {}), list):
+            kwargs['many'] = True
+        return super().get_serializer(*args, **kwargs)
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_field = 'username'
 
-
-
-
-
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-
 
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
@@ -49,32 +63,51 @@ class DepartmentViewSet(viewsets.ModelViewSet):
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
+    filter_fields = ('patron',)
 
-class DrugViewSet(viewsets.ModelViewSet):
-    queryset = Drug.objects.all()
-    serializer_class = DrugSerializer
+    def perform_update(self, serializer):
+        serializer.save()
 
-    def get_serializer(self, *args, **kwargs):
-        serializer_class = self.get_serializer_class()
-        kwargs['context'] = self.get_serializer_context()
-        if('fields' in self.request.query_params):
-            kwargs['fields'] = json.loads(self.request.query_params['fields'])
-        return serializer_class(*args, **kwargs)
+class GuestViewSet(viewsets.ModelViewSet):
+    queryset = Guest.objects.all()
+    serializer_class = GuestSerializer
 
+class WaitingRoomViewSet(viewsets.ModelViewSet):
+    queryset = WaitingRoom.objects.all()
+    serializer_class = WaitingRoomSerializer
+    filter_fields = ('doctor',)
 
-class BatchViewSet(viewsets.ModelViewSet):
-    queryset = Batch.objects.all()
-    serializer_class = BatchSerializer
+class DoctorViewSet(viewsets.ModelViewSet):
+    queryset = Doctor.objects.all()
+    serializer_class = DoctorSerializer
+    filter_fields = ('person__id',)
 
-    def get_serializer(self, *args, **kwargs):
-        if "data" in kwargs:
-             kwargs["many"] = isinstance(kwargs["data"], list)
-        return super().get_serializer(*args, **kwargs)
+class LoggedUserViewSet(viewsets.ModelViewSet):
+    queryset = LoggedUser.objects.all()
+    serializer_class = LoggedUserSerializer
 
-class PharmaRecordViewSet(viewsets.ModelViewSet):
-    queryset = PharmaRecord.objects.all()
-    serializer_class = PharmaRecordSerializer
+class LabReportViewSet(viewsets.ModelViewSet):
+    queryset = LabReport.objects.all()
+    serializer_class = LabReportSerializer
 
-class PrescriptionViewSet(viewsets.ModelViewSet):
-    queryset = Prescription.objects.all()
-    serializer_class = PrescriptionSerializer
+class PatientHistoryViewSet(viewsets.ModelViewSet):
+    queryset = PatientHistory.objects.all()
+    serializer_class = PatientHistorySerializer
+
+class AppointmentSpecViewSet(viewsets.ModelViewSet):
+    queryset = AppointmentSpec.objects.all()
+    serializer_class = AppointmentSpecSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('doctor',)
+
+class AppointmentViewSet(CreateListMixin, viewsets.ModelViewSet):
+    queryset = Appointment.objects.all()
+    serializer_class = AppointmentSerializer
+    filter_backends= (DjangoFilterBackend,)
+    filter_fields = ('doctor', 'spec')
+
+class SlotViewSet(CreateListMixin, viewsets.ModelViewSet):
+    queryset = Slot.objects.all()
+    serializer_class = SlotSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('appointment',)

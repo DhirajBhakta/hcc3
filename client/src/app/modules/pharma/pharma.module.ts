@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AgGridModule }  from "ag-grid-angular/main";
+import { AgGridModule }  from 'ag-grid-angular/main';
 
 import { PharmaRoutingModule } from './pharma-routing.module';
 import { PharmaComponent } from './pharma.component';

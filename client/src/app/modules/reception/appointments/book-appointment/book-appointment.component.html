@@ -1,0 +1,75 @@
+<button (click)="log()"></button>
+<mat-vertical-stepper [linear]="true">
+
+  <mat-step label="Select Patient">
+    <div fxLayout="row" *ngIf=" family === undefined || (family | async)?.length === 0">
+    <mat-form-field>
+      <input matInput placeholder="Enter ID" [(ngModel)]="enteredId"/>
+    </mat-form-field>
+    <button mat-button color="primary" (click)="getFamily()">Verify</button>
+    </div>
+
+    <mat-form-field *ngIf="(family | async)?.length >= 1">
+      <mat-select placeholder="Select member" [(ngModel)]="patient" name="patient">
+        <mat-option *ngFor="let member of family | async"
+                    [value]="member">
+                    {{member.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-button matStepperNext color="primary"
+            *ngIf="patient">Continue</button>
+  </mat-step>
+
+  <mat-step label="Select Specialization">
+    <mat-form-field>
+        <mat-select [(ngModel)]="selectedSpec" name="specialization"
+                    (selectionChange)="generateValidDates()">
+          <mat-option *ngFor="let spec of objectKeys(specDocMap)"
+                      [value]="spec" > {{spec}} </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-button matStepperNext color="primary"
+            *ngIf="selectedSpec">Continue</button>
+  </mat-step>
+
+  <mat-step label="Select Date">
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Select date" [(ngModel)]="selectedDate"
+                      [matDatepickerFilter]="dateFilter.bind(this)"
+                      >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <button mat-button matStepperNext color="primary"
+            *ngIf="selectedDate"
+            (click)="generateResults()">Continue</button>
+  </mat-step>
+
+  <mat-step label="Confirm" fxLayout="column" fxFlex="50%">
+    <mat-radio-group [(ngModel)]="selectedAppointment">
+
+    <mat-card  fxLayout="column"*ngFor="let appt of filtered_appointments; let i=index">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-radio-button [value]="appt.id">Appointment {{i+1}} </mat-radio-button>
+        </mat-card-title>
+      </mat-card-header>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <span> {{appt.date | date:'mediumDate'}} </span>
+        <span> {{appt.start_time | date:'shortTime' }} - {{appt.end_time | date:'shortTime' }}</span>
+      </div>
+      {{getDoctor(appt.doctor_id).person.name}}
+      </mat-card>
+      </mat-radio-group>
+      <mat-form-field>
+            <mat-select [(ngModel)]="booking_status" placeholder="Select status">
+        <mat-option value='BO'> Booked </mat-option>
+        <mat-option value='WL'> Waiting List </mat-option>
+      </mat-select>
+      </mat-form-field>
+      <button mat-button color="primary" (click)="createSlot()">Create</button>
+  </mat-step>
+</mat-vertical-stepper>
+<app-show-errors [success]="success" ></app-show-errors>

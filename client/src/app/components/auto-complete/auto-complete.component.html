@@ -1,7 +1,14 @@
 <div class='container'>
   <mat-form-field>
-    <input style='float:bottom'  matInput [(ngModel)]='user_input'(keyup)=generateSuggestions() autocomplete="off" [placeholder]='placeholder'/>
+    <input style='float:bottom' matInput [(ngModel)]='user_input' (keyup)=generateSuggestions() autocomplete="off" [placeholder]='placeholder'
+    />
   </mat-form-field>
 
-  <ul><li *ngFor="let suggestion of suggestions" (click)="select(suggestion)">{{ suggestion[display_attr] }}</li></ul>
+  <div class="def-shadow">
+    <ul>
+      <li *ngFor="let suggestion of suggestions" (click)="select(suggestion)">
+        {{ suggestion[display_attr] }}
+      </li>
+    </ul>
+  </div>
 </div>

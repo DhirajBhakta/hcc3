@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AppointmentsComponent } from './appointments/appointments.component';
-import { HistoryComponent } from './history/history.component';
 import { PatientComponent } from './patient.component';
 import { PatientProfileComponent} from './patient-profile/patient-profile.component';
 
@@ -10,10 +8,8 @@ const Patientroutes: Routes = [
   {
     path: '', component: PatientComponent,
     children: [
-      { path: 'appointments', component: AppointmentsComponent },
-      { path: 'history', component: HistoryComponent },
+      { path: '', redirectTo: 'history'},
       { path: 'profile', component:  PatientProfileComponent},
-
     ]
   }];
 

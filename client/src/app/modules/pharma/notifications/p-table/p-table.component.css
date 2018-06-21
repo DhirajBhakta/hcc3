@@ -1,21 +1,4 @@
- th, td {
-    border: 1px solid rgb(182, 199, 255);
-    padding: 4px 9px;
- }
-th{
-    background: #4693ff;
-}
-
-tr:nth-child(odd){ 
-    background: #90beff;
-}
-tr:nth-child(even){
-    background: #e6f0ff;
-	}
-table{
-     border-collapse: collapse;
-     border-spacing: 0;
- }
+ 
 .drug_input{
     width:50px;
 }

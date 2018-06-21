@@ -1,0 +1,56 @@
+.mat-card{
+  padding:15px;
+  margin:5px;
+  background-color:#002f6c;
+  color:white;
+  font-size:12px;
+}
+
+.title{
+  font-size: 15px;
+  font-weight:bolder;
+}
+
+.counter{
+  background-color: white;
+  color:#002f6c;
+  padding:5px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+.incrementor-card{
+  background-color: white;
+  color:black;
+  border: 2px solid #002f6c;
+  border-radius: 5px;
+}
+
+
+button.member{
+  background-color: Transparent;
+  outline:none;
+  color:black;
+  font-size: 15px;
+  width:300px;
+  margin:1px;
+  font-weight: normal;
+  border: 1px solid white;
+  border-radius: 3px;
+}
+
+button.member:hover{
+  opacity:0.5;
+  cursor:pointer;
+  background-color: black;
+  color:white;
+  border:1px solid black;
+  font-weight:bold;
+}
+
+.queue{
+  background-color: white;
+  border-radius:2px;
+  box-shadow: 5px 5px 2px;
+  padding:10px;
+  margin-top: 0;
+}

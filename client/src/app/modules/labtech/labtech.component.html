@@ -1,0 +1,342 @@
+<!--top nav toolbar-->
+<app-main-toolbar [navLinks]="navLinks"></app-main-toolbar>
+
+<div fxLayout fxLayoutAlign="space-between">
+  <div fxFLex="20%" fxLayout='column'>
+    <h2>Incoming Requests</h2>
+    <button mat-raised-button *ngFor="let notification of notifications" color='primary' (click)='setCurrentRequest(notification); '>
+      {{notification.patient.name}}
+    </button>
+  </div>
+  <div fxFLex style='height:400px'>
+    <mat-tab-group style='height:100%'>
+      <mat-tab label="Lab Report 1">
+
+        <table style="border-collapse:collapse">
+          <tbody style="border:2px solid black;border-radius:3px;">
+            <tr>
+              <td rowspan='3'>Blood Sugar </td>
+              <td>Fasting</td>
+              <td>70 - 105</td>
+              <td>mg/dL</td>
+              <td>
+                <mat-form-field><input matInput name=blood_sugar_fasting></mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Random</td>
+              <td>
+                < 150</td>
+                  <td>mg/dL</td>
+                  <td>
+                    <mat-form-field><input matInput name=blood_sugar_random></mat-form-field>
+                  </td>
+            </tr>
+
+            <tr>
+              <td>Post-Pranadial</td>
+              <td>100 - 150</td>
+              <td>mg/dL</td>
+              <td>
+                <mat-form-field><input matInput name=blood_sugar_post_prandial></mat-form-field>
+              </td>
+            </tr>
+          </tbody>
+
+
+
+          <tr>
+            <td rowspan="7"></td>
+            <td>Serum Urea</td>
+            <td>10 - 55</td>
+            <td>mg/dL</td>
+            <td>
+              <mat-form-field><input matInput name=serum_urea></mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Serum Creatinine</td>
+            <td>0.6 - 1.4</td>
+            <td>mg/dL</td>
+            <td>
+              <mat-form-field><input matInput name=serum_creatinine></mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Serum Cholestrol</td>
+            <td>150-250</td>
+            <td>mg/dL</td>
+            <td>
+              <mat-form-field><input matInput name=serum_cholestrol></mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <td>HDL</td>
+            <td>35 - 55</td>
+            <td>mg/dL</td>
+            <td>
+              <mat-form-field><input matInput name=HDL></mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <td>LDL</td>
+            <td>upto 150</td>
+            <td>mg/dL</td>
+            <td>
+              <mat-form-field><input matInput name=LDL></mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <td>TC/HDL</td>
+            <td>2.5 - 5.0</td>
+            <td>mg/dL</td>
+            <td>
+              <mat-form-field><input matInput name=TC_HDL></mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Triglycerides</td>
+            <td>60 - 165</td>
+            <td>mg/dL</td>
+            <td>
+              <mat-form-field><input matInput name=triglycerides></mat-form-field>
+            </td>
+          </tr>
+
+
+          <tbody style="background-color:red">
+            <tr>
+              <td rowspan="9">Liver Function Test</td>
+              <td>Serum Protein</td>
+              <td>6.2 - 8.0</td>
+              <td>gm/dL</td>
+              <td>
+                <mat-form-field><input matInput name=LFT_serum_protein></mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Serum Albumin</td>
+              <td>3.5 - 5.5</td>
+              <td>gm/Dl</td>
+              <td>
+                <mat-form-field><input matInput name=LFT_serum_albumin></mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Serum Globulin</td>
+              <td>2.3 - 3.5</td>
+              <td>gm/dL</td>
+              <td>
+                <mat-form-field><input matInput name=LFT_serum_globulin></mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <td>A/G Ratio</td>
+              <td>1.0 - 1.5</td>
+              <td>gm/dL</td>
+              <td>
+                <mat-form-field><input matInput name=LFT_A_G_ratio></mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Total Bilirubin</td>
+              <td>upto 1.2</td>
+              <td>mg/dL</td>
+              <td>
+                <mat-form-field><input matInput name=LFT_total_bilirubin></mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Direct Bilirubin</td>
+              <td>upto 0.4</td>
+              <td>mg/dL</td>
+              <td>
+                <mat-form-field><input matInput name=LFT_direct_bilirubin></mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Indirect Bilirubin</td>
+              <td>0.75</td>
+              <td>mg/dL</td>
+              <td>
+                <mat-form-field><input matInput name=LFT_indirect_bilirubin></mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <td>SGOT</td>
+              <td>46</td>
+              <td>U/L</td>
+              <td>
+                <mat-form-field><input matInput name=LFT_SGOT></mat-form-field>
+              </td>
+            </tr>
+
+            <tr>
+              <td>SGPT</td>
+              <td>49</td>
+              <td>U/L</td>
+              <td>
+                <mat-form-field><input matInput name=LFT_SGPT></mat-form-field>
+              </td>
+            </tr>
+          </tbody>
+          <tr>
+            <td></td>
+            <td>Alkaline Phosphatase</td>
+            <td>100 - 290</td>
+            <td>U/L</td>
+            <td>
+              <mat-form-field><input matInput name=alkaline_phosphatase></mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </mat-tab>
+
+      <mat-tab label="Lab Report 2">
+        <table>
+          <tbody>
+          <tr>
+            <td rowspan='13'>Blood</td>
+            <td>Blood Group</td>
+            <td>
+              <mat-form-field><input matInput name=blood_group></mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td><R.H.</td>
+            <td>
+              <mat-form-field><input matInput name=RH></mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Complete Hemogram</td>
+            <td>
+              <mat-form-field><input matInput name=complete_hemogram></mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>E.S.R.</td>
+            <td>
+              <mat-form-field><input matInput name=ESR></mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>H.B.</td>
+            <td>
+              <mat-form-field><input matInput name=HB></mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Bleeding Time</td>
+            <td>
+              <mat-form-field><input matInput name=bleeding_time></mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Clotting Time</td>
+            <td>
+              <mat-form-field><input matInput name=clotting_time></mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Blood Sugar Fasting</td>
+            <td>
+              <mat-form-field><input matInput name=blood_sugar_fasting_2></mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Blood Sugar P.P</td>
+            <td>
+              <mat-form-field><input matInput name=blood_sugar_post_prandial_2></mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Blood Sugar Random</td>
+            <td>
+              <mat-form-field><input matInput name=blood_sugar_random_2></mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Uric Acid</td>
+            <td>
+              <mat-form-field><input matInput name=uric_acid></mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>M.P.</td>
+            <td>
+              <mat-form-field><input matInput name=MP></mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Widal</td>
+            <td>
+              <mat-form-field><input matInput name=widal></mat-form-field>
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td rowspan='5'>Urine</td>
+            <td>Albumin</td>
+            <td>
+              <mat-form-field ><input matInput name=albumin></mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Sugar</td>
+            <td>
+              <mat-form-field><input matInput name=sugar></mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Bile Salts</td>
+            <td>
+              <mat-form-field><input matInput name=bile_salts></mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Bile Pigments</td>
+            <td>
+              <mat-form-field><input matInput name=bile_pigments></mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Microscopy</td>
+            <td>
+              <mat-form-field><input matInput name=microscopy></mat-form-field>
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td rowspan='2'>Stool</td>
+            <td>Ova</td>
+            <td>
+              <mat-form-field><input matInput name=ova></mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Cyst</td>
+            <td>
+              <mat-form-field><input matInput name=cyst></mat-form-field>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+      </mat-tab>
+    </mat-tab-group>

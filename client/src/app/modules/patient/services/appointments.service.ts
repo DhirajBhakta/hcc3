@@ -22,7 +22,7 @@ export class AppointmentsService {
   appointmentData$;
   specialities$;
   specialityDatesMap$;
-  num=1;
+  num= 1;
 
   constructor(private http: HttpClient) { }
 
@@ -62,13 +62,13 @@ export class AppointmentsService {
   postBookedAppointment(bundle){
     //send post request with reqired data to book the appointment;
     //if success, return true
-    this.num = this.num +Math.floor(Math.random()*200);
-    bundle = replaceKeys(Object.assign({},bundle),[
-      {replace:'subtitle', with:'doctorname'},
-      {replace:'title', with:'speciality'},
+    this.num = this.num + Math.floor(Math.random() * 200);
+    bundle = replaceKeys(Object.assign({}, bundle), [
+      {replace: 'subtitle', with: 'doctorname'},
+      {replace: 'title', with: 'speciality'},
     ]);
     bundle['id'] = this.num;
-    console.log('buunndle:',bundle);
+    console.log('buunndle:', bundle);
     this.http.post(this.url + 'bookedAppointments', bundle).subscribe();
     return this.getBookedAppointments();
    }

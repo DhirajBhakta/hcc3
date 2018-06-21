@@ -1,0 +1,32 @@
+
+
+form{
+  height: 100%;
+}
+
+.container{
+  height:100%;
+  padding:15px;
+  background-color: #33a8f233;
+}
+
+
+.mat-tab-group{
+  height: 100%;
+  background-color: #c9e5f633;
+}
+
+
+table tr{
+  padding:20px;
+  margin-bottom:2px;
+  border:1px solid #E503031A;
+}
+
+table tr:nth-child(odd){
+  background-color: #E503031A;
+}
+
+table tr >td{
+  padding:20px;
+}

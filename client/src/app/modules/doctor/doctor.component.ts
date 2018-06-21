@@ -10,8 +10,6 @@ export class DoctorComponent implements OnInit {
 
   navLinks: NavLink[] = [
     {displayString: 'WorkBench', path: 'workbench'},
-    {displayString: 'History', path: 'history'},
-    {displayString: 'Appointments', path: 'appointments'}
   ];
   constructor() { }
 

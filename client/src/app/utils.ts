@@ -1,5 +1,5 @@
-export function replaceKeys(object:Object, metadata:Array<any>){
-   for(let data of metadata){
+export function replaceKeys(object: Object, metadata: Array<any>){
+   for (const data of metadata){
      object[data.with] = object[data.replace];
      delete(object[data.replace]);
    }
@@ -7,9 +7,14 @@ export function replaceKeys(object:Object, metadata:Array<any>){
 }
 
 export function prepareURL(...args){
-  return args.reduce((accumulator,current)=>accumulator+current+'/',[]);
+  return args.reduce((accumulator, current) => accumulator + current + '/', []);
 }
 
+export function addParams(params) {
+  return '?' + Object.keys(params).map(function(key){
+    return key + '=' + params[key];
+  }).join('&');
+}
 
 //ISO date format is univeral: YYYY-MM-DDTHH:MM:SSZ
 export function dateString(date: Date){

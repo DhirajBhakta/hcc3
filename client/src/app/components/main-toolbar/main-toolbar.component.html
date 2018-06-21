@@ -7,7 +7,7 @@
     <button mat-menu-item  *ngFor="let menuLink of menuLinks" [routerLink]="menuLink.path">
       <mat-icon color="primary">{{menuLink.icon}}</mat-icon> {{menuLink.displayString}}
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item (click)="logout()">
       <span fxFlex></span> Logout</button>
   </mat-menu>
 

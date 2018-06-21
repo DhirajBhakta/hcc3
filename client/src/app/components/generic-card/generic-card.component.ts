@@ -7,7 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class GenericCardComponent implements OnInit {
 
- @Input() bundle: {};
+ @Input() bundle:any;
  @Input() canCancel: boolean;
  @Input() canConfirm: boolean;
 
@@ -24,7 +24,7 @@ export class GenericCardComponent implements OnInit {
   }
 
   triggerConfirm(): void {
-    console.log('confirm clicked! emit triggered')
+    console.log('confirm clicked! emit triggered');
     this.Confirm.emit();
   }
 

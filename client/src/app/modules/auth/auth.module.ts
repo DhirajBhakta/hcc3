@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
 
 import { AuthService } from './auth.service';
-import { PatientAuthGuard, DoctorAuthGuard, PharmaAuthGuard } from './auth-guards';
+import { PatientAuthGuard, DoctorAuthGuard, PharmaAuthGuard, ReceptionAuthGuard, LabTechAuthGuard } from './auth-guards';
 import { LoginComponent } from './login/login.component';
 
 
@@ -17,7 +17,9 @@ import { LoginComponent } from './login/login.component';
     AuthService,
     PatientAuthGuard,
     PharmaAuthGuard,
-    DoctorAuthGuard
+    DoctorAuthGuard,
+    ReceptionAuthGuard,
+    LabTechAuthGuard
   ],
   declarations: [LoginComponent],
   exports: [LoginComponent]

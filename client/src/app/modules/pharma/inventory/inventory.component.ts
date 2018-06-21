@@ -12,11 +12,10 @@ export class InventoryComponent implements OnInit {
   rowData;
   constructor(private phService: PharmaService) {
     this.columnDefs = [
-      { headerName: "Trade-name", field: "drug.trade_name" },
-      { headerName: "Generic-name", field: "drug.generic_name" },
-      { headerName: "Batch", field: "batch" },
-      { headerName: "Quantity Left", field: "quantity" },
-      { headerName: "Rack", field: "rack" },
+      { headerName: 'Drug', field: 'drug' },
+      { headerName: 'Batch', field: 'batch' },
+      { headerName: 'Quantity Left', field: 'quantity' },
+      { headerName: 'Rack', field: 'rack' },
     ];
   }
 

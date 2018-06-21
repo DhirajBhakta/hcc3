@@ -1,5 +1,7 @@
 venv/
-
+server/api/migrations/
 **/node_modules/
 
 **/__pycache__/
+**/.idea/
+**/.vscode/

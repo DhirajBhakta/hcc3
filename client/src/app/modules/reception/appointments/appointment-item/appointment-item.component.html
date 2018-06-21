@@ -1,0 +1,53 @@
+<mat-card fxLayout="column" fxLayoutAlign="space-evenly" fxLayoutGap="10px"
+          *ngIf="!flipped"
+          [ngClass]="{'animated': !flipped, 'flipInX': !flipped, 'flipOutX': flipped}">
+  <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="10px">
+    <span>
+      {{appt.date | date:'fullDate'}} {{appt.id}}
+    </span>
+    <span>
+      {{appt.start_time | date:'shortTime'}} - {{appt.end_time | date:'shortTime'}}
+    </span>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <button mat-button color="primary" (click)="startEdit()"> Edit </button>
+    <button mat-button color="warn" (click)="deleteAppointment()"> Delete </button>
+    <mat-slide-toggle (change)="toggleSlots()">Show Slots</mat-slide-toggle>
+  </div>
+  <div fxLayout="column" *ngIf="showSlots" >
+      <!-- <p class="small-grey-text" *ngIf="(slots | async).length === 0">No slots</p> -->
+      <app-slot-item *ngFor="let slot of slots; let i=index"
+                     [name]="slotPersonMap[i]?.name"
+                     [status]="slot.status"
+                     (deleteSlot)="deleteSlot(i)"></app-slot-item>
+      <app-create-slot [appointment_id]="appt.id" (slotCreate)="handleSlotCreation($event)"></app-create-slot>
+  </div>
+  <app-show-errors [errors]="errors" [success]="success"></app-show-errors>
+</mat-card>
+
+<mat-card *ngIf="flipped"
+          [ngClass]="{'animated': 'flipped', 'flipInX': flipped, 'flipOutX': !flipped}">
+
+<div fxLayout="row">
+<mat-form-field>
+  <input matInput placeholder="Start Time" [owlDateTimeTrigger]="starttime" [owlDateTime]="starttime" [(ngModel)]="appt.start_time">
+  <owl-date-time [pickerType]="'timer'" hour12Timer="'true'" #starttime></owl-date-time>
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="End Time" [owlDateTimeTrigger]="endtime" [owlDateTime]="endtime" [(ngModel)]="appt.end_time">
+  <owl-date-time [pickerType]="'timer'" hour12Timer="'true'" #endtime></owl-date-time>
+</mat-form-field>
+</div>
+<mat-form-field>
+<input matInput [matDatepicker]="picker" placeholder="Select date" [(ngModel)]="appt.date">
+<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+<mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+<button mat-button (click)="updateAppointment()" color="primary">Update</button>
+<button mat-button (click)="cancelEdit()" color="warn">Cancel</button>
+<app-show-errors [errors]="errors" [success]="success"></app-show-errors>
+
+
+
+</mat-card>

@@ -1,0 +1,10 @@
+<button mat-raised-button (click)="showDetails();">
+ <div fxLayout fxLayoutAlign="space-between center">
+   <div fxLayout='column'>
+     <span class="name">{{bundle.doctorName}}</span>
+     <span class="specialization">{{bundle.specialization}}</span>
+   </div>
+  <span class='indication'>{{bundle.indication}}</span>
+  {{bundle.date}}
+</div>
+</button>
