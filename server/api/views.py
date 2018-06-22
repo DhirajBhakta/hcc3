@@ -89,6 +89,7 @@ class LoggedUserViewSet(viewsets.ModelViewSet):
 class LabReportViewSet(viewsets.ModelViewSet):
     queryset = LabReport.objects.all()
     serializer_class = LabReportSerializer
+    filter_fields = ('done',)
 
 class PatientHistoryViewSet(viewsets.ModelViewSet):
     queryset = PatientHistory.objects.all()

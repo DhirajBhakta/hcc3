@@ -1,26 +1,31 @@
 <!--top nav toolbar-->
 <app-main-toolbar [navLinks]="navLinks"></app-main-toolbar>
 
-<div fxLayout fxLayoutAlign="space-between">
-  <div fxFLex="20%" fxLayout='column'>
+<div fxLayout fxLayoutAlign="space-around">
+  <div fxFLex="20%" fxLayout='column' fxLayoutGap="2px" class="incoming-requests-container">
     <h2>Incoming Requests</h2>
-    <button mat-raised-button *ngFor="let notification of notifications" color='primary' (click)='setCurrentRequest(notification); '>
+    <button mat-raised-button *ngFor="let notification of notifications" (click)='setCurrentRequest(notification); '>
       {{notification.patient.name}}
     </button>
   </div>
-  <div fxFLex style='height:400px'>
-    <mat-tab-group style='height:100%'>
+  <div fxFLex *ngIf="currentRequest">
+    <div class="report-header">
+      <p class="patient-name">{{currentRequest.patient.name}}</p>
+      <p class="doctor-name">Dr.{{currentRequest.doctor.person.name}}</p>
+    </div>
+   <form (ngSubmit)="onSubmit(form.value); reset()" #form="ngForm">
+    <mat-tab-group >
       <mat-tab label="Lab Report 1">
 
         <table style="border-collapse:collapse">
-          <tbody style="border:2px solid black;border-radius:3px;">
+          <tbody >
             <tr>
-              <td rowspan='3'>Blood Sugar </td>
+              <td rowspan='3' class="test-group">Blood Sugar </td>
               <td>Fasting</td>
               <td>70 - 105</td>
               <td>mg/dL</td>
               <td>
-                <mat-form-field><input matInput name=blood_sugar_fasting></mat-form-field>
+                <mat-form-field [hidden]="!currentRequest?.blood_sugar_fasting"><input   matInput ngModel name="blood_sugar_fasting"></mat-form-field>
               </td>
             </tr>
 
@@ -30,7 +35,7 @@
                 < 150</td>
                   <td>mg/dL</td>
                   <td>
-                    <mat-form-field><input matInput name=blood_sugar_random></mat-form-field>
+                    <mat-form-field [hidden]="!currentRequest?.blood_sugar_random"><input   matInput ngModel name="blood_sugar_random"></mat-form-field>
                   </td>
             </tr>
 
@@ -39,7 +44,7 @@
               <td>100 - 150</td>
               <td>mg/dL</td>
               <td>
-                <mat-form-field><input matInput name=blood_sugar_post_prandial></mat-form-field>
+                <mat-form-field [hidden]="!currentRequest?.blood_sugar_post_prandial"><input  matInput ngModel name="blood_sugar_post_prandial"></mat-form-field>
               </td>
             </tr>
           </tbody>
@@ -47,12 +52,12 @@
 
 
           <tr>
-            <td rowspan="7"></td>
+            <td rowspan="7" class="test-group"></td>
             <td>Serum Urea</td>
             <td>10 - 55</td>
             <td>mg/dL</td>
             <td>
-              <mat-form-field><input matInput name=serum_urea></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.serum_urea"><input   matInput ngModel name="serum_urea"></mat-form-field>
             </td>
           </tr>
 
@@ -61,7 +66,7 @@
             <td>0.6 - 1.4</td>
             <td>mg/dL</td>
             <td>
-              <mat-form-field><input matInput name=serum_creatinine></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.serum_creatinine" ><input matInput ngModel name="serum_creatinine"></mat-form-field>
             </td>
           </tr>
 
@@ -70,7 +75,7 @@
             <td>150-250</td>
             <td>mg/dL</td>
             <td>
-              <mat-form-field><input matInput name=serum_cholestrol></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.serum_cholestrol"><input matInput ngModel name="serum_cholestrol"></mat-form-field>
             </td>
           </tr>
 
@@ -79,7 +84,7 @@
             <td>35 - 55</td>
             <td>mg/dL</td>
             <td>
-              <mat-form-field><input matInput name=HDL></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.HDL" ><input  matInput ngModel name="HDL"></mat-form-field>
             </td>
           </tr>
 
@@ -88,7 +93,7 @@
             <td>upto 150</td>
             <td>mg/dL</td>
             <td>
-              <mat-form-field><input matInput name=LDL></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.LDL"><input matInput ngModel name="LDL"></mat-form-field>
             </td>
           </tr>
 
@@ -97,7 +102,7 @@
             <td>2.5 - 5.0</td>
             <td>mg/dL</td>
             <td>
-              <mat-form-field><input matInput name=TC_HDL></mat-form-field>
+              <mat-form-field [hidden]='!currentRequest?.TC_HDL'><input matInput ngModel name="TC_HDL"></mat-form-field>
             </td>
           </tr>
 
@@ -106,19 +111,19 @@
             <td>60 - 165</td>
             <td>mg/dL</td>
             <td>
-              <mat-form-field><input matInput name=triglycerides></mat-form-field>
+              <mat-form-field [hidden]='!currentRequest?.triglycerides'><input matInput ngModel name="triglycerides"></mat-form-field>
             </td>
           </tr>
 
 
-          <tbody style="background-color:red">
+          <tbody>
             <tr>
-              <td rowspan="9">Liver Function Test</td>
+              <td rowspan="9" class="test-group">L.F.T.</td>
               <td>Serum Protein</td>
               <td>6.2 - 8.0</td>
               <td>gm/dL</td>
               <td>
-                <mat-form-field><input matInput name=LFT_serum_protein></mat-form-field>
+                <mat-form-field [hidden]='!currentRequest?.LFT_serum_protein'><input matInput ngModel name="LFT_serum_protein"></mat-form-field>
               </td>
             </tr>
 
@@ -127,7 +132,7 @@
               <td>3.5 - 5.5</td>
               <td>gm/Dl</td>
               <td>
-                <mat-form-field><input matInput name=LFT_serum_albumin></mat-form-field>
+                <mat-form-field [hidden]="!currentRequest?.LFT_serum_albumin"><input matInput ngModel name="LFT_serum_albumin"></mat-form-field>
               </td>
             </tr>
 
@@ -136,7 +141,7 @@
               <td>2.3 - 3.5</td>
               <td>gm/dL</td>
               <td>
-                <mat-form-field><input matInput name=LFT_serum_globulin></mat-form-field>
+                <mat-form-field [hidden]="!currentRequest?.LFT_serum_globulin"><input matInput ngModel name="LFT_serum_globulin"></mat-form-field>
               </td>
             </tr>
 
@@ -145,7 +150,7 @@
               <td>1.0 - 1.5</td>
               <td>gm/dL</td>
               <td>
-                <mat-form-field><input matInput name=LFT_A_G_ratio></mat-form-field>
+                <mat-form-field [hidden]="!currentRequest?.LFT_A_G_ratio"><input matInput ngModel name="LFT_A_G_ratio"></mat-form-field>
               </td>
             </tr>
 
@@ -154,7 +159,7 @@
               <td>upto 1.2</td>
               <td>mg/dL</td>
               <td>
-                <mat-form-field><input matInput name=LFT_total_bilirubin></mat-form-field>
+                <mat-form-field [hidden]="!currentRequest?.LFT_total_bilirubin"><input matInput ngModel name="LFT_total_bilirubin"></mat-form-field>
               </td>
             </tr>
 
@@ -163,7 +168,7 @@
               <td>upto 0.4</td>
               <td>mg/dL</td>
               <td>
-                <mat-form-field><input matInput name=LFT_direct_bilirubin></mat-form-field>
+                <mat-form-field [hidden]="!currentRequest?.LFT_direct_bilirubin"><input matInput ngModel name="LFT_direct_bilirubin"></mat-form-field>
               </td>
             </tr>
 
@@ -172,7 +177,7 @@
               <td>0.75</td>
               <td>mg/dL</td>
               <td>
-                <mat-form-field><input matInput name=LFT_indirect_bilirubin></mat-form-field>
+                <mat-form-field [hidden]="!currentRequest?.LFT_indirect_bilirubin"><input matInput ngModel name="LFT_indirect_bilirubin"></mat-form-field>
               </td>
             </tr>
 
@@ -181,7 +186,7 @@
               <td>46</td>
               <td>U/L</td>
               <td>
-                <mat-form-field><input matInput name=LFT_SGOT></mat-form-field>
+                <mat-form-field [hidden]='!currentRequest?.LFT_SGOT'><input matInput ngModel name="LFT_SGOT"></mat-form-field>
               </td>
             </tr>
 
@@ -190,17 +195,17 @@
               <td>49</td>
               <td>U/L</td>
               <td>
-                <mat-form-field><input matInput name=LFT_SGPT></mat-form-field>
+                <mat-form-field [hidden]="!currentRequest?.LFT_SGPT"><input matInput ngModel name="LFT_SGPT"></mat-form-field>
               </td>
             </tr>
           </tbody>
           <tr>
-            <td></td>
+            <td class="test-group"></td>
             <td>Alkaline Phosphatase</td>
             <td>100 - 290</td>
             <td>U/L</td>
             <td>
-              <mat-form-field><input matInput name=alkaline_phosphatase></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.alkaline_phosphatase"><input matInput ngModel name="alkaline_phosphatase"></mat-form-field>
             </td>
           </tr>
         </table>
@@ -210,133 +215,140 @@
         <table>
           <tbody>
           <tr>
-            <td rowspan='13'>Blood</td>
+            <td rowspan='13' class="test-group">Blood</td>
             <td>Blood Group</td>
             <td>
-              <mat-form-field><input matInput name=blood_group></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.blood_group"><input matInput name=blood_group></mat-form-field>
             </td>
           </tr>
           <tr>
             <td><R.H.</td>
             <td>
-              <mat-form-field><input matInput name=RH></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.RH"><input matInput name=RH></mat-form-field>
             </td>
           </tr>
           <tr>
             <td>Complete Hemogram</td>
             <td>
-              <mat-form-field><input matInput name=complete_hemogram></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.complete_hemogram"><input matInput name=complete_hemogram></mat-form-field>
             </td>
           </tr>
           <tr>
             <td>E.S.R.</td>
             <td>
-              <mat-form-field><input matInput name=ESR></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.ESR"><input matInput name=ESR></mat-form-field>
             </td>
           </tr>
           <tr>
             <td>H.B.</td>
             <td>
-              <mat-form-field><input matInput name=HB></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.HB"><input matInput name=HB></mat-form-field>
             </td>
           </tr>
           <tr>
             <td>Bleeding Time</td>
             <td>
-              <mat-form-field><input matInput name=bleeding_time></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.bleeding_time"><input matInput name=bleeding_time></mat-form-field>
             </td>
           </tr>
           <tr>
             <td>Clotting Time</td>
             <td>
-              <mat-form-field><input matInput name=clotting_time></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.clotting_time"><input matInput name=clotting_time></mat-form-field>
             </td>
           </tr>
           <tr>
             <td>Blood Sugar Fasting</td>
             <td>
-              <mat-form-field><input matInput name=blood_sugar_fasting_2></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.blood_sugar_fasting_2"><input matInput name=blood_sugar_fasting_2></mat-form-field>
             </td>
           </tr>
           <tr>
             <td>Blood Sugar P.P</td>
             <td>
-              <mat-form-field><input matInput name=blood_sugar_post_prandial_2></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.blood_sugar_post_prandial_2"><input matInput name=blood_sugar_post_prandial_2></mat-form-field>
             </td>
           </tr>
           <tr>
             <td>Blood Sugar Random</td>
             <td>
-              <mat-form-field><input matInput name=blood_sugar_random_2></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.blood_sugar_random_2"><input matInput name=blood_sugar_random_2></mat-form-field>
             </td>
           </tr>
           <tr>
             <td>Uric Acid</td>
             <td>
-              <mat-form-field><input matInput name=uric_acid></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.uric_acid"><input matInput name=uric_acid></mat-form-field>
             </td>
           </tr>
           <tr>
             <td>M.P.</td>
             <td>
-              <mat-form-field><input matInput name=MP></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.MP"><input matInput name=MP></mat-form-field>
             </td>
           </tr>
           <tr>
             <td>Widal</td>
             <td>
-              <mat-form-field><input matInput name=widal></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.widal"><input matInput name=widal></mat-form-field>
             </td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td rowspan='5'>Urine</td>
+            <td rowspan='5' class="test-group">Urine</td>
             <td>Albumin</td>
             <td>
-              <mat-form-field ><input matInput name=albumin></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.albumin"><input matInput name=albumin></mat-form-field>
             </td>
           </tr>
           <tr>
             <td>Sugar</td>
             <td>
-              <mat-form-field><input matInput name=sugar></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.sugar"><input matInput name=sugar></mat-form-field>
             </td>
           </tr>
           <tr>
             <td>Bile Salts</td>
             <td>
-              <mat-form-field><input matInput name=bile_salts></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.bile_salts"><input matInput name=bile_salts></mat-form-field>
             </td>
           </tr>
           <tr>
             <td>Bile Pigments</td>
             <td>
-              <mat-form-field><input matInput name=bile_pigments></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.bile_pigments"><input matInput name=bile_pigments></mat-form-field>
             </td>
           </tr>
           <tr>
             <td>Microscopy</td>
             <td>
-              <mat-form-field><input matInput name=microscopy></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.microscopy"><input matInput name=microscopy></mat-form-field>
             </td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td rowspan='2'>Stool</td>
+            <td rowspan='2' class="test-group">Stool</td>
             <td>Ova</td>
             <td>
-              <mat-form-field><input matInput name=ova></mat-form-field>
+              <mat-form-field [hidden]="!currentRequest?.ova"><input matInput name=ova></mat-form-field>
             </td>
           </tr>
           <tr>
             <td>Cyst</td>
             <td>
-              <mat-form-field><input matInput name=cyst></mat-form-field>
+              <mat-form-field [hidden]="currentRequest?.cyst"><input matInput name=cyst></mat-form-field>
             </td>
           </tr>
         </tbody>
         </table>
       </mat-tab>
     </mat-tab-group>
+    <div fxLayout >
+    <button  type="submit" fxFlex mat-raised-button color="warn">Submit</button>
+  </div>
+</form>
+</div>
+
+</div>
