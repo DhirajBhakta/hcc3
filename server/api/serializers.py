@@ -94,7 +94,7 @@ class MinimalPersonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Person
-        fields = ('id', 'name', 'patient_type',)
+        fields = ('id', 'name', 'patient_type','date_of_birth')
 
 
 class GuestSerializer(serializers.ModelSerializer):
@@ -174,7 +174,12 @@ class LabReportSerializer(serializers.ModelSerializer):
 
 
 class PatientHistorySerializer(serializers.ModelSerializer):
-    doctor = DoctorSerializer()
+    doctor = DoctorSerializer(read_only=True)
+    patient = MinimalPersonSerializer(read_only=True)
+    doctor_id = serializers.PrimaryKeyRelatedField(
+        write_only=True, allow_null=True, source='doctor', queryset=Doctor.objects.all(),)
+    patient_id = serializers.PrimaryKeyRelatedField(
+        write_only=True, allow_null=True, source='patient', queryset=Person.objects.all(),)
 
     class Meta:
         model = PatientHistory

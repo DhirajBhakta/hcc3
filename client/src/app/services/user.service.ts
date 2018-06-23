@@ -48,6 +48,7 @@ export class UserService {
   }
 
   getCurrentPerson() {
+    console.log('SERV,',this.currentPerson);
     return this.currentPerson;
   }
 

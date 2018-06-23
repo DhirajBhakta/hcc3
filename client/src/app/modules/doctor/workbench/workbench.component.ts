@@ -23,7 +23,8 @@ export class WorkbenchComponent implements OnInit {
     'date': '11/15/1995',
     'indication': 'fever'
   }
-
+  patienthistory;
+  labreports;
 
   constructor(private userService: UserService, private workbenchService: WorkbenchService, private _alerts: AlertsService) {
     this.submitLabRequest = this.submitLabRequest.bind(this);
@@ -46,13 +47,18 @@ export class WorkbenchComponent implements OnInit {
 
   setPatient(waiting_item) {
     this.currentPatient = waiting_item;
+    if (!this._isGuest(waiting_item)) {
+      this.patienthistory$ = this.workbenchService.getPatientHistory(this.currentPatient.patient.id);
+      this.labreports$ = this.workbenchService.getLabReports(this.currentPatient.patient.id);
+    }
     this.displayState = "HISTORY";
+
   }
 
-  isCurrentPatientSet(): boolean {
-    return !(this.currentPatient == null);
+  reset() {
+    this.currentPatient = null;
+    this.indication = "";
   }
-
   setDisplayState(event) {
     this.displayState = event.value;
   }
@@ -73,6 +79,9 @@ export class WorkbenchComponent implements OnInit {
     return item.guest.id;
   }
 
+  /**
+  *This function will be passed as an @Input() param to LabRequest Component
+  */
   submitLabRequest(filledForm) {
     let requestedTests = {
       'patient_id': this._getPatientID(this.currentPatient),
@@ -85,5 +94,15 @@ export class WorkbenchComponent implements OnInit {
     this.workbenchService.submitLabRequest(requestedTests).subscribe((response) => this._alerts.create('success', 'Request placed'));
   }
 
+  completeDiagnosis() {
+    if (this._isGuest(this.currentPatient))
+      this.workbenchService.popQueue(this.currentPatient.id).subscribe((response) => { this.reset(); this._alerts("success", "Guest patients details are NOT recorded");});
+
+    else
+      this.workbenchService.submitDiagnosis(this.doctor.id, this.currentPatient.patient.id, this.indication)
+                            .flatMap((response) => this.workbenchService.popQueue(this.currentPatient.id);)
+                            .subscribe((response) => { this.reset(); this._alerts.create("success", "Submitted!") });
+
+  }
 
 }

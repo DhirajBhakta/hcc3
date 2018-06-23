@@ -24,14 +24,39 @@ export class WorkbenchService {
   }
 
   getQueue(doctor_id) {
-    return Observable.interval(5000)
+    return Observable.interval(1000)
       .switchMap(() => this.http.get(prepareURL(environment.server_base_url, 'waitingroom') + '?doctor=' + doctor_id))
       .map((data) => data.json());
   }
+  popQueue(waiting_item_id){
+    return this.http.delete(prepareURL(environment.server_base_url,'waitingroom',waiting_item_id))
+  }
 
   submitLabRequest(requestedTests){
-    console.log('service',requestedTests);
     return this.http.post(prepareURL(environment.server_base_url,'labreports'),requestedTests);
+  }
+
+  submitDiagnosis(doctor_id, patient_id, indication){
+    return this.http.post(prepareURL(environment.server_base_url,'patienthistory'),{
+      "doctor_id":doctor_id,
+      "patient_id":patient_id,
+      "indication":indication
+    });
+  }
+
+  getLabReport(labreport_id){
+    return this.http.get(prepareURL(environment.server_base_url,'labreports',labreport_id))
+                    .map((data)=> data.json());
+  }
+
+  getLabReports(patient_id){
+    return this.http.get(prepareURL(environment.server_base_url,'labreports')+'?done='+true+'&patient_id='+patient_id)
+                    .map((data)=> data.json());
+  }
+
+  getPatientHistory(patient_id){
+    return this.http.get(prepareURL(environment.server_base_url,'patienthistory')+'?patient_id='+patient_id)
+                  .map((data)=> data.json());
   }
 
 

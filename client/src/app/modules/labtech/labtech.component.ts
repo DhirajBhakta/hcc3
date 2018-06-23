@@ -35,12 +35,9 @@ export class LabtechComponent implements OnInit {
           required.push(property);
     for (let property of required)
       if (formvalues[property] == "" || formvalues[property] == null)
-        return this._alerts.create('error', 'Please fill the required field - ' + property));
+        return this._alerts.create('error', 'Please fill the required field - ' + property);
 
     formvalues["done"]=true;
     this.labtechService.submitLabReport(currentRequest.id, formvalues).subscribe((response)=> this._alerts.create("success", "Report submitted"));
   }
-}
-
-
 }

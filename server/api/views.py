@@ -89,11 +89,12 @@ class LoggedUserViewSet(viewsets.ModelViewSet):
 class LabReportViewSet(viewsets.ModelViewSet):
     queryset = LabReport.objects.all()
     serializer_class = LabReportSerializer
-    filter_fields = ('done',)
+    filter_fields = ('done','patient_id',)
 
 class PatientHistoryViewSet(viewsets.ModelViewSet):
     queryset = PatientHistory.objects.all()
     serializer_class = PatientHistorySerializer
+    filter_fields = ('patient_id','doctor_id',)
 
 class AppointmentSpecViewSet(viewsets.ModelViewSet):
     queryset = AppointmentSpec.objects.all()

@@ -1,33 +1,30 @@
 <p class='title'>Dr.{{doctor.person.name}}'s Workbench</p>
-<div fxLayout fxLayoutAlign="space-between">
-  <div fxFlex='30%' fxLayout='column' fxLayoutAlign="start stretch"  class='display-box'>
+<div fxLayout fxLayoutAlign="space-around">
+  <div fxFlex='30%'  *ngIf="currentPatient && !currentPatient.guest"  class='display-box'>
     <lab-request *ngIf="displayState=='LABREQUEST'" [onSubmit]="submitLabRequest"></lab-request>
-    <patient-history-card fxFLex [bundle]="bundle"></patient-history-card>
-    <patient-history-card fxFlex [bundle]="bundle"></patient-history-card>
-    <patient-history-card fxFlex [bundle]="bundle"></patient-history-card>
-
+    <patient-history *ngIf="displayState=='HISTORY'" [history]="patienthistory$ | async" [labreports]="labreports$ | async"></patient-history>
   </div>
 
 
-  <div  fxFLex="40%" *ngIf="isCurrentPatientSet()" fxLayout='column' fxLayoutAlign='start' fxLayoutGap="10px">
+  <div  fxFLex="40%" *ngIf="currentPatient" fxLayout='column' fxLayoutAlign='start' fxLayoutGap="10px">
     <h2>Patient:  {{_getPatientName(currentPatient)}}</h2>
     <mat-button-toggle-group *ngIf="!currentPatient.guest" (change)="setDisplayState($event);">
       <mat-button-toggle value="INFO" [checked]="displayState=='INFO'">Info</mat-button-toggle>
-      <mat-button-toggle value="HISTORY" [checked]="displayState=='HISTORY'">History</mat-button-toggle>
       <mat-button-toggle value="LABREQUEST" [checked]="displayState=='LABREQUEST'">Request Lab Test</mat-button-toggle>
+      <mat-button-toggle value="HISTORY" [checked]="displayState=='HISTORY'">History</mat-button-toggle>
     </mat-button-toggle-group>
     <mat-form-field fxFlex>
       <input matInput placeholder="Enter Indication"  [(ngModel)]="indication">
     </mat-form-field>
     <span fxFLex="30%"></span>
-    <button fxFLex mat-raised-button color='warn'>Submit</button>
+    <button fxFLex mat-raised-button color='warn' (click)="completeDiagnosis()">Submit</button>
   </div>
 
   <div fxFlex="20%" fxLayout='column'>
-    <h2 class='queue-heading'>Waiting Room : <span style='color:white'>{{patients_queue.length}}</span></h2>
+    <div class='queue-heading'>Waiting Room : {{patients_queue.length}}</div>
     <button mat-raised-button class='queue-card' *ngFor='let waiting_item of patients_queue' [ngClass]="{'selected-queue-card':waiting_item.id==currentPatient?.id}" (click)="setPatient(waiting_item)">
-      <span *ngIf='waiting_item.patient'><b>{{waiting_item.patient.name}}</b><br/>{{waiting_item.patient.patient_type}}</span>
-      <span *ngIf='waiting_item.guest' style='color:red'><b>{{waiting_item.guest.name}}</b><br/>(GUEST)</span>
+      <div *ngIf='waiting_item.patient'><b>{{waiting_item.patient.name}}</b><br/><span>{{waiting_item.patient.patient_type}}</span></div>
+      <div *ngIf='waiting_item.guest' style='color:red'><b>{{waiting_item.guest.name}}</b><br/><span>GUEST</span></div>
     </button>
   </div>
 </div>

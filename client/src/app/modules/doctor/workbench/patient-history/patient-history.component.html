@@ -1,0 +1,15 @@
+<mat-tab-group>
+  <mat-tab label="History">
+    <div fxLayout="column" fxLayoutGap="2px">
+      <patient-history-card *ngFor="let item of history" [bundle]="item"></patient-history-card>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Lab Reports">
+    <div fxLayout="column" fxLayoutGap="2px">
+      <button *ngFor="let report of labreports" (click)="openLabreport(report)">
+        {{report.date | date}}
+      </button>
+    </div>
+  </mat-tab>
+</mat-tab-group>

@@ -7,24 +7,22 @@ p.title{
   margin:0;
   padding:10px;
 }
- .queue-card{
-  background-color:white;
-  border:1px solid #E9E9E9;
+
+
+.queue-heading{
+  background-color: #039BE5;
+  color:white;
+  padding:15px;
+  box-shadow: 0 5px black;
+}
+.queue-card div span{
+  color:gray;
 }
 .selected-queue-card{
   background-color: #039BE580;
   color:white;
   font-size: 20px;
   font-weight: lighter;
-}
-.queue-heading{
-  background-color: #039BE5;
-  color:#ffffff80;
-  border-radius:1px;
-  padding-top: 10px;
-  padding-bottom:10px;
-  padding-right:5px;
-  margin-bottom: 0;
 }
 
 .display-box{

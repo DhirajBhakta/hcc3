@@ -14,6 +14,8 @@ import { HistoryService } from './services/history.service';
 import { AgGridModule } from 'ag-grid-angular';
 import { LabRequestComponent } from './workbench/lab-request/lab-request.component';
 import { HistoryCardComponent } from './history-card/history-card.component';
+import { PatientHistoryComponent } from './workbench/patient-history/patient-history.component';
+import { LabreportComponent } from './labreport/labreport.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { HistoryCardComponent } from './history-card/history-card.component';
     WorkbenchComponent,
     PatientInfoComponent,
     LabRequestComponent,
-    HistoryCardComponent
+    HistoryCardComponent,
+    PatientHistoryComponent,
+    LabreportComponent
   ],
   exports: [
     DoctorComponent
