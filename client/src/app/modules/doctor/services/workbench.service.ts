@@ -16,11 +16,9 @@ export class WorkbenchService {
   constructor(private http: JWTHttpClient) { }
 
 
-  getDoctor(person_id) {
-    //you get an ARRAY as response , bcos you applied a filter (person__id=person_id)
-    //hence get the first element[0].
-    return this.http.get(prepareURL(environment.server_base_url, 'doctors') + '?person__id=' + person_id)
-      .map((data) => data.json()[0]);
+  getDoctor() {
+    return this.http.get(prepareURL(environment.server_base_url, 'doctors','me'))
+      .map((data) => data.json());
   }
 
   getQueue(doctor_id) {

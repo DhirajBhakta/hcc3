@@ -48,6 +48,9 @@ export class UserService {
   }
 
   getCurrentPerson() {
+    if(!this.currentPerson){
+      this.http.get(prepareURL(environment.server_base_url,"persons","current")).subscribe((data)=>console.log(data));
+    }
     console.log('SERV,',this.currentPerson);
     return this.currentPerson;
   }

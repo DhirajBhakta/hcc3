@@ -31,9 +31,7 @@ export class WorkbenchComponent implements OnInit {
   }
 
   ngOnInit() {
-    let person = this.userService.getCurrentPerson();
-    console.log('DOC', person);
-    this.workbenchService.getDoctor(person.id)
+    this.workbenchService.getDoctor()
       .flatMap((doctor) => {
         this.doctor = doctor;
         return this.workbenchService.getQueue(doctor.id);
