@@ -24,7 +24,7 @@
         "../node_modules/ag-grid/dist/styles/ag-grid.css",
 "../node_modules/ag-grid/dist/styles/ag-theme-material.css"
       ],
-      "scripts": [],
+      "scripts": ["../node_modules/moment/min/moment.min.js"],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

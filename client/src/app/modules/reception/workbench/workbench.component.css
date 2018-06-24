@@ -1,11 +1,3 @@
-.available-doctors {
-  display: inline-flex;
-  flex-direction: column;
-}
-.doctor-name {
-  margin-top:10px;
-  margin-bottom:10px;
-}
 
 
 .left-list{

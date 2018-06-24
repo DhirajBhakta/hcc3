@@ -15,7 +15,7 @@ export class LabtechService {
   constructor(private http:JWTHttpClient) { }
 
   getNotifications(){
-    return Observable.interval(10000)
+    return Observable.interval(1000)
       .switchMap(() => this.http.get(prepareURL(environment.server_base_url, 'labreports') + '?done=' + false))
       .map((data) => data.json())
   }

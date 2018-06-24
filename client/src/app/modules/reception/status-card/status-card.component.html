@@ -1,9 +1,11 @@
-<mat-card *ngIf="!flipped" [ngClass]="{'animated':!flipped, 'flipInX':!flipped}">
+
+<!-- Front side of the card (before flipped)-->
+<mat-card *ngIf="!flipped" class="animated flipInX">
   <div fxLayout>
     <div fxFlex="90%" fxLayout fxLayout.xs='column' fxLayout.sm='column'>
       <div fxLayout='column' fxFlex='70%'>
-        <span class='subtitle'>{{doctor.specialization}}</span>
-        <span class='title'>Dr.{{doctor.person.name}}</span>
+        <span class='subtitle'>{{doctor?.specialization}}</span>
+        <span class='title'>Dr.{{doctor?.person.name}}</span>
       </div>
 
       <button mat-button fxLayout='column' fxFlex='10%' class='counter' (click)="toggleShowQueue();">
@@ -17,9 +19,11 @@
 </mat-card>
 
 
-<mat-card class='incrementor-card' *ngIf="flipped" [ngClass]="{'animated':flipped, 'flipInX':flipped}">
+
+<!-- The Other side of the Card (when flipped) -->
+<mat-card *ngIf="flipped" class="incrementor-card animated flipInX">
   <div fxLayout fxLayoutAlign='start end'>
-    <div *ngIf="family?.length == 0">
+    <div *ngIf="family.length == 0">
       <mat-form-field>
         <input matInput placeholder="Enter ID/Guest Name" [(ngModel)]='username'>
       </mat-form-field>
@@ -29,16 +33,21 @@
       <button mat-raised-button class='member' *ngFor='let member of family' (click)="addToWaitingQueue(member);">{{member.name}}</button>
     </div>
     <button mat-raised-button color='warn' (click)="resetDefaults();flip();">Cancel</button>
-    <mat-slide-toggle [disabled]="family?.length != 0" [checked]="GUEST_MODE" (change)="GUEST_MODE=!GUEST_MODE">Guest</mat-slide-toggle>
+    <mat-slide-toggle [disabled]="family.length != 0" [checked]="GUEST_MODE" (change)="toggleGuestMode();">Guest</mat-slide-toggle>
   </div>
 </mat-card>
 
-<div *ngIf='showqueue' class='animated queue zoomIn' fxLayout='column' fxLayoutAlign='center '>
-  <table fxFlex style='width:100%'>
-    <tr *ngFor='let waiting_item of patients_queue'>
-      <td *ngIf='waiting_item.patient'>{{waiting_item.patient.name}}</td>
-      <td *ngIf='waiting_item.guest' style='color:red'>{{waiting_item.guest.name}}</td>
-      <td><button mat-raised-button color='warn' (click)="removeFromWaitingQueue(waiting_item);">Remove</button></td>
-    </tr>
-  </table>
-<div>
+
+
+ <!-- collapsible waiting Queue -->
+<div *ngIf='showqueue' class='animated queue zoomIn'>
+  <mat-list>
+    <mat-list-item *ngFor='let waiting_item of patients_queue'>
+      <mat-icon mat-list-icon>person</mat-icon>
+      <span mat-line>{{ _getPatientName(waiting_item) }}</span>
+      <span mat-line style="float:left">{{ _getPatientType(waiting_item) }}</span>
+      <button style="float:right" mat-raised-button color='warn' (click)="removeFromWaitingQueue(waiting_item);">Remove</button>
+    </mat-list-item>
+  </mat-list>
+  <p *ngIf="patients_queue.length == 0" class="empty-list">List is Empty</p>
+</div>

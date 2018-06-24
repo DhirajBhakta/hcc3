@@ -12,13 +12,13 @@ import {UserService} from 'app/services/user.service';
 export class ReceptionComponent implements OnInit {
 
   navLinks: NavLink[] = [
-    {displayString: 'Greeter', path: 'greeter'},
+    {displayString: 'Workbench', path: 'workbench'},
     {displayString: 'Timetable', path: 'timetable'},
     {displayString: 'Appointments', path: 'appointments'},
   ];
 
 
-  constructor(private http: JWTHttpClient, private userService: UserService) { }
+  constructor(private http: JWTHttpClient) { }
 
   ngOnInit() {
 

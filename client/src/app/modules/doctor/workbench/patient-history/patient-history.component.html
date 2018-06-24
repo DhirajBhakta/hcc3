@@ -1,0 +1,29 @@
+<mat-tab-group>
+
+  <mat-tab label="History">
+    <mat-nav-list >
+     <a mat-list-item *ngFor="let history_item of history">
+       <mat-icon mat-list-icon>local_hospital</mat-icon>
+       <span mat-line> {{history_item.indication}}</span>
+       <p mat-line style="color:gray">
+         <span style="float:left">Dr.{{ history_item.doctor.person.name }} ({{history_item.doctor.specialization}})</span>
+         <span style="float:right"> {{history_item.date | date}}</span>
+       </p>
+     </a>
+   </mat-nav-list>
+   <p *ngIf="history.length == 0" class="empty-list">No Records</p>
+  </mat-tab>
+
+  <mat-tab label="Lab Reports">
+    <mat-nav-list >
+     <a mat-list-item *ngFor="let report of labreports" (click)="openLabreport(report)">
+       <mat-icon mat-list-icon>receipt</mat-icon>
+       <span mat-line> Dr.{{report.doctor.person.name}}</span>
+       <span mat-line style="color:gray">{{report.date | date}}</span>
+     </a>
+   </mat-nav-list>
+    <p *ngIf="history.length == 0" class="empty-list">No Records</p>
+  </mat-tab>
+
+
+</mat-tab-group>

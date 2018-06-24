@@ -1,0 +1,46 @@
+
+.incoming-requests-container{
+  padding:20px;
+  background-color: #ecececcc;
+  border-radius: 2px;
+  box-shadow: 0px 0px 4px gray;
+}
+
+mat-form-field[hidden]{
+  display: none;
+}
+/deep/ .mat-dialog-content {
+    overflow-y: hidden !important;
+}
+tbody{
+  padding:20px;
+  color:#0000004d;
+  background-color: #ececec66;
+  border-bottom: 10px solid white;
+}
+
+td{
+  padding:10px;
+  border:1px solid white;
+}
+
+td.test-group{
+color: #fff;
+font-size: 20px;
+padding: 50px;
+background-color: #1b050533;
+}
+
+.report-header{
+  padding:20px;
+  background-color: #ecececcc;
+}
+
+.patient-name{
+  color:#2cc3f5cc;
+  font-size:23px;
+}
+.doctor-name{
+  color:gray;
+  font-weight: 100;
+}

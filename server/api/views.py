@@ -6,7 +6,10 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view, list_route
+
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+
 
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -43,10 +46,21 @@ class CreateListMixin:
             kwargs['many'] = True
         return super().get_serializer(*args, **kwargs)
 
+
+
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_field = 'username'
+
+    #to get currently loggedin user
+    @list_route(methods=['get'])
+    def me(self,request,**kwargs):
+        user = None
+        if(not request.user.is_anonymous):
+            user = UserSerializer(request.user).data
+        return Response(user)
 
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
@@ -65,6 +79,17 @@ class PersonViewSet(viewsets.ModelViewSet):
     serializer_class = PersonSerializer
     filter_fields = ('patron',)
 
+    #to get currently loggedin person
+    @list_route(methods=['get'])
+    def me(self,request,**kwargs):
+        person = None
+        if(not request.user.is_anonymous):
+            user = UserSerializer(request.user).data
+            person_id = user.get('person').get('id')
+            person = Person.objects.get(id=person_id)
+            person = PersonSerializer(person).data
+        return Response(person)
+
     def perform_update(self, serializer):
         serializer.save()
 
@@ -80,7 +105,18 @@ class WaitingRoomViewSet(viewsets.ModelViewSet):
 class DoctorViewSet(viewsets.ModelViewSet):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
-    filter_fields = ('person__id',)
+
+    #to get currently loggedin doctor
+    @list_route(methods=['get'])
+    def me(self,request,**kwargs):
+        doctor = None
+        if(not request.user.is_anonymous):
+            user = UserSerializer(request.user).data
+            person_id = user.get('person').get('id')
+            doctor = Doctor.objects.get(person__id=person_id)
+            doctor = DoctorSerializer(doctor).data
+        return Response(doctor)
+
 
 class LoggedUserViewSet(viewsets.ModelViewSet):
     queryset = LoggedUser.objects.all()
@@ -89,10 +125,12 @@ class LoggedUserViewSet(viewsets.ModelViewSet):
 class LabReportViewSet(viewsets.ModelViewSet):
     queryset = LabReport.objects.all()
     serializer_class = LabReportSerializer
+    filter_fields = ('done','patient_id',)
 
 class PatientHistoryViewSet(viewsets.ModelViewSet):
     queryset = PatientHistory.objects.all()
     serializer_class = PatientHistorySerializer
+    filter_fields = ('patient_id','doctor_id',)
 
 class AppointmentSpecViewSet(viewsets.ModelViewSet):
     queryset = AppointmentSpec.objects.all()

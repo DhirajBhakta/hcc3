@@ -1,0 +1,17 @@
+<div fxLayout>
+
+  <div fxFlex=50% class='left-list'>
+    <h1>Available Doctors in Cabin</h1>
+    <status-card *ngFor='let personID of loggedInDoctorsPersonIDs' [doctor__Person_id]='personID'></status-card>
+    <p *ngIf="loggedInDoctorsPersonIDs.length == 0" class="empty-list"> Sorry, doctors are currently unavailable</p>
+  </div>
+
+  <div class='right-list'>
+    <h1>Appointments for Approval</h1>
+    <mat-card>
+      <h3>Ranganath Pai</h3>
+      <h4>B.Tech</h4> has requested for an appointment with
+      <b>Dr.Strange</b> on <b>11/12/2018</b> <button mat-raised-button color='primary'>Approve</button>
+    </mat-card>
+  </div>
+</div>

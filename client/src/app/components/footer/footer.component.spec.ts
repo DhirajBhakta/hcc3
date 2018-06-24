@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HistoryCardComponent } from './history-card.component';
+import { FooterComponent } from './footer.component';
 
-describe('HistoryCardComponent', () => {
-  let component: HistoryCardComponent;
-  let fixture: ComponentFixture<HistoryCardComponent>;
+describe('FooterComponent', () => {
+  let component: FooterComponent;
+  let fixture: ComponentFixture<FooterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HistoryCardComponent ]
+      declarations: [ FooterComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HistoryCardComponent);
+    fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

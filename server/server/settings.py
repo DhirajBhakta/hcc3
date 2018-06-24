@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '-d+8dn^8m6ike%6u!7vrs@6nmr(97v5w6qu6)9va&ull88jg$i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["hcc.nitk.com","localhost","127.0.0.1"]
 
 APPEND_SLASH = False
 # Application definition
@@ -55,10 +55,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    'localhost:4200',
-    '127.0.0.1:4200'
-]
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_WHITELIST = [
+#     'localhost:4200',
+#     '127.0.0.1:4200'
+#     'localhost:80',
+#     '127.0.0.1:80',
+#     '0.0.0.0:80',
+#     'hcc.nitk.com:80'
+# ]
 ROOT_URLCONF = 'server.urls'
 
 TEMPLATES = [
@@ -114,17 +119,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication',
-        # 'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
     ),
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
-    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
 
 }
 

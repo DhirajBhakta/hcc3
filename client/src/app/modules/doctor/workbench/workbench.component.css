@@ -1,36 +1,48 @@
-p.title{
+h2.title{
   background-color: #039BE5;
   color:#ffffff80;
-  font-size: 30px;
   font-weight:lighter;
   text-align: center;
   margin:0;
   padding:10px;
 }
- .queue-card{
-  background-color:white;
-  border:1px solid #E9E9E9;
+
+
+
+.diagnosis-header{
+  padding:20px;
+  background-color: #ecececcc;
 }
-.selected-queue-card{
-  background-color: #039BE580;
+
+.patient-name{
+  color:#2cc3f5cc;
+  font-size:23px;
+}
+.age{
+  color:gray;
+}
+
+
+
+h4.queue-heading{
+  background-color: #039be5;
+  text-align: center;
   color:white;
-  font-size: 20px;
-  font-weight: lighter;
+  font-weight: 100;
+  box-shadow: 0 0 1px black;
+  margin:0;
+  padding:10px;
 }
-.queue-heading{
-  background-color: #039BE5;
-  color:#ffffff80;
-  border-radius:1px;
-  padding-top: 10px;
-  padding-bottom:10px;
-  padding-right:5px;
-  margin-bottom: 0;
+.queue{
+  background-color: #a7cfe31a;
 }
+
+
 
 .display-box{
   height:400px;
+  border-right: 1px solid rgba(0,0,0,.12);
 }
-
 .display-box > *{
   height: 100%;
 }

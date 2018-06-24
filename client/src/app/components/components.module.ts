@@ -12,6 +12,7 @@ import { ProfileCardComponent } from './profile-card/profile-card.component';
 import { HttpErrorComponent } from './http-error/http-error.component';
 import { AutoCompleteComponent } from './auto-complete/auto-complete.component';
 import { BookAppointmentComponent } from './book-appointment/book-appointment.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { BookAppointmentComponent } from './book-appointment/book-appointment.co
     HttpErrorComponent,
     AutoCompleteComponent,
     BookAppointmentComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,8 @@ import { BookAppointmentComponent } from './book-appointment/book-appointment.co
     ProfileCardComponent,
     AutoCompleteComponent,
     HttpErrorComponent,
-    BookAppointmentComponent
+    BookAppointmentComponent,
+    FooterComponent
   ]
 })
 export class ComponentsModule { }
