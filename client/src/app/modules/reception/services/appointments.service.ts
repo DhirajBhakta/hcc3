@@ -73,12 +73,36 @@ export class AppointmentsService {
   }
   getAppointmentWithParams(params: Object) {
     return this.http.get(prepareURL(environment.server_base_url, 'appointments') + addParams(params))
-                    .map(data => data.json());
+              .map(data => data.json());
 
+  }
+  getAppointmentWithParamsAndDoctor(params: Object) {
+    return this.http.get(prepareURL(environment.server_base_url, 'appointments') + addParams(params))
+              .map(data => data.json())
+              .flatMap(appointments => {
+                if (appointments.length > 0) {
+                  return Observable.forkJoin(
+                    appointments.map( appointment => {
+                      return this.http.get(prepareURL(environment.server_base_url, 'doctors', appointment.doctor_id))
+                        .map(data => data.json())
+                        .map(doctor => {
+                          appointment.doctor = doctor;
+                          return appointment;
+                        });
+                    })
+                  );
+                }
+                return Observable.of([]);
+              })
   }
 
   // CRUD Endpoints for Slots
   //
+  pollAppointments(args) {
+    return Observable.interval(5000)
+                     .startWith(0)
+                     .switchMap(() => this.getSlotsWithAppointments(args));
+  }
   getSlotsWithParams(params: Object) {
     return this.http.get(prepareURL(environment.server_base_url, 'slots') + addParams(params))
                     .map(data => data.json());
@@ -94,5 +118,28 @@ export class AppointmentsService {
   deleteSlot(slot_id) {
     return this.http.delete(prepareURL(environment.server_base_url, 'slots', slot_id))
                     .map(data => data.json());
+  }
+  getSlotsWithAppointments(args) {
+    return this.getSlotsWithParams(args)
+            .flatMap(slots => {
+              if (slots.length > 0) {
+                return Observable.forkJoin(
+                  slots.map(slot => {
+                    return Observable.forkJoin(
+                      this.getAppointmentWithParamsAndDoctor({'id' : slot.appointment}),
+                      this.http.get(prepareURL(environment.server_base_url, 'persons', slot.patient))
+                        .map(data => data.json()))
+                      .map(data => {
+                        const appointment = data[0][0];
+                        const patient_data = data[1];
+                        slot.appointment = appointment;
+                        slot.patient_data = patient_data;
+                        return slot;
+                      });
+                  })
+                );
+              }
+              return Observable.of([]);
+            });
   }
 }

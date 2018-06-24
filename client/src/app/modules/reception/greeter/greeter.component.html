@@ -32,12 +32,7 @@
   <status-card *ngFor='let personID of loggedInDoctorsPersonIDs' [doctor__Person_id]='personID'></status-card>
 </div>
 
-<div class='right-list'>
+<div class='def-shadow padded-container'>
   <h1>Appointments for Approval</h1>
-  <mat-card>
-    <h3>Ranganath Pai</h3>
-    <h4>B.Tech</h4>
-     has requested for an appointment with
-     <b>Dr.Strange</b> on <b>11/12/2018</b> <button mat-raised-button color='primary'>Approve</button>
-  </mat-card>
+  <app-confirm-appointments></app-confirm-appointments>
 </div>

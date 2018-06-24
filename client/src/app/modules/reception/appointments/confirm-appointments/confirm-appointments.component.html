@@ -1,0 +1,37 @@
+<ng-container *ngIf="slots?.length > 0">
+  <mat-card *ngFor="let slot of slots; let i=index">
+    <mat-card-header>
+      <mat-card-title>
+    {{slot.patient_data.name}}
+      </mat-card-title>
+      <mat-card-subtitle>
+    {{slot.patient_data.patient_type}}
+    <p *ngIf="slot.patient_data.patron" class="small-grey-text">Dependant</p>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <span>
+          Doctor : {{slot.appointment.doctor.person.name}}
+        </span>
+        <span>
+          Date : {{slot.appointment.date | date:'mediumDate'}}
+        </span>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <span>
+          Status : {{slot.status}}
+        </span>
+        <span>
+          Time : {{slot.appointment.start_time | date:'shortTime'}}
+        </span>
+      </div>
+      </div>
+    <button mat-button color="primary" (click)="confirmSlot(i)">CONFIRM</button>
+    <button mat-button color="warn" (click)="rejectSlot(i)">REJECT</button>
+  </mat-card>
+</ng-container>
+<ng-container *ngIf="slots?.length === 0">
+  <p class="small-grey-text">No appointments awaiting confirmation.</p>
+</ng-container>
+<app-show-errors [success]="success" [errors]="errors"></app-show-errors>

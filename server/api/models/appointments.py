@@ -6,7 +6,9 @@ from .person import Person
 
 BOOKING_STATUS = (('BO', 'BOOKED'),
                   ('WL', 'WAITING_LIST'),
-                  ('BC', 'BOOKED_CONFIRMED'), )
+                  ('BC', 'BOOKED_CONFIRMED'),
+                  ('UC', 'UNCONFIRMED'),
+                  ('RJ', 'REJECTED'))
                   
 class AppointmentSpec(models.Model):
     '''
@@ -63,7 +65,7 @@ class Slot(models.Model):
     patient = models.ForeignKey(Person, on_delete=models.CASCADE)
 
     appointment = models.ForeignKey(Appointment, null=False, on_delete=models.CASCADE, related_name='slots')
-    status = models.CharField(max_length=2, choices=BOOKING_STATUS)
+    status = models.CharField(max_length=2, choices=BOOKING_STATUS, default='UC')
 
     
     

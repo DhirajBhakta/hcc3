@@ -19,7 +19,7 @@ import { ViewAppointmentsComponent } from './appointments/view-appointments/view
 import { AppointmentItemComponent } from './appointments/appointment-item/appointment-item.component';
 import { CreateSlotComponent } from './appointments/appointment-item/create-slot/create-slot.component';
 import { SlotItemComponent } from './appointments/appointment-item/slot-item/slot-item.component';
-import { BookAppointmentComponent } from './appointments/book-appointment/book-appointment.component';
+import { ConfirmAppointmentsComponent } from './appointments/confirm-appointments/confirm-appointments.component';
 
 @NgModule({
   imports: [
@@ -40,7 +40,8 @@ import { BookAppointmentComponent } from './appointments/book-appointment/book-a
                  AppointmentItemComponent,
                  CreateSlotComponent,
                  SlotItemComponent,
-                 BookAppointmentComponent],
+                 ConfirmAppointmentsComponent,
+  ],
   exports: [
     ReceptionComponent
   ],
