@@ -9,7 +9,7 @@ html, body {
   padding:0px;
   margin:0px;
   height:100vh;
-  height: 100%;
+  min-height: 100vh;
   font-family: 'Roboto',sans-serif;
 }
 
@@ -43,9 +43,9 @@ button.member:hover{
   padding: 20px;
 }
 .main-container {
-    margin:0px;
-    padding: 0px;;
+  min-height:90%;
 }
+
 button[hidden]{
   display: none;
 }
