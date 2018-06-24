@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { LabtechService } from './services/labtech.service';
 import { AlertsService } from '@jaspero/ng-alerts';
+import * as moment from 'moment';
+
 
 
 @Component({
@@ -11,17 +13,20 @@ import { AlertsService } from '@jaspero/ng-alerts';
 })
 export class LabtechComponent implements OnInit {
   navLinks: any[] = [];
-  notifications: any[] = [];
+
+  requests: any[] = [];
   currentRequest: any = null;
 
   constructor(private labtechService: LabtechService, private _alerts: AlertsService) { }
 
   ngOnInit() {
-    this.labtechService.getNotifications().subscribe((labrequests) => this.notifications = labrequests);
+    this.labtechService.getNotifications().subscribe((labrequests) => this.requests = labrequests);
   }
+
   setCurrentRequest(request) {
     this.currentRequest = request;
   }
+
   reset(){
     this.currentRequest = null;
   }
@@ -38,6 +43,7 @@ export class LabtechComponent implements OnInit {
         return this._alerts.create('error', 'Please fill the required field - ' + property);
 
     formvalues["done"]=true;
+    formvalues["date"]=moment.utc(new Date()).format();
     this.labtechService.submitLabReport(currentRequest.id, formvalues).subscribe((response)=> this._alerts.create("success", "Report submitted"));
   }
 }

@@ -2,12 +2,19 @@
 <app-main-toolbar [navLinks]="navLinks"></app-main-toolbar>
 
 <div fxLayout fxLayoutAlign="space-around">
-  <div fxFLex="20%" fxLayout='column' fxLayoutGap="2px" class="incoming-requests-container">
+
+  <div fxFLex="20%"  class="incoming-requests-container">
     <h2>Incoming Requests</h2>
-    <button mat-raised-button *ngFor="let notification of notifications" (click)='setCurrentRequest(notification); '>
-      {{notification.patient.name}}
-    </button>
+    <mat-nav-list>
+      <mat-list-item *ngFor='let request of requests' (click)="setCurrentRequest(request)">
+        <mat-icon mat-list-icon>person</mat-icon>
+        <span mat-line>{{ request.patient.name }}</span>
+      </mat-list-item>
+    </mat-nav-list>
+    <p *ngIf="requests.length == 0" class="empty-list">List is Empty</p>
   </div>
+
+
   <div fxFLex *ngIf="currentRequest">
     <div class="report-header">
       <p class="patient-name">{{currentRequest.patient.name}}</p>

@@ -133,7 +133,7 @@ class GroupSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     username = serializers.CharField(
         validators=[UniqueValidator(queryset=User.objects.all())])
-    groups = GroupSerializer(read_only=True, many=True)
+    groups = GroupSerializer(read_only=True,many=True)
     person = MinimalPersonSerializer(read_only=True)
     password = serializers.CharField(write_only=True)
 

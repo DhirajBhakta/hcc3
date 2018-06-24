@@ -43,8 +43,9 @@ export class UserService {
       });
   }
 
+  /**ambiguous, deprecated due to dependants profile being eliminated*/
   setCurrentPerson(person) {
-    this.currentPerson = person;
+    this.currentPerson$ = person;
   }
 
   getCurrentPerson() {

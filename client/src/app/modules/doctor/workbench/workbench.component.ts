@@ -18,8 +18,8 @@ export class WorkbenchComponent implements OnInit {
   currentPatient: any = null;
   indication: string = "";
   displayState: string = "HISTORY";
-  patienthistory;
-  labreports;
+  patienthistory$;
+  labreports$;
 
   constructor(private userService: UserService, private workbenchService: WorkbenchService, private _alerts: AlertsService) {
     this.submitLabRequest = this.submitLabRequest.bind(this);
@@ -95,7 +95,7 @@ export class WorkbenchComponent implements OnInit {
 
   completeDiagnosis() {
     if (this._isGuest(this.currentPatient))
-      this.workbenchService.popQueue(this.currentPatient.id).subscribe((response) => { this.reset(); this._alerts("success", "Guest patients details are NOT recorded");});
+      this.workbenchService.popQueue(this.currentPatient.id).subscribe((response) => { this.reset(); this._alerts.create("success","Guest patients details are NOT recorded");});
 
     else
       this.workbenchService.submitDiagnosis(this.doctor.id, this.currentPatient.patient.id, this.indication)

@@ -10,7 +10,7 @@ import { UserService } from 'app/services/user.service';
 export class StatusCardComponent implements OnInit {
   //personID of the doctor
   @Input() doctor__Person_id;
-  doctor: any;
+  doctor: any = null;
   patients_queue: any[] = [];
   token: number = 0;
   flipped: boolean = false;
@@ -18,9 +18,8 @@ export class StatusCardComponent implements OnInit {
   username: string = "";
   family: any[] = [];
   GUEST_MODE: boolean = false;
-  constructor(private queueService: QueueService, private userService: UserService) {
 
-  }
+  constructor(private queueService: QueueService, private userService: UserService) {}
 
   ngOnInit() {
     this.queueService.getDoctor(this.doctor__Person_id)
@@ -37,10 +36,26 @@ export class StatusCardComponent implements OnInit {
 
   flip() {
     this.flipped = !this.flipped;
+    this.showqueue = false;
   }
 
   toggleShowQueue() {
     this.showqueue = !this.showqueue;
+  }
+
+  toggleGuestMode(){
+    this.GUEST_MODE = !this.GUEST_MODE;
+  }
+
+  _getPatientName(item) {
+    if (item.patient)
+      return item.patient.name;
+    return item.guest.name;
+  }
+  _getPatientType(item){
+    if(item.patient)
+      return item.patient.patient_type;
+    return "GUEST";
   }
 
   resetDefaults() {
@@ -57,15 +72,15 @@ export class StatusCardComponent implements OnInit {
   }
 
 
+/**
+*if Guest: submits the "name" entered in the text box(Input)
+*if Non-Guest: submits the userID(employee ID/ student roll number) to get the family members(incase of employee), or student himself
+*/
   submitGuestNameOrID() {
-    if (this.GUEST_MODE){
+    if (this.GUEST_MODE)
       this.addToWaitingQueue(this.username);
-    }
-    else{
-      console.log('cos im a chooth');
-      this.userService.getFamily(this.username)
-        .subscribe((family) => this.family = family);
-      }
+    else
+      this.userService.getFamily(this.username).subscribe((family) => this.family = family);
   }
 
 
@@ -75,14 +90,11 @@ export class StatusCardComponent implements OnInit {
   * for guest patient  ==> input: just name of the guest (bcos, new guest will be created everytime)
   */
   addToWaitingQueue(patient) {
-    console.log('called me in add to waiting q');
-    this.queueService.enqueue(patient, this.token, this.doctor.id)
-      .subscribe(() => {console.log('enqueueueueueed');this.incrementToken()});
+    this.queueService.enqueue(patient, this.token, this.doctor.id).subscribe(()=>this.incrementToken());
   }
 
   removeFromWaitingQueue(waiting_item) {
-    this.queueService.dequeue(waiting_item)
-      .subscribe(() => this.toggleShowQueue());
+    this.queueService.dequeue(waiting_item).subscribe(()=>this.toggleShowQueue());
   }
 
 

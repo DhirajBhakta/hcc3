@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ReceptionRoutingModule } from './reception-routing.module';
 import { ReceptionComponent } from './reception.component';
-import { GreeterComponent } from './greeter/greeter.component';
+import { WorkbenchComponent } from './workbench/workbench.component';
 
 import { ComponentsModule } from '../../components/components.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -29,7 +29,7 @@ import { BookAppointmentComponent } from './appointments/book-appointment/book-a
     ComponentsModule
   ],
   declarations: [ReceptionComponent,
-                 GreeterComponent,
+                 WorkbenchComponent,
                  StatusCardComponent,
                  TimeTableComponent,
                  SpecFormComponent,
