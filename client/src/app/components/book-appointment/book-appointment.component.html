@@ -1,4 +1,5 @@
 <button (click)="log()"></button>
+{{currentPerson | async| json}}
 <mat-vertical-stepper [linear]="true">
 
   <mat-step label="Select Patient">
@@ -67,6 +68,7 @@
             <mat-select [(ngModel)]="booking_status" placeholder="Select status">
         <mat-option value='BO'> Booked </mat-option>
         <mat-option value='WL'> Waiting List </mat-option>
+        <mat-option value='UC'> Unconfirmed </mat-option>
       </mat-select>
       </mat-form-field>
       <button mat-button color="primary" (click)="createSlot()">Create</button>

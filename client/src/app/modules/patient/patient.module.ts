@@ -15,8 +15,8 @@ import { PatientProfileComponent } from './patient-profile/patient-profile.compo
 
 
 //services
-import { AppointmentsService } from './services/appointments.service';
 import { PatientService } from './services/patient.service';
+import { ReceptionModule } from '../reception/reception.module';
 
 
 @NgModule({
@@ -29,13 +29,13 @@ import { PatientService } from './services/patient.service';
     CommonModule,
     ComponentsModule,
     PatientRoutingModule,
-    SharedModule
+    SharedModule,
+    ReceptionModule
   ],
   // exports : [
   //   PatientComponent
   // ],
   providers: [
-    AppointmentsService,
     PatientService
   ]
 

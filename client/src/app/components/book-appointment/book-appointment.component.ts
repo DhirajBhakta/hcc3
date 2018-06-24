@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../../../services/user.service';
+import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs/Observable';
-import { AppointmentsService } from '../../services/appointments.service';
-import { Slot } from '../../models/slot.model';
+import { AppointmentsService } from '../../modules/reception/services/appointments.service';
+import { Slot } from '../../modules/reception/models/slot.model';
 
 @Component({
   selector: 'app-book-appointment',
@@ -39,9 +39,12 @@ export class BookAppointmentComponent implements OnInit {
   filtered_appointments = [];
   valid_dates = [];
 
+  currentPerson;
+
   objectKeys = Object.keys;
   constructor(private userService: UserService,
              private aptService: AppointmentsService) {
+               this.currentPerson = userService.getCurrentPerson();
              }
 
   ngOnInit() {
