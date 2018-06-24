@@ -17,7 +17,7 @@ export class ConfirmAppointmentsComponent implements OnInit {
 
   ngOnInit() {
     // this.slots = this.aptService.pollAppointments({'status' : 'BO'});
-    this.aptService.pollAppointments({'status' : 'BO'}).subscribe(data => this.slots = data);
+    this.aptService.pollAppointments({'status' : 'UC'}).subscribe(data => this.slots = data);
 
 
   }
