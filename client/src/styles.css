@@ -54,3 +54,14 @@ button[hidden]{
   color: rgba(0,0,0,.54)
 }
 
+
+/**
+*Used to show feedback whenever lists are empty
+*/
+p.empty-list{
+  padding:20px;
+  text-align: center;
+  color:gray;
+  font-weight: 100;
+  font-size: 20px;
+}

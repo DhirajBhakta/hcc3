@@ -24,7 +24,8 @@ export class WorkbenchService {
   getQueue(doctor_id) {
     return Observable.interval(1000)
       .switchMap(() => this.http.get(prepareURL(environment.server_base_url, 'waitingroom') + '?doctor=' + doctor_id))
-      .map((data) => data.json());
+      .map((data) => data.json())
+      .map((array) => array.sort(item=> item.token));
   }
   popQueue(waiting_item_id){
     return this.http.delete(prepareURL(environment.server_base_url,'waitingroom',waiting_item_id))

@@ -65,7 +65,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     OwlNativeDateTimeModule,
     MatSidenavModule,
     MatSlideToggleModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
 
   ],
 })

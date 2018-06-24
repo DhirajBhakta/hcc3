@@ -21,7 +21,6 @@ export class LabreportComponent implements OnInit {
   }
 
   getAge(dob){
-        console.log(dob);
        return moment().diff(dob, 'years');
   }
 

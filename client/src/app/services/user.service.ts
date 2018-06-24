@@ -13,7 +13,7 @@ import 'rxjs/add/operator/concatAll';
 @Injectable()
 export class UserService {
 
-  private currentPerson: any = null;
+  private currentPerson$ = null;
 
   constructor(private http: JWTHttpClient) { }
 
@@ -48,11 +48,10 @@ export class UserService {
   }
 
   getCurrentPerson() {
-    if(!this.currentPerson){
-      this.http.get(prepareURL(environment.server_base_url,"persons","current")).subscribe((data)=>console.log(data));
-    }
-    console.log('SERV,',this.currentPerson);
-    return this.currentPerson;
+    if(!this.currentPerson$)
+      this.currentPerson$ = this.http.get(prepareURL(environment.server_base_url,"persons","current"))
+                                  .map((data) => data.json());
+    return this.currentPerson$;
   }
 
   getAllLoggedInUsers() {

@@ -4,6 +4,7 @@ import { UserService } from 'app/services/user.service';
 import { WorkbenchService } from '../services/workbench.service';
 import { AlertsService } from '@jaspero/ng-alerts';
 
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-workbench',
@@ -17,12 +18,6 @@ export class WorkbenchComponent implements OnInit {
   currentPatient: any = null;
   indication: string = "";
   displayState: string = "HISTORY";
-  bundle = {
-    'specialization': 'General',
-    'doctorName': 'Dr.Bhandary',
-    'date': '11/15/1995',
-    'indication': 'fever'
-  }
   patienthistory;
   labreports;
 
@@ -39,6 +34,7 @@ export class WorkbenchComponent implements OnInit {
       .subscribe((queue) => {
         if (this.patients_queue.length != queue.length)
           this.patients_queue = queue.sort((item => item.token))
+          console.log(this.patients_queue);
       }
       );
   }
@@ -71,6 +67,11 @@ export class WorkbenchComponent implements OnInit {
       return item.patient.name;
     return item.guest.name;
   }
+  _getPateintType(item){
+    if(item.patient)
+      return item.patient.patient_type;
+    return "GUEST";
+  }
   _getPatientID(item) {
     if (item.patient)
       return item.patient.id;
@@ -98,9 +99,16 @@ export class WorkbenchComponent implements OnInit {
 
     else
       this.workbenchService.submitDiagnosis(this.doctor.id, this.currentPatient.patient.id, this.indication)
-                            .flatMap((response) => this.workbenchService.popQueue(this.currentPatient.id);)
+                            .flatMap((response) => this.workbenchService.popQueue(this.currentPatient.id))
                             .subscribe((response) => { this.reset(); this._alerts.create("success", "Submitted!") });
 
   }
+
+
+    getAge(dob){
+        if(dob)
+         return moment().diff(dob, 'years');
+        return "";
+    }
 
 }
