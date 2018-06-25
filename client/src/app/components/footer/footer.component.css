@@ -4,8 +4,4 @@ div.footer {
   font-weight: lighter;
   padding: 10px;
   height: 40px;
-  position: absolute;
-  bottom: 0;
-  width:100%;
-  box-sizing: border-box;
 }
