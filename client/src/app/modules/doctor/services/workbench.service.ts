@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { URLSearchParams, RequestOptions, Headers } from '@angular/http';
 import { JWTHttpClient } from 'app/services/jwthttp.service';
 import { Observable } from 'rxjs/Rx';
+import { ErrorFeedbackService } from 'app/services/error-feedback.service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
@@ -13,7 +14,7 @@ import { environment } from 'environments/environment';
 @Injectable()
 export class WorkbenchService {
 
-  constructor(private http: JWTHttpClient) { }
+  constructor(private http: JWTHttpClient, private feedbackService:ErrorFeedbackService) { }
 
 
   getDoctor() {
@@ -40,7 +41,7 @@ export class WorkbenchService {
       "doctor_id":doctor_id,
       "patient_id":patient_id,
       "indication":indication
-    });
+    }).catch((err)=> this.feedbackService.showFeedback(err,{"400":"Please Enter indication (eg:Viral fever)"}));
   }
 
   getLabReport(labreport_id){

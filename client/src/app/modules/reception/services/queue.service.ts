@@ -33,14 +33,11 @@ export class QueueService {
 
   createGuest(name: string) {
     return this.http.post(prepareURL(environment.server_base_url, 'guests'), { "name": name })
-      .map((response) => response.json())
+      .map((response) => response.json());
   }
 
   enqueue(patient, token, doctorID) {
-    console.log('WHWHW', patient);
-    console.log('ARGS',doctorID);
     if (typeof patient === 'string'){
-      console.log('im here');
       return this.createGuest(patient)
             .flatMap((newguest) =>
                 this.http.post(prepareURL(environment.server_base_url,'waitingroom'),
