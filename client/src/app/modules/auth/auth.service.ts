@@ -164,7 +164,7 @@ export class AuthService {
    */
   logout() {
     const logout_token = localStorage.getItem('logout-info');
-    this.jwthttp.delete(environment.server_base_url + '/loggedusers/' +  logout_token)
+    this.jwthttp.delete(prepareURL(environment.server_base_url, 'loggedusers',  logout_token))
                 .subscribe(response => {
                   localStorage.removeItem('JWT');
                   localStorage.removeItem('user-group');
