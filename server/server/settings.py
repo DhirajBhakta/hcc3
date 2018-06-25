@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '-d+8dn^8m6ike%6u!7vrs@6nmr(97v5w6qu6)9va&ull88jg$i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["hcc.nitk.com","localhost","127.0.0.1"]
 

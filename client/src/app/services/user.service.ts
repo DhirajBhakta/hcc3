@@ -3,6 +3,7 @@ import { JWTHttpClient } from './jwthttp.service';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../environments/environment';
 import { prepareURL } from 'app/utils';
+import { ErrorFeedbackService } from 'app/services/error-feedback.service';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/mergeMap';
@@ -15,7 +16,7 @@ export class UserService {
 
   private currentPerson$ = null;
 
-  constructor(private http: JWTHttpClient) { }
+  constructor(private http: JWTHttpClient, private feedbackService:ErrorFeedbackService) { }
 
   getUser(username: string): Observable<any> {
     return this.http.get(prepareURL(environment.server_base_url, 'users', username))
@@ -40,7 +41,8 @@ export class UserService {
         if (user.person.patient_type == "EMPLOYEE")
             httpRequests.push(getDependants(user.person.id));
         return Observable.forkJoin(httpRequests);
-      });
+      })
+      .catch((err) => this.feedbackService.showFeedback(err,{"404":"Invalid username"}));
   }
 
   /**ambiguous, deprecated due to dependants profile being eliminated*/
