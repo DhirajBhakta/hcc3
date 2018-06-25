@@ -87,5 +87,9 @@ export class UserService {
       return family;
     });
   }
+  createDependant(dependant) {
+    return this.http.post(prepareURL(environment.server_base_url, 'persons'), dependant)
+                    .map(data => data.json());
+  }
 
 }

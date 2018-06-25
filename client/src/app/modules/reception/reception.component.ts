@@ -15,6 +15,7 @@ export class ReceptionComponent implements OnInit {
     {displayString: 'Workbench', path: 'workbench'},
     {displayString: 'Timetable', path: 'timetable'},
     {displayString: 'Appointments', path: 'appointments'},
+    {displayString: 'Data Entry', path: 'data-entry'},
   ];
 
 
