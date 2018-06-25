@@ -78,7 +78,7 @@ export class AppointmentItemComponent implements OnInit {
   deleteSlot(i) {
     console.log('delete slot' + i);
     this.aptService.deleteSlot(this.slots[i].id)
-                   .subscribe(response => this.slots.splice(i),
+                   .subscribe(response => this.slots.splice(i, 1),
                               err => console.log(err));
 
   }

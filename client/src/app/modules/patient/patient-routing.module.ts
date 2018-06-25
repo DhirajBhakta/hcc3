@@ -3,13 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { PatientComponent } from './patient.component';
 import { PatientProfileComponent} from './patient-profile/patient-profile.component';
-import { BookAppointmentComponent } from '../../components/book-appointment/book-appointment.component';
+import { AppointmentsComponent } from './appointments/appointments.component';
 
 const Patientroutes: Routes = [
   {
     path: '', component: PatientComponent,
     children: [
-      { path: 'appointment', component: BookAppointmentComponent},
+      { path: '', redirectTo: 'appointment'},
+      { path: 'appointment', component: AppointmentsComponent},
       { path: 'profile', component:  PatientProfileComponent},
     ]
   }];

@@ -14,6 +14,7 @@ import 'rxjs/add/operator/concatAll';
 export class UserService {
 
   private currentPerson$ = null;
+  private currentUser$ = null;
 
   constructor(private http: JWTHttpClient) { }
 
@@ -48,9 +49,21 @@ export class UserService {
     this.currentPerson$ = person;
   }
 
+  setCurrentUser(user) {
+    this.currentUser$ = user;
+  }
+
+  getCurrentUser() {
+    if (!this.currentUser$) {
+      this.currentUser$ = this.http.get(prepareURL(environment.server_base_url, 'users', 'me'))
+                            .map(data => data.json());
+    }
+    return this.currentUser$;
+  }
   getCurrentPerson() {
-    if(!this.currentPerson$)
-      this.currentPerson$ = this.http.get(prepareURL(environment.server_base_url,"persons","current"))
+    console.log(this.currentPerson$);
+    if (!this.currentPerson$)
+      this.currentPerson$ = this.http.get(prepareURL(environment.server_base_url,"persons","me"))
                                   .map((data) => data.json());
     return this.currentPerson$;
   }

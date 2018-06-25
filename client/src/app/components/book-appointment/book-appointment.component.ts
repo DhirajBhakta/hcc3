@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { AppointmentsService } from '../../modules/reception/services/appointments.service';
 import { Slot } from '../../modules/reception/models/slot.model';
 
+import { timeDisp, dateDisp } from '../../constants';
+
 @Component({
   selector: 'app-book-appointment',
   templateUrl: './book-appointment.component.html',
@@ -40,11 +42,22 @@ export class BookAppointmentComponent implements OnInit {
   valid_dates = [];
 
   currentPerson;
+  currentUser;
+  currentUserType;
 
   objectKeys = Object.keys;
   constructor(private userService: UserService,
              private aptService: AppointmentsService) {
-               this.currentPerson = userService.getCurrentPerson();
+               const userGetter = userService.getCurrentUser();
+               userGetter.subscribe(data => {
+                  this.currentUser = data;
+                  this.currentUserType = data.groups[0].name;
+                  if (this.currentUserType === 'PATIENT') {
+                    this.enteredId = data.username;
+                    this.getFamily();
+                    this.booking_status = 'UC';
+                  }
+               });
              }
 
   ngOnInit() {
@@ -71,13 +84,18 @@ export class BookAppointmentComponent implements OnInit {
     }));
   }
 
+  showUserSelect() {
+    return this.currentUserType === 'RECEPTIONIST' &&
+           (this.family === undefined || this.family.length === 0);
+  }
   createSlot() {
     this.aptService.createSlot(new Slot(this.booking_status, this.patient.id,
                                                 this.selectedAppointment))
       .subscribe(response => {
                  console.log(response);
                  this.success = 'Apopintment has been booked for ' + this.patient.name +
-                  'with Dr. ' + 'on ' + this.selectedDate; },
+                  ' on ' + this.selectedDate.toLocaleDateString('en-US', dateDisp) + ' at ' +
+                  this.selectedDate.toLocaleTimeString('en-US', timeDisp); },
                  err => {
                    console.log(err);
                    this.errors = ['Some error occured trying to create slot'];
@@ -137,12 +155,15 @@ export class BookAppointmentComponent implements OnInit {
     console.log(this.specDateMap);
   }
   getFamily() {
-    this.family = this.userService.getFamily(this.enteredId)
-                                  .catch(err => {
+    const familyGetter = this.userService.getFamily(this.enteredId)
+                          .catch(err => {
                                       console.log(err);
                                       this.errors = ['Entered id is not valid'];
                                       return Observable.of([]); });
-    this.family.subscribe( () => this.errors = []);
+    familyGetter.subscribe(data => {
+      this.family = data;
+      this.errors = [];
+    });
   }
 
 }

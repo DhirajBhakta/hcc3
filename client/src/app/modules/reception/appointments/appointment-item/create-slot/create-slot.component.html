@@ -8,16 +8,16 @@
 
       <div fxLayout="column">
 
-        <div fxLayout="row" *ngIf=" family === undefined || (family | async)?.length === 0">
+        <div fxLayout="row" *ngIf=" family === undefined ||family?.length === 0">
         <mat-form-field>
           <input matInput placeholder="Enter ID" [(ngModel)]="enteredId"/>
         </mat-form-field>
         <button mat-button color="primary" (click)="getFamily()">Verify</button>
         </div>
 
-        <mat-form-field *ngIf="(family | async)?.length >= 1">
+        <mat-form-field *ngIf="family?.length >= 1">
           <mat-select placeholder="Select member" [(ngModel)]="patient" name="patient">
-            <mat-option *ngFor="let member of family | async"
+            <mat-option *ngFor="let member of family"
                         [value]="member">
                         {{member.name}}
             </mat-option>

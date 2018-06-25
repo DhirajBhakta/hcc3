@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
 import { JWTHttpClient } from '../../services/jwthttp.service';
 import { prepareURL } from 'app/utils';
+import { UserService } from '../../services/user.service';
 
 enum user_groups {
   NONE,
@@ -27,7 +28,7 @@ export class AuthService {
   private loggedInUser: user_groups = user_groups.NONE;
   public is_multi_profile = false;
 
-  constructor(private http: HttpClient, private router: Router, private jwthttp: JWTHttpClient) { }
+  constructor(private http: HttpClient, private router: Router, private jwthttp: JWTHttpClient, private userService: UserService) { }
 
   /**
   * This function checks if the given user group has been locally stored for further use.
@@ -156,6 +157,8 @@ export class AuthService {
       default: this.loggedInUser = user_groups.NONE; break;
     }
     localStorage.setItem('user-group', this.loggedInUser.toString());
+    this.userService.getCurrentPerson();
+    this.userService.getCurrentUser();
   }
   /**
    * This function logs out the current user and removes traces from local strage.
@@ -172,7 +175,9 @@ export class AuthService {
                   this.loggedInUser = user_groups.NONE;
                   this.router.navigate(['/login']);
                   console.log('logged out', localStorage.getItem('JWT'));
-                              });
+                  this.userService.setCurrentPerson(null);
+                  this.userService.setCurrentUser(null);
+                });
   }
 
 

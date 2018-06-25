@@ -45,12 +45,15 @@ export class CreateSlotComponent implements OnInit {
   }
 
   getFamily() {
-    this.family = this.userService.getFamily(this.enteredId)
+    const familyGetter = this.userService.getFamily(this.enteredId)
                                   .catch(err => {
                                       console.log(err);
                                       this.errors = ['Entered id is not valid'];
                                       return Observable.of([]); });
-    this.family.subscribe( () => this.errors = []);
+    familyGetter.subscribe( (family) => {
+      this.errors = [];
+      this.family = family;
+    });
   }
   createSlot() {
     const slot = new Slot(this.booking_status, this.patient.id, this.appointment_id);
@@ -58,6 +61,8 @@ export class CreateSlotComponent implements OnInit {
     this.aptService.createSlot(slot)
                    .subscribe( response => {console.log(response);
                                this.slotCreate.emit({'response': response, 'patient': this.patient});
+                               this.family = undefined;
+                               this.enteredId = '';
                                this.flip(); } ,
                                err => {this.errors = ['An error ocurred']; });
 

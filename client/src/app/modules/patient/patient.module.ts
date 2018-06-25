@@ -17,12 +17,14 @@ import { PatientProfileComponent } from './patient-profile/patient-profile.compo
 //services
 import { PatientService } from './services/patient.service';
 import { ReceptionModule } from '../reception/reception.module';
+import { AppointmentsComponent } from './appointments/appointments.component';
 
 
 @NgModule({
   declarations: [
     PatientComponent,
     PatientProfileComponent,
+    AppointmentsComponent,
   ],
 
   imports: [
