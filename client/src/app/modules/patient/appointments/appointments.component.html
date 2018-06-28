@@ -1,10 +1,11 @@
 <div fxLayout='row' fxLayout.xs='column'>
 
-<mat-card fxFlex='30%'>
-  <mat-card-header>
-    <mat-card-title>View Booked Appointments</mat-card-title>
-  </mat-card-header>
-  <div *ngFor="let appts of appts$| async">
+<div class="def-shadow padded-container" fxFlex='30%'>
+  <h3>View Booked Appointments</h3>
+  <div *ngIf="isApptsEmpty()">
+    <p class="small-grey-text">No booked appointments.</p>
+  </div>
+  <div *ngFor="let appts of appts$">
     <mat-card *ngFor="let appt of appts" [ngClass]="appt.status">
       <!-- {{appt | json}} -->
       <mat-card-header>
@@ -15,22 +16,22 @@
           {{appt.patient_data.name}}
         </mat-card-subtitle>
       </mat-card-header>
-      <div fxLayout='column'>
-        <div fxLayout='row' fxLayoutAlign='space-between'>
-          <span>Doctor: {{appt.appointment.doctor.person.name}}</span>
-          <span>Date: {{appt.appointment.date | date:'mediumDate'}}</span>
+      <mat-card-content>
+        <div fxLayout='column'>
+          <div fxLayout='row' fxLayoutAlign='space-between'>
+            <span>{{appt.appointment.doctor.person.name}}</span>
+            <span>{{appt.appointment.date | date:'mediumDate'}}</span>
+          </div>
+          <div fxLayout='row' fxLayoutAlign='space-between'>
+            <span> {{appt.appointment.start_time | date:'shortTime'}} - {{appt.appointment.end_time | date: 'shortTime'}}</span>
+            <span>Status: {{getStatus(appt.status)}}</span>
+          </div>
         </div>
-        <div fxLayout='row' fxLayoutAlign='space-between'>
-          <span> Time: {{appt.appointment.start_time | date:'shortTime'}} -
-      {{appt.appointment.end_time | date: 'shortTime'}}</span>
-          <span>Status: {{getStatus(appt.status)}}</span>
-        </div>
-      </div>
-       <br/>
-      </mat-card>
+      </mat-card-content>
+    </mat-card>
   </div>
-</mat-card>
+</div>
 <div class='def-shadow padded-container' fxFlex='50%'>
-<app-book-appointment></app-book-appointment>
+<app-book-appointment (slotBooked)="onSlotBooked($event)"></app-book-appointment>
 </div>
 </div>

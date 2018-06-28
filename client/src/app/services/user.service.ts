@@ -8,7 +8,10 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/forkJoin';
+import 'rxjs/add/observable/concat';
 import 'rxjs/add/operator/concatAll';
+import 'rxjs/add/operator/toArray';
+
 
 
 @Injectable()
@@ -33,18 +36,44 @@ export class UserService {
 
 
   getFamily(username: string) {
-    let getPatron = (personID) => this.http.get(prepareURL(environment.server_base_url, 'persons', personID)).map((data) => data.json());
-    let getDependants = (personID) => this.http.get(prepareURL(environment.server_base_url, 'persons') + '?patron=' + personID).map((data) => data.json()).concatAll();
-    let httpRequests = [];
+    const getPatron = (personID) => this.http.get(prepareURL(environment.server_base_url, 'persons', personID))
+                                    .map((data) => data.json());
+    const getDependants = (personID) => this.http.get(prepareURL(environment.server_base_url, 'persons') + '?patron=' + personID)
+                                        .map((data) => data.json()).concatAll();
+    const httpRequests = [];
     return this.getUser(username)
       .flatMap((user) => {
         httpRequests.push(getPatron(user.person.id));
-        if (user.person.patient_type == "EMPLOYEE")
+        if (user.person.patient_type === 'EMPLOYEE') {
             httpRequests.push(getDependants(user.person.id));
-        return Observable.forkJoin(httpRequests);
+        }
+        return Observable.concat(...httpRequests).toArray();
       })
       .catch((err) => this.feedbackService.showFeedback(err,{"404":"Invalid username"}));
   }
+
+  // getFamily(username: string) {
+  //   const getPatron = (personID) => this.http.get(prepareURL(environment.server_base_url, 'persons', personID))
+  //                                    .map(data => data.json());
+  //   const getDependants = (personID) => this.http.get(prepareURL(environment.server_base_url, 'persons') + '?patron=' + personID)
+  //                                       .map(data => data.json());
+  //   return this.getUser(username)
+  //     .flatMap((user) => {
+  //       return this.getPerson(user.person.id);
+  //     })
+  //     .flatMap((person) => {
+  //       if (person.patient_type !=== "EMPLOYEE") {
+  //         return Observable.of(person);
+  //       }
+  //       else {
+  //         return getDependants(person.id)
+  //           .flatMap(dependants => {
+  //             dependants.unshift(person);
+  //             return Observable.of(dependants);
+  //           })
+  //       }
+  //     });
+  // }
 
   /**ambiguous, deprecated due to dependants profile being eliminated*/
   setCurrentPerson(person) {

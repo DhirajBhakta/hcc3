@@ -15,8 +15,8 @@ export class AppointmentsComponent implements OnInit {
   appts$;
   constructor(private aptService: AppointmentsService,
               private userService: UserService) {
-
-                this.appts$ = this.userService.getCurrentUser()
+                this.appts$ = [[]];
+                this.userService.getCurrentUser()
                                 .flatMap(user => {
                                   return this.userService.getFamily(user.username);
                                 })
@@ -24,10 +24,15 @@ export class AppointmentsComponent implements OnInit {
                                   return Observable.concat(Observable.forkJoin(persons.map(person => {
                                     return this.aptService.getSlotsWithAppointments({'patient' : person.id});
                                   })));
-                                });
+                                })
+                                .subscribe(data => { this.appts$ = data; });
 
    }
 
+   isApptsEmpty() {
+    const flatApps = [].concat.apply([], this.appts$);
+    return flatApps.length === 0;
+   }
    getStatus(status) {
      switch (status) {
        case 'BO': return 'Booked';
@@ -39,6 +44,19 @@ export class AppointmentsComponent implements OnInit {
      }
    }
   ngOnInit() {
+  }
+  onSlotBooked(data) {
+    const slot = data.slot;
+    const appt = data.appointment;
+    const doctor = data.doctor;
+    let person_name;
+    this.userService.getCurrentUser().subscribe(user => person_name = user.person.name);
+
+    appt.doctor = doctor;
+    slot.appointment = appt;
+    slot.patient_data = {'name': person_name };
+
+    this.appts$[0].push(slot);
   }
 
 }

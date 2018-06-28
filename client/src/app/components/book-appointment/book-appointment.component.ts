@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs/Observable';
 import { AppointmentsService } from '../../modules/reception/services/appointments.service';
@@ -12,6 +12,9 @@ import { timeDisp, dateDisp } from '../../constants';
   styleUrls: ['./book-appointment.component.css']
 })
 export class BookAppointmentComponent implements OnInit {
+
+  @Output()
+  slotBooked = new EventEmitter();
 
   // for show-errors component
   success;
@@ -89,13 +92,21 @@ export class BookAppointmentComponent implements OnInit {
            (this.family === undefined || this.family.length === 0);
   }
   createSlot() {
-    this.aptService.createSlot(new Slot(this.booking_status, this.patient.id,
-                                                this.selectedAppointment))
+    const appointmentData = this.filtered_appointments
+                              .find(appt =>
+                                appt.id === this.selectedAppointment);
+    const newSlot = new Slot(this.booking_status, this.patient.id,
+                              this.selectedAppointment);
+    this.aptService.createSlot(newSlot)
       .subscribe(response => {
                  console.log(response);
                  this.success = 'Apopintment has been booked for ' + this.patient.name +
                   ' on ' + this.selectedDate.toLocaleDateString('en-US', dateDisp) + ' at ' +
-                  this.selectedDate.toLocaleTimeString('en-US', timeDisp); },
+                  this.selectedDate.toLocaleTimeString('en-US', timeDisp);
+                  this.slotBooked.emit({'slot': newSlot,
+                    'appointment': appointmentData,
+                    'doctor': this.getDoctor(appointmentData.doctor_id)});
+                 },
                  err => {
                    console.log(err);
                    this.errors = ['Some error occured trying to create slot'];
